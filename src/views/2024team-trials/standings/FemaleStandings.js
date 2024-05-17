@@ -143,7 +143,7 @@ const FemaleStandings = () => {
                 <CCol xs={12}>
                     <CCard className="mb-4">
                         <CCardHeader>
-                            <strong>Schedule Filters</strong>
+                            <strong>Standing Filters</strong>
                         </CCardHeader>
                         <CCardBody>
                             <CRow>
