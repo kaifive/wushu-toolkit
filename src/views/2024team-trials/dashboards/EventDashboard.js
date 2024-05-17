@@ -157,7 +157,7 @@ const EventDashboard = () => {
                 </CCol>
                 <CCol xs={12} sm={12} xl={6} xxl={6}>
                     <CCard>
-                        <CCardHeader><strong>Athlete Long Weapon Score Comparison</strong></CCardHeader>
+                        <CCardHeader><strong>School Breakdown of Event Female Athletes</strong></CCardHeader>
                         <CCardBody>
                             <PieChartBuilder
                                 dataset={femaleAthletes}
