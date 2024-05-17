@@ -21,6 +21,7 @@ import {
 } from '@coreui/react'
 
 import { getData } from '../helpers/getData.js'
+import { sortStandings } from '../helpers/sortStandings.js'
 
 const TotalScores2024 = () => {
     const [genderFilter, setGenderFilter] = useState("")
@@ -49,6 +50,8 @@ const TotalScores2024 = () => {
     }, [setDataState]);
 
     const { athleteData, schools, loading, error, syncDate } = dataState;
+
+    const sortedAthleteData = sortStandings(athleteData);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -160,7 +163,7 @@ const TotalScores2024 = () => {
                                     </CTableRow>
                                 </CTableHead>
                                 <CTableBody>
-                                    {Object.entries(athleteData).map(([key, data]) => {
+                                    {Object.entries(sortedAthleteData).map(([key, data]) => {
                                         const tempEventData = data.events.sort((a, b) => b.score - a.score);
 
                                         const barehandScores = [];
