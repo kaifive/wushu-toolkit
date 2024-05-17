@@ -1,11 +1,8 @@
 {
-  "name": "WushuToolkit",
+  "name": "wushu-toolkit",
   "version": "1.0.0",
   "description": "Wushu Athlete Toolkit",
   "homepage": "https://kaifive.github.io/wushu-toolkit",
-  "bugs": {
-    "url": ""
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/kaifive/wushu-toolkit"

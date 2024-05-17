@@ -238,7 +238,7 @@ const EventDashboard = () => {
                 <CCol xs={12}>
                     <CCard className="mb-4">
                         <CCardHeader>
-                            <strong>Total Score Filters</strong>
+                            <strong>Event Filters</strong>
                         </CCardHeader>
                         <CCardBody>
                             <CRow>
