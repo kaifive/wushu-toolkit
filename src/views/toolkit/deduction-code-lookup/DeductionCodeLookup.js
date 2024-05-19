@@ -167,7 +167,7 @@ const CodeCards = ({ codeCards, classFilter, codeFilter }) => {
         <>
             {
                 Object.entries(codeCards).map(([key, card]) => {
-                    const filteredCodes = card.codes.filter(code => code.code.includes(codeFilter));
+                    const filteredCodes = card.codes.filter(code => code.code.startsWith(codeFilter));
 
                     return (
                         key.includes(classFilter) && (
