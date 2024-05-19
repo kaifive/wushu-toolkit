@@ -196,7 +196,7 @@ const AGroupStandingsTable = ({ standings }) => {
                     </CTableHead>
                     <CTableBody>
                         {standings.map((data, idx) => {
-                            let teamStatus = "#" + idx;
+                            let teamStatus = "#" + (idx + 1);
 
                             if (idx >= 0 && idx < 3) {
                                 teamStatus = "A Team";
@@ -241,7 +241,7 @@ const BGroupStandingsTable = ({ standings }) => {
                     </CTableHead>
                     <CTableBody>
                         {standings.map((data, idx) => {
-                            let teamStatus = "#" + idx;
+                            let teamStatus = "#" + (idx + 1);
 
                             if (idx >= 0 && idx < 2) {
                                 teamStatus = "A Team";
@@ -286,7 +286,7 @@ const CGroupStandingsTable = ({ standings }) => {
                     </CTableHead>
                     <CTableBody>
                         {standings.map((data, idx) => {
-                            let teamStatus = "#" + idx;
+                            let teamStatus = "#" + (idx + 1);
 
                             if (idx >= 0 && idx < 2) {
                                 teamStatus = "A Team";
