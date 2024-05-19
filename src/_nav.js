@@ -313,6 +313,16 @@ const dev_nav = [
 const live_nav = [
   {
     component: CNavTitle,
+    name: 'Athlete Toolkit',
+  },
+  {
+    component: CNavItem,
+    name: 'Deduction Code Lookup',
+    to: '/toolkit/deduction_code_lookup',
+    icon: <CIcon icon={cilBarcode} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
     name: '2024 Junior Team Trials',
   },
   {
@@ -379,7 +389,7 @@ const live_nav = [
   },
   {
     component: CNavTitle,
-    name: 'Athlete Toolkit',
+    name: 'Coming Soon',
   },
   {
     component: CNavItem,
@@ -392,12 +402,6 @@ const live_nav = [
     name: 'Sort Required Movement',
     to: '/required_movement_sorter',
     icon: <CIcon icon={cilAudioSpectrum} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Deduction Code Lookup',
-    to: '/deduction_code_lookup',
-    icon: <CIcon icon={cilBarcode} customClassName="nav-icon" />,
   },
 ]
 

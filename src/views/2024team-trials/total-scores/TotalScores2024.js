@@ -122,6 +122,7 @@ const TotalScores2024 = () => {
                                     <CInputGroupText style={{ width: "75px" }}>Athlete: </CInputGroupText>
                                     <CFormInput
                                         value={athleteFilter}
+                                        placeholder='Enter Athlete Name'
                                         onChange={(event) => setAthleteFilter(event.target.value)}>
                                     </CFormInput>
                                 </CInputGroup>
