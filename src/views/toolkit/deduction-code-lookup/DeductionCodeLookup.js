@@ -232,5 +232,4 @@ const CodeCards = ({ codeCards, classFilter, codeFilter }) => {
     );
 }
 
-
 export default DeductionCodeLookup

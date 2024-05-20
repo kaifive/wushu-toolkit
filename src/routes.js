@@ -52,6 +52,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 // Athlete Toolkit
 const DeductionCodeLookup = React.lazy(() => import('./views/toolkit/deduction-code-lookup/DeductionCodeLookup'))
+const RequiredMovements = React.lazy(() => import('./views/toolkit/required-movements/RequiredMovements'))
 
 // 2024 Team Trials
 const About2024 = React.lazy(() => import('./views/2024team-trials/about/About'))
@@ -115,6 +116,7 @@ const dev_routes = [
 
 const live_routes = [
   { path: '/toolkit/deduction_code_lookup', name: 'DeductionCodeLookup', element: DeductionCodeLookup },
+  { path: '/toolkit/required_movements', name: 'RequiredMovements', element: RequiredMovements },
   { path: '/', name: 'About2024', element: About2024 },
   { path: '/2024_juniors/about', name: 'About2024', element: About2024 },
   { path: '/2024_juniors/schedule', name: 'Schedule2024', element: Schedule2024 },
@@ -126,7 +128,6 @@ const live_routes = [
   { path: '/2024_juniors/event_dashboard', name: 'EventDashboard', element: EventDashboard },
   { path: '/2024_juniors/us_team_dashboard', name: 'USTeamDashboard', element: USTeamDashboard },
   { path: '/nandu_calculator', name: 'NanduCalculator', element: ComingSoon },
-  { path: '/required_movement_sorter', name: 'RequiredMovementSorter', element: ComingSoon },
 ]
 
 const routes = live_routes

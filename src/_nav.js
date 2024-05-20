@@ -18,7 +18,7 @@ import {
   cilWc,
   cilChart,
   cilCalculator,
-  cilAudioSpectrum,
+  cilCheckCircle,
   cilBarcode,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
@@ -322,6 +322,12 @@ const live_nav = [
     icon: <CIcon icon={cilBarcode} customClassName="nav-icon" />,
   },
   {
+    component: CNavItem,
+    name: 'Required Movements',
+    to: '/toolkit/required_movements',
+    icon: <CIcon icon={cilCheckCircle} customClassName="nav-icon" />,
+  },
+  {
     component: CNavTitle,
     name: '2024 Junior Team Trials',
   },
@@ -396,12 +402,6 @@ const live_nav = [
     name: 'Nandu Calculator',
     to: '/nandu_calculator',
     icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Required Movements',
-    to: '/required_movement_sorter',
-    icon: <CIcon icon={cilAudioSpectrum} customClassName="nav-icon" />,
   },
 ]
 
