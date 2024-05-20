@@ -1,10 +1,5 @@
 import React, { useState, useRef } from 'react'
 import {
-    CModal,
-    CModalHeader,
-    CModalTitle,
-    CModalBody,
-    CModalFooter,
     CRow,
     CButton,
     CCol,
