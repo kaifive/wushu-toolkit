@@ -129,9 +129,9 @@ const About = () => {
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
-                                            { title: 'table', value: '5' },
-                                            { title: 'charts', value: '14' },
-                                            { title: 'single value metrics', value: '188' },
+                                            { title: 'table', value: '15' },
+                                            { title: 'charts', value: '18' },
+                                            { title: 'single value metrics', value: '26' },
                                         ]}
                                     />
                                 </CCol>
