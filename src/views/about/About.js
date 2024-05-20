@@ -111,7 +111,7 @@ const About = () => {
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
-                                            { title: 'minute refresh rate', value: '1' },
+                                            { title: 'refresh rate', value: '1 minute' },
                                             { title: 'dashboard views', value: '8' },
                                         ]}
                                     />
