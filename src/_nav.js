@@ -4,7 +4,6 @@ import {
   cilBell,
   cilChartPie,
   cilCursor,
-  cilDescription,
   cilDrop,
   cilNotes,
   cilPencil,
@@ -20,8 +19,12 @@ import {
   cilCalculator,
   cilCheckCircle,
   cilBarcode,
+  cilEnvelopeClosed,
+  cilDescription
 } from '@coreui/icons'
+
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+
 
 const dev_nav = [
   {
@@ -312,6 +315,18 @@ const dev_nav = [
 
 const live_nav = [
   {
+    component: CNavItem,
+    name: 'About Wushu Toolkit',
+    to: '/about',
+    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Contact Us',
+    to: '/contact_us',
+    icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+  },
+  {
     component: CNavTitle,
     name: 'Athlete Toolkit',
   },
@@ -333,7 +348,7 @@ const live_nav = [
   },
   {
     component: CNavItem,
-    name: 'About',
+    name: 'Toolkit Information',
     to: '/2024_juniors/about',
     icon: <CIcon icon={cilInfo} customClassName="nav-icon" />,
   },

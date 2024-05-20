@@ -50,6 +50,9 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
+// Base
+const ContactUs = React.lazy(() => import('./views/contact/ContactUs'))
+
 // Athlete Toolkit
 const DeductionCodeLookup = React.lazy(() => import('./views/toolkit/deduction-code-lookup/DeductionCodeLookup'))
 const RequiredMovements = React.lazy(() => import('./views/toolkit/required-movements/RequiredMovements'))
@@ -115,6 +118,7 @@ const dev_routes = [
 ]
 
 const live_routes = [
+  { path: '/contact_us', name: 'ContactUs', element: ContactUs },
   { path: '/toolkit/deduction_code_lookup', name: 'DeductionCodeLookup', element: DeductionCodeLookup },
   { path: '/toolkit/required_movements', name: 'RequiredMovements', element: RequiredMovements },
   { path: '/', name: 'About2024', element: About2024 },
