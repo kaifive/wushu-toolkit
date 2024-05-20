@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
     CCard,
     CCardBody,
@@ -10,26 +10,43 @@ import {
     CFormSelect,
     CButton,
     CWidgetStatsB,
-    CFormCheck
-} from '@coreui/react'
+    CFormCheck,
+    CProgress
+} from '@coreui/react';
 
-import { movements } from "./movements"
+import { movements } from "./movements";
 
 const RequiredMovements = () => {
-    const [classFilter, setClassFilter] = useState("")
-    const [typeFilter, setTypeFilter] = useState("")
+    const [classFilter, setClassFilter] = useState("");
+    const [typeFilter, setTypeFilter] = useState("");
+    const [filteredMovements, setFilteredMovements] = useState(movements);
 
-    let filteredMovements = movements
+    useEffect(() => {
+        let filtered = movements;
 
-    if (classFilter !== "") {
-        filteredMovements = filteredMovements.filter((movement) => movement.class === classFilter);
-    }
+        if (classFilter !== "") {
+            filtered = filtered.filter((movement) => movement.class === classFilter);
+        }
 
-    const types = filteredMovements.map(movement => movement.type);
+        if (typeFilter !== "") {
+            filtered = filtered.filter((movement) => movement.type === typeFilter);
+        }
 
-    if (typeFilter !== "") {
-        filteredMovements = filteredMovements.filter((movement) => movement.type === typeFilter);
-    }
+        setFilteredMovements(filtered);
+    }, [classFilter, typeFilter]);
+
+    const updateChecklistState = (movementIdx, requirementIdx, label) => {
+        setFilteredMovements(prevMovements => {
+            const newMovements = [...prevMovements];
+            const requirement = newMovements[movementIdx].requirements[requirementIdx];
+            requirement.checklist = requirement.checklist.map(item =>
+                item.label === label ? { ...item, state: !item.state } : item
+            );
+            return newMovements;
+        });
+    };
+
+    const types = [...new Set(filteredMovements.map(movement => movement.type))];
 
     return (
         <>
@@ -45,14 +62,11 @@ const RequiredMovements = () => {
                                     <CInputGroupText style={{ width: "75px" }}>Class: </CInputGroupText>
                                     <CFormSelect
                                         value={classFilter}
-                                        onChange={(event) => {
-                                            setClassFilter(event.target.value);
-                                            setTypeFilter("");
-                                        }}>
+                                        onChange={(event) => setClassFilter(event.target.value)}>
                                         <option value="">*</option>
                                         <option value="Optional Changquan, Daoshu, Jianshu, Qiangshu, Gungshu">Optional Changquan, Daoshu, Jianshu, Qiangshu, Gungshu</option>
                                         <option value="Optional Nanquan, Nandao, Nangun">Optional Nanquan, Nandao, Nangun</option>
-                                        <option value="taichi">Optional Taijiquan, Taijijian</option>
+                                        <option value="Optional Taijiquan, Taijijian">Optional Taijiquan, Taijijian</option>
                                         <option value="Duilian (Choreographed Sparring)">Duilian (Choreographed Sparring)</option>
                                         <option value="Jiti (Group Routine)">Jiti (Group Routine)</option>
                                     </CFormSelect>
@@ -60,7 +74,7 @@ const RequiredMovements = () => {
                             </CRow>
                             <CRow>
                                 <CInputGroup className="mb-3">
-                                    <CInputGroupText style={{ width: "75px" }}>Code: </CInputGroupText>
+                                    <CInputGroupText style={{ width: "75px" }}>Type: </CInputGroupText>
                                     <CFormSelect
                                         value={typeFilter}
                                         onChange={(event) => setTypeFilter(event.target.value)}>
@@ -73,7 +87,6 @@ const RequiredMovements = () => {
                             </CRow>
                             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <CButton
-                                    style={{}}
                                     color="primary"
                                     onClick={() => {
                                         setClassFilter("");
@@ -88,61 +101,69 @@ const RequiredMovements = () => {
             </CRow>
             <MovementCards
                 filteredMovements={filteredMovements}
+                updateChecklistState={updateChecklistState}
             />
-            <br></br>
-            <hr></hr>
+            <br />
+            <hr />
             <p style={{ fontSize: "12px" }}>Routine Content Requirements taken from the <a href="http://www.iwuf.org/wp-content/uploads/2019/03/Wushu-Taolu-Competition-Rules-Judging-Methods-Excerpt.pdf" target="_blank">2019 Wushu Taolu Competition Rules & Judging Methods (Excerpt)</a></p>
         </>
-    )
-}
+    );
+};
 
-const MovementCards = ({ filteredMovements }) => {
+const MovementCards = ({ filteredMovements, updateChecklistState }) => {
+    const groupedByType = filteredMovements.reduce((acc, movement) => {
+        if (!acc[movement.type]) {
+            acc[movement.type] = [];
+        }
+        acc[movement.type].push(movement);
+        return acc;
+    }, {});
+
     return (
         <>
-            {
-                filteredMovements.map((movement) => (
-                    <CRow key={movement.type}>
-                        <CCol xs={12}>
-                            <CCard className="mb-4">
-                                <CCardHeader>
-                                    <div><strong>Optional {movement.type}</strong> - Routine Content Requirements</div>
-                                </CCardHeader>
-                                <CCardBody>
-                                    {movement.requirements.map((requirement, idx) => (
+            {Object.keys(groupedByType).map((type, idx) => (
+                <CRow key={idx}>
+                    <CCol xs={12}>
+                        <CCard className="mb-4">
+                            <CCardHeader>
+                                <div><strong>Optional {type}</strong> - Routine Content Requirements</div>
+                                <div>Overall Progress: {getTypeProgress(groupedByType[type])}%</div>
+                                <CProgress value={getTypeProgress(groupedByType[type])}>{getTypeProgress(groupedByType[type])}%</CProgress>
+                            </CCardHeader>
+                            <CCardBody>
+                                {groupedByType[type].map((movement, movementIdx) => (
+                                    movement.requirements.map((requirement, requirementIdx) => (
                                         <MovementWidget
+                                            key={`${movementIdx}_${requirementIdx}`}
                                             requirement={requirement}
-                                            idx={`${idx}_${requirement.label}`}
+                                            movementIdx={filteredMovements.indexOf(movement)}
+                                            requirementIdx={requirementIdx}
+                                            updateChecklistState={updateChecklistState}
                                         />
-                                    ))}
-                                </CCardBody>
-                            </CCard>
-                        </CCol>
-                    </CRow>
-                ))
-            }
+                                    ))
+                                ))}
+                            </CCardBody>
+                        </CCard>
+                    </CCol>
+                </CRow>
+            ))}
         </>
     );
-}
+};
 
-const MovementWidget = ({ requirement, idx }) => {
+const MovementWidget = ({ requirement, movementIdx, requirementIdx, updateChecklistState }) => {
     const [checklistState, setChecklistState] = useState(requirement.checklist);
 
     useEffect(() => {
         setChecklistState(requirement.checklist);
     }, [requirement.checklist]);
 
-    const toggleItemState = (id) => {
-        setChecklistState(checklistState.map(item => 
-            item.label === id ? { ...item, state: !item.state } : item
-        ));
-    };
-
     return (
         <CWidgetStatsB
-            key={idx}
+            key={requirementIdx}
             className="mb-3"
-            color={ getProgress(checklistState) === 100 ? "primary" : "white" }
-            inverse={ getProgress(checklistState) === 100 }
+            color={getProgress(checklistState) === 100 ? "primary" : "white"}
+            inverse={getProgress(checklistState) === 100}
             progress={{ value: getProgress(checklistState) }}
             text={
                 <div>
@@ -151,7 +172,12 @@ const MovementWidget = ({ requirement, idx }) => {
                             key={item.label}
                             label={item.label}
                             defaultChecked={item.state}
-                            onChange={() => toggleItemState(item.label)}
+                            onChange={() => {
+                                updateChecklistState(movementIdx, requirementIdx, item.label);
+                                setChecklistState(checklistState.map(i =>
+                                    i.label === item.label ? { ...i, state: !i.state } : i
+                                ));
+                            }}
                         />
                     ))}
                 </div>
@@ -159,20 +185,31 @@ const MovementWidget = ({ requirement, idx }) => {
             title={requirement.title}
             value=""
         />
-    )
-}
+    );
+};
 
 function getProgress(checklist) {
-    let checked = 0;
-    let total = checklist.length;
-
-    checklist.map((item) => {
-        if (item.state) {
-            checked++;
-        }
-    })
-
-    return Math.round((checked / total) * 100)
+    const total = checklist.length;
+    const checked = checklist.filter(item => item.state).length;
+    return Math.round((checked / total) * 100);
 }
 
-export default RequiredMovements
+function getTypeProgress(movements) {
+    let totalItems = 0;
+    let checkedItems = 0;
+
+    movements.forEach(movement => {
+        movement.requirements.forEach(requirement => {
+            requirement.checklist.forEach(item => {
+                totalItems++;
+                if (item.state) {
+                    checkedItems++;
+                }
+            });
+        });
+    });
+
+    return Math.round((checkedItems / totalItems) * 100);
+}
+
+export default RequiredMovements;
