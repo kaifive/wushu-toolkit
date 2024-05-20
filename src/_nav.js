@@ -323,7 +323,7 @@ const live_nav = [
   {
     component: CNavItem,
     name: 'Contact Us',
-    to: '/contact_us',
+    to: '/contact-us',
     icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
   },
   {
@@ -333,13 +333,13 @@ const live_nav = [
   {
     component: CNavItem,
     name: 'Deduction Code Lookup',
-    to: '/toolkit/deduction_code_lookup',
+    to: '/toolkit/deduction-code-lookup',
     icon: <CIcon icon={cilBarcode} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Required Movements',
-    to: '/toolkit/required_movements',
+    to: '/toolkit/required-movements',
     icon: <CIcon icon={cilCheckCircle} customClassName="nav-icon" />,
   },
   {
@@ -349,19 +349,19 @@ const live_nav = [
   {
     component: CNavItem,
     name: 'Toolkit Information',
-    to: '/2024_juniors/about',
+    to: '/2024-juniors/about',
     icon: <CIcon icon={cilInfo} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Schedule',
-    to: '/2024_juniors/schedule',
+    to: '/2024-juniors/schedule',
     icon: <CIcon icon={cilListNumbered} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Total Scores',
-    to: '/2024_juniors/total_scores',
+    to: '/2024-juniors/total-scores',
     icon: <CIcon icon={cilClipboard} customClassName="nav-icon" />,
   },
   {
@@ -372,12 +372,12 @@ const live_nav = [
       {
         component: CNavItem,
         name: 'Male Standings',
-        to: '/2024_juniors/male_standings',
+        to: '/2024-juniors/male-standings',
       },
       {
         component: CNavItem,
         name: 'Female Standings',
-        to: '/2024_juniors/female_standings',
+        to: '/2024-juniors/female-standings',
       },
     ],
   },
@@ -389,22 +389,22 @@ const live_nav = [
       {
         component: CNavItem,
         name: 'Holistic Dashboard',
-        to: '/2024_juniors/holistic_dashboard',
+        to: '/2024-juniors/holistic-dashboard',
       },
       {
         component: CNavItem,
         name: 'Athlete Dashboard',
-        to: '/2024_juniors/athlete_dashboard',
+        to: '/2024-juniors/athlete-dashboard',
       },
       {
         component: CNavItem,
         name: 'Event Dashboard',
-        to: '/2024_juniors/event_dashboard',
+        to: '/2024-juniors/event-dashboard',
       },
       {
         component: CNavItem,
         name: 'US Team Dashboard',
-        to: '/2024_juniors/us_team_dashboard',
+        to: '/2024-juniors/us-team-dashboard',
       },
     ],
   },
@@ -415,7 +415,7 @@ const live_nav = [
   {
     component: CNavItem,
     name: 'Nandu Calculator',
-    to: '/nandu_calculator',
+    to: '/nandu-calculator',
     icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
   },
 ]

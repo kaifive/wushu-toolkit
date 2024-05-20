@@ -51,6 +51,7 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 // Base
+const About = React.lazy(() => import('./views/about/About'))
 const ContactUs = React.lazy(() => import('./views/contact/ContactUs'))
 
 // Athlete Toolkit
@@ -118,20 +119,22 @@ const dev_routes = [
 ]
 
 const live_routes = [
-  { path: '/contact_us', name: 'ContactUs', element: ContactUs },
-  { path: '/toolkit/deduction_code_lookup', name: 'DeductionCodeLookup', element: DeductionCodeLookup },
-  { path: '/toolkit/required_movements', name: 'RequiredMovements', element: RequiredMovements },
   { path: '/', name: 'About2024', element: About2024 },
-  { path: '/2024_juniors/about', name: 'About2024', element: About2024 },
-  { path: '/2024_juniors/schedule', name: 'Schedule2024', element: Schedule2024 },
-  { path: '/2024_juniors/total_scores', name: 'TotalScores2024', element: TotalScores2024 },
-  { path: '/2024_juniors/male_standings', name: 'MaleStandings', element: MaleStandings },
-  { path: '/2024_juniors/female_standings', name: 'FemaleStandings', element: FemaleStandings },
-  { path: '/2024_juniors/holistic_dashboard', name: 'HolisticDashboard', element: HolisticDashboard },
-  { path: '/2024_juniors/athlete_dashboard', name: 'AthleteDashboard', element: AthleteDashboard },
-  { path: '/2024_juniors/event_dashboard', name: 'EventDashboard', element: EventDashboard },
-  { path: '/2024_juniors/us_team_dashboard', name: 'USTeamDashboard', element: USTeamDashboard },
-  { path: '/nandu_calculator', name: 'NanduCalculator', element: ComingSoon },
+
+  { path: '/about', name: 'About', element: About },
+  { path: '/contact-us', name: 'ContactUs', element: ContactUs },
+  { path: '/toolkit/deduction-code-lookup', name: 'DeductionCodeLookup', element: DeductionCodeLookup },
+  { path: '/toolkit/required-movements', name: 'RequiredMovements', element: RequiredMovements },
+  { path: '/2024-juniors/about', name: 'About2024', element: About2024 },
+  { path: '/2024-juniors/schedule', name: 'Schedule2024', element: Schedule2024 },
+  { path: '/2024-juniors/total-scores', name: 'TotalScores2024', element: TotalScores2024 },
+  { path: '/2024-juniors/male-standings', name: 'MaleStandings', element: MaleStandings },
+  { path: '/2024-juniors/female-standings', name: 'FemaleStandings', element: FemaleStandings },
+  { path: '/2024-juniors/holistic-dashboard', name: 'HolisticDashboard', element: HolisticDashboard },
+  { path: '/2024-juniors/athlete-dashboard', name: 'AthleteDashboard', element: AthleteDashboard },
+  { path: '/2024-juniors/event-dashboard', name: 'EventDashboard', element: EventDashboard },
+  { path: '/2024-juniors/us-team-dashboard', name: 'USTeamDashboard', element: USTeamDashboard },
+  { path: '/nandu-calculator', name: 'NanduCalculator', element: ComingSoon },
 ]
 
 const routes = live_routes

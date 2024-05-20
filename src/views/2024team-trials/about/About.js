@@ -10,7 +10,8 @@ import {
     CCol,
     CCard,
     CCardHeader,
-    CCardBody
+    CCardBody,
+    CAlert
 } from '@coreui/react'
 
 import orderform from './orderform.png';
@@ -20,6 +21,7 @@ const About = () => {
 
     return (
         <>
+            <CAlert color="info">The 2024 Junior Wushu Team Trials Continuous Monitoring Dashboard is currently live with <strong>sample data</strong>. This will be updated on Saturday, May 25, 2024.</CAlert>
             <CRow>
                 <CCol xs={12}>
                     <CCard className="mb-4">
