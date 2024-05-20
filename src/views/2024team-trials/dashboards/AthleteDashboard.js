@@ -214,6 +214,7 @@ const AthleteDashboard = () => {
                     <CWidgetStatsF
                         icon={<CIcon width={24} icon={cilChartPie} size="xl" />}
                         title="Average Barehand Score"
+                        padding={false}
                         value={`${calculateAverageClassScore(filteredStandings, "Barehand")} / 10.00`}
                         color="primary"
                     />
@@ -222,6 +223,7 @@ const AthleteDashboard = () => {
                     <CWidgetStatsF
                         icon={<CIcon width={24} icon={cilChartPie} size="xl" />}
                         title="Average Weapon Score"
+                        padding={false}
                         value={`${calculateAverageClassScore(filteredStandings, "Weapon")} / 10.00`}
                         color="primary"
                     />
