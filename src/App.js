@@ -30,7 +30,8 @@ const App = () => {
       return
     }
 
-    setColorMode(storedTheme)
+    //setColorMode(storedTheme)
+    setColorMode('light')
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
