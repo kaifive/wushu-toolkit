@@ -130,6 +130,7 @@ const DeductionCodeLookup = () => {
                                     <CFormInput
                                         value={codeFilter}
                                         type='number'
+                                        inputMode='numeric'
                                         placeholder='Enter Code Number'
                                         onChange={(event) => setCodeFilter(event.target.value.toString())}>
                                     </CFormInput>

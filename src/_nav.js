@@ -399,7 +399,7 @@ const live_nav = [
   },
   {
     component: CNavItem,
-    name: 'Sort Required Movement',
+    name: 'Required Movements',
     to: '/required_movement_sorter',
     icon: <CIcon icon={cilAudioSpectrum} customClassName="nav-icon" />,
   },
