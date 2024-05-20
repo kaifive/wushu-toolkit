@@ -348,7 +348,7 @@ const live_nav = [
   },
   {
     component: CNavItem,
-    name: 'Toolkit Information',
+    name: 'ConMon Information',
     to: '/2024-juniors/about',
     icon: <CIcon icon={cilInfo} customClassName="nav-icon" />,
   },
