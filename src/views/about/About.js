@@ -129,7 +129,7 @@ const About = () => {
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
-                                            { title: 'table', value: '15' },
+                                            { title: 'tables', value: '15' },
                                             { title: 'charts', value: '18' },
                                             { title: 'single value metrics', value: '26' },
                                         ]}
