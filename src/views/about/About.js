@@ -52,12 +52,9 @@ const About = () => {
                                     <CWidgetStatsD
                                         className="mb-3"
                                         icon={
-                                            <CButton
-                                                color="primary"
-                                                href='#/toolkit/deduction-code-lookup'
-                                            >
+                                            <div>
                                                 <strong>Deduction Code Lookup</strong>
-                                            </CButton>
+                                            </div>
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
@@ -70,12 +67,9 @@ const About = () => {
                                     <CWidgetStatsD
                                         className="mb-3"
                                         icon={
-                                            <CButton
-                                                color="primary"
-                                                href='#/toolkit/required-movements'
-                                            >
+                                            <div>
                                                 <strong>Required Movements Checklist</strong>
-                                            </CButton>
+                                            </div>
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
@@ -94,7 +88,7 @@ const About = () => {
                 <CCol xs={12}>
                     <CCard className="mb-4">
                         <CCardHeader>
-                            <strong>2024 National Wushu Taolu Team Trials</strong>
+                            <strong>2024 Junior National Wushu Taolu Team Trials</strong>
                         </CCardHeader>
                         <CCardBody>
                             <CRow xs={{ gutter: 3 }}>
@@ -102,12 +96,9 @@ const About = () => {
                                     <CWidgetStatsD
                                         className="mb-3"
                                         icon={
-                                            <CButton
-                                                color="primary"
-                                                href='#/2024-juniors/about'
-                                            >
+                                            <div>
                                                 <strong>Continuous Monitoring Dashboard</strong>
-                                            </CButton>
+                                            </div>
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
@@ -120,12 +111,9 @@ const About = () => {
                                     <CWidgetStatsD
                                         className="mb-3"
                                         icon={
-                                            <CButton
-                                                color="primary"
-                                                href='#/2024-juniors/about'
-                                            >
+                                            <div>
                                                 <strong>Combined Visuals</strong>
-                                            </CButton>
+                                            </div>
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
