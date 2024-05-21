@@ -52,9 +52,12 @@ const About = () => {
                                     <CWidgetStatsD
                                         className="mb-3"
                                         icon={
-                                            <div>
+                                            <CButton
+                                                color="primary"
+                                                href='#/toolkit/deduction-code-lookup'
+                                            >
                                                 <strong>Deduction Code Lookup</strong>
-                                            </div>
+                                            </CButton>
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
@@ -67,9 +70,12 @@ const About = () => {
                                     <CWidgetStatsD
                                         className="mb-3"
                                         icon={
-                                            <div>
+                                            <CButton
+                                                color="primary"
+                                                href='#/toolkit/required-movements'
+                                            >
                                                 <strong>Required Movements Checklist</strong>
-                                            </div>
+                                            </CButton>
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
@@ -96,9 +102,12 @@ const About = () => {
                                     <CWidgetStatsD
                                         className="mb-3"
                                         icon={
-                                            <div>
+                                            <CButton
+                                                color="primary"
+                                                href='#/2024-juniors/about'
+                                            >
                                                 <strong>Continuous Monitoring Dashboard</strong>
-                                            </div>
+                                            </CButton>
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
@@ -111,9 +120,12 @@ const About = () => {
                                     <CWidgetStatsD
                                         className="mb-3"
                                         icon={
-                                            <div>
+                                            <CButton
+                                                color="primary"
+                                                href='#/2024-juniors/about'
+                                            >
                                                 <strong>Combined Visuals</strong>
-                                            </div>
+                                            </CButton>
                                         }
                                         style={{ '--cui-card-cap-bg': '#5856d6' }}
                                         values={[
