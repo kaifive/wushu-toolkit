@@ -162,8 +162,6 @@ const MovementWidget = ({ requirement, movementIdx, requirementIdx, updateCheckl
         <CWidgetStatsB
             key={requirementIdx}
             className="mb-3"
-            color={getProgress(checklistState) === 100 ? "primary" : "white"}
-            inverse={getProgress(checklistState) === 100}
             progress={{ value: getProgress(checklistState) }}
             text={
                 <div>

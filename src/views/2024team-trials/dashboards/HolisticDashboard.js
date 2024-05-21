@@ -11,7 +11,8 @@ import {
     CInputGroupText,
     CFormSelect,
     CButton,
-    CWidgetStatsB
+    CWidgetStatsB,
+    useColorModes
 } from '@coreui/react'
 
 import { BarChart } from '@mui/x-charts/BarChart';
@@ -63,6 +64,37 @@ const HolisticDashboard = () => {
     if (schoolFilter !== "") {
         filteredStandings = filteredStandings.filter((athlete) => athlete.school === schoolFilter)
     }
+
+    const { colorMode, setColorMode } = useColorModes('coreui-free-react-admin-template-theme')
+
+    const darkModeStyles = colorMode === 'dark' ? {
+        [`.${axisClasses.root}`]: {
+            [`.${axisClasses.tick}, .${axisClasses.line}`]: {
+                stroke: 'white',
+                strokeWidth: 3,
+            },
+            [`.${axisClasses.tickLabel}`]: {
+                fill: 'white',
+            },
+        },
+        [`.MuiChartsGrid-horizontalLine`]: {
+            stroke: 'white',
+        },
+        [`.MuiChartsLegend-series text`]: {
+            color: 'white !important',
+            fill: 'white !important',
+        }
+    } : {};
+
+    const chartSetting = {
+        height: 300,
+        sx: {
+            [`.${axisClasses.left} .${axisClasses.label}`]: {
+                transform: 'translate(-20px, 0)',
+            },
+            ...darkModeStyles
+        },
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -148,7 +180,6 @@ const HolisticDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(filteredStandings.length, allStandings.length) }}
                         text=""
                         title="Number of Athletes"
@@ -158,7 +189,6 @@ const HolisticDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageClassScore(filteredStandings, "Barehand"), 10) }}
                         text=""
                         title="Average Barehand Score"
@@ -168,7 +198,6 @@ const HolisticDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageClassScore(filteredStandings, "Short Weapon"), 10) }}
                         text=""
                         title="Average Short Weapon Score"
@@ -178,7 +207,6 @@ const HolisticDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageClassScore(filteredStandings, "Long Weapon"), 10) }}
                         text=""
                         title="Average Long Weapon Score"
@@ -195,6 +223,7 @@ const HolisticDashboard = () => {
                             <DoubleColumnBarChart
                                 dataset={constructMaleFemaleDatasetByClass(filteredStandings, "Barehand")}
                                 type="Count"
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -209,6 +238,7 @@ const HolisticDashboard = () => {
                             <DoubleColumnBarChart
                                 dataset={constructMaleFemaleDatasetByClass(filteredStandings, "Short Weapon")}
                                 type="Count"
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -220,6 +250,7 @@ const HolisticDashboard = () => {
                             <DoubleColumnBarChart
                                 dataset={constructMaleFemaleDatasetByClass(filteredStandings, "Long Weapon")}
                                 type="Count"
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -234,6 +265,7 @@ const HolisticDashboard = () => {
                             <DoubleColumnBarChart
                                 dataset={constructMaleFemaleDatasetByClass(filteredStandings, "Barehand")}
                                 type="Average"
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -248,6 +280,7 @@ const HolisticDashboard = () => {
                             <DoubleColumnBarChart
                                 dataset={constructMaleFemaleDatasetByClass(filteredStandings, "Short Weapon")}
                                 type="Average"
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -259,6 +292,7 @@ const HolisticDashboard = () => {
                             <DoubleColumnBarChart
                                 dataset={constructMaleFemaleDatasetByClass(filteredStandings, "Long Weapon")}
                                 type="Average"
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -273,6 +307,7 @@ const HolisticDashboard = () => {
                             <SingleColumnBarChart
                                 dataset={constructDatasetForTop10(filteredStandings, "Male")}
                                 gender="Male"
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -284,6 +319,7 @@ const HolisticDashboard = () => {
                             <SingleColumnBarChart
                                 dataset={constructDatasetForTop10(filteredStandings, "Female")}
                                 gender="Female"
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -293,16 +329,7 @@ const HolisticDashboard = () => {
     )
 }
 
-const DoubleColumnBarChart = ({ dataset, type }) => {
-    const chartSetting = {
-        height: 300,
-        sx: {
-            [`.${axisClasses.left} .${axisClasses.label}`]: {
-                transform: 'translate(-20px, 0)',
-            },
-        },
-    };
-
+const DoubleColumnBarChart = ({ dataset, type, chartSetting }) => {
     let max = null;
 
     if (type === "Average") {
@@ -324,16 +351,7 @@ const DoubleColumnBarChart = ({ dataset, type }) => {
     )
 }
 
-const SingleColumnBarChart = ({ dataset, gender }) => {
-    const chartSetting = {
-        height: 300,
-        sx: {
-            [`.${axisClasses.left} .${axisClasses.label}`]: {
-                transform: 'translate(-20px, 0)',
-            },
-        },
-    };
-
+const SingleColumnBarChart = ({ dataset, gender, chartSetting }) => {
     const color = gender === "Male" ? "#3399ff" : "#e55353"
 
     return (

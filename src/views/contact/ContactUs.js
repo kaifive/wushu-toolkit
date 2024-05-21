@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
     CRow,
     CButton,
@@ -46,6 +46,21 @@ const ContactUs = () => {
                 },
             );
     };
+
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [setIsMobile]);
 
     return (
         <>
@@ -108,24 +123,50 @@ const ContactUs = () => {
                                         </CFormInput>
                                     </CInputGroup>
                                 </CRow>
+
                                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <CButton
-                                        color="secondary"
-                                        onClick={() => {
-                                            setNameField("");
-                                            setEmailField("");
-                                            setSubjectField("");
-                                            setMessageField("");
-                                        }}
-                                    >
-                                        Cancel
-                                    </CButton>
-                                    <CButton
-                                        type="submit"
-                                        color="primary"
-                                    >
-                                        Send
-                                    </CButton>
+                                    {isMobile ? (
+                                        <>
+                                            <CButton
+                                                type="submit"
+                                                color="primary"
+                                            >
+                                                Send
+                                            </CButton>
+                                            <CButton
+                                                color="secondary"
+                                                onClick={() => {
+                                                    setNameField("");
+                                                    setEmailField("");
+                                                    setSubjectField("");
+                                                    setMessageField("");
+                                                }}
+                                            >
+                                                Cancel
+                                            </CButton>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <CButton
+                                                color="secondary"
+                                                onClick={() => {
+                                                    setNameField("");
+                                                    setEmailField("");
+                                                    setSubjectField("");
+                                                    setMessageField("");
+                                                }}
+                                            >
+                                                Cancel
+                                            </CButton>
+                                            <CButton
+                                                type="submit"
+                                                color="primary"
+                                            >
+                                                Send
+                                            </CButton>
+                                        </>
+                                    )}
+
                                 </div>
                             </form>
                         </CCardBody>

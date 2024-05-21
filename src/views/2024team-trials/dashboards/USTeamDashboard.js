@@ -14,6 +14,7 @@ import {
     CAlert,
     CAlertLink,
     CWidgetStatsB,
+    useColorModes
 } from '@coreui/react'
 
 import { PieChart } from '@mui/x-charts/PieChart';
@@ -268,7 +269,6 @@ const SingleValueCharts = ({ maleFilteredStandings, femaleFilteredStandings }) =
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageClassScore(maleFilteredStandings, "Barehand"), 10) }}
                         text="Top Barehand on the US Team"
                         title="Average Score of Males' "
@@ -278,7 +278,6 @@ const SingleValueCharts = ({ maleFilteredStandings, femaleFilteredStandings }) =
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageClassScore(maleFilteredStandings, "Weapon"), 10) }}
                         text="Top Weapon on the US Team"
                         title="Average Score of Males' "
@@ -288,7 +287,6 @@ const SingleValueCharts = ({ maleFilteredStandings, femaleFilteredStandings }) =
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageClassScore(femaleFilteredStandings, "Barehand"), 10) }}
                         text="Top Barehand on the US Team"
                         title="Average Score of Females'"
@@ -298,7 +296,6 @@ const SingleValueCharts = ({ maleFilteredStandings, femaleFilteredStandings }) =
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageClassScore(femaleFilteredStandings, "Weapon"), 10) }}
                         text="Top Weapon on the US Team"
                         title="Average Score of Females' "
@@ -311,7 +308,6 @@ const SingleValueCharts = ({ maleFilteredStandings, femaleFilteredStandings }) =
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageCombinedScore(maleFilteredStandings), 20) }}
                         text="of Males' on the US Team"
                         title="Average Combined Score"
@@ -321,7 +317,6 @@ const SingleValueCharts = ({ maleFilteredStandings, femaleFilteredStandings }) =
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: 100 }}
                         text="by Males on the US Team"
                         title="Average Number of Events"
@@ -331,7 +326,6 @@ const SingleValueCharts = ({ maleFilteredStandings, femaleFilteredStandings }) =
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageClassScore(femaleFilteredStandings, "Barehand"), 20) }}
                         text="of Females' on the US Team"
                         title="Average Combined Score"
@@ -341,7 +335,6 @@ const SingleValueCharts = ({ maleFilteredStandings, femaleFilteredStandings }) =
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: 100 }}
                         text="by Females on the US Team"
                         title="Average Number of Events"
@@ -385,6 +378,37 @@ const BarehandTypeCharts = ({ maleFilteredStandings, femaleFilteredStandings }) 
 }
 
 const WeaponDistribution = ({ filteredStandings }) => {
+    const { colorMode, setColorMode } = useColorModes('coreui-free-react-admin-template-theme')
+
+    const darkModeStyles = colorMode === 'dark' ? {
+        [`.${axisClasses.root}`]: {
+            [`.${axisClasses.tick}, .${axisClasses.line}`]: {
+                stroke: 'white',
+                strokeWidth: 3,
+            },
+            [`.${axisClasses.tickLabel}`]: {
+                fill: 'white',
+            },
+        },
+        [`.MuiChartsGrid-horizontalLine`]: {
+            stroke: 'white',
+        },
+        [`.MuiChartsLegend-series text`]: {
+            color: 'white !important',
+            fill: 'white !important',
+        }
+    } : {};
+
+    const chartSetting = {
+        height: 300,
+        sx: {
+            [`.${axisClasses.left} .${axisClasses.label}`]: {
+                transform: 'translate(-20px, 0)',
+            },
+            ...darkModeStyles
+        },
+    };
+
     return (
         <>
             <CRow>
@@ -394,6 +418,7 @@ const WeaponDistribution = ({ filteredStandings }) => {
                         <CCardBody>
                             <DoubleColumnBarChart
                                 dataset={constructWeaponDistributionDataset(filteredStandings)}
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -404,16 +429,7 @@ const WeaponDistribution = ({ filteredStandings }) => {
     )
 }
 
-const DoubleColumnBarChart = ({ dataset }) => {
-    const chartSetting = {
-        height: 300,
-        sx: {
-            [`.${axisClasses.left} .${axisClasses.label}`]: {
-                transform: 'translate(-20px, 0)',
-            },
-        },
-    };
-
+const DoubleColumnBarChart = ({ dataset, chartSetting }) => {
     return (
         <BarChart
             dataset={dataset}
@@ -697,7 +713,7 @@ function constructWeaponDistributionDataset(filteredStandings) {
             };
         }
 
-        dataJSON[data.topEvents.Weapon.type][data.gender.toLowerCase()] += 1;    
+        dataJSON[data.topEvents.Weapon.type][data.gender.toLowerCase()] += 1;
     })
 
     return Object.values(dataJSON);

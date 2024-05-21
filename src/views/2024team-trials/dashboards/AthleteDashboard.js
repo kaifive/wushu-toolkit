@@ -12,7 +12,8 @@ import {
     CFormSelect,
     CButton,
     CWidgetStatsB,
-    CWidgetStatsF
+    CWidgetStatsF,
+    useColorModes
 } from '@coreui/react'
 
 import { BarChart } from '@mui/x-charts/BarChart';
@@ -51,6 +52,37 @@ const AthleteDashboard = () => {
 
         return () => clearInterval(intervalId);
     }, [setDataState]);
+
+    const { colorMode, setColorMode } = useColorModes('coreui-free-react-admin-template-theme')
+
+    const darkModeStyles = colorMode === 'dark' ? {
+        [`.${axisClasses.root}`]: {
+            [`.${axisClasses.tick}, .${axisClasses.line}`]: {
+                stroke: 'white',
+                strokeWidth: 3,
+            },
+            [`.${axisClasses.tickLabel}`]: {
+                fill: 'white',
+            },
+        },
+        [`.MuiChartsGrid-horizontalLine`]: {
+            stroke: 'white',
+        },
+        [`.MuiChartsLegend-series text`]: {
+            color: 'white !important',
+            fill: 'white !important',
+        }
+    } : {};
+
+    const chartSetting = {
+        height: 300,
+        sx: {
+            [`.${axisClasses.left} .${axisClasses.label}`]: {
+                transform: 'translate(-20px, 0)',
+            },
+            ...darkModeStyles
+        },
+    };
 
     const { athleteData, schools, athletes, loading, error, syncDate } = dataState;
 
@@ -104,7 +136,6 @@ const AthleteDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(filteredStandings.topEvents.Barehand.score, 10) }}
                         text={getTopFormByClass(filteredStandings, "Barehand")}
                         title="Top Barehand Score"
@@ -114,7 +145,6 @@ const AthleteDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(getTopScoreByClass(filteredStandings, "Short Weapon"), 10) }}
                         text={getTopFormByClass(filteredStandings, "Short Weapon")}
                         title="Top Short Weapon Score"
@@ -124,7 +154,6 @@ const AthleteDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(getTopScoreByClass(filteredStandings, "Long Weapon"), 10) }}
                         text={getTopFormByClass(filteredStandings, "Long Weapon")}
                         title="Top Long Weapon Score"
@@ -134,7 +163,6 @@ const AthleteDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(filteredStandings.finalScore, 20) }}
                         text="Top Barehand + Top Weapon"
                         title="Combined Score"
@@ -147,7 +175,6 @@ const AthleteDashboard = () => {
                 <CCol xs={12} sm={12} xl={4} xxl={4}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(standingsInGroup.length - getRanking(filteredStandings, standingsInGroup) + 1, standingsInGroup.length) }}
                         text="Ranking in Group & Gender"
                         value={`#${getRanking(filteredStandings, standingsInGroup)} of ${standingsInGroup.length}`}
@@ -156,7 +183,6 @@ const AthleteDashboard = () => {
                 <CCol xs={12} sm={12} xl={4} xxl={4}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(standingsInGender.length - getRanking(filteredStandings, standingsInGender) + 1, standingsInGender.length) }}
                         text="Ranking in Gender"
                         value={`#${getRanking(filteredStandings, standingsInGender)} of ${standingsInGender.length}`}
@@ -165,7 +191,6 @@ const AthleteDashboard = () => {
                 <CCol xs={12} sm={12} xl={4} xxl={4}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(standings.length - getRanking(filteredStandings, standings) + 1, standings.length) }}
                         text="Ranking in USA"
                         value={`#${getRanking(filteredStandings, standings)} of ${standings.length}`}
@@ -180,6 +205,7 @@ const AthleteDashboard = () => {
                         <CCardBody>
                             <BarChartBuilder
                                 dataset={constructComparisonDataset(filteredStandings, standings, "Barehand")}
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -193,6 +219,7 @@ const AthleteDashboard = () => {
                         <CCardBody>
                             <BarChartBuilder
                                 dataset={constructComparisonDataset(filteredStandings, standings, "Short Weapon")}
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -203,6 +230,7 @@ const AthleteDashboard = () => {
                         <CCardBody>
                             <BarChartBuilder
                                 dataset={constructComparisonDataset(filteredStandings, standings, "Long Weapon")}
+                                chartSetting={chartSetting}
                             />
                         </CCardBody>
                     </CCard>
@@ -298,16 +326,7 @@ const AthleteDashboard = () => {
     )
 }
 
-const BarChartBuilder = ({ dataset }) => {
-    const chartSetting = {
-        height: 500,
-        sx: {
-            [`.${axisClasses.left} .${axisClasses.label}`]: {
-                transform: 'translate(-20px, 0)',
-            },
-        },
-    };
-
+const BarChartBuilder = ({ dataset, chartSetting }) => {
     return (
         <BarChart
             dataset={dataset}
@@ -428,7 +447,7 @@ function constructComparisonDataset(filteredStandings, standings, classType) {
 function calculateAverageGroupAndGenderScoreByClass(standingsInGroup, classType) {
     let totalScore = 0;
     let count = 0;
-    
+
     standingsInGroup.map((athlete) => {
         athlete.events.map((event) => {
             if (event.class === classType) {

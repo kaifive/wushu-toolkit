@@ -104,7 +104,6 @@ const EventDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(maleAthletes.length, countOfAllMaleAthletes) }}
                         text=""
                         title="Number of Male Athletes"
@@ -114,7 +113,6 @@ const EventDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageScoreInEvent(maleAthletes, eventFilter), 10) }}
                         text=""
                         title="Average Barehand Score"
@@ -124,7 +122,6 @@ const EventDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(femaleAthletes.length, countOfAllFemaleAthletes) }}
                         text=""
                         title="Number of Female Athletes"
@@ -134,7 +131,6 @@ const EventDashboard = () => {
                 <CCol xs={12} sm={6} xl={3} xxl={3}>
                     <CWidgetStatsB
                         className="mb-3"
-                        color="white"
                         progress={{ value: calculatePercentage(calculateAverageScoreInEvent(femaleAthletes, eventFilter), 10) }}
                         text=""
                         title="Average Long Weapon Score"

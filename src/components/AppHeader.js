@@ -91,7 +91,6 @@ const AppHeader = () => {
                 <CIcon className="me-2" icon={cilSun} size="lg" /> Light
               </CDropdownItem>
               <CDropdownItem
-                disabled
                 active={colorMode === 'dark'}
                 className="d-flex align-items-center"
                 as="button"
@@ -101,7 +100,6 @@ const AppHeader = () => {
                 <CIcon className="me-2" icon={cilMoon} size="lg" /> Dark
               </CDropdownItem>
               <CDropdownItem
-                disabled
                 active={colorMode === 'auto'}
                 className="d-flex align-items-center"
                 as="button"

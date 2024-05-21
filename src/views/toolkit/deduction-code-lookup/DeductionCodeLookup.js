@@ -203,7 +203,6 @@ const CodeCards = ({ codeCards, classFilter, codeFilter }) => {
                                                             <CWidgetStatsB
                                                                 key={idx}
                                                                 className="mb-3"
-                                                                color="white"
                                                                 progress={{ value: 100 }}
                                                                 text={
                                                                     <div>
