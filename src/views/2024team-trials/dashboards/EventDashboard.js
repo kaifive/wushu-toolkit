@@ -124,7 +124,7 @@ const EventDashboard = () => {
                         className="mb-3"
                         progress={{ value: calculatePercentage(femaleAthletes.length, countOfAllFemaleAthletes) }}
                         text=""
-                        title="Average Female Score in Event"
+                        title="Number of Female Athletes"
                         value={`${femaleAthletes.length} / ${countOfAllFemaleAthletes}`}
                     />
                 </CCol>
@@ -133,7 +133,7 @@ const EventDashboard = () => {
                         className="mb-3"
                         progress={{ value: calculatePercentage(calculateAverageScoreInEvent(femaleAthletes, eventFilter), 10) }}
                         text=""
-                        title="Average Long Weapon Score"
+                        title="Average Female Score in Event"
                         value={`${calculateAverageScoreInEvent(femaleAthletes, eventFilter)} / 10.00`}
                     />
                 </CCol>
