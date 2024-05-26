@@ -413,18 +413,28 @@ function constructComparisonDataset(filteredStandings, standings, classType) {
                         data[event.form] = {
                             groupTotalScore: 0,
                             groupCount: 0,
+                            groupAverageCount: 0,
                             genderTotalScore: 0,
                             genderCount: 0,
+                            genderAverageCount: 0,
                         }
                     }
 
                     if (athlete.gender === filteredStandings.gender) {
-                        data[event.form].genderTotalScore += event.score;
                         data[event.form].genderCount++;
+
+                        if (event.score !== 0) {
+                            data[event.form].genderTotalScore += event.score;
+                            data[event.form].genderAverageCount++;
+                        }
                     }
 
-                    data[event.form].groupTotalScore += event.score;
                     data[event.form].groupCount++;
+
+                    if (event.score !== 0) {
+                        data[event.form].groupTotalScore += event.score;
+                        data[event.form].groupAverageCount++;
+                    }
                 }
             })
         }
@@ -437,8 +447,8 @@ function constructComparisonDataset(filteredStandings, standings, classType) {
             dataset.push({
                 label: event.form,
                 athlete: event.score,
-                group: data[event.form].groupCount !== 0 ? Math.round((data[event.form].groupTotalScore / data[event.form].groupCount) * 1000) / 1000 : 0,
-                gender: data[event.form].genderCount !== 0 ? Math.round((data[event.form].genderTotalScore / data[event.form].genderCount) * 1000) / 1000 : 0,
+                group: data[event.form].groupAverageCount !== 0 ? Math.round((data[event.form].groupTotalScore / data[event.form].groupAverageCount) * 1000) / 1000 : 0,
+                gender: data[event.form].genderAverageCount !== 0 ? Math.round((data[event.form].genderTotalScore / data[event.form].genderAverageCount) * 1000) / 1000 : 0,
             });
         }
     })

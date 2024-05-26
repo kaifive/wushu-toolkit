@@ -415,6 +415,8 @@ function constructMaleFemaleDatasetByClass(filteredStandings, eventClass) {
                     dataset[event.form] = {
                         maleCount: 0,
                         femaleCount: 0,
+                        maleAverageCount: 0,
+                        femaleAverageCount: 0,
                         maleTotal: 0,
                         femaleTotal: 0,
                         maleAverage: 0,
@@ -424,7 +426,12 @@ function constructMaleFemaleDatasetByClass(filteredStandings, eventClass) {
                 }
 
                 dataset[event.form][data.gender.toLowerCase() + "Count"] += 1
-                dataset[event.form][data.gender.toLowerCase() + "Total"] += event.score
+
+                if (event.score !== 0) {
+                    dataset[event.form][data.gender.toLowerCase() + "AverageCount"] += 1
+                    dataset[event.form][data.gender.toLowerCase() + "Total"] += event.score    
+                }
+
             }
         })
     })
@@ -432,8 +439,8 @@ function constructMaleFemaleDatasetByClass(filteredStandings, eventClass) {
     let dataArray = Object.values(dataset);
 
     dataArray.map((d) => {
-        d.maleAverage = d.maleCount !== 0 ? Math.round((d.maleTotal / d.maleCount) * 1000) / 1000 : 0;
-        d.femaleAverage = d.femaleCount !== 0 ? Math.round((d.femaleTotal / d.femaleCount) * 1000) / 1000 : 0;
+        d.maleAverage = d.maleAverageCount !== 0 ? Math.round((d.maleTotal / d.maleAverageCount) * 1000) / 1000 : 0;
+        d.femaleAverage = d.femaleAverageCount !== 0 ? Math.round((d.femaleTotal / d.femaleAverageCount) * 1000) / 1000 : 0;
     });
 
     return dataArray.sort((a, b) => {
