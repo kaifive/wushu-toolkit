@@ -390,8 +390,10 @@ function calculateAverageClassScore(filteredStandings, eventClass) {
 
     filteredStandings.events.forEach((event) => {
         if (event.class.includes(eventClass)) {
-            totalScore = totalScore + event.score;
-            count++;
+            if (event.score !== 0) {
+                totalScore = totalScore + event.score;
+                count++;
+            }
         }
     });
 
@@ -451,8 +453,10 @@ function calculateAverageGroupAndGenderScoreByClass(standingsInGroup, classType)
     standingsInGroup.map((athlete) => {
         athlete.events.map((event) => {
             if (event.class === classType) {
-                totalScore += event.score;
-                count++;
+                if (event.score !== 0) {
+                    totalScore += event.score;
+                    count++;
+                }
             }
         })
     });

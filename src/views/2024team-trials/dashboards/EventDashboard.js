@@ -343,8 +343,10 @@ function calculateAverageScoreInEvent(data, event) {
     data.map((d) => {
         d.events.map((e) => {
             if (e.form === event) {
-                totalScore += e.score;
-                count++;
+                if (e.score !== 0) {
+                    totalScore += e.score;
+                    count++;
+                }
             }
         })
     })

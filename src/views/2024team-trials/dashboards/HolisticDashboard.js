@@ -375,8 +375,10 @@ function calculateAverageClassScore(filteredStandings, eventClass) {
     filteredStandings.map((data) => {
         data.events.forEach((event) => {
             if (event.class === eventClass) {
-                totalScore = totalScore + event.score;
-                count++;
+                if (event.score !== 0) {
+                    totalScore = totalScore + event.score;
+                    count++;
+                }
             }
         });
     })
@@ -391,8 +393,10 @@ function calculateAverageCombinedScore(top10Dataset) {
     let count = 0;
 
     top10Dataset.map((data) => {
-        total += data.score;
-        count++;
+        if (data.score !== 0) {
+            total += data.score;
+            count++;
+        }
     })
 
     const averageScore = count !== 0 ? total / count : 0;
