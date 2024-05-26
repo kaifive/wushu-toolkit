@@ -765,7 +765,7 @@ export function getData() {
                 throw new Error('Athlete data not found');
             }
 
-            data = sampleData;
+            //data = sampleData;
 
             const athleteData = {}
             const schools = []

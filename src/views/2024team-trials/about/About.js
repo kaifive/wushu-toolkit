@@ -21,7 +21,7 @@ const About = () => {
 
     return (
         <>
-            <CAlert color="info">The 2024 Junior Wushu Team Trials Continuous Monitoring Dashboard is currently live with <strong>sample data</strong>. This will be updated on Saturday, May 25, 2024.</CAlert>
+            <CAlert color="info">The 2024 Junior Wushu Team Trials Continuous Monitoring Dashboard is currently <strong>live</strong>. Good luck to all competing athletes!</CAlert>
             <CRow>
                 <CCol xs={12}>
                     <CCard className="mb-4">
