@@ -36,6 +36,10 @@ const About = () => {
                             <div>
                                 The Continuous Monitoring Dashboard offers accessibility across various devices, ensuring users can seamlessly engage with its features. While it is ideally experienced on a laptop or computer for optimal viewing and interaction, mobile devices are supported for ease of use. Users can quickly access the dashboard through any web browser on their mobile devices. For any strange interactions, refresh the page/browser.
                             </div>
+                            <br></br>
+                            <div>
+                                Feel free to distribute this link to parents and athletes of your school, however we kindly request that you do not distribute this link to members outside of your organization and instead redirect them to the order form below.
+                            </div>
                         </CCardBody>
                     </CCard>
                 </CCol>
@@ -72,7 +76,7 @@ const About = () => {
                     <CModalTitle>Order Form</CModalTitle>
                 </CModalHeader>
                 <CModalBody>
-                    <img style={{width: "100%"}} src={orderform} alt="Order Form QR Code" />
+                    <img style={{ width: "100%" }} src={orderform} alt="Order Form QR Code" />
                 </CModalBody>
                 <CModalFooter>
                     <CButton color="secondary" onClick={() => setVisible(false)}>
