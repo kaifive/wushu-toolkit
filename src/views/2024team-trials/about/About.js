@@ -21,6 +21,7 @@ const About = () => {
 
     return (
         <>
+            <CAlert color="danger">We are aware that scores include 3 decimal places and are working on updating dashboards accordingly. This should be resolved within 15 minutes.</CAlert>
             <CAlert color="info">The 2024 Junior Wushu Team Trials Continuous Monitoring Dashboard is currently <strong>live</strong>. Good luck to all competing athletes!</CAlert>
             <CRow>
                 <CCol xs={12}>
