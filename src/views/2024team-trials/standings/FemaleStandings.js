@@ -44,7 +44,7 @@ const FemaleStandings = () => {
         const intervalId = setInterval(fetchData, 1 * 60 * 1000);
 
         return () => clearInterval(intervalId);
-    }, [setDataState]);
+    }, [setDataState, setInterval]);
 
     const { athleteData, loading, error, syncDate } = dataState;
 

@@ -51,7 +51,7 @@ const AthleteDashboard = () => {
         const intervalId = setInterval(fetchData, 1 * 60 * 1000);
 
         return () => clearInterval(intervalId);
-    }, [setDataState]);
+    }, [setDataState, setInterval]);
 
     const { colorMode, setColorMode } = useColorModes('coreui-free-react-admin-template-theme')
 
@@ -397,7 +397,7 @@ function calculateAverageClassScore(filteredStandings, eventClass) {
 
     const averageScore = count !== 0 ? totalScore / count : 0;
 
-    return Math.round(averageScore * 100) / 100;
+    return Math.round(averageScore * 1000) / 1000;
 }
 
 function constructComparisonDataset(filteredStandings, standings, classType) {
@@ -435,8 +435,8 @@ function constructComparisonDataset(filteredStandings, standings, classType) {
             dataset.push({
                 label: event.form,
                 athlete: event.score,
-                group: data[event.form].groupCount !== 0 ? Math.round((data[event.form].groupTotalScore / data[event.form].groupCount) * 100) / 100 : 0,
-                gender: data[event.form].genderCount !== 0 ? Math.round((data[event.form].genderTotalScore / data[event.form].genderCount) * 100) / 100 : 0,
+                group: data[event.form].groupCount !== 0 ? Math.round((data[event.form].groupTotalScore / data[event.form].groupCount) * 1000) / 1000 : 0,
+                gender: data[event.form].genderCount !== 0 ? Math.round((data[event.form].genderTotalScore / data[event.form].genderCount) * 1000) / 1000 : 0,
             });
         }
     })
@@ -459,7 +459,7 @@ function calculateAverageGroupAndGenderScoreByClass(standingsInGroup, classType)
 
     const averageScore = count !== 0 ? totalScore / count : 0;
 
-    return Math.round(averageScore * 100) / 100;
+    return Math.round(averageScore * 1000) / 1000;
 }
 
 export default AthleteDashboard

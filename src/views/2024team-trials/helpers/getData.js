@@ -848,7 +848,7 @@ export function getData() {
                     }
                 })
 
-                athlete.finalScore = Math.round((athlete.topEvents.Barehand.score + athlete.topEvents.Weapon.score) * 100) / 100;
+                athlete.finalScore = Math.round((athlete.topEvents.Barehand.score + athlete.topEvents.Weapon.score) * 1000) / 1000;
             })
 
 

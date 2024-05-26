@@ -44,7 +44,7 @@ const USTeamDashboard = () => {
         const intervalId = setInterval(fetchData, 1 * 60 * 1000);
 
         return () => clearInterval(intervalId);
-    }, [setDataState]);
+    }, [setDataState, setInterval]);
 
     const { athleteData, loading, error, syncDate } = dataState;
 
@@ -588,7 +588,7 @@ function calculateAverageClassScore(filteredStandings, eventClass) {
 
     const averageScore = count !== 0 ? totalScore / count : 0;
 
-    return Math.round(averageScore * 100) / 100;
+    return Math.round(averageScore * 1000) / 1000;
 }
 
 function calculateAverageCombinedScore(filteredStandings) {
@@ -602,7 +602,7 @@ function calculateAverageCombinedScore(filteredStandings) {
 
     const averageNumber = count !== 0 ? totalScore / count : 0;
 
-    return Math.round(averageNumber * 100) / 100;
+    return Math.round(averageNumber * 1000) / 1000;
 }
 
 function calculateAverageNumberOfEvents(filteredStandings) {
@@ -616,7 +616,7 @@ function calculateAverageNumberOfEvents(filteredStandings) {
 
     const averageNumber = count !== 0 ? totalNumber / count : 0;
 
-    return Math.round(averageNumber * 100) / 100;
+    return Math.round(averageNumber * 1000) / 1000;
 }
 
 const PieChartBuilder = ({ dataset }) => {

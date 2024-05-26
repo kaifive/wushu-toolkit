@@ -45,7 +45,7 @@ const HolisticDashboard = () => {
         const intervalId = setInterval(fetchData, 1 * 60 * 1000);
 
         return () => clearInterval(intervalId);
-    }, [setDataState]);
+    }, [setDataState, setInterval]);
 
     const { athleteData, schools, loading, error, syncDate } = dataState;
 
@@ -383,7 +383,7 @@ function calculateAverageClassScore(filteredStandings, eventClass) {
 
     const averageScore = count !== 0 ? totalScore / count : 0;
 
-    return Math.round(averageScore * 100) / 100;
+    return Math.round(averageScore * 1000) / 1000;
 }
 
 function calculateAverageCombinedScore(top10Dataset) {
@@ -397,7 +397,7 @@ function calculateAverageCombinedScore(top10Dataset) {
 
     const averageScore = count !== 0 ? total / count : 0;
 
-    return Math.round(averageScore * 100) / 100;
+    return Math.round(averageScore * 1000) / 1000;
 }
 
 
@@ -428,8 +428,8 @@ function constructMaleFemaleDatasetByClass(filteredStandings, eventClass) {
     let dataArray = Object.values(dataset);
 
     dataArray.map((d) => {
-        d.maleAverage = d.maleCount !== 0 ? Math.round((d.maleTotal / d.maleCount) * 100) / 100 : 0;
-        d.femaleAverage = d.femaleCount !== 0 ? Math.round((d.femaleTotal / d.femaleCount) * 100) / 100 : 0;
+        d.maleAverage = d.maleCount !== 0 ? Math.round((d.maleTotal / d.maleCount) * 1000) / 1000 : 0;
+        d.femaleAverage = d.femaleCount !== 0 ? Math.round((d.femaleTotal / d.femaleCount) * 1000) / 1000 : 0;
     });
 
     return dataArray.sort((a, b) => {
