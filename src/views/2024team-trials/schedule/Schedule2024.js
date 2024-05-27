@@ -23,7 +23,7 @@ import { getSchedule } from './getSchedule.js'
 
 
 const Schedule2024 = () => {
-  const [dayFilter, setDayFilter] = useState("");
+  const [dayFilter, setDayFilter] = useState("Mon");
   const [ringFilter, setRingFilter] = useState("")
 
   const [scheduleState, setScheduleState] = useState({ schedules: [], loading: true, error: null });
@@ -139,7 +139,9 @@ const Schedule2024 = () => {
                             <CTableDataCell>{event.eventName}</CTableDataCell>
                             <CTableDataCell>{event.ageGroupName}</CTableDataCell>
                             <CTableDataCell>{event.gender}</CTableDataCell>
-                            <CTableDataCell>{event.startTime ? event.startTime : "8:00 AM"}</CTableDataCell>
+                            <CTableDataCell>
+                              {!event.isComplete ? (event.startTime ? event.startTime : "In Progress") : "Completed"}
+                            </CTableDataCell>
                           </CTableRow>
                         ))}
                       </CTableBody>
