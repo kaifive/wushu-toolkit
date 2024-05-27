@@ -829,7 +829,7 @@ export function getData() {
 
                 athleteData[event.participantId].events.push({
                     form: event.eventName,
-                    score: event.score ? event.score : 0,
+                    score: event.score ? (event.score !== "-DNS-" ? event.score : 0) : 0,
                     type: eventTypes[event.eventName],
                     class: eventClasses[eventTypes[event.eventName]]
                 })
