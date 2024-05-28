@@ -23,7 +23,7 @@ import { getSchedule } from './getSchedule.js'
 
 
 const Schedule2024 = () => {
-  const [dayFilter, setDayFilter] = useState("Mon");
+  const [dayFilter, setDayFilter] = useState("");
   const [ringFilter, setRingFilter] = useState("")
 
   const [scheduleState, setScheduleState] = useState({ schedules: [], loading: true, error: null });
