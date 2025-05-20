@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -12,6 +12,7 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
+  CButton,
   useColorModes,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -27,6 +28,10 @@ import {
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
+
+import { auth, logout } from '../authentication/authService'
+import { onAuthStateChanged } from "firebase/auth";
+
 
 const AppHeader = () => {
   const headerRef = useRef()
@@ -110,10 +115,45 @@ const AppHeader = () => {
               </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
+          <li className="nav-item py-1">
+            <div className="vr h-100 mx-2 text-body text-opacity-75" />
+          </li>
+          <HeaderButton />
         </CHeaderNav>
       </CContainer>
     </CHeader>
   )
 }
+
+
+const HeaderButton = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+    });
+
+    return () => unsubscribe(); 
+  }, []);
+
+  const handleClick = () => {
+    if (isLoggedIn) {
+      logout();
+    }
+  };
+
+  return (
+    <CButton
+      style={{ marginLeft: 5 }}
+      color={isLoggedIn ? "secondary" : "primary"}
+      onClick={handleClick}
+      href="#/login"
+    >
+      {isLoggedIn ? "Logout" : "Login"}
+    </CButton>
+  );
+};
+
 
 export default AppHeader

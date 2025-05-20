@@ -5,6 +5,8 @@ import { CContainer, CSpinner } from '@coreui/react'
 // routes config
 import routes from '../routes'
 
+import AuthRoute from "../authentication/AuthRoute"
+
 const AppContent = () => {
   return (
     <CContainer className="px-4" lg>
@@ -18,7 +20,9 @@ const AppContent = () => {
                   path={route.path}
                   exact={route.exact}
                   name={route.name}
-                  element={<route.element />}
+                  element={
+                    route.protected ? <AuthRoute><route.element /></AuthRoute> : <route.element />
+                  }
                 />
               )
             )

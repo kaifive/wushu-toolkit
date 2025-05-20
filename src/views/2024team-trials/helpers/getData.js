@@ -15,6 +15,8 @@ export function getData() {
                 throw new Error('Athlete data not found');
             }
 
+            throw new Error("Database changed.");
+
             return processEventData(data);
         })
         .catch(error => {

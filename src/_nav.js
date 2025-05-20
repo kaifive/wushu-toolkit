@@ -20,7 +20,9 @@ import {
   cilCheckCircle,
   cilBarcode,
   cilEnvelopeClosed,
-  cilDescription
+  cilDescription,
+
+  cilAddressBook
 } from '@coreui/icons'
 
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
@@ -313,39 +315,7 @@ const dev_nav = [
   },
 ]
 
-const live_nav = [
-  {
-    component: CNavItem,
-    name: 'About Wushu Toolkit',
-    to: '/about',
-    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Contact Us',
-    to: '/contact-us',
-    icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavTitle,
-    name: 'Athlete Toolkit',
-  },
-  {
-    component: CNavItem,
-    name: 'Deduction Code Lookup',
-    to: '/toolkit/deduction-code-lookup',
-    icon: <CIcon icon={cilBarcode} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Required Movements',
-    to: '/toolkit/required-movements',
-    icon: <CIcon icon={cilCheckCircle} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavTitle,
-    name: '2024 Junior Team Trials',
-  },
+const JUNIORS_24 = [
   {
     component: CNavItem,
     name: 'ConMon Information',
@@ -406,6 +376,85 @@ const live_nav = [
         name: 'US Team Dashboard',
         to: '/2024-juniors/us-team-dashboard',
       },
+    ],
+  },
+]
+
+const ADULTS_25 = [
+  {
+    component: CNavTitle,
+    name: '2025 Adult Team Trials',
+  },
+  {
+    component: CNavItem,
+    name: 'ConMon Information',
+    to: '/2025-adults/about',
+    icon: <CIcon icon={cilInfo} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Schedule',
+    to: '/2025-adults/schedule',
+    icon: <CIcon icon={cilListNumbered} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavGroup,
+    name: 'Live Standings',
+    icon: <CIcon icon={cilWc} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Male Standings',
+        to: '/2025-adults/male-standings',
+      },
+      {
+        component: CNavItem,
+        name: 'Female Standings',
+        to: '/2025-adults/female-standings',
+      },
+    ],
+  },
+]
+
+const live_nav = [
+  {
+    component: CNavItem,
+    name: 'About Wushu Toolkit',
+    to: '/about',
+    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Contact Us',
+    to: '/contact-us',
+    icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
+    name: 'Athlete Toolkit',
+  },
+  {
+    component: CNavItem,
+    name: 'Deduction Code Lookup',
+    to: '/toolkit/deduction-code-lookup',
+    icon: <CIcon icon={cilBarcode} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Required Movements',
+    to: '/toolkit/required-movements',
+    icon: <CIcon icon={cilCheckCircle} customClassName="nav-icon" />,
+  },
+  ...ADULTS_25,
+  {
+    component: CNavTitle,
+    name: 'Past Competitions',
+  },
+  {
+    component: CNavGroup,
+    name: '2024 Junior Team Trials',
+    items: [
+      ...JUNIORS_24,
     ],
   },
   {

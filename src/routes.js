@@ -69,6 +69,9 @@ const AthleteDashboard = React.lazy(() => import('./views/2024team-trials/dashbo
 const EventDashboard = React.lazy(() => import('./views/2024team-trials/dashboards/EventDashboard'))
 const USTeamDashboard = React.lazy(() => import('./views/2024team-trials/dashboards/USTeamDashboard'))
 
+// 2025 Team Trials
+const About2025 = React.lazy(() => import('./views/2025team-trials/about/About'))
+
 // Coming Soon
 const ComingSoon = React.lazy(() => import('./views/coming-soon/ComingSoon'))
 
@@ -118,13 +121,24 @@ const dev_routes = [
   { path: '/widgets', name: 'Widgets', element: Widgets },
 ]
 
-const live_routes = [
-  { path: '/', name: 'About2024', element: About2024 },
+const base_routes = [
+  { path: '/', name: 'About2025', element: About2025 },
 
   { path: '/about', name: 'About', element: About },
   { path: '/contact-us', name: 'ContactUs', element: ContactUs },
   { path: '/toolkit/deduction-code-lookup', name: 'DeductionCodeLookup', element: DeductionCodeLookup },
   { path: '/toolkit/required-movements', name: 'RequiredMovements', element: RequiredMovements },
+  { path: '/nandu-calculator', name: 'NanduCalculator', element: ComingSoon },
+]
+
+const adults2025_routes = [
+  { path: '/2025-adults/about', name: 'About2025', element: About2025 },
+  { path: '/2025-adults/schedule', name: 'Schedule2025', element: ComingSoon, protected: true },
+  { path: '/2025-adults/male-standings', name: 'MaleStandings2025', element: ComingSoon, protected: true },
+  { path: '/2025-adults/female-standings', name: 'FemaleStandings2025', element: ComingSoon, protected: true },
+]
+
+const juniors2024_routes = [
   { path: '/2024-juniors/about', name: 'About2024', element: About2024 },
   { path: '/2024-juniors/schedule', name: 'Schedule2024', element: Schedule2024 },
   { path: '/2024-juniors/total-scores', name: 'TotalScores2024', element: TotalScores2024 },
@@ -134,7 +148,12 @@ const live_routes = [
   { path: '/2024-juniors/athlete-dashboard', name: 'AthleteDashboard', element: AthleteDashboard },
   { path: '/2024-juniors/event-dashboard', name: 'EventDashboard', element: EventDashboard },
   { path: '/2024-juniors/us-team-dashboard', name: 'USTeamDashboard', element: USTeamDashboard },
-  { path: '/nandu-calculator', name: 'NanduCalculator', element: ComingSoon },
+]
+
+const live_routes = [
+  ...base_routes,
+  ...adults2025_routes,
+  ...juniors2024_routes,
 ]
 
 const routes = live_routes

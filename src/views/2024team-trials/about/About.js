@@ -67,7 +67,7 @@ const About = () => {
                     </CCard>
                 </CCol>
             </CRow>
-            <CButton color="primary" onClick={() => setVisible(!visible)}>Order Form</CButton>
+            <CButton disabled color="primary" onClick={() => setVisible(!visible)}>Order Form</CButton>
             <CModal
                 visible={visible}
                 onClose={() => setVisible(false)}

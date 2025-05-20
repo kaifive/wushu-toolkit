@@ -28,8 +28,10 @@ const ContactUs = () => {
     const sendEmail = (e) => {
         e.preventDefault();
 
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+
         emailjs
-            .sendForm('service_3j61177', 'template_fgrygiq', form.current, {
+            .sendForm(serviceId, 'template_fgrygiq', form.current, {
                 publicKey: 'xo572Xf-hdKwWQOr6',
             })
             .then(
