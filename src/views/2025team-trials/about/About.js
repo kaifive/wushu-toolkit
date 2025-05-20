@@ -22,8 +22,8 @@ import emailjs from '@emailjs/browser';
 const About2025 = () => {
     React.useEffect(() => {
         async function test() {
-            const BACKEND_URL = 'http://localhost:5000';
-            const response = await fetch(`${BACKEND_URL}/2025AdultsData`);
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await fetch(`${apiUrl}/2025AdultsData`);
             const json = await response.json();
 
             console.log("here")
