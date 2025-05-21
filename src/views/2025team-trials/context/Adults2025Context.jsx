@@ -668,9 +668,9 @@ export const Adults2025Provider = ({ children }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const athleteData = await getData();
+                //const athleteData = await getData();
 
-                //const athleteData = temp;
+                const athleteData = temp;
 
                 setData({
                     athleteData,

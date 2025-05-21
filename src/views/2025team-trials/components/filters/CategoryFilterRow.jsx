@@ -26,10 +26,10 @@ const CategoryFilterRow = () => {
                     value={filters.categoryFilter}
                     onChange={handleCategoryFilterChange}>
                     <option value="">*</option>
-                    <option value="CQ_DS_GS">Changquan, Daoshu, Gunshu Group</option>
-                    <option value="CQ_JS_QS">Changquan, Jianshu, Qiangshu Group</option>
-                    <option value="NQ_ND_NG">Nanquan, Nandao, Nangun Group</option>
-                    <option value="TQ_TJ_TS">Taijiquan, Taijijian, Taijishan Group</option>
+                    <option value="CQ_DS_GS">Changquan, Daoshu, Gunshu</option>
+                    <option value="CQ_JS_QS">Changquan, Jianshu, Qiangshu</option>
+                    <option value="NQ_ND_NG">Nanquan, Nandao, Nangun</option>
+                    <option value="TQ_TJ_TS">Taijiquan, Taijijian, Taijishan</option>
                 </CFormSelect>
             </CInputGroup>
         </CRow>

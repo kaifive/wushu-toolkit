@@ -44,7 +44,6 @@ const MaleStandings25 = () => {
         TQ_TJ_TS: athleteData.MALES.TQ_TJ_TS,
     };
 
-
     const filteredCategories = filters.categoryFilter
         ? [filters.categoryFilter]
         : Object.keys(CATEGORY_MAP);

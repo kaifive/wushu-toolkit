@@ -44,7 +44,6 @@ const FemaleStandings = () => {
         TQ_TJ_TS: athleteData.FEMALES.TQ_TJ_TS,
     };
 
-
     const filteredCategories = filters.categoryFilter
         ? [filters.categoryFilter]
         : Object.keys(CATEGORY_MAP);

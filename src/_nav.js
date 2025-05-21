@@ -22,7 +22,8 @@ import {
   cilEnvelopeClosed,
   cilDescription,
 
-  cilAddressBook
+  cilAddressBook,
+  cilAirplay
 } from '@coreui/icons'
 
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
@@ -414,6 +415,12 @@ const ADULTS_25 = [
       },
     ],
   },
+  // {
+  //   component: CNavItem,
+  //   name: 'Scorecard',
+  //   to: '/2025-adults/scorecard',
+  //   icon: <CIcon icon={cilAirplay} customClassName="nav-icon" />,
+  // },
 ]
 
 const live_nav = [
