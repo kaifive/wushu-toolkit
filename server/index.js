@@ -1,7 +1,10 @@
 // server.js
 import express from 'express';
 import cors from 'cors';
-import puppeteer from 'puppeteer';
+import chromium from 'chrome-aws-lambda'
+
+// import puppeteer from 'puppeteer';
+// const chromium = require('chrome-aws-lambda');
 
 const app = express();
 app.use(cors()); // enable CORS for your frontend to call this
@@ -120,7 +123,13 @@ const EVENT_CATEGORY_MAPPING = {
 
 
 async function getAdultsData() {
-    const browser = await puppeteer.launch();
+    const browser = await chromium.puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: true,
+    });
+    
 
     try {
         const waitingListPage = await browser.newPage();
