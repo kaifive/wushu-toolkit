@@ -223,7 +223,7 @@ async function getAdultsData() {
     }
 }
 
-const lightweight1 = async () => {
+const getRegistrationData = async () => {
     const browser = await chromium.puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
@@ -235,22 +235,36 @@ const lightweight1 = async () => {
 
       const registration = await scrapeRegistration(registrationPage);
 
-      return registration
-
+      return registration;
 }
 
-app.get('/2025AdultsData', async (req, res) => {
+const getWaitingListData = async () => {
+    const browser = await chromium.puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: true,
+      });
+
+      const waitingListPage = await browser.newPage();
+
+      const waitingList = await scrapeWaitingList(waitingListPage);
+
+      return waitingList;
+}
+
+app.get("/registrationData2025Adults", async (req, res) => {
     try {
-        const data = await getAdultsData();
+        const data = await getRegistrationData();
         res.json({ data });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
-app.get("/testing", async (req, res) => {
+app.get("/waitingListData2025Adults", async (req, res) => {
     try {
-        const data = await lightweight1();
+        const data = await getWaitingListData();
         res.json({ data });
     } catch (err) {
         res.status(500).json({ error: err.message });
