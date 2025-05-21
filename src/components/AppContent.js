@@ -5,7 +5,9 @@ import { CContainer, CSpinner } from '@coreui/react'
 // routes config
 import routes from '../routes'
 
-import AuthRoute from "../authentication/AuthRoute"
+import AuthRoute from '../authentication/AuthRoute'
+
+import { Adults2025Provider } from '../views/2025team-trials/context/Adults2025Context'
 
 const AppContent = () => {
   return (
@@ -13,18 +15,29 @@ const AppContent = () => {
       <Suspense fallback={<CSpinner color="primary" />}>
         <Routes>
           {routes.map((route, idx) => {
+            if (!route.element) return null
+
+            const Element = route.element
+            const wrapped = route.protected ? (
+              <AuthRoute><Element /></AuthRoute>
+            ) : (
+              <Element />
+            )
+
+            const elementWithContext = route.path?.includes('2025-adults') ? (
+              <Adults2025Provider>{wrapped}</Adults2025Provider>
+            ) : (
+              wrapped
+            )
+
             return (
-              route.element && (
-                <Route
-                  key={idx}
-                  path={route.path}
-                  exact={route.exact}
-                  name={route.name}
-                  element={
-                    route.protected ? <AuthRoute><route.element /></AuthRoute> : <route.element />
-                  }
-                />
-              )
+              <Route
+                key={idx}
+                path={route.path}
+                exact={route.exact}
+                name={route.name}
+                element={elementWithContext}
+              />
             )
           })}
           <Route path="/" element={<Navigate to="dashboard" replace />} />
