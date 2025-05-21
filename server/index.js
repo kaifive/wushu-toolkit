@@ -223,9 +223,34 @@ async function getAdultsData() {
     }
 }
 
+const lightweight1 = async () => {
+    const browser = await chromium.puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: true,
+      });
+
+      const registrationPage = await browser.newPage();
+
+      const registration = await scrapeRegistration(registrationPage);
+
+      return registration
+
+}
+
 app.get('/2025AdultsData', async (req, res) => {
     try {
         const data = await getAdultsData();
+        res.json({ data });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.get("/testing", async (req, res) => {
+    try {
+        const data = await lightweight1();
         res.json({ data });
     } catch (err) {
         res.status(500).json({ error: err.message });
