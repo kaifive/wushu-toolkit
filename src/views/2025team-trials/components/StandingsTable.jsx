@@ -35,8 +35,12 @@ const StandingsTable = ({
                             <CTableHeaderCell scope="col">Athlete</CTableHeaderCell>
                             <CTableHeaderCell scope="col">Barehand ({EVENT_ABBREVIATIONS[category.split(",")[0].trim()]})</CTableHeaderCell>
                             <CTableHeaderCell scope="col">Weapon 1 ({EVENT_ABBREVIATIONS[category.split(",")[1].trim()]})</CTableHeaderCell>
-                            {EVENT_ABBREVIATIONS[category.split(",")[2]] && (<CTableHeaderCell scope="col">Weapon 2 ({EVENT_ABBREVIATIONS[category.split(",")[2].trim()]})</CTableHeaderCell>)}
-                            <CTableHeaderCell scope="col">Total Score</CTableHeaderCell>
+                            {category.split(",").length > 2 && (
+                                <CTableHeaderCell scope="col">
+                                    Weapon 2 ({EVENT_ABBREVIATIONS[category.split(",")[2].trim()]})
+                                </CTableHeaderCell>
+                            )}
+                            <CTableHeaderCell scope="col">Avg. Score</CTableHeaderCell>
                         </CTableRow>
                     </CTableHead>
                     <CTableBody>
