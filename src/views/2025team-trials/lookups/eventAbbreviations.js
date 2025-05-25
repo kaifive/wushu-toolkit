@@ -9,5 +9,4 @@ export const EVENT_ABBREVIATIONS = {
     Nangun: "NG",
     Taijiquan: "TQ",
     Taijijian: "TJ",
-    Taijishan: "TS",
 }

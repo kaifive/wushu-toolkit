@@ -123,9 +123,8 @@ const EVENT_CATEGORY_MAPPING = {
     Nanquan: "NQ_ND_NG",
     Nandao: "NQ_ND_NG",
     Nangun: "NQ_ND_NG",
-    Taijiquan: "TQ_TJ_TS",
-    Taijijian: "TQ_TJ_TS",
-    Taijishan: "TQ_TJ_TS",
+    Taijiquan: "TQ_TJ",
+    Taijijian: "TQ_TJ",
 }
 
 const getAthleteData = async () => {
@@ -134,14 +133,14 @@ const getAthleteData = async () => {
             CQ_DS_GS: {},
             CQ_JS_QS: {},
             NQ_ND_NG: {},
-            TQ_TJ_TS: {},
+            TQ_TJ: {},
             CQ: {},
         },
         FEMALES: {
             CQ_DS_GS: {},
             CQ_JS_QS: {},
             NQ_ND_NG: {},
-            TQ_TJ_TS: {},
+            TQ_TJ: {},
             CQ: {},
         },
     }

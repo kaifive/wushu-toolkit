@@ -23,10 +23,6 @@ import { useAdults2025 } from '../context/Adults2025Context'
 
 
 const About2025 = () => {
-    const ctx = useAdults2025()
-
-    console.log(ctx)
-
     const [visibleSuccess, setVisibleSuccess] = useState(false);
     const [visibleFailure, setVisibleFailure] = useState(false);
 

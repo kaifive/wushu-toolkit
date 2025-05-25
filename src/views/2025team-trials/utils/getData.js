@@ -7,33 +7,37 @@ const EVENT_CATEGORY_MAPPING = {
     Nanquan: "NQ_ND_NG",
     Nandao: "NQ_ND_NG",
     Nangun: "NQ_ND_NG",
-    Taijiquan: "TQ_TJ_TS",
-    Taijijian: "TQ_TJ_TS",
-    Taijishan: "TQ_TJ_TS",
+    Taijiquan: "TQ_TJ",
+    Taijijian: "TQ_TJ",
 }
 
 export async function getData() {
     const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
-    const registrationResponse = await fetch(`${apiUrl}/registrationData2025Adults`);
-    const registrationData = await registrationResponse.json();
+    const [registrationData, waitingListData] = await Promise.all([
+        fetch(`${apiUrl}/registrationData2025Adults`).then(res => res.json()),
+        fetch(`${apiUrl}/waitingListData2025Adults`).then(res => res.json()),
+      ]);
 
-    const waitingListResponse = await fetch(`${apiUrl}/waitingListData2025Adults`);
-    const waitingListData = await waitingListResponse.json();
+    // const registrationResponse = await fetch(`${apiUrl}/registrationData2025Adults`);
+    // const registrationData = await registrationResponse.json();
+
+    // const waitingListResponse = await fetch(`${apiUrl}/waitingListData2025Adults`);
+    // const waitingListData = await waitingListResponse.json();
 
     const ATHLETE_DATA = {
         MALES: {
             CQ_DS_GS: {},
             CQ_JS_QS: {},
             NQ_ND_NG: {},
-            TQ_TJ_TS: {},
+            TQ_TJ: {},
             CQ: {},
         },
         FEMALES: {
             CQ_DS_GS: {},
             CQ_JS_QS: {},
             NQ_ND_NG: {},
-            TQ_TJ_TS: {},
+            TQ_TJ: {},
             CQ: {},
         },
     }

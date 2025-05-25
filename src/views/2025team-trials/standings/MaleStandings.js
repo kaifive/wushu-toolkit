@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     CCard,
     CCardBody,
@@ -6,22 +6,18 @@ import {
     CCol,
     CRow,
     CAlert,
-    CInputGroup,
-    CInputGroupText,
-    CFormSelect,
-    CButton,
 } from '@coreui/react'
 
 import { useAdults2025 } from '../context/Adults2025Context.jsx';
 
 import { CATEGORY_MAP } from "../lookups/categoryMap.js"
 
-import CategoryFilterRow from '../components/filters/CategoryFilterRow.jsx';
+import Adults2025Filters from '../components/filters/Adults2025Filters.jsx';
 import StandingsTable from '../components/StandingsTable.jsx';
 
 const MaleStandings25 = () => {
     const adults25Context = useAdults2025();
-    const { data, filters, setFilters } = adults25Context
+    const { data, filters } = adults25Context
 
     const { athleteData, date, isLoading, error } = data
 
@@ -41,7 +37,7 @@ const MaleStandings25 = () => {
         CQ_DS_GS: athleteData.MALES.CQ_DS_GS,
         CQ_JS_QS: athleteData.MALES.CQ_JS_QS,
         NQ_ND_NG: athleteData.MALES.NQ_ND_NG,
-        TQ_TJ_TS: athleteData.MALES.TQ_TJ_TS,
+        TQ_TJ: athleteData.MALES.TQ_TJ,
     };
 
     const filteredCategories = filters.categoryFilter
@@ -72,17 +68,12 @@ const MaleStandings25 = () => {
                             <strong>Standing Filters</strong>
                         </CCardHeader>
                         <CCardBody>
-                            <CategoryFilterRow />
-                            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <CButton
-                                    style={{}}
-                                    color="primary"
-                                    onClick={() => {
-                                        setFilters((prev) => ({...prev, categoryFilter: ""}))
-                                    }}>
-                                    Reset Filter
-                                </CButton>
-                            </div>
+                            <Adults2025Filters
+                                showGenderFilter={false}
+                                showCategoryFilter={true}
+                                showEventFilter={false}
+                                showAthleteFilter={false}
+                            />
                         </CCardBody>
                     </CCard>
                 </CCol>

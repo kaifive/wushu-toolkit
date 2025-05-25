@@ -415,12 +415,12 @@ const ADULTS_25 = [
       },
     ],
   },
-  // {
-  //   component: CNavItem,
-  //   name: 'Scorecard',
-  //   to: '/2025-adults/scorecard',
-  //   icon: <CIcon icon={cilAirplay} customClassName="nav-icon" />,
-  // },
+  {
+    component: CNavItem,
+    name: 'Scorecard',
+    to: '/2025-adults/scorecard',
+    icon: <CIcon icon={cilAirplay} customClassName="nav-icon" />,
+  },
 ]
 
 const live_nav = [

@@ -419,7 +419,7 @@ const temp = {
                 ]
             }
         },
-        "TQ_TJ_TS": {
+        "TQ_TJ": {
             "Huang Victor": {
                 "competitor": {
                     "name": "Huang Victor"
@@ -649,13 +649,19 @@ const temp = {
                 ]
             }
         },
-        "TQ_TJ_TS": {}
+        "TQ_TJ": {}
     }
 }
 
 export const Adults2025Provider = ({ children }) => {
-    const [filters, setFilters] = useState({
-        categoryFilter: "",
+    const [filters, setFilters] = useState(() => {
+        const stored = localStorage.getItem("WushuToolkit-Adults25");
+        return stored ? JSON.parse(stored) : {
+            genderFilter: "",
+            categoryFilter: "",
+            eventFilter: "",
+            athleteFilter: "",
+        };
     });
 
     const [data, setData] = useState({
@@ -668,9 +674,9 @@ export const Adults2025Provider = ({ children }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                //const athleteData = await getData();
+                const athleteData = await getData();
 
-                const athleteData = temp;
+                //const athleteData = temp;
 
                 setData({
                     athleteData,
@@ -692,7 +698,7 @@ export const Adults2025Provider = ({ children }) => {
     }, []);
 
     return (
-        <Adults2025Context.Provider value={{ data, filters, setFilters}}>
+        <Adults2025Context.Provider value={{ data, filters, setFilters }}>
             {children}
         </Adults2025Context.Provider>
     )
