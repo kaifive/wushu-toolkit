@@ -137,6 +137,47 @@ const getWaitingListData = async () => {
       return waitingList;
 }
 
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
+async function scrape(url) {
+  try {
+    const { data: html } = await axios.get(url, {
+      headers: {
+        // Pretend to be a real browser
+        'User-Agent': 'Mozilla/5.0',
+      },
+    });
+
+    const $ = cheerio.load(html);
+
+    // Example: extract all links
+    const links = [];
+    $('a').each((_, el) => {
+      links.push({
+        text: $(el).text().trim(),
+        href: $(el).attr('href'),
+      });
+    });
+
+    return links;
+  } catch (err) {
+    console.error('Scrape failed:', err.message);
+    return [];
+  }
+}
+
+app.get('/scrape', async (req, res) => {
+    // const { url } = req.query;
+    // if (!url) return res.status(400).send('Missing url');
+    const url = `${BASE_URL}popup_nennungen_main.php?popup_action=nennungenall&verid=${COMPETITION_ID}`;
+
+    
+    const data = await scrape(url);
+    res.json(data);
+  });
+  
+
 app.get("/registrationData2025Adults", async (req, res) => {
     try {
         const data = await getRegistrationData();
