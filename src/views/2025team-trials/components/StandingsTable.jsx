@@ -9,7 +9,14 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
+    CTooltip,
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+
+import {
+    cilMagnifyingGlass
+  } from '@coreui/icons'
+  
 
 import { EVENT_ABBREVIATIONS } from "../lookups/eventAbbreviations.js"
 import { useAdults2025 } from '../context/Adults2025Context.jsx';
@@ -68,19 +75,29 @@ const StandingsTable = ({
                                     {categoryEvents.map((event, i) => (
                                         <CTableDataCell key={i}>
                                             {event && event.nandu ? (
-                                                <a
-                                                    href="#/2025-adults/scorecard"
-                                                    onClick={(e) => {
-                                                        setFilters({
-                                                            genderFilter: window.location.hash.includes("male") ? "MALES" : "FEMALES",
-                                                            categoryFilter: filters.categoryFilter,
-                                                            eventFilter: event.event.split(" ")[event.event.split(" ").length - 1],
-                                                            athleteFilter: registration.competitor.name,
-                                                        })
-                                                    }}
-                                                >
-                                                    {(event.score ?? 0).toFixed(3)}
-                                                </a>
+                                                <>
+                                                    <a
+                                                        href="#/2025-adults/scorecard"
+                                                        onClick={(e) => {
+                                                            setFilters({
+                                                                genderFilter: window.location.hash.includes("male") ? "MALES" : "FEMALES",
+                                                                categoryFilter: filters.categoryFilter,
+                                                                eventFilter: event.event.split(" ")[event.event.split(" ").length - 1],
+                                                                athleteFilter: registration.competitor.name,
+                                                            })
+                                                        }}
+                                                    >
+                                                        {(event.score ?? 0).toFixed(3)}
+                                                    </a>
+                                                    <CTooltip content={event.nandu.join(", ")}>
+    <CIcon
+      icon={cilMagnifyingGlass} 
+      size="sm"
+      className="ms-2"
+      style={{ cursor: "pointer" }}
+    />
+    </CTooltip>
+                                                </>
                                             ) : (
                                                 <p>{event ? (event.score ?? 0).toFixed(3) : "-"}</p>
                                             )}
