@@ -1,3 +1,5 @@
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 const EVENT_CATEGORY_MAPPING = {
     Changquan: "CQ",
     Daoshu: "CQ_DS_GS",
@@ -11,19 +13,32 @@ const EVENT_CATEGORY_MAPPING = {
     Taijijian: "TQ_TJ",
 }
 
-export async function getData() {
-    const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const fetchScoresByCategory = async (categoryName, categoryId) => {
+    const categoryScores = await fetch(`${apiUrl}/2025-phoenix/scorecard-data/${categoryId}`).then(res => res.json())
 
-    const [registrationData, waitingListData] = await Promise.all([
-        fetch(`${apiUrl}/2025-adults/registration-data?searchTerm=${encodeURIComponent("Taolu Team Trials")}`).then(res => res.json()),
-        fetch(`${apiUrl}/2025-adults/waiting-list-data?searchTerm=${encodeURIComponent("Taolu Team Trials")}`).then(res => res.json()),
+    return { [categoryName]: categoryScores }
+}
+
+const fetchAllCategories = async (categoryData) => {
+    const promises = Object.entries(categoryData).map(([categoryName, categoryId]) =>
+        fetchScoresByCategory(categoryName, categoryId)
+    );
+
+    const results = await Promise.all(promises);
+    return results;
+};
+
+export async function getData() {
+    const [registrationData, categoryData] = await Promise.all([
+        fetch(`${apiUrl}/2025-phoenix/registration-data?searchTerm=${encodeURIComponent("Optional")}`).then(res => res.json()),
+        fetch(`${apiUrl}/2025-phoenix/category-data?searchTerm=${encodeURIComponent("Optional")}`).then(res => res.json()),
     ]);
 
-    // const registrationResponse = await fetch(`${apiUrl}/registrationData2025Adults`);
-    // const registrationData = await registrationResponse.json();W
+    let scorecardData;
 
-    // const waitingListResponse = await fetch(`${apiUrl}/waitingListData2025Adults`);
-    // const waitingListData = await waitingListResponse.json();
+    await fetchAllCategories(categoryData.data).then((categories) => {
+        scorecardData = Object.assign({}, ...categories);
+    });
 
     const ATHLETE_DATA = {
         MALES: {
@@ -43,7 +58,6 @@ export async function getData() {
     }
 
     const joined = {
-        ...waitingListData.data,
         ...registrationData.data,
     }
 
@@ -51,27 +65,31 @@ export async function getData() {
         const athleteName = registration.competitor.name
 
         registration.events.forEach((event) => {
-            const eventInfo = event.event.split("-")
+            const eventInfo = event.event
 
-            const gender = eventInfo[1]
-                .trim()
-                .split(" ")[0]
-                .includes("Men´s") ? "MALES" : "FEMALES";
+            const gender = eventInfo.includes("Male") ? "MALES" : "FEMALES";
 
-            const type = eventInfo[1]
-                .trim()
-                .split(" ")[1];
+            const type = Object.keys(EVENT_CATEGORY_MAPPING).find((key) =>
+                eventInfo?.includes(key)
+            );
 
             const category = EVENT_CATEGORY_MAPPING[type];
 
+            const athleteEventScorecard = scorecardData[eventInfo].data[athleteName.toLowerCase()]
+
+            const mergedEventData = {
+                ...event,
+                ...athleteEventScorecard,
+            }
+
             if (ATHLETE_DATA[gender][category][athleteName]) {
-                ATHLETE_DATA[gender][category][athleteName].events.push(event)
+                ATHLETE_DATA[gender][category][athleteName].events.push(mergedEventData)
             } else {
                 ATHLETE_DATA[gender][category][athleteName] = {
                     competitor: {
                         name: athleteName,
                     },
-                    events: [event]
+                    events: [mergedEventData]
                 }
             }
         })

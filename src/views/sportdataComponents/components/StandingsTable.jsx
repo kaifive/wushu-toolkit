@@ -15,19 +15,19 @@ import CIcon from '@coreui/icons-react'
 
 import {
     cilMagnifyingGlass
-  } from '@coreui/icons'
-  
+} from '@coreui/icons'
+
 
 import { EVENT_ABBREVIATIONS } from "../lookups/eventAbbreviations.js"
-import { useAdults2025 } from '../context/Adults2025Context.jsx';
+import { useSportdata } from '../context/SportdataContext.jsx';
 
 const StandingsTable = ({
     gender,
     category,
     data
 }) => {
-    const adults25Context = useAdults2025();
-    const { filters, setFilters } = adults25Context
+    const sportdataContext = useSportdata();
+    const { filters, setFilters } = sportdataContext
 
     return (
         <CCard className="mb-4">
@@ -60,12 +60,17 @@ const StandingsTable = ({
                                 registration.events.find((event) => event.event.includes(cat))
                             );
 
-                            const totalScore = categoryEvents.reduce(
-                                (sum, event) => sum + (event?.score ?? 0),
-                                0
-                            );
+                            const validScores = categoryEvents
+                                .map(event => parseFloat(event?.finalScore))
+                                .filter(score => !isNaN(score));
 
-                            const formattedTotalScore = totalScore.toFixed(3);
+                            const average = validScores.length > 0
+                                ? validScores.reduce((sum, score) => sum + score, 0) / validScores.length
+                                : 0;
+
+                            const formattedAvgScore = average.toFixed(3);
+
+                            const competitionId = window.location.hash.split("/")[1]
 
                             return (
                                 <CTableRow key={idx}>
@@ -77,7 +82,7 @@ const StandingsTable = ({
                                             {event && event.nandu ? (
                                                 <>
                                                     <a
-                                                        href="#/2025-adults/scorecard"
+                                                        href={`#/${competitionId}/scorecard`}
                                                         onClick={(e) => {
                                                             setFilters({
                                                                 genderFilter: window.location.hash.includes("male") ? "MALES" : "FEMALES",
@@ -87,24 +92,24 @@ const StandingsTable = ({
                                                             })
                                                         }}
                                                     >
-                                                        {(event.score ?? 0).toFixed(3)}
+                                                        {(event.finalScore ?? "0.000")}
                                                     </a>
                                                     <CTooltip content={event.nandu.join(", ")}>
-    <CIcon
-      icon={cilMagnifyingGlass} 
-      size="sm"
-      className="ms-2"
-      style={{ cursor: "pointer" }}
-    />
-    </CTooltip>
+                                                        <CIcon
+                                                            icon={cilMagnifyingGlass}
+                                                            size="sm"
+                                                            className="ms-2"
+                                                            style={{ cursor: "pointer" }}
+                                                        />
+                                                    </CTooltip>
                                                 </>
                                             ) : (
-                                                <p>{event ? (event.score ?? 0).toFixed(3) : "-"}</p>
+                                                <p>{event ? (event.score ?? "0.000") : "-"}</p>
                                             )}
                                         </CTableDataCell>
                                     ))}
 
-                                    <CTableDataCell>{formattedTotalScore}</CTableDataCell>
+                                    <CTableDataCell>{formattedAvgScore}</CTableDataCell>
                                 </CTableRow>
                             );
                         })}

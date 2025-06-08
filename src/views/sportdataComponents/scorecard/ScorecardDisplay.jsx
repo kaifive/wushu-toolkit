@@ -17,11 +17,11 @@ import {
     CCardTitle,
 } from '@coreui/react'
 
-import { useAdults2025 } from '../context/Adults2025Context.jsx';
+import { useSportdata } from '../context/SportdataContext.jsx';
 
-const ScorecardDisplay = () => {
-    const adults25Context = useAdults2025();
-    const { data, filters, setFilters } = adults25Context
+const ScorecardDisplay = ({ athleteInfo, eventInfo }) => {
+    const sportdataContext = useSportdata();
+    const { data, filters, setFilters } = sportdataContext
 
     const { athleteData, date, isLoading, error } = data
 
@@ -37,53 +37,45 @@ const ScorecardDisplay = () => {
         )
     }
 
-    if (!filters.eventFilter || !filters.athleteFilter) {
-        return (
-            <CAlert color="danger">
-                Select an Athlete and Event to view scorecard.
-            </CAlert>
-        )
-    }
+    // let athleteInfo = null;
+    // let eventInfo = null;
 
-    let athleteInfo = null;
-    let eventInfo = null;
+    // for (const gender in athleteData) {
+    //     const categories = athleteData[gender];
 
-    for (const gender in athleteData) {
-      const categories = athleteData[gender];
-    
-      for (const category in categories) {
-        const competitors = categories[category];
-    
-        for (const name in competitors) {
-          if (name === filters.athleteFilter) {
-            const registration = competitors[name];
-            const events = registration.events || [];
-    
-            for (let i = 0; i < events.length; i++) {
-              if (events[i].event.includes(filters.eventFilter)) {
-                athleteInfo = registration;
-                eventInfo = events[i];
-                break;
-              }
-            }
-    
-            if (athleteInfo) break;
-          }
-        }
-    
-        if (athleteInfo) break;
-      }
-    
-      if (athleteInfo) break;
-    }
+    //     for (const category in categories) {
+    //         const competitors = categories[category];
 
-    if (!athleteInfo || !eventInfo) {
-        return (
-            <CAlert color="danger">
-                An error occurred getting athlete and event scorecard.
-            </CAlert>
-        )
-    }
+    //         for (const name in competitors) {
+    //             if (name === filters.athleteFilter) {
+    //                 const registration = competitors[name];
+    //                 const events = registration.events || [];
+
+    //                 for (let i = 0; i < events.length; i++) {
+    //                     if (events[i].event.includes(filters.eventFilter)) {
+    //                         athleteInfo = registration;
+    //                         eventInfo = events[i];
+    //                         break;
+    //                     }
+    //                 }
+
+    //                 if (athleteInfo) break;
+    //             }
+    //         }
+
+    //         if (athleteInfo) break;
+    //     }
+
+    //     if (athleteInfo) break;
+    // }
+
+    // if (!athleteInfo || !eventInfo) {
+    //     return (
+    //         <CAlert color="danger">
+    //             An error occurred getting athlete and event scorecard.
+    //         </CAlert>
+    //     )
+    // }
 
     return (
         <>
@@ -97,39 +89,41 @@ const ScorecardDisplay = () => {
                             <CContainer>
                                 <CRow className="justify-content-center align-items-center text-center">
                                     <CCol xs="12" md="2" style={{ minWidth: 130 }}>
-                                        <JudgeGroupCard label="A SCORE" value={5} />
+                                        <JudgeGroupCard label="A SCORE" value={parseFloat(eventInfo?.A?.score ?? 0)} />
                                     </CCol>
                                     <CCol xs="12" md="10">
-                                        <DeductionCodes codes={[]} />
+                                        <DeductionCodes codes={eventInfo?.A?.deductions ?? []} />
                                     </CCol>
                                 </CRow>
 
                                 <CRow className="justify-content-center align-items-center text-center">
                                     <CCol xs="12" md="2" style={{ minWidth: 130 }}>
-                                        <JudgeGroupCard label="B SCORE" value={0} />
+                                        <JudgeGroupCard label="B SCORE" value={parseFloat(eventInfo?.B?.score ?? 0)} />
                                     </CCol>
                                     <CCol xs="12" md="10">
-                                        <BJudgeScores scores={[0, 0, 0, 0, 0]} />
+                                        <BJudgeScores scores={eventInfo?.B?.scores ?? []} booleans={eventInfo?.B?.isNotDropped ?? []} />
                                     </CCol>
                                 </CRow>
 
                                 <CRow className="justify-content-center align-items-center text-center">
                                     <CCol xs="12" md="2" style={{ minWidth: 130 }}>
-                                        <JudgeGroupCard label="C SCORE" value={0} />
+                                        <JudgeGroupCard label="C SCORE" value={parseFloat(eventInfo?.C?.score ?? 0)} />
                                     </CCol>
                                     <CCol xs="12" md="10">
                                         <NanduCards
+                                            counts={eventInfo?.C?.counts || []}
                                             codeSequence={eventInfo?.nandu || []}
+                                            booleans={eventInfo?.C?.isNotMissed || []}
                                         />
                                     </CCol>
                                 </CRow>
 
                                 <CRow className="justify-content-center align-items-center text-center">
                                     <CCol xs="12" md="2" style={{ minWidth: 130 }}>
-                                        <AdditionalDeductions value={0} />
+                                        <AdditionalDeductions value={eventInfo?.adjustment} />
                                     </CCol>
                                     <CCol xs="12" md="10">
-                                        <FinalScore value={5} />
+                                        <FinalScore value={parseFloat(eventInfo?.finalScore ?? 0)} />
                                     </CCol>
                                 </CRow>
                             </CContainer>
@@ -165,6 +159,10 @@ const DeductionCodes = ({ codes }) => {
                 style={{ alignItems: 'center' }}
             >
                 {codes.map((code, idx) => {
+                    if (code === "0.0") {
+                        return <div key={idx}/>
+                    }
+
                     return (
                         <CButton
                             key={idx}
@@ -172,7 +170,7 @@ const DeductionCodes = ({ codes }) => {
                             className="d-flex flex-column align-items-center justify-content-center"
                             style={{
                                 fontWeight: 'bold',
-                                fontSize: '1.25rem',
+                                fontSize: '1.rem',
                             }}
                             color="danger"
                         >
@@ -186,7 +184,7 @@ const DeductionCodes = ({ codes }) => {
     );
 };
 
-const BJudgeScores = ({ scores }) => {
+const BJudgeScores = ({ scores, booleans }) => {
     return (
         <CCard className="border-0 p-0">
             <CCardBody
@@ -200,11 +198,11 @@ const BJudgeScores = ({ scores }) => {
                                 className="d-flex gap-2 bg-body-secondary rounded px-2 py-1"
                                 style={{
                                     fontWeight: 'bold',
-                                    fontSize: '1.25rem',
+                                    fontSize: '1.rem',
                                 }}
                             >
-                                <CCardText className="text-success mb-1">
-                                    {score.toFixed(3)}
+                                <CCardText className={`text-${booleans[idx] ? "success" : "danger"} mb-1`}>
+                                    {score}
                                 </CCardText>
                             </CCardBody>
                         </CCard>
@@ -216,7 +214,7 @@ const BJudgeScores = ({ scores }) => {
     );
 };
 
-const NanduCards = ({ codeSequence }) => {
+const NanduCards = ({ counts, codeSequence, booleans }) => {
     let counter = 1;
 
     if (codeSequence.length === 0) {
@@ -236,36 +234,48 @@ const NanduCards = ({ codeSequence }) => {
                 {codeSequence.map((combo, idx) => {
                     const parts = combo.split('+');
 
+
                     return (
                         <CCard key={idx} className="border-0 p-0">
                             <CCardBody
                                 className="d-flex gap-2 bg-body-secondary rounded px-2 py-1"
                                 style={{ flexShrink: 0 }}
                             >
-                                {parts.map((part, i) => (
-                                    <CTooltip
-                                        key={i}
-                                        content={`${i > 0 ? '+' : ''}${part}`}
-                                        placement="top"
-                                    >
-                                        <CButton
+                                {parts.map((part, i) => {
+                                    let color = "secondary";
+
+                                    if (booleans[counter - 1] === true) {
+                                        color = "success"
+                                    } else if (booleans[counter - 1] === false) {
+                                        color = "danger"
+                                    }
+
+                                    return (
+                                        <CTooltip
                                             key={i}
-                                            className="d-flex flex-column align-items-center justify-content-center border-3 border-white"
-                                            style={{
-                                                width: '55px',
-                                                height: '55px',
-                                                borderRadius: '50%',
-                                                color: 'white',
-                                                fontWeight: 'bold',
-                                                fontSize: '1.25rem',
-                                                flexShrink: 0,
-                                            }}
-                                            color="secondary"
+                                            content={`${i > 0 ? '+' : ''}${part}`}
+                                            placement="top"
                                         >
-                                            {counter++}
-                                        </CButton>
-                                    </CTooltip>
-                                ))}
+                                            <CButton
+                                                key={i}
+                                                className="d-flex flex-column align-items-center justify-content-center border-3 border-white"
+                                                style={{
+                                                    width: '55px',
+                                                    height: '55px',
+                                                    borderRadius: '50%',
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '1.rem',
+                                                    flexShrink: 0,
+                                                }}
+                                                color={color}
+                                            >
+                                                {counter++}
+                                            </CButton>
+                                        </CTooltip>
+                                    )
+                                }
+                                )}
                             </CCardBody>
                         </CCard>
                     );
@@ -277,19 +287,18 @@ const NanduCards = ({ codeSequence }) => {
 };
 
 const AdditionalDeductions = ({ value }) => {
-    if (value == 0) {
+    if (!value || value?.length === 0) {
         return (<></>);
     }
     return (
         <CCard className="text-center border-0 p-0">
             <CCardBody className="p-2">
 
-                <div className="text-danger" style={{ fontSize: '1.75rem', fontWeight: 'bold' }}>
-                    -{value.toFixed(3)}
+                <div className={`text-${value.includes("-") ? "danger" : "success"}`} style={{ fontSize: '1.75rem', fontWeight: 'bold' }}>
+                    {value}
                 </div>
                 <CCardText className="text-muted mb-1" style={{ fontSize: '0.75rem' }}>
-                    <div>ADDITIONAL</div>
-                    <div>DEDUCTIONS</div>
+                    ADJUSTMENTS
                 </CCardText>
             </CCardBody>
         </CCard>

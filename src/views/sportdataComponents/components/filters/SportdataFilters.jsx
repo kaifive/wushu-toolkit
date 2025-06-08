@@ -7,45 +7,45 @@ import {
     CButton,
 } from '@coreui/react'
 
-import { useAdults2025 } from '../../context/Adults2025Context';
+import { useSportdata } from '../../context/SportdataContext';
 
 import { EVENT_ABBREVIATIONS } from '../../lookups/eventAbbreviations';
 import { CATEGORY_MAP } from '../../lookups/categoryMap';
 
-const Adults2025Filters = ({
+const SportdataFilters = ({
     showGenderFilter,
     showCategoryFilter,
     showEventFilter,
     showAthleteFilter,
 }) => {
-    const adults25Context = useAdults2025();
+    const sportdataContext = useSportdata();
 
-    const { data, filters, setFilters } = adults25Context
+    const { data, filters, setFilters } = sportdataContext
 
     const { athleteData, date, isLoading, error } = data
 
     const [eventValues, setEventValues] = useState([
-        <option value="">*</option>,
+        <option key="*" value="">*</option>,
         ...Object.entries(EVENT_ABBREVIATIONS).map(([event, abbreviation], idx) => (
             <option key={idx} value={event.trim()}>{event.trim()}</option>
         ))
     ])
 
     const [athleteValues, setAthleteValues] = useState([
-        <option value="">*</option>
+        <option key="*" value="">*</option>
     ])
 
     useEffect(() => {
         if (filters.categoryFilter.length === 0) {
             setEventValues([
-                <option value="">*</option>,
+                <option key="*" value="">*</option>,
                 ...Object.entries(EVENT_ABBREVIATIONS).map(([event, abbreviation], idx) => (
                     <option key={idx} value={event.trim()}>{event.trim()}</option>
                 ))
             ])
         } else {
             setEventValues([
-                <option value="">*</option>,
+                <option key="*" value="">*</option>,
                 ...CATEGORY_MAP[filters.categoryFilter].split(",").map((event, idx) => (
                     <option key={idx} value={event.trim()}>{event.trim()}</option>
                 ))
@@ -60,7 +60,7 @@ const Adults2025Filters = ({
     useEffect(() => {
         if (filters.athleteFilter.length === 0) {
             setEventValues([
-                <option value="">*</option>,
+                <option key="*" value="">*</option>,
                 ...Object.entries(EVENT_ABBREVIATIONS).map(([event, abbreviation], idx) => (
                     <option key={idx} value={event.trim()}>{event.trim()}</option>
                 ))
@@ -69,18 +69,17 @@ const Adults2025Filters = ({
             let athleteEvents = [];
 
             // Find the athlete and grab their events
-            outer: for (const gender of Object.keys(athleteData)) {
+            for (const gender of Object.keys(athleteData)) {
                 for (const category of Object.keys(athleteData[gender])) {
                     const competitors = athleteData[gender][category];
                     if (filters.athleteFilter in competitors) {
-                        athleteEvents = competitors[filters.athleteFilter].events.map(e => e.event.split(" ")[e.event.split(" ").length - 1]);
-                        break outer;
+                        athleteEvents.push(...competitors[filters.athleteFilter].events.map(e => e.event.split(" ")[e.event.split(" ").length - 1]));
                     }
                 }
             }
 
             setEventValues([
-                <option value="">*</option>,
+                <option key="*" value="">*</option>,
                 ...athleteEvents.map((event, idx) => (
                     <option key={idx} value={event}>{event}</option>
                 ))
@@ -94,8 +93,8 @@ const Adults2025Filters = ({
     }, [filters.athleteFilter]);
 
     useEffect(() => {
-        // Save to localStorage
-        localStorage.setItem("WushuToolkit-Adults25", JSON.stringify(filters));
+        const competition = window.location.hash.split("/")[1]
+        localStorage.setItem(`WushuToolkit-Sportdata-${competition}`, JSON.stringify(filters));
 
         let filteredAthleteData = structuredClone(athleteData);
 
@@ -184,9 +183,9 @@ const Adults2025Filters = ({
                             value={filters.genderFilter}
                             onChange={handleGenderFilterChange}
                         >
-                            <option value="">*</option>
-                            <option value="MALES">Male</option>
-                            <option value="FEMALES">Female</option>
+                            <option key="*" value="">*</option>
+                            <option key="males" value="MALES">Male</option>
+                            <option key="females" value="FEMALES">Female</option>
                         </CFormSelect>
                     </CInputGroup>
                 </CRow>
@@ -199,11 +198,11 @@ const Adults2025Filters = ({
                             value={filters.categoryFilter}
                             onChange={handleCategoryFilterChange}
                         >
-                            <option value="">*</option>
-                            <option value="CQ_DS_GS">Changquan, Daoshu, Gunshu</option>
-                            <option value="CQ_JS_QS">Changquan, Jianshu, Qiangshu</option>
-                            <option value="NQ_ND_NG">Nanquan, Nandao, Nangun</option>
-                            <option value="TQ_TJ">Taijiquan, Taijijian</option>
+                            <option key="*" value="">*</option>
+                            <option key="cq_ds_gs" value="CQ_DS_GS">Changquan, Daoshu, Gunshu</option>
+                            <option key="cq_js_qs" value="CQ_JS_QS">Changquan, Jianshu, Qiangshu</option>
+                            <option key="nq_nd_ng" value="NQ_ND_NG">Nanquan, Nandao, Nangun</option>
+                            <option key="tq_tj" value="TQ_TJ">Taijiquan, Taijijian</option>
                         </CFormSelect>
                     </CInputGroup>
                 </CRow>
@@ -253,4 +252,4 @@ const Adults2025Filters = ({
     )
 }
 
-export default Adults2025Filters;
+export default SportdataFilters;

@@ -381,6 +381,32 @@ const JUNIORS_24 = [
   },
 ]
 
+const PHOENIX_25 = [
+  {
+    component: CNavGroup,
+    name: 'Live Standings',
+    icon: <CIcon icon={cilWc} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Male Standings',
+        to: '/2025-phoenix/male-standings',
+      },
+      {
+        component: CNavItem,
+        name: 'Female Standings',
+        to: '/2025-phoenix/female-standings',
+      },
+    ],
+  },
+  {
+    component: CNavItem,
+    name: 'Scorecard',
+    to: '/2025-phoenix/scorecard',
+    icon: <CIcon icon={cilAirplay} customClassName="nav-icon" />,
+  },
+]
+
 const ADULTS_25 = [
   {
     component: CNavTitle,
@@ -456,6 +482,13 @@ const live_nav = [
   {
     component: CNavTitle,
     name: 'Past Competitions',
+  },
+  {
+    component: CNavGroup,
+    name: 'Phoenix Nationals 2025',
+    items: [
+      ...PHOENIX_25,
+    ],
   },
   {
     component: CNavGroup,

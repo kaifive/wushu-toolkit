@@ -17,7 +17,7 @@
     "serve": "vite preview",
     "start": "concurrently -n \"CLIENT,SERVER\" -c \"blue,green\" \"npm run frontend\" \"npm run backend\"",
     "frontend": "vite",
-    "backend": "nodemon --watch server/index.js server/index.js",
+    "backend": "nodemon --watch server/* server/index.js",
     "postinstall": "puppeteer install"
   },
   "type": "module",

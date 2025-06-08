@@ -69,11 +69,13 @@ const AthleteDashboard = React.lazy(() => import('./views/2024team-trials/dashbo
 const EventDashboard = React.lazy(() => import('./views/2024team-trials/dashboards/EventDashboard'))
 const USTeamDashboard = React.lazy(() => import('./views/2024team-trials/dashboards/USTeamDashboard'))
 
+// Sportdata
+const SportdataMaleStandings = React.lazy(() => import('./views/sportdataComponents/standings/MaleStandings'))
+const SportdataFemaleStandings = React.lazy(() => import('./views/sportdataComponents/standings/FemaleStandings'))
+const SportdataScorecards = React.lazy(() => import('./views/sportdataComponents/scorecard/Scorecard'))
+
 // 2025 Team Trials
 const About2025 = React.lazy(() => import('./views/2025team-trials/about/About'))
-const MaleStandings25 = React.lazy(() => import('./views/2025team-trials/standings/MaleStandings'))
-const FemaleStandings25 = React.lazy(() => import('./views/2025team-trials/standings/FemaleStandings'))
-const Scorecard25 = React.lazy(() => import('./views/2025team-trials/scorecard/Scorecard'))
 
 
 
@@ -139,9 +141,15 @@ const base_routes = [
 const adults2025_routes = [
   { path: '/2025-adults/about', name: 'About2025', element: About2025 },
   { path: '/2025-adults/schedule', name: 'Schedule2025', element: ComingSoon, protected: true },
-  { path: '/2025-adults/male-standings', name: 'MaleStandings2025', element: MaleStandings25, protected: true },
-  { path: '/2025-adults/female-standings', name: 'FemaleStandings2025', element: FemaleStandings25, protected: true },
-  { path: '/2025-adults/scorecard', name: 'Scorecard2025', element: Scorecard25, protected: true },
+  { path: '/2025-adults/male-standings', name: 'MaleStandings2025', element: SportdataMaleStandings, protected: true },
+  { path: '/2025-adults/female-standings', name: 'FemaleStandings2025', element: SportdataFemaleStandings, protected: true },
+  { path: '/2025-adults/scorecard', name: 'Scorecard2025', element: SportdataScorecards, protected: true },
+]
+
+const phoenix2025_routes = [
+  { path: '/2025-phoenix/male-standings', name: 'MaleStandings2025', element: SportdataMaleStandings },
+  { path: '/2025-phoenix/female-standings', name: 'FemaleStandings2025', element: SportdataFemaleStandings },
+  { path: '/2025-phoenix/scorecard', name: 'Scorecard2025', element: SportdataScorecards },
 ]
 
 const juniors2024_routes = [
@@ -159,6 +167,7 @@ const juniors2024_routes = [
 const live_routes = [
   ...base_routes,
   ...adults2025_routes,
+  ...phoenix2025_routes,
   ...juniors2024_routes,
 ]
 

@@ -7,7 +7,10 @@ import routes from '../routes'
 
 import AuthRoute from '../authentication/AuthRoute'
 
-import { Adults2025Provider } from '../views/2025team-trials/context/Adults2025Context'
+import { SportdataProvider } from '../views/sportdataComponents/context/SportdataContext'
+
+import { getData as Adults25GetData } from '../views/2025team-trials/utils/getData'
+import { getData as Phoenix25GetData } from '../views/2025phoenix/utils/getData'
 
 const AppContent = () => {
   return (
@@ -24,11 +27,35 @@ const AppContent = () => {
               <Element />
             )
 
-            const elementWithContext = route.path?.includes('2025-adults') ? (
-              <Adults2025Provider>{wrapped}</Adults2025Provider>
-            ) : (
-              wrapped
-            )
+            const providersData = {
+              '2025-adults': {
+                provider: SportdataProvider,
+                getData: Adults25GetData,
+              },
+              '2025-phoenix': {
+                provider: SportdataProvider,
+                getData: Phoenix25GetData,
+              },
+            }
+
+            let elementWithContext = wrapped;
+
+            for (const [pathSegment, providerData] of Object.entries(providersData)) {
+              if (route.path?.includes(pathSegment)) {
+                const Provider = providerData.provider;
+                const getDataFunction = providerData.getData
+
+                elementWithContext = (
+                  <Provider
+                    competition={pathSegment}
+                    getData={getDataFunction}
+                  >
+                    {wrapped}
+                  </Provider>
+                );
+                break;
+              }
+            }
 
             return (
               <Route

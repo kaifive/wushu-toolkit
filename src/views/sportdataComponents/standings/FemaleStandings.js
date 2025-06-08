@@ -8,16 +8,16 @@ import {
     CAlert,
 } from '@coreui/react'
 
-import { useAdults2025 } from '../context/Adults2025Context.jsx';
+import { useSportdata } from '../context/SportdataContext.jsx';
 
 import { CATEGORY_MAP } from "../lookups/categoryMap.js"
 
-import Adults2025Filters from '../components/filters/Adults2025Filters.jsx';
+import SportdataFilters from '../components/filters/SportdataFilters.jsx';
 import StandingsTable from '../components/StandingsTable.jsx';
 
-const MaleStandings25 = () => {
-    const adults25Context = useAdults2025();
-    const { data, filters } = adults25Context
+const FemaleStandings = () => {
+    const sportdataContext = useSportdata();
+    const { data, filters } = sportdataContext
 
     const { athleteData, date, isLoading, error } = data
 
@@ -34,10 +34,10 @@ const MaleStandings25 = () => {
     }
 
     const dataMap = {
-        CQ_DS_GS: athleteData.MALES.CQ_DS_GS,
-        CQ_JS_QS: athleteData.MALES.CQ_JS_QS,
-        NQ_ND_NG: athleteData.MALES.NQ_ND_NG,
-        TQ_TJ: athleteData.MALES.TQ_TJ,
+        CQ_DS_GS: athleteData.FEMALES.CQ_DS_GS,
+        CQ_JS_QS: athleteData.FEMALES.CQ_JS_QS,
+        NQ_ND_NG: athleteData.FEMALES.NQ_ND_NG,
+        TQ_TJ: athleteData.FEMALES.TQ_TJ,
     };
 
     const filteredCategories = filters.categoryFilter
@@ -48,7 +48,7 @@ const MaleStandings25 = () => {
         filteredCategories.map((key) => (
             <CRow key={key}>
                 <CCol xs={12}>
-                    <StandingsTable gender="Male" category={CATEGORY_MAP[key]} data={dataMap[key]} />
+                    <StandingsTable gender="Female" category={CATEGORY_MAP[key]} data={dataMap[key]} />
                 </CCol>
             </CRow>
         ))
@@ -68,7 +68,7 @@ const MaleStandings25 = () => {
                             <strong>Standing Filters</strong>
                         </CCardHeader>
                         <CCardBody>
-                            <Adults2025Filters
+                            <SportdataFilters
                                 showGenderFilter={false}
                                 showCategoryFilter={true}
                                 showEventFilter={false}
@@ -83,4 +83,4 @@ const MaleStandings25 = () => {
     )
 }
 
-export default MaleStandings25
+export default FemaleStandings
