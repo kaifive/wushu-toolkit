@@ -19,9 +19,6 @@ import {
 
 import emailjs from '@emailjs/browser';
 
-import { useAdults2025 } from '../context/Adults2025Context'
-
-
 const About2025 = () => {
     const [visibleSuccess, setVisibleSuccess] = useState(false);
     const [visibleFailure, setVisibleFailure] = useState(false);
