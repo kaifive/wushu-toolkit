@@ -9,9 +9,6 @@ import AuthRoute from '../authentication/AuthRoute'
 
 import { SportdataProvider } from '../views/sportdataComponents/context/SportdataContext'
 
-import { getData as Adults25GetData } from '../views/2025team-trials/utils/getData'
-import { getData as Phoenix25GetData } from '../views/2025phoenix/utils/getData'
-
 const AppContent = () => {
   return (
     <CContainer className="px-4" lg>
@@ -30,11 +27,9 @@ const AppContent = () => {
             const providersData = {
               '2025-adults': {
                 provider: SportdataProvider,
-                getData: Adults25GetData,
               },
               '2025-phoenix': {
                 provider: SportdataProvider,
-                getData: Phoenix25GetData,
               },
             }
 
@@ -43,12 +38,10 @@ const AppContent = () => {
             for (const [pathSegment, providerData] of Object.entries(providersData)) {
               if (route.path?.includes(pathSegment)) {
                 const Provider = providerData.provider;
-                const getDataFunction = providerData.getData
 
                 elementWithContext = (
                   <Provider
                     competition={pathSegment}
-                    getData={getDataFunction}
                   >
                     {wrapped}
                   </Provider>

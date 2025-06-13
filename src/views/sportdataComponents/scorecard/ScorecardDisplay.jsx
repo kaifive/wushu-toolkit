@@ -37,46 +37,6 @@ const ScorecardDisplay = ({ athleteInfo, eventInfo }) => {
         )
     }
 
-    // let athleteInfo = null;
-    // let eventInfo = null;
-
-    // for (const gender in athleteData) {
-    //     const categories = athleteData[gender];
-
-    //     for (const category in categories) {
-    //         const competitors = categories[category];
-
-    //         for (const name in competitors) {
-    //             if (name === filters.athleteFilter) {
-    //                 const registration = competitors[name];
-    //                 const events = registration.events || [];
-
-    //                 for (let i = 0; i < events.length; i++) {
-    //                     if (events[i].event.includes(filters.eventFilter)) {
-    //                         athleteInfo = registration;
-    //                         eventInfo = events[i];
-    //                         break;
-    //                     }
-    //                 }
-
-    //                 if (athleteInfo) break;
-    //             }
-    //         }
-
-    //         if (athleteInfo) break;
-    //     }
-
-    //     if (athleteInfo) break;
-    // }
-
-    // if (!athleteInfo || !eventInfo) {
-    //     return (
-    //         <CAlert color="danger">
-    //             An error occurred getting athlete and event scorecard.
-    //         </CAlert>
-    //     )
-    // }
-
     return (
         <>
             <CRow>
@@ -173,6 +133,8 @@ const DeductionCodes = ({ codes }) => {
                                 fontSize: '1.rem',
                             }}
                             color="danger"
+                            href={`#/toolkit/deduction-code-lookup?code=${code}`}
+                            target='_blank'
                         >
                             {code}
                         </CButton>

@@ -105,7 +105,12 @@ const RequiredMovements = () => {
             />
             <br />
             <hr />
-            <p style={{ fontSize: "12px" }}>Routine Content Requirements taken from the <a href="http://www.iwuf.org/wp-content/uploads/2019/03/Wushu-Taolu-Competition-Rules-Judging-Methods-Excerpt.pdf" target="_blank">2019 Wushu Taolu Competition Rules & Judging Methods (Excerpt)</a></p>
+            <p style={{ fontSize: "12px" }}>
+                Routine Content Requirements taken from the <a href="https://www.iwuf.org/xhimg/soft/240912/WUSHU-TAOLU-COMPETITION-RULES-AND-JUDGING-METHODS-2024.pdf" target="_blank">
+                    WUSHU TAOLU COMPETITION RULES AND
+                    JUDGING METHODS (2024)
+                </a>
+            </p>
         </>
     );
 };

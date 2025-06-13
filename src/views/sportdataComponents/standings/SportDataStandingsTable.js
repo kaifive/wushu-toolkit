@@ -15,7 +15,7 @@ import { CATEGORY_MAP } from "../lookups/categoryMap.js"
 import SportdataFilters from '../components/filters/SportdataFilters.jsx';
 import StandingsTable from '../components/StandingsTable.jsx';
 
-const FemaleStandings = () => {
+const SportDataStandingsTable = () => {
     const sportdataContext = useSportdata();
     const { data, filters } = sportdataContext
 
@@ -33,11 +33,15 @@ const FemaleStandings = () => {
         )
     }
 
+
+
+    const genderKey = window.location.hash.includes("female") ? "FEMALES" : "MALES"
+
     const dataMap = {
-        CQ_DS_GS: athleteData.FEMALES.CQ_DS_GS,
-        CQ_JS_QS: athleteData.FEMALES.CQ_JS_QS,
-        NQ_ND_NG: athleteData.FEMALES.NQ_ND_NG,
-        TQ_TJ: athleteData.FEMALES.TQ_TJ,
+        CQ_DS_GS: athleteData[genderKey].CQ_DS_GS,
+        CQ_JS_QS: athleteData[genderKey].CQ_JS_QS,
+        NQ_ND_NG: athleteData[genderKey].NQ_ND_NG,
+        TQ_TJ: athleteData[genderKey].TQ_TJ,
     };
 
     const filteredCategories = filters.categoryFilter
@@ -48,7 +52,7 @@ const FemaleStandings = () => {
         filteredCategories.map((key) => (
             <CRow key={key}>
                 <CCol xs={12}>
-                    <StandingsTable gender="Female" category={CATEGORY_MAP[key]} data={dataMap[key]} />
+                    <StandingsTable gender={window.location.hash.includes("female") ? "Female" : "Male"} category={CATEGORY_MAP[key]} data={dataMap[key]} />
                 </CCol>
             </CRow>
         ))
@@ -83,4 +87,4 @@ const FemaleStandings = () => {
     )
 }
 
-export default FemaleStandings
+export default SportDataStandingsTable

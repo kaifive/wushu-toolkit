@@ -24,9 +24,7 @@ const scrapeCategories = async (competitionId, eventFilter) => {
                 const url = new URL(link, 'https://example.com');
                 const catId = url.searchParams.get('catid');
                 categories[text] = catId;
-
             }
-
         });
     })
 

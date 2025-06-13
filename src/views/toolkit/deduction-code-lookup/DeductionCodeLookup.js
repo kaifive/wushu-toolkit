@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     CCard,
     CCardBody,
@@ -100,6 +100,36 @@ const DeductionCodeLookup = () => {
     const [classFilter, setClassFilter] = useState("")
     const [codeFilter, setCodeFilter] = useState("")
 
+    useEffect(() => {
+        const hash = window.location.hash;
+        const [pathAndHash, searchParams] = hash.split('?');
+
+        const params = new URLSearchParams(searchParams);
+        setCodeFilter(params.get('code') || '');
+    }, []);
+
+    const updateQueryParam = (key, value) => {
+        const hash = window.location.hash;
+        const [pathAndHash, searchParams] = hash.split('?');
+        const params = new URLSearchParams(searchParams);
+    
+        if (value) {
+            params.set(key, value);
+        } else {
+            params.delete(key);
+        }
+    
+        const newHash = `${pathAndHash}?${params.toString()}`;
+        const newUrl = `${window.location.pathname}${newHash}`;
+        window.history.replaceState({}, '', newUrl);
+    };
+
+    const handleCodeChange = (event) => {
+        const value = event.target.value;
+        setCodeFilter(value);
+        updateQueryParam('code', value);
+    };
+
     return (
         <>
             <CRow>
@@ -128,12 +158,13 @@ const DeductionCodeLookup = () => {
                                 <CInputGroup className="mb-3">
                                     <CInputGroupText style={{ width: "75px" }}>Code: </CInputGroupText>
                                     <CFormInput
+                                        min={0}
                                         value={codeFilter}
                                         type='number'
                                         inputMode='numeric'
                                         placeholder='Enter Code Number'
-                                        onChange={(event) => setCodeFilter(event.target.value.toString())}>
-                                    </CFormInput>
+                                        onChange={handleCodeChange}
+                                    />
                                 </CInputGroup>
                             </CRow>
                             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -143,6 +174,7 @@ const DeductionCodeLookup = () => {
                                     onClick={() => {
                                         setClassFilter("");
                                         setCodeFilter("");
+                                        updateQueryParam('code', null)
                                     }}>
                                     Reset Filters
                                 </CButton>
@@ -158,7 +190,12 @@ const DeductionCodeLookup = () => {
             />
             <br></br>
             <hr></hr>
-            <p style={{ fontSize: "12px" }}>Deduction codes taken from the <a href="http://www.iwuf.org/wp-content/uploads/2019/03/Wushu-Taolu-Competition-Rules-Judging-Methods-Excerpt.pdf" target="_blank">2019 Wushu Taolu Competition Rules & Judging Methods (Excerpt)</a></p>
+            <p style={{ fontSize: "12px" }}>
+                Routine Content Requirements taken from the <a href="https://www.iwuf.org/xhimg/soft/240912/WUSHU-TAOLU-COMPETITION-RULES-AND-JUDGING-METHODS-2024.pdf" target="_blank">
+                    WUSHU TAOLU COMPETITION RULES AND
+                    JUDGING METHODS (2024)
+                </a>
+            </p>
         </>
     )
 }
@@ -168,7 +205,7 @@ const CodeCards = ({ codeCards, classFilter, codeFilter }) => {
         <>
             {
                 Object.entries(codeCards).map(([key, card]) => {
-                    const filteredCodes = card.codes.filter(code => code.code.startsWith(codeFilter));
+                    const filteredCodes = card.codes.filter(code => code.code.includes(codeFilter));
 
                     return (
                         key.includes(classFilter) && (

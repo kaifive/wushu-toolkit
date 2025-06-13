@@ -1,0 +1,3683 @@
+{
+  "MALES": {
+    "CQ_DS_GS": {
+      "Gao Bryan": {
+        "competitor": {
+          "name": "Gao Bryan"
+        },
+        "events": [
+          {
+            "event": "Male Optional Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ],
+            "A": {
+              "score": "4.80",
+              "deductions": [
+                "51",
+                "51"
+              ]
+            },
+            "B": {
+              "score": "2.216",
+              "scores": [
+                "2.20",
+                "2.20",
+                "2.25",
+                "2.25",
+                "2.15"
+              ],
+              "isNotDropped": [
+                true,
+                true,
+                false,
+                true,
+                false
+              ]
+            },
+            "C": {
+              "score": "1.55",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "GAO BRYAN",
+            "schoolName": "O-MEI WUSHU KUNG FU CENTER,USA",
+            "adjustment": "-0.500",
+            "finalScore": "8.066"
+          },
+          {
+            "event": "Male Optional Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "312A+6",
+              "333A+6"
+            ],
+            "A": {
+              "score": "4.60",
+              "deductions": [
+                "51",
+                "30",
+                "51",
+                "50"
+              ]
+            },
+            "B": {
+              "score": "2.176",
+              "scores": [
+                "2.00",
+                "2.20",
+                "2.25",
+                "2.13",
+                "2.20"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "GAO BRYAN",
+            "schoolName": "O-MEI WUSHU KUNG FU CENTER,USA",
+            "adjustment": "-0.200",
+            "finalScore": "8.576"
+          }
+        ]
+      },
+      "Huang Ryan": {
+        "competitor": {
+          "name": "Huang Ryan"
+        },
+        "events": [
+          {
+            "event": "Male Optional Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ],
+            "A": {
+              "deductions": [
+                "5.00"
+              ]
+            },
+            "B": {
+              "score": "2.250",
+              "scores": [
+                "2.25",
+                "2.30",
+                "2.20",
+                "2.18",
+                "2.30"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                true,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "HUANG RYAN",
+            "schoolName": "PHOENIX WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "9.250"
+          },
+          {
+            "event": "Male Optional Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ],
+            "A": {
+              "score": "4.90",
+              "deductions": [
+                "70B"
+              ]
+            },
+            "B": {
+              "score": "2.243",
+              "scores": [
+                "2.20",
+                "2.25",
+                "2.33",
+                "2.28",
+                "2.20"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.85",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "HUANG RYAN",
+            "schoolName": "PHOENIX WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.993"
+          }
+        ]
+      },
+      "Vo Jayden": {
+        "competitor": {
+          "name": "Vo Jayden"
+        },
+        "events": [
+          {
+            "event": "Male Optional Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+6",
+              "333A+6"
+            ],
+            "A": {
+              "score": "4.70",
+              "deductions": [
+                "73",
+                "51",
+                "73"
+              ]
+            },
+            "B": {
+              "score": "1.983",
+              "scores": [
+                "2.10",
+                "1.95",
+                "2.00",
+                "2.00",
+                "1.95"
+              ],
+              "isNotDropped": [
+                false,
+                false,
+                true,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.80",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "VO JAYDEN",
+            "schoolName": "PHOENIX WUSHU ACADEMY,USA",
+            "adjustment": "-0.300",
+            "finalScore": "8.183"
+          },
+          {
+            "event": "Male Optional Gunshu",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "333A"
+            ],
+            "A": {
+              "score": "4.60",
+              "deductions": [
+                "51",
+                "70B",
+                "30",
+                "73"
+              ]
+            },
+            "B": {
+              "score": "1.983",
+              "scores": [
+                "2.10",
+                "1.95",
+                "2.00",
+                "1.90",
+                "2.00"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                true,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.70",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "VO JAYDEN",
+            "schoolName": "PHOENIX WUSHU ACADEMY,USA",
+            "adjustment": "-0.600",
+            "finalScore": "7.683"
+          },
+          {
+            "event": "Male Optional Changquan",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+1",
+              "324A+1",
+              "312A+335A",
+              "333A"
+            ],
+            "A": {
+              "score": "4.40",
+              "deductions": [
+                "70B",
+                "30",
+                "51",
+                "70B",
+                "14",
+                "77"
+              ]
+            },
+            "B": {
+              "score": "2.030",
+              "scores": [
+                "2.18",
+                "2.00",
+                "2.00",
+                "2.09",
+                "2.00"
+              ],
+              "isNotDropped": [
+                false,
+                false,
+                true,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.65",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "VO JAYDEN",
+            "schoolName": "PHOENIX WUSHU ACADEMY,USA",
+            "adjustment": "-0.100",
+            "finalScore": "7.980"
+          }
+        ]
+      },
+      "Meng Stanley": {
+        "competitor": {
+          "name": "Meng Stanley"
+        },
+        "events": [
+          {
+            "event": "Male Optional Daoshu",
+            "nandu": [
+              "353B+323C+1",
+              "324B+1",
+              "312A+335A"
+            ],
+            "A": {
+              "score": "4.90",
+              "deductions": [
+                "30"
+              ]
+            },
+            "B": {
+              "score": "2.366",
+              "scores": [
+                "2.35",
+                "2.35",
+                "2.40",
+                "2.30",
+                "2.40"
+              ],
+              "isNotDropped": [
+                true,
+                true,
+                false,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MENG STANLEY",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "9.266"
+          },
+          {
+            "event": "Male Optional Changquan",
+            "nandu": [
+              "312A+324B+1",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "355B"
+            ],
+            "A": {
+              "score": "4.80",
+              "deductions": [
+                "30",
+                "22"
+              ]
+            },
+            "B": {
+              "score": "2.330",
+              "scores": [
+                "2.22",
+                "2.31",
+                "2.35",
+                "2.33",
+                "2.35"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MENG STANLEY",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "9.130"
+          }
+        ]
+      }
+    },
+    "CQ_JS_QS": {
+      "Hussaini Sayed Mujtaba": {
+        "competitor": {
+          "name": "Hussaini Sayed Mujtaba"
+        },
+        "events": [
+          {
+            "event": "Male Optional Jianshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A"
+            ],
+            "A": {
+              "score": "3.90",
+              "deductions": [
+                "30",
+                "70B",
+                "04",
+                "71",
+                "14",
+                "77",
+                "72",
+                "61"
+              ]
+            },
+            "B": {
+              "score": "1.936",
+              "scores": [
+                "1.91",
+                "2.00",
+                "1.80",
+                "2.00",
+                "1.90"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "0.50",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true
+              ]
+            },
+            "athleteName": "HUSSAINI SAYED MUJTABA",
+            "schoolName": "DENVER SHAOLIN KUNG FU TAI CHI INSISTUTE,USA",
+            "adjustment": "-0.500",
+            "finalScore": "5.836"
+          }
+        ]
+      },
+      "Wells Aaron": {
+        "competitor": {
+          "name": "Wells Aaron"
+        },
+        "events": [
+          {
+            "event": "Male Optional Jianshu",
+            "nandu": [
+              "333A",
+              "324A+1",
+              "323A"
+            ],
+            "A": {
+              "score": "4.30",
+              "deductions": [
+                "33",
+                "30",
+                "14",
+                "77",
+                "50",
+                "30",
+                "52"
+              ]
+            },
+            "B": {
+              "score": "1.633",
+              "scores": [
+                "1.80",
+                "1.70",
+                "1.30",
+                "1.75",
+                "1.45"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "0.20",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                false,
+                false
+              ]
+            },
+            "athleteName": "WELLS AARON",
+            "schoolName": "OHIO WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "6.133"
+          },
+          {
+            "event": "Male Optional Changquan",
+            "nandu": [
+              "324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "333A"
+            ],
+            "A": {
+              "score": "3.25",
+              "deductions": [
+                "70A",
+                "14",
+                "77",
+                "30",
+                "58",
+                "30",
+                "72",
+                "30",
+                "70B",
+                "30",
+                "54",
+                "50",
+                "21",
+                "53",
+                "33",
+                "52"
+              ]
+            },
+            "B": {
+              "score": "1.633",
+              "scores": [
+                "1.75",
+                "1.70",
+                "1.30",
+                "1.55",
+                "1.65"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "0.20",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true
+              ]
+            },
+            "athleteName": "WELLS AARON",
+            "schoolName": "OHIO WUSHU ACADEMY,USA",
+            "adjustment": "-0.600",
+            "finalScore": "4.483"
+          }
+        ]
+      },
+      "Huang Ryan": {
+        "competitor": {
+          "name": "Huang Ryan"
+        },
+        "events": [
+          {
+            "event": "Male Optional Qiangshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ],
+            "A": {
+              "score": "4.80",
+              "deductions": [
+                "50",
+                "73"
+              ]
+            },
+            "B": {
+              "score": "2.116",
+              "scores": [
+                "2.15",
+                "2.05",
+                "2.10",
+                "2.10",
+                "2.15"
+              ],
+              "isNotDropped": [
+                false,
+                false,
+                true,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "HUANG RYAN",
+            "schoolName": "PHOENIX WUSHU ACADEMY,USA",
+            "adjustment": "-0.300",
+            "finalScore": "8.616"
+          },
+          {
+            "event": "Male Optional Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ],
+            "A": {
+              "score": "4.90",
+              "deductions": [
+                "70B"
+              ]
+            },
+            "B": {
+              "score": "2.243",
+              "scores": [
+                "2.20",
+                "2.25",
+                "2.33",
+                "2.28",
+                "2.20"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.85",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "HUANG RYAN",
+            "schoolName": "PHOENIX WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.993"
+          }
+        ]
+      },
+      "SIGNORE Jacopo": {
+        "competitor": {
+          "name": "SIGNORE Jacopo"
+        },
+        "events": [
+          {
+            "event": "Male Optional Jianshu",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+4",
+              "324A+1",
+              "312A+335A",
+              "333A+6"
+            ],
+            "A": {
+              "score": "4.80",
+              "deductions": [
+                "30",
+                "73"
+              ]
+            },
+            "B": {
+              "score": "2.300",
+              "scores": [
+                "2.35",
+                "2.30",
+                "2.35",
+                "2.25",
+                "2.25"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                true,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "SIGNORE JACOPO",
+            "schoolName": "ROGUE WUSHU AND ATHLETICS,USA",
+            "adjustment": "0.000",
+            "finalScore": "9.100"
+          },
+          {
+            "event": "Male Optional Qiangshu",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+4",
+              "312A+324A+1",
+              "312A+335A"
+            ],
+            "A": {
+              "score": "4.90",
+              "deductions": [
+                "51"
+              ]
+            },
+            "B": {
+              "score": "2.316",
+              "scores": [
+                "2.35",
+                "2.10",
+                "2.40",
+                "2.25",
+                "2.35"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "SIGNORE JACOPO",
+            "schoolName": "ROGUE WUSHU AND ATHLETICS,USA",
+            "adjustment": "0.000",
+            "finalScore": "9.216"
+          },
+          {
+            "event": "Male Optional Changquan",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+4",
+              "324A+1",
+              "312A+335A",
+              "333A+6"
+            ],
+            "A": {
+              "deductions": [
+                "5.00"
+              ]
+            },
+            "B": {
+              "score": "2.300",
+              "scores": [
+                "2.30",
+                "2.30",
+                "2.40",
+                "2.30",
+                "2.30"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "SIGNORE JACOPO",
+            "schoolName": "ROGUE WUSHU AND ATHLETICS,USA",
+            "adjustment": "-0.100",
+            "finalScore": "9.200"
+          }
+        ]
+      }
+    },
+    "NQ_ND_NG": {
+      "Cox Kaelin": {
+        "competitor": {
+          "name": "Cox Kaelin"
+        },
+        "events": [
+          {
+            "event": "Male Optional Nandao",
+            "nandu": [
+              "324B+1",
+              "346B+2",
+              "324A+1",
+              "323A+312A",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.60",
+              "deductions": [
+                "04",
+                "30",
+                "55",
+                "76"
+              ]
+            },
+            "B": {
+              "score": "1.750",
+              "scores": [
+                "1.39",
+                "1.90",
+                "1.85",
+                "1.80",
+                "1.60"
+              ],
+              "isNotDropped": [
+                false,
+                false,
+                true,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.70",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "COX KAELIN",
+            "schoolName": "BERMUDA SANSHOU WUSHU ASSOCIATION,BER",
+            "adjustment": "-1.100",
+            "finalScore": "6.950"
+          },
+          {
+            "event": "Male Optional Nangun",
+            "nandu": [
+              "324B+1",
+              "346B+2",
+              "324A+1",
+              "323A+312A",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.70",
+              "deductions": [
+                "55",
+                "30",
+                "70B"
+              ]
+            },
+            "B": {
+              "score": "1.890",
+              "scores": [
+                "1.95",
+                "1.95",
+                "1.80",
+                "1.87",
+                "1.85"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.25",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "COX KAELIN",
+            "schoolName": "BERMUDA SANSHOU WUSHU ASSOCIATION,BER",
+            "adjustment": "-0.300",
+            "finalScore": "7.540"
+          },
+          {
+            "event": "Male Optional Nanquan",
+            "nandu": [
+              "324B+1",
+              "346B+2",
+              "324A+1",
+              "323A+312A",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.60",
+              "deductions": [
+                "70B",
+                "30",
+                "30",
+                "30"
+              ]
+            },
+            "B": {
+              "score": "1.886",
+              "scores": [
+                "1.91",
+                "1.90",
+                "1.80",
+                "1.85",
+                "1.95"
+              ],
+              "isNotDropped": [
+                true,
+                true,
+                false,
+                true,
+                false
+              ]
+            },
+            "C": {
+              "score": "1.55",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "COX KAELIN",
+            "schoolName": "BERMUDA SANSHOU WUSHU ASSOCIATION,BER",
+            "adjustment": "0.000",
+            "finalScore": "8.036"
+          }
+        ]
+      },
+      "Candra Jayden": {
+        "competitor": {
+          "name": "Candra Jayden"
+        },
+        "events": [
+          {
+            "event": "Male Optional Nandao",
+            "nandu": [
+              "346A+2",
+              "323A+346B+2",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A"
+            ],
+            "A": {
+              "deductions": [
+                "5.00"
+              ]
+            },
+            "B": {
+              "score": "2.000",
+              "scores": [
+                "1.80",
+                "1.78",
+                "2.30",
+                "2.15",
+                "2.05"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "CANDRA JAYDEN",
+            "schoolName": "LAS VEGAS MODERN KUNG FU,USA",
+            "adjustment": "-0.100",
+            "finalScore": "8.900"
+          }
+        ]
+      },
+      "PAYUMO Jonathan": {
+        "competitor": {
+          "name": "PAYUMO Jonathan"
+        },
+        "events": [
+          {
+            "event": "Male Optional Nandao",
+            "nandu": [
+              "324B+1",
+              "323A+346B+2",
+              "323B+2",
+              "423A",
+              "447A"
+            ],
+            "A": {
+              "score": "4.70",
+              "deductions": [
+                "30",
+                "70B",
+                "55"
+              ]
+            },
+            "B": {
+              "score": "2.066",
+              "scores": [
+                "1.95",
+                "2.00",
+                "2.10",
+                "2.13",
+                "2.10"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                true,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.85",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "PAYUMO JONATHAN",
+            "schoolName": "LAS VEGAS MODERN KUNG FU,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.616"
+          }
+        ]
+      },
+      "YANG Aaron": {
+        "competitor": {
+          "name": "YANG Aaron"
+        },
+        "events": [
+          {
+            "event": "Male Optional Nandao",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "323A+312A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.80",
+              "deductions": [
+                "30",
+                "30"
+              ]
+            },
+            "B": {
+              "score": "2.183",
+              "scores": [
+                "1.91",
+                "2.10",
+                "2.27",
+                "2.20",
+                "2.25"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "YANG AARON",
+            "schoolName": "NORTHERN VIRGINIA WUSHU ACADEMY,USA",
+            "adjustment": "-0.600",
+            "finalScore": "8.383"
+          },
+          {
+            "event": "Male Optional Nangun",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "323A+312A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.80",
+              "deductions": [
+                "30",
+                "70B"
+              ]
+            },
+            "B": {
+              "score": "2.216",
+              "scores": [
+                "2.15",
+                "2.10",
+                "2.30",
+                "2.20",
+                "2.30"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.85",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "YANG AARON",
+            "schoolName": "NORTHERN VIRGINIA WUSHU ACADEMY,USA",
+            "adjustment": "-0.300",
+            "finalScore": "8.566"
+          },
+          {
+            "event": "Male Optional Nanquan",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "323A+312A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.90",
+              "deductions": [
+                "70B"
+              ]
+            },
+            "B": {
+              "score": "2.223",
+              "scores": [
+                "2.30",
+                "2.15",
+                "2.20",
+                "2.17",
+                "2.30"
+              ],
+              "isNotDropped": [
+                false,
+                false,
+                true,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.85",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "YANG AARON",
+            "schoolName": "NORTHERN VIRGINIA WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.973"
+          }
+        ]
+      },
+      "Kwan Antony": {
+        "competitor": {
+          "name": "Kwan Antony"
+        },
+        "events": [
+          {
+            "event": "Male Optional Nandao",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.80",
+              "deductions": [
+                "30",
+                "30",
+                "70a"
+              ]
+            },
+            "B": {
+              "score": "2.133",
+              "scores": [
+                "1.90",
+                "2.15",
+                "2.25",
+                "2.27",
+                "2.00"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                true,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.45",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+              ]
+            },
+            "athleteName": "KWAN ANTONY",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.383"
+          },
+          {
+            "event": "Male Optional Nangun",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.55",
+              "deductions": [
+                "30",
+                "70B",
+                "70A",
+                "30",
+                "55"
+              ]
+            },
+            "B": {
+              "score": "2.050",
+              "scores": [
+                "1.75",
+                "2.15",
+                "2.00",
+                "2.05",
+                "2.10"
+              ],
+              "isNotDropped": [
+                false,
+                false,
+                true,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.40",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "KWAN ANTONY",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.000"
+          },
+          {
+            "event": "Male Optional Nanquan",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.70",
+              "deductions": [
+                "30",
+                "30",
+                "55"
+              ]
+            },
+            "B": {
+              "score": "2.116",
+              "scores": [
+                "2.15",
+                "2.30",
+                "2.00",
+                "2.10",
+                "2.10"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.55",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "KWAN ANTONY",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.366"
+          }
+        ]
+      },
+      "LI WILLIAM": {
+        "competitor": {
+          "name": "LI WILLIAM"
+        },
+        "events": [
+          {
+            "event": "Male Optional Nandao",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.80",
+              "deductions": [
+                "30",
+                "30"
+              ]
+            },
+            "B": {
+              "score": "1.920",
+              "scores": [
+                "1.60",
+                "1.80",
+                "1.95",
+                "2.05",
+                "2.01"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                true,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.90",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+              ]
+            },
+            "athleteName": "LI WILLIAM",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0",
+            "finalScore": "8.620"
+          },
+          {
+            "event": "Male Optional Nangun",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.50",
+              "deductions": [
+                "30",
+                "30",
+                "30",
+                "30",
+                "70B"
+              ]
+            },
+            "B": {
+              "score": "2.016",
+              "scores": [
+                "2.20",
+                "2.10",
+                "1.85",
+                "2.00",
+                "1.95"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "0.85",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                false
+              ]
+            },
+            "athleteName": "LI WILLIAM",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "7.366"
+          },
+          {
+            "event": "Male Optional Nanquan",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.45",
+              "deductions": [
+                "30",
+                "70A",
+                "30",
+                "55",
+                "30",
+                "55"
+              ]
+            },
+            "B": {
+              "score": "2.056",
+              "scores": [
+                "2.10",
+                "2.15",
+                "1.90",
+                "2.08",
+                "1.99"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.30",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                false
+              ]
+            },
+            "athleteName": "LI WILLIAM",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "7.806"
+          }
+        ]
+      },
+      "Meng Stanley": {
+        "competitor": {
+          "name": "Meng Stanley"
+        },
+        "events": [
+          {
+            "event": "Male Optional Nandao",
+            "nandu": [
+              "324B+1",
+              "324B+346B+2",
+              "323B+2",
+              "447A+2"
+            ],
+            "A": {
+              "deductions": [
+                "5.00"
+              ]
+            },
+            "B": {
+              "score": "2.186",
+              "scores": [
+                "2.11",
+                "2.25",
+                "1.83",
+                "2.20",
+                "2.30"
+              ],
+              "isNotDropped": [
+                true,
+                true,
+                false,
+                true,
+                false
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MENG STANLEY",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "9.186"
+          },
+          {
+            "event": "Male Optional Nangun",
+            "nandu": [
+              "324B+1",
+              "324B+346B+2",
+              "323B+2",
+              "447A+2"
+            ],
+            "A": {
+              "deductions": [
+                "5.00"
+              ]
+            },
+            "B": {
+              "score": "2.216",
+              "scores": [
+                "2.31",
+                "2.20",
+                "2.15",
+                "2.20",
+                "2.25"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.50",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MENG STANLEY",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.716"
+          },
+          {
+            "event": "Male Optional Nanquan",
+            "nandu": [
+              "324B+1",
+              "324B+346B+2",
+              "323B+2",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.85",
+              "deductions": [
+                "70A",
+                "55"
+              ]
+            },
+            "B": {
+              "score": "2.266",
+              "scores": [
+                "2.35",
+                "2.30",
+                "2.25",
+                "2.18",
+                "2.25"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                true,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MENG STANLEY",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "9.116"
+          }
+        ]
+      },
+      "Wong Marcus": {
+        "competitor": {
+          "name": "Wong Marcus"
+        },
+        "events": [
+          {
+            "event": "Male Optional Nandao",
+            "nandu": [
+              "323B+2",
+              "324B+346B+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.60",
+              "deductions": [
+                "71",
+                "55",
+                "53"
+              ]
+            },
+            "B": {
+              "score": "1.883",
+              "scores": [
+                "1.30",
+                "1.95",
+                "1.80",
+                "1.90",
+                "1.96"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                true,
+                true,
+                false
+              ]
+            },
+            "C": {
+              "score": "1.35",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "WONG MARCUS",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "7.833"
+          },
+          {
+            "event": "Male Optional Nangun",
+            "nandu": [
+              "346A+2",
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.90",
+              "deductions": [
+                "73"
+              ]
+            },
+            "B": {
+              "score": "1.950",
+              "scores": [
+                "2.00",
+                "1.85",
+                "1.90",
+                "1.95",
+                "2.03"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                true,
+                true,
+                false
+              ]
+            },
+            "C": {
+              "score": "1.55",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "WONG MARCUS",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "-0.200",
+            "finalScore": "8.200"
+          },
+          {
+            "event": "Male Optional Nanquan",
+            "nandu": [
+              "323B+2",
+              "324B+346B+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.50",
+              "deductions": [
+                "70B",
+                "55",
+                "71",
+                "52"
+              ]
+            },
+            "B": {
+              "score": "1.983",
+              "scores": [
+                "1.95",
+                "2.00",
+                "1.85",
+                "2.07",
+                "2.00"
+              ],
+              "isNotDropped": [
+                true,
+                true,
+                false,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.85",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "WONG MARCUS",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.333"
+          }
+        ]
+      }
+    },
+    "TQ_TJ": {
+      "Reilly Bobby": {
+        "competitor": {
+          "name": "Reilly Bobby"
+        },
+        "events": [
+          {
+            "event": "Male Optional Taijiquan",
+            "nandu": [
+              "323B+3",
+              "324B+3",
+              "142A+3",
+              "312A+3",
+              "143A+212A"
+            ],
+            "A": {
+              "score": "4.35",
+              "deductions": [
+                "70A",
+                "70B",
+                "70B",
+                "70B",
+                "30",
+                "70B",
+                "70B"
+              ]
+            },
+            "B": {
+              "score": "2.000",
+              "scores": [
+                "2.20",
+                "2.00",
+                "1.95",
+                "2.00",
+                "2.00"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.20",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                false
+              ]
+            },
+            "athleteName": "REILLY BOBBY",
+            "schoolName": "WUSHU UNLIMITED,USA",
+            "adjustment": "0.000",
+            "finalScore": "7.550"
+          }
+        ]
+      }
+    }
+  },
+  "FEMALES": {
+    "CQ_DS_GS": {},
+    "CQ_JS_QS": {
+      "Jian Emily": {
+        "competitor": {
+          "name": "Jian Emily"
+        },
+        "events": [
+          {
+            "event": "Female Optional Qiangshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+4",
+              "324A+7",
+              "312A+6"
+            ],
+            "A": {
+              "score": "4.45",
+              "deductions": [
+                "30",
+                "30",
+                "30",
+                "70A",
+                "50",
+                "63"
+              ]
+            },
+            "B": {
+              "score": "2.050",
+              "scores": [
+                "2.18",
+                "2.00",
+                "2.10",
+                "2.05",
+                "2.00"
+              ],
+              "isNotDropped": [
+                false,
+                false,
+                true,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "JIAN EMILY",
+            "schoolName": "LAS VEGAS MODERN KUNG FU,USA",
+            "adjustment": "-0.200",
+            "finalScore": "8.300"
+          },
+          {
+            "event": "Female Optional Changquan",
+            "nandu": [
+              "324A+1",
+              "312A+6",
+              "333A+353B+4",
+              "312A+335A",
+              "323A+4"
+            ],
+            "A": {
+              "score": "4.60",
+              "deductions": [
+                "21",
+                "30",
+                "70B",
+                "22"
+              ]
+            },
+            "B": {
+              "score": "2.116",
+              "scores": [
+                "2.20",
+                "2.25",
+                "2.05",
+                "2.03",
+                "2.10"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                true,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "JIAN EMILY",
+            "schoolName": "LAS VEGAS MODERN KUNG FU,USA",
+            "adjustment": "-0.100",
+            "finalScore": "8.616"
+          }
+        ]
+      },
+      "Meng Elina": {
+        "competitor": {
+          "name": "Meng Elina"
+        },
+        "events": [
+          {
+            "event": "Female Optional Jianshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "312A+6"
+            ],
+            "A": {
+              "score": "0.0",
+              "deductions": [
+                "0.0"
+              ]
+            },
+            "B": {},
+            "C": {},
+            "athleteName": "MENG ELINA",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "finalScore": "0"
+          },
+          {
+            "event": "Female Optional Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "312A+6"
+            ],
+            "A": {
+              "score": "0.0",
+              "deductions": [
+                "0.0"
+              ]
+            },
+            "B": {},
+            "C": {},
+            "athleteName": "MENG ELINA",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "finalScore": "0"
+          }
+        ]
+      },
+      "Schmidt Dusty": {
+        "competitor": {
+          "name": "Schmidt Dusty"
+        },
+        "events": [
+          {
+            "event": "Female Optional Jianshu",
+            "nandu": [
+              "324A+1",
+              "353B+323B+6",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ],
+            "A": {
+              "deductions": [
+                "5.00"
+              ]
+            },
+            "B": {
+              "score": "2.083",
+              "scores": [
+                "2.25",
+                "2.15",
+                "2.00",
+                "2.05",
+                "2.05"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.10",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                true,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "SCHMIDT DUSTY",
+            "schoolName": "WORLD MARTIAL ARTS ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.183"
+          },
+          {
+            "event": "Female Optional Qiangshu",
+            "nandu": [
+              "324A+1",
+              "312A+335A",
+              "323A+1",
+              "312A+6",
+              "335A",
+              "324A+7",
+              "333A+6"
+            ],
+            "A": {
+              "score": "4.40",
+              "deductions": [
+                "30",
+                "30",
+                "30",
+                "50",
+                "30",
+                "50"
+              ]
+            },
+            "B": {
+              "score": "2.000",
+              "scores": [
+                "2.05",
+                "2.13",
+                "2.00",
+                "1.95",
+                "1.95"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                true,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "SCHMIDT DUSTY",
+            "schoolName": "WORLD MARTIAL ARTS ACADEMY,USA",
+            "adjustment": "-0.100",
+            "finalScore": "8.300"
+          },
+          {
+            "event": "Female Optional Changquan",
+            "nandu": [
+              "312A+6",
+              "353B+323B+6",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ],
+            "A": {
+              "score": "4.20",
+              "deductions": [
+                "30",
+                "33",
+                "71",
+                "21",
+                "72"
+              ]
+            },
+            "B": {
+              "score": "2.016",
+              "scores": [
+                "2.10",
+                "2.00",
+                "2.15",
+                "1.90",
+                "1.95"
+              ],
+              "isNotDropped": [
+                true,
+                true,
+                false,
+                false,
+                true
+              ]
+            },
+            "C": {
+              "score": "2.00",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "isNotMissed": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "SCHMIDT DUSTY",
+            "schoolName": "WORLD MARTIAL ARTS ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "8.216"
+          }
+        ]
+      }
+    },
+    "NQ_ND_NG": {
+      "MEENAKSHISUNDARAM SHAKTHIMEENA": {
+        "competitor": {
+          "name": "MEENAKSHISUNDARAM SHAKTHIMEENA"
+        },
+        "events": [
+          {
+            "event": "Female Optional Nandao",
+            "nandu": [
+              "323B+2",
+              "323A+312A",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.10",
+              "deductions": [
+                "71",
+                "30",
+                "55",
+                "30",
+                "30",
+                "71",
+                "79"
+              ]
+            },
+            "B": {
+              "score": "1.666",
+              "scores": [
+                "1.30",
+                "1.70",
+                "1.60",
+                "1.70",
+                "1.80"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                true,
+                true,
+                false
+              ]
+            },
+            "C": {
+              "score": "1.30",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+              ]
+            },
+            "athleteName": "MEENAKSHISUNDARAM SHAKTHIMEENA",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "-0.100",
+            "finalScore": "6.966"
+          },
+          {
+            "event": "Female Optional Nangun",
+            "nandu": [
+              "323B+2",
+              "323A+312A",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.60",
+              "deductions": [
+                "30",
+                "30",
+                "30",
+                "30"
+              ]
+            },
+            "B": {
+              "score": "1.840",
+              "scores": [
+                "2.15",
+                "1.85",
+                "1.75",
+                "1.87",
+                "1.80"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                false,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.45",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MEENAKSHISUNDARAM SHAKTHIMEENA",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "7.890"
+          },
+          {
+            "event": "Female Optional Nanquan",
+            "nandu": [
+              "323B+2",
+              "323A+312A",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.55",
+              "deductions": [
+                "70A",
+                "30",
+                "30",
+                "30",
+                "55"
+              ]
+            },
+            "B": {
+              "score": "1.913",
+              "scores": [
+                "1.92",
+                "1.92",
+                "1.90",
+                "1.90",
+                "2.00"
+              ],
+              "isNotDropped": [
+                true,
+                true,
+                false,
+                true,
+                false
+              ]
+            },
+            "C": {
+              "score": "1.25",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MEENAKSHISUNDARAM SHAKTHIMEENA",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "7.713"
+          }
+        ]
+      },
+      "Meng Elina": {
+        "competitor": {
+          "name": "Meng Elina"
+        },
+        "events": [
+          {
+            "event": "Female Optional Nandao",
+            "nandu": [
+              "323B+2",
+              "323A+1",
+              "312A+3",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.30",
+              "deductions": [
+                "30",
+                "70B",
+                "30",
+                "71",
+                "30",
+                "52"
+              ]
+            },
+            "B": {
+              "score": "1.866",
+              "scores": [
+                "1.35",
+                "2.00",
+                "1.75",
+                "1.90",
+                "1.95"
+              ],
+              "isNotDropped": [
+                false,
+                false,
+                true,
+                true,
+                true
+              ]
+            },
+            "C": {
+              "score": "1.25",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MENG ELINA",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "7.416"
+          },
+          {
+            "event": "Female Optional Nangun",
+            "nandu": [
+              "323B+2",
+              "323A+1",
+              "312A+3",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.60",
+              "deductions": [
+                "30",
+                "30",
+                "30",
+                "55"
+              ]
+            },
+            "B": {
+              "score": "1.916",
+              "scores": [
+                "1.95",
+                "1.95",
+                "1.90",
+                "1.90",
+                "1.85"
+              ],
+              "isNotDropped": [
+                false,
+                true,
+                true,
+                true,
+                false
+              ]
+            },
+            "C": {
+              "score": "0.65",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MENG ELINA",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "7.166"
+          },
+          {
+            "event": "Female Optional Nanquan",
+            "nandu": [
+              "323B+2",
+              "323A+1",
+              "312A+3",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ],
+            "A": {
+              "score": "4.40",
+              "deductions": [
+                "30",
+                "70B",
+                "30",
+                "30",
+                "55",
+                "53"
+              ]
+            },
+            "B": {
+              "score": "1.950",
+              "scores": [
+                "2.00",
+                "2.05",
+                "1.85",
+                "2.00",
+                "1.80"
+              ],
+              "isNotDropped": [
+                true,
+                false,
+                true,
+                true,
+                false
+              ]
+            },
+            "C": {
+              "score": "0.95",
+              "counts": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "isNotMissed": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "athleteName": "MENG ELINA",
+            "schoolName": "SIFU MENGS KUNGFU/WUSHU ACADEMY,USA",
+            "adjustment": "0.000",
+            "finalScore": "7.300"
+          }
+        ]
+      }
+    },
+    "TQ_TJ": {
+      "Castilla Ailani": {
+        "competitor": {
+          "name": "Castilla Ailani"
+        },
+        "events": [
+          {
+            "event": "Female Optional Taijijian",
+            "nandu": [],
+            "A": {
+              "score": "0.0",
+              "deductions": [
+                "0.0"
+              ]
+            },
+            "B": {},
+            "C": {},
+            "athleteName": "CASTILLA AILANI",
+            "schoolName": "NATIONAL MARTIAL ARTS ACADEMY,USA",
+            "finalScore": "0"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -154,42 +154,7 @@ export let movements = [
                 ]
             },
             {
-                title: "One (1) of these must include one full set of Guà Jiàn (Straight Sword Hooking Parry) on the left and right connected with Chuān Guà Jiàn (Straight Sword Hooking Parry with Pierce) behind the back",
-                checklist: [
-                    {
-                        label: "Guà Jiàn (Straight Sword Hooking Parry) on the left and right connected with Chuān Guà Jiàn (Straight Sword Hooking Parry with Pierce)",
-                        state: false,
-                    },
-                ]
-            },
-            {
-                title: "Three (3) stances comprising of Gōng Bù (Bow Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance)",
-                checklist: [
-                    {
-                        label: "Gōng Bù (Bow Stance)",
-                        state: false,
-                    },
-                    {
-                        label: "Pū Bù (Crouching Stance)",
-                        state: false,
-                    },
-                    {
-                        label: "Xū Bù (Empty Stance)",
-                        state: false,
-                    },
-                ]
-            },
-            {
-                title: "One (1) extended balance technique",
-                checklist: [
-                    {
-                        label: "Extended Balance",
-                        state: false,
-                    },
-                ]
-            },
-            {
-                title: "Five (5) stances comprising of Gōng Bù (Bow Stance), Mǎ Bù (Horse Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance), Xiē Bù (Cross-Legged Crouching Stance)",
+                title: "Five (5) stances comprising of Gōng Bù (Bow Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance)",
                 checklist: [
                     {
                         label: "Gōng Bù (Bow Stance)",
@@ -210,24 +175,7 @@ export let movements = [
                     {
                         label: "Xiē Bù (Cross-Legged Crouching Stance)",
                         state: false,
-                    },
-                ]
-            },
-            {
-                title: "Three (3) leg techniques comprising of leg swinging techniques/methods with the leg straight, flexion to extension, and sweep",
-                checklist: [
-                    {
-                        label: "Leg Straight",
-                        state: false,
-                    },
-                    {
-                        label: "Flexion to Extension",
-                        state: false,
-                    },
-                    {
-                        label: "Sweep",
-                        state: false,
-                    },
+                    }
                 ]
             },
             {
@@ -283,19 +231,14 @@ export let movements = [
                 ]
             },
             {
-                title: "One (1) of these must include one full set of Chán Tóu (Broadsword Twining) Guǒ Nǎo (Wrapping with the Broadsword)",
-                checklist: [
-                    {
-                        label: "Set of Chán Tóu (Broadsword Twining) Guǒ Nǎo (Wrapping with the Broadsword)",
-                        state: false,
-                    },
-                ]
-            },
-            {
-                title: "Three (3) stances comprising of Gōng Bù (Bow Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance)",
+                title: "Five (5) stances comprising of Gōng Bù (Bow Stance), Mǎ Bù (Horse Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance), Xiē Bù (Cross-Legged Crouching Stance)",
                 checklist: [
                     {
                         label: "Gōng Bù (Bow Stance)",
+                        state: false,
+                    },
+                    {
+                        label: "Mǎ Bù (Horse Stance)",
                         state: false,
                     },
                     {
@@ -304,6 +247,10 @@ export let movements = [
                     },
                     {
                         label: "Xū Bù (Empty Stance)",
+                        state: false,
+                    },
+                    {
+                        label: "Xiē Bù (Cross-Legged Crouching Stance)",
                         state: false,
                     },
                 ]
@@ -352,19 +299,14 @@ export let movements = [
                 ]
             },
             {
-                title: "One (1) of these must include a set of three continuous connected Lán Qiāng (Outward Blocking with the Spear), Ná Qiāng (Inward Blocking with the Spear), Zhā Qiāng (Spear Thrust) combinations.",
-                checklist: [
-                    {
-                        label: "Set of three continuous connected Lán Qiāng (Outward Blocking with the Spear), Ná Qiāng (Inward Blocking with the Spear), Zhā Qiāng (Spear Thrust)",
-                        state: false,
-                    },
-                ]
-            },
-            {
-                title: "Three (3) stances comprising of Gōng Bù (Bow Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance)",
+                title: "Five (5) stances comprising of Gōng Bù (Bow Stance), Mǎ Bù (Horse Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance), Xiē Bù (Cross-Legged Crouching Stance)",
                 checklist: [
                     {
                         label: "Gōng Bù (Bow Stance)",
+                        state: false,
+                    },
+                    {
+                        label: "Mǎ Bù (Horse Stance)",
                         state: false,
                     },
                     {
@@ -373,6 +315,10 @@ export let movements = [
                     },
                     {
                         label: "Xū Bù (Empty Stance)",
+                        state: false,
+                    },
+                    {
+                        label: "Xiē Bù (Cross-Legged Crouching Stance)",
                         state: false,
                     },
                 ]
@@ -421,19 +367,14 @@ export let movements = [
                 ]
             },
             {
-                title: "One (1) of these must include a set of three continuous connected revolutions of Shuāng Shǒu Tí Liāo Huā Gùn (Two-handed Vertical Cudgel Uppercut)",
-                checklist: [
-                    {
-                        label: "Set of three continuous connected revolutions of Shuāng Shǒu Tí Liāo Huā Gùn (Two-handed Vertical Cudgel Uppercut)",
-                        state: false,
-                    },
-                ]
-            },
-            {
-                title: "Three (3) stances comprising of Gōng Bù (Bow Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance)",
+                title: "Five (5) stances comprising of Gōng Bù (Bow Stance), Mǎ Bù (Horse Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance), Xiē Bù (Cross-Legged Crouching Stance)",
                 checklist: [
                     {
                         label: "Gōng Bù (Bow Stance)",
+                        state: false,
+                    },
+                    {
+                        label: "Mǎ Bù (Horse Stance)",
                         state: false,
                     },
                     {
@@ -442,6 +383,10 @@ export let movements = [
                     },
                     {
                         label: "Xū Bù (Empty Stance)",
+                        state: false,
+                    },
+                    {
+                        label: "Xiē Bù (Cross-Legged Crouching Stance)",
                         state: false,
                     },
                 ]
@@ -475,10 +420,10 @@ export let movements = [
                 ]
             },
             {
-                title: "One (1) bridge technique (Qiáo Fǎ) of Gǔn Qiáo (Rolling Bridge",
+                title: "One (1) bridge technique (Qiáo Fǎ) of Gǔn Qiáo (Rolling Bridge)",
                 checklist: [
                     {
-                        label: "Bridge technique (Qiáo Fǎ) of Gǔn Qiáo (Rolling Bridge",
+                        label: "Bridge technique (Qiáo Fǎ) of Gǔn Qiáo (Rolling Bridge)",
                         state: false,
                     },
                 ]
@@ -574,7 +519,7 @@ export let movements = [
                 ]
             },
             {
-                title: "Four (4) stances comprising of Gōng Bù (Bow Stance), Mǎ Bù (Horse Stance), Xū Bù (Empty Stance), Qí Lóng Bù (Dragon Riding Stance)",
+                title: "Six (6) stances comprising of Gōng Bù (Bow Stance), Mǎ Bù (Horse Stance), Xū Bù (Empty Stance), Qí Lóng Bù (Dragon Riding Stance)",
                 checklist: [
                     {
                         label: "Gōng Bù (Bow Stance)",
@@ -585,11 +530,37 @@ export let movements = [
                         state: false,
                     },
                     {
+                        label: "Pū Bù (Crouching Stance)",
+                        state: false,
+                    },
+                    {
                         label: "Xū Bù (Empty Stance)",
                         state: false,
                     },
                     {
+                        label: "Dié Bù (Butterfly Stance)",
+                        state: false,
+                    },
+                    {
                         label: "Qí Lóng Bù (Dragon Riding Stance)",
+                        state: false,
+                    },
+                ]
+            },
+            {
+                title: "One (1) footwork technique comprising of Qílín Bù (Kirin Steps)",
+                checklist: [
+                    {
+                        label: "Qílín Bù (Kirin Steps)",
+                        state: false,
+                    },
+                ]
+            },
+            {
+                title: "One (1) leg technique comprising of Héng Dīng Tuǐ (Horizontal Nail Kick)",
+                checklist: [
+                    {
+                        label: "Héng Dīng Tuǐ (Horizontal Nail Kick)",
                         state: false,
                     },
                 ]
@@ -638,7 +609,7 @@ export let movements = [
                 ]
             },
             {
-                title: "Four (4) stances comprising of Gōng Bù (Bow Stance), Mǎ Bù (Horse Stance), Xū Bù (Empty Stance), Qí Lóng Bù (Dragon Riding Stance)",
+                title: "Six (6) stances comprising of Gōng Bù (Bow Stance), Mǎ Bù (Horse Stance), Xū Bù (Empty Stance), Qí Lóng Bù (Dragon Riding Stance)",
                 checklist: [
                     {
                         label: "Gōng Bù (Bow Stance)",
@@ -649,11 +620,37 @@ export let movements = [
                         state: false,
                     },
                     {
+                        label: "Pū Bù (Crouching Stance)",
+                        state: false,
+                    },
+                    {
                         label: "Xū Bù (Empty Stance)",
                         state: false,
                     },
                     {
+                        label: "Dié Bù (Butterfly Stance)",
+                        state: false,
+                    },
+                    {
                         label: "Qí Lóng Bù (Dragon Riding Stance)",
+                        state: false,
+                    },
+                ]
+            },
+            {
+                title: "One (1) footwork technique comprising of Qílín Bù (Kirin Steps)",
+                checklist: [
+                    {
+                        label: "Qílín Bù (Kirin Steps)",
+                        state: false,
+                    },
+                ]
+            },
+            {
+                title: "One (1) leg technique comprising of Héng Dīng Tuǐ (Horizontal Nail Kick)",
+                checklist: [
+                    {
+                        label: "Héng Dīng Tuǐ (Horizontal Nail Kick)",
                         state: false,
                     },
                 ]
@@ -702,10 +699,14 @@ export let movements = [
                 ]
             },
             {
-                title: "Three (3) stances comprising of Gōng Bù (Bow Stance), Pū Bù (Crouching Stance), Xū Bù (Empty Stance)",
+                title: "Six (6) stances comprising of Gōng Bù (Bow Stance), Mǎ Bù (Horse Stance), Xū Bù (Empty Stance), Qí Lóng Bù (Dragon Riding Stance)",
                 checklist: [
                     {
                         label: "Gōng Bù (Bow Stance)",
+                        state: false,
+                    },
+                    {
+                        label: "Mǎ Bù (Horse Stance)",
                         state: false,
                     },
                     {
@@ -714,6 +715,14 @@ export let movements = [
                     },
                     {
                         label: "Xū Bù (Empty Stance)",
+                        state: false,
+                    },
+                    {
+                        label: "Dié Bù (Butterfly Stance)",
+                        state: false,
+                    },
+                    {
+                        label: "Qí Lóng Bù (Dragon Riding Stance)",
                         state: false,
                     },
                 ]
@@ -791,6 +800,19 @@ export let movements = [
                     },
                 ]
             },
+            {
+                title: "Two (2) different leg techniques",
+                checklist: [
+                    {
+                        label: "Leg Technique #1",
+                        state: false,
+                    },
+                    {
+                        label: "Leg Technique #2",
+                        state: false,
+                    },
+                ]
+            }
         ]
     },
     {

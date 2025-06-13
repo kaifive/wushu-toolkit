@@ -70,8 +70,7 @@ const EventDashboard = React.lazy(() => import('./views/2024team-trials/dashboar
 const USTeamDashboard = React.lazy(() => import('./views/2024team-trials/dashboards/USTeamDashboard'))
 
 // Sportdata
-const SportdataMaleStandings = React.lazy(() => import('./views/sportdataComponents/standings/MaleStandings'))
-const SportdataFemaleStandings = React.lazy(() => import('./views/sportdataComponents/standings/FemaleStandings'))
+const SportdataSportDataStandingsTable = React.lazy(() => import('./views/sportdataComponents/standings/SportDataStandingsTable'))
 const SportdataScorecards = React.lazy(() => import('./views/sportdataComponents/scorecard/Scorecard'))
 
 // 2025 Team Trials
@@ -141,14 +140,14 @@ const base_routes = [
 const adults2025_routes = [
   { path: '/2025-adults/about', name: 'About2025', element: About2025 },
   { path: '/2025-adults/schedule', name: 'Schedule2025', element: ComingSoon, protected: true },
-  { path: '/2025-adults/male-standings', name: 'MaleStandings2025', element: SportdataMaleStandings, protected: true },
-  { path: '/2025-adults/female-standings', name: 'FemaleStandings2025', element: SportdataFemaleStandings, protected: true },
+  { path: '/2025-adults/male-standings', name: 'MaleStandings2025', element: SportdataSportDataStandingsTable, protected: true },
+  { path: '/2025-adults/female-standings', name: 'FemaleStandings2025', element: SportdataSportDataStandingsTable, protected: true },
   { path: '/2025-adults/scorecard', name: 'Scorecard2025', element: SportdataScorecards, protected: true },
 ]
 
 const phoenix2025_routes = [
-  { path: '/2025-phoenix/male-standings', name: 'MaleStandings2025', element: SportdataMaleStandings },
-  { path: '/2025-phoenix/female-standings', name: 'FemaleStandings2025', element: SportdataFemaleStandings },
+  { path: '/2025-phoenix/male-standings', name: 'MaleStandings2025', element: SportdataSportDataStandingsTable },
+  { path: '/2025-phoenix/female-standings', name: 'FemaleStandings2025', element: SportdataSportDataStandingsTable },
   { path: '/2025-phoenix/scorecard', name: 'Scorecard2025', element: SportdataScorecards },
 ]
 

@@ -1,0 +1,4583 @@
+{
+  "MALES": {
+    "CQ_DS_GS": {
+      "Sun Nicholas": {
+        "competitor": {
+          "name": "Sun Nicholas"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324B+1",
+              "353B+323B+6",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324B+1",
+              "355B",
+              "353B+323B+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324B+1",
+              "353B+323B+6",
+              "355B"
+            ]
+          }
+        ]
+      },
+      "Bitner Owen": {
+        "competitor": {
+          "name": "Bitner Owen"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+323B+6",
+              "312A+6",
+              "324B+6",
+              "333A+6",
+              "324A+1"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324A+1",
+              "312A+323B+6",
+              "312A+6",
+              "324B+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+323B+6",
+              "312A+6",
+              "324B+6",
+              "333A+6",
+              "324A+1"
+            ]
+          }
+        ]
+      },
+      "Yim Ashton": {
+        "competitor": {
+          "name": "Yim Ashton"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "353B+323C+1",
+              "324C+6",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "353B+323C+1",
+              "324C+6",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "353B+323C+1",
+              "324C+6",
+              "355B"
+            ]
+          }
+        ]
+      },
+      "Burns Seth": {
+        "competitor": {
+          "name": "Burns Seth"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324B+6",
+              "353B+323B+6",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324B+6",
+              "353B+323B+6",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324B+6",
+              "353B+323B+6",
+              "355B"
+            ]
+          }
+        ]
+      },
+      "Chao Nathan": {
+        "competitor": {
+          "name": "Chao Nathan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+6",
+              "312A+335A+323B+6",
+              "335A",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+6",
+              "312A+335A+323B+6",
+              "335A",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+6",
+              "312A+335A+323B+6",
+              "335A",
+              "333A"
+            ]
+          }
+        ]
+      },
+      "Chen Kevin": {
+        "competitor": {
+          "name": "Chen Kevin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+1",
+              "324A+7",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+323A+1",
+              "312A+335A",
+              "323A+1",
+              "324A+7",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+1",
+              "324A+7",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Che Ethan": {
+        "competitor": {
+          "name": "Che Ethan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+6",
+              "333A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+6",
+              "355B",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Yang Chien-Mu": {
+        "competitor": {
+          "name": "Yang Chien-Mu"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324B+6",
+              "353B",
+              "323A+1",
+              "324A+1",
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324B+6",
+              "353B",
+              "323A+1",
+              "324A+1",
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324B+6",
+              "353B",
+              "323A+1",
+              "324A+1",
+              "312A+335A"
+            ]
+          }
+        ]
+      },
+      "Emmert Alex": {
+        "competitor": {
+          "name": "Emmert Alex"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324B+1",
+              "312A+335A",
+              "323A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Fung Josiah Christian": {
+        "competitor": {
+          "name": "Fung Josiah Christian"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+6",
+              "353B+4",
+              "312A+335A",
+              "323A+4",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324A+1",
+              "312A+6",
+              "312A+335A",
+              "323A+4",
+              "324A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "353B+4",
+              "312A+335A",
+              "323A+4",
+              "324A+6",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Gao Sen": {
+        "competitor": {
+          "name": "Gao Sen"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "353B+323C+4",
+              "312A+335A",
+              "323A+1",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "353B+323C+4",
+              "312A+335A",
+              "323A+1",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "353B+323C+4",
+              "312A+335A",
+              "323A+1",
+              "355B"
+            ]
+          }
+        ]
+      },
+      "Gao Bryan": {
+        "competitor": {
+          "name": "Gao Bryan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Huang Ryan": {
+        "competitor": {
+          "name": "Huang Ryan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Candra Jayden": {
+        "competitor": {
+          "name": "Candra Jayden"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B",
+              "312A+335A",
+              "323A+1",
+              "355B",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B",
+              "312A+335A",
+              "323A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B",
+              "312A+335A",
+              "323A+1",
+              "355B",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Land Preston": {
+        "competitor": {
+          "name": "Land Preston"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "355B"
+            ]
+          }
+        ]
+      },
+      "Lee Ryan": {
+        "competitor": {
+          "name": "Lee Ryan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Ly Nathan": {
+        "competitor": {
+          "name": "Ly Nathan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "335A+4",
+              "324B+1",
+              "333A+353B",
+              "312A+335A",
+              "323A+1"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "335A+4",
+              "324B+1",
+              "333A+353B",
+              "312A+335A",
+              "323A+1"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "335A+4",
+              "324B+1",
+              "333A+353B",
+              "312A+335A",
+              "323A+1"
+            ]
+          }
+        ]
+      },
+      "Kono Shoma": {
+        "competitor": {
+          "name": "Kono Shoma"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324A+1",
+              "353B+4",
+              "312A+335A",
+              "333A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324A+1",
+              "353B+4",
+              "312A+335A",
+              "333A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "353B+4",
+              "312A+335A",
+              "333A+6",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Lou Justin": {
+        "competitor": {
+          "name": "Lou Justin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+335A+323B+4"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+335A+323B+4"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+335A+323B+4",
+              "324B+1",
+              "312A+6"
+            ]
+          }
+        ]
+      },
+      "Ma Jake": {
+        "competitor": {
+          "name": "Ma Jake"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+335A"
+            ]
+          }
+        ]
+      },
+      "Nguyen Matthew": {
+        "competitor": {
+          "name": "Nguyen Matthew"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324B",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324B",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Payumo Jonathan": {
+        "competitor": {
+          "name": "Payumo Jonathan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "353B+323B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1"
+            ]
+          }
+        ]
+      },
+      "Sahertian Paul": {
+        "competitor": {
+          "name": "Sahertian Paul"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Liu Shangshang": {
+        "competitor": {
+          "name": "Liu Shangshang"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Zheng Nathan": {
+        "competitor": {
+          "name": "Zheng Nathan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Shultz Ball Sage": {
+        "competitor": {
+          "name": "Shultz Ball Sage"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "323B+3",
+              "353B+4",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "323B+3",
+              "353B+4",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "323B+3",
+              "353B+4",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Briones Zachary": {
+        "competitor": {
+          "name": "Briones Zachary"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Wang Derek": {
+        "competitor": {
+          "name": "Wang Derek"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Wang Tony": {
+        "competitor": {
+          "name": "Wang Tony"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Wong Brendan": {
+        "competitor": {
+          "name": "Wong Brendan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+4",
+              "324A+1",
+              "312A+335A",
+              "323A+1"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+4",
+              "324A+1",
+              "312A+335A",
+              "323A+1"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+4",
+              "324A+1",
+              "312A+335A",
+              "323A+1"
+            ]
+          }
+        ]
+      },
+      "Wu Ashton": {
+        "competitor": {
+          "name": "Wu Ashton"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Ambrose Elijah": {
+        "competitor": {
+          "name": "Ambrose Elijah"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "323A+353B",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+1",
+              "324A+7",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+335A",
+              "323A+1",
+              "312A+323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Yang Nianjin": {
+        "competitor": {
+          "name": "Yang Nianjin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Ye Brian": {
+        "competitor": {
+          "name": "Ye Brian"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Chen Shaun": {
+        "competitor": {
+          "name": "Chen Shaun"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324B+1",
+              "333A+353B",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324B+1",
+              "333A+353B",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324B+1",
+              "333A+353B",
+              "312A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Thio Julian": {
+        "competitor": {
+          "name": "Thio Julian"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+323A+1",
+              "335A",
+              "323A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+323A+1",
+              "335A",
+              "323A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "312A+323A+1",
+              "335A",
+              "323A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Tjhin Joshua": {
+        "competitor": {
+          "name": "Tjhin Joshua"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+1",
+              "323A+353B",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+1",
+              "323A+353B",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+1",
+              "323A+353B",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Yu Elijah Jordan Dizon": {
+        "competitor": {
+          "name": "Yu Elijah Jordan Dizon"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "333A+353B",
+              "323A+1",
+              "312A+335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+6",
+              "333A+353B",
+              "323A+1",
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "333A+353B",
+              "323A+1",
+              "312A+335A",
+              "312A+6"
+            ]
+          }
+        ]
+      },
+      "Zheng Lin": {
+        "competitor": {
+          "name": "Zheng Lin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+6",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+6",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+6",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Zhou Zheng": {
+        "competitor": {
+          "name": "Zhou Zheng"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "312A+324B+6",
+              "353B+323B+6",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "312A+324B+6",
+              "353B+323B+6",
+              "312B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324B+6",
+              "353B+323B+6",
+              "355B"
+            ]
+          }
+        ]
+      },
+      "Lu Dazhi": {
+        "competitor": {
+          "name": "Lu Dazhi"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Daoshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "312A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Gunshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "312A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "312A+6",
+              "335A"
+            ]
+          }
+        ]
+      }
+    },
+    "CQ_JS_QS": {
+      "Fung Josiah Christian": {
+        "competitor": {
+          "name": "Fung Josiah Christian"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "353B+4",
+              "312A+335A",
+              "323A+4",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "324A+1",
+              "312A+6",
+              "312A+335A",
+              "323A+4",
+              "324A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "353B+4",
+              "312A+335A",
+              "323A+4",
+              "324A+6",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Gao Sen": {
+        "competitor": {
+          "name": "Gao Sen"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "353B+323C+4",
+              "312A+335A",
+              "323A+1",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "324A+1",
+              "312A+335A",
+              "323A+1",
+              "353B+323C+1"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "353B+323C+4",
+              "312A+335A",
+              "323A+1",
+              "355B"
+            ]
+          }
+        ]
+      },
+      "Guo Trevor": {
+        "competitor": {
+          "name": "Guo Trevor"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A",
+              "323A+1",
+              "323A+324A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A",
+              "323A+1",
+              "323A+324A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "312A",
+              "323A+1",
+              "323A+324A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Hirahara Kai": {
+        "competitor": {
+          "name": "Hirahara Kai"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "355B",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "355B",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Imanverdi Kayvon": {
+        "competitor": {
+          "name": "Imanverdi Kayvon"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+4",
+              "324A+7",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+4",
+              "324A+7",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324A+7",
+              "312A+324A+1",
+              "312A+335A",
+              "323A+4",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Liang Kong": {
+        "competitor": {
+          "name": "Liang Kong"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "324B+1",
+              "353B+323B+1",
+              "312A+335A",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "324A+1",
+              "312A+6",
+              "312A+323A+1",
+              "335A",
+              "312A+324A+1",
+              "163A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "353B+323B+1",
+              "312A+335A",
+              "355B"
+            ]
+          }
+        ]
+      },
+      "Liu Bruce": {
+        "competitor": {
+          "name": "Liu Bruce"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+335A"
+            ]
+          }
+        ]
+      },
+      "Shen Justin": {
+        "competitor": {
+          "name": "Shen Justin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "355B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "355B"
+            ]
+          }
+        ]
+      },
+      "Signore Jacopo": {
+        "competitor": {
+          "name": "Signore Jacopo"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+4",
+              "312A+324A+1",
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+4",
+              "312A+324A+1",
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "353B",
+              "323A+4",
+              "312A+324A+1",
+              "312A+335A"
+            ]
+          }
+        ]
+      },
+      "Tran Ryan": {
+        "competitor": {
+          "name": "Tran Ryan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "324A+1",
+              "312A+6",
+              "312A+323A+1",
+              "324A+7",
+              "333A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "324A+1",
+              "312A+323A+1",
+              "324A+7",
+              "333A",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324A+1",
+              "312A+323A+1",
+              "324A+7",
+              "335A",
+              "312A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Vo William": {
+        "competitor": {
+          "name": "Vo William"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "312A+324B+1",
+              "312A+335A",
+              "323A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "312A+324B+1",
+              "312A+335A",
+              "323A+324A+1",
+              "312B"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324B+1",
+              "312A+335A",
+              "323A+324A+1",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Wang Benjamin": {
+        "competitor": {
+          "name": "Wang Benjamin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+323A+6",
+              "324A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+323A+6",
+              "324A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "312A+323A+6",
+              "324A+6",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Wong Matthew Yum Ping": {
+        "competitor": {
+          "name": "Wong Matthew Yum Ping"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+6",
+              "335A",
+              "323A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+6",
+              "335A",
+              "323A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+6",
+              "335A",
+              "323A+1",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Wu Ashton": {
+        "competitor": {
+          "name": "Wu Ashton"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Yeager Blake": {
+        "competitor": {
+          "name": "Yeager Blake"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "323B+1",
+              "324A+7",
+              "312A+323A+1",
+              "324A+1",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "323B+1",
+              "312A+323A+1",
+              "324A+1",
+              "324A+7",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "323B+1",
+              "324A+7",
+              "312A+323A+1",
+              "324A+1",
+              "312A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Zhang Alex": {
+        "competitor": {
+          "name": "Zhang Alex"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "324B+6",
+              "312A+335A+323B+6",
+              "335A",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "324B+6",
+              "312A+335A+323B+6",
+              "335A",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "324B+6",
+              "312A+335A+323B+6",
+              "335A",
+              "333A"
+            ]
+          }
+        ]
+      },
+      "Chen Shaun": {
+        "competitor": {
+          "name": "Chen Shaun"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "312A+324B+1",
+              "333A+353B",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "312A+324B+1",
+              "333A+353B",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+324B+1",
+              "333A+353B",
+              "312A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Zhuang Evan": {
+        "competitor": {
+          "name": "Zhuang Evan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu",
+            "nandu": [
+              "323A+1",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Qiangshu",
+            "nandu": [
+              "323A+1",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan",
+            "nandu": [
+              "312A+6",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "323A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Duchene Troy": {
+        "competitor": {
+          "name": "Duchene Troy"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Jianshu"
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Changquan"
+          }
+        ]
+      }
+    },
+    "NQ_ND_NG": {
+      "Yim Augustin": {
+        "competitor": {
+          "name": "Yim Augustin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "324B+1",
+              "323B+1",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "324B+1",
+              "323B+1",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "324B+1",
+              "323B+1",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Burns Seth": {
+        "competitor": {
+          "name": "Burns Seth"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "323A+312A",
+              "346A+2",
+              "323B+2",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "323A+312A",
+              "346A+2",
+              "323B+2",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "323A+312A",
+              "346A+2",
+              "323B+2",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Chao Nathan": {
+        "competitor": {
+          "name": "Chao Nathan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "323B+2",
+              "346A+2",
+              "323A+312A",
+              "323A+2",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "323B+2",
+              "346A+2",
+              "323A+312A",
+              "323A+2",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "323B+2",
+              "346A+2",
+              "323A+312A",
+              "323A+2",
+              "447A+2",
+              "423A"
+            ]
+          }
+        ]
+      },
+      "Che Ethan": {
+        "competitor": {
+          "name": "Che Ethan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+2",
+              "323A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+2",
+              "323A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+2",
+              "323A+1",
+              "447A+2",
+              "423A"
+            ]
+          }
+        ]
+      },
+      "Chow Justin": {
+        "competitor": {
+          "name": "Chow Justin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "346A+2",
+              "324A+1",
+              "323B+2",
+              "323A+2",
+              "323A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "346A+2",
+              "324A+1",
+              "323B+2",
+              "323A+2",
+              "323A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "346A+2",
+              "324A+1",
+              "323B+2",
+              "323A+2",
+              "323A+1",
+              "447A+2",
+              "423A"
+            ]
+          }
+        ]
+      },
+      "Deng Darren": {
+        "competitor": {
+          "name": "Deng Darren"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "346A+2",
+              "323B+2",
+              "323A+312A",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "346A+2",
+              "323B+2",
+              "323A+312A",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "346A+2",
+              "323B+2",
+              "323A+312A",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Candra Jayden": {
+        "competitor": {
+          "name": "Candra Jayden"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "346A+2",
+              "323A+346B+2",
+              "323B+2",
+              "423A",
+              "447A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "346A+2",
+              "323A+346B+2",
+              "323B+2",
+              "423A",
+              "447A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "346A+2",
+              "323A+346B+2",
+              "323B+2",
+              "423A",
+              "447A"
+            ]
+          }
+        ]
+      },
+      "Ly Nathan": {
+        "competitor": {
+          "name": "Ly Nathan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "346A+2",
+              "324B+1",
+              "324B+346B+2",
+              "323A+1",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "346A+2",
+              "324B+1",
+              "324B+346B+2",
+              "323A+1",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "346A+2",
+              "324B+1",
+              "324B+346B+2",
+              "323A+1",
+              "423A"
+            ]
+          }
+        ]
+      },
+      "Payumo Jonathan": {
+        "competitor": {
+          "name": "Payumo Jonathan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "346A+2",
+              "324B+346B+2",
+              "323B+2",
+              "423A",
+              "447A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "346A+2",
+              "324B+346B+2",
+              "323B+2",
+              "423A",
+              "447A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "346A+2",
+              "324B+346B+2",
+              "323B+2",
+              "423A",
+              "447A"
+            ]
+          }
+        ]
+      },
+      "Kwan Antony": {
+        "competitor": {
+          "name": "Kwan Antony"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Li William": {
+        "competitor": {
+          "name": "Li William"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+1",
+              "324A+1",
+              "323A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+1",
+              "324A+1",
+              "323A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "324B+1",
+              "323B+2",
+              "323A+1",
+              "324A+1",
+              "323A+2",
+              "423A"
+            ]
+          }
+        ]
+      },
+      "Meng Stanley": {
+        "competitor": {
+          "name": "Meng Stanley"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "324B+1",
+              "324B+346B+2",
+              "323B+2",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "324B+1",
+              "324B+346B+2",
+              "323B+2",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "324B+1",
+              "324B+346B+2",
+              "323B+2",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Wong Marcus": {
+        "competitor": {
+          "name": "Wong Marcus"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "324B+346B+2",
+              "323B+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "346A+2",
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "324B+346B+2",
+              "323B+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Yang Kevin": {
+        "competitor": {
+          "name": "Yang Kevin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nangun"
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nandao"
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan"
+          }
+        ]
+      },
+      "Tu Danny": {
+        "competitor": {
+          "name": "Tu Danny"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "323B+1",
+              "323B+2",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "323B+1",
+              "323B+2",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "323B+1",
+              "323B+2",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Yang Aaron": {
+        "competitor": {
+          "name": "Yang Aaron"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "323A+2",
+              "323B+2",
+              "324A+1",
+              "323A+312A",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "323A+2",
+              "323B+2",
+              "324A+1",
+              "323A+312A",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "323A+2",
+              "323B+2",
+              "324A+1",
+              "323A+312A",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Zheng Lin": {
+        "competitor": {
+          "name": "Zheng Lin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Nandao",
+            "nandu": [
+              "346A+2",
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nangun",
+            "nandu": [
+              "346A+2",
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Nanquan",
+            "nandu": [
+              "346A+2",
+              "324B+1",
+              "323B+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      }
+    },
+    "TQ_TJ": {
+      "Chou Nathan": {
+        "competitor": {
+          "name": "Chou Nathan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "312A+3",
+              "312A+324B+5",
+              "143A",
+              "323A+3",
+              "143B+212A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "143B+212A",
+              "312A+324B+5",
+              "143A",
+              "323A+3",
+              "312A+3"
+            ]
+          }
+        ]
+      },
+      "Tian Ethan": {
+        "competitor": {
+          "name": "Tian Ethan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "312A+324B+5",
+              "323A+3",
+              "143B+212A",
+              "312A+3"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "312A+324B+5",
+              "312A+3",
+              "324B+3",
+              "143B+212A"
+            ]
+          }
+        ]
+      },
+      "Tian Luke": {
+        "competitor": {
+          "name": "Tian Luke"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "312A+324C+5",
+              "143B+212A",
+              "312B+8"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "312A+324C+5",
+              "143B+212A",
+              "312B+8"
+            ]
+          }
+        ]
+      },
+      "Zheng Alex": {
+        "competitor": {
+          "name": "Zheng Alex"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "312A+324B+5",
+              "323A+3",
+              "143B+212A",
+              "312A+3"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "312A+324B+5",
+              "312A+3",
+              "324B+3",
+              "143B+212A"
+            ]
+          }
+        ]
+      },
+      "Tzankov Lyubomir": {
+        "competitor": {
+          "name": "Tzankov Lyubomir"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "143B+212A",
+              "312A+3",
+              "312A+324B+5",
+              "323A+3"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "143B+212A",
+              "312A+324B+5",
+              "312A+3",
+              "323A+3"
+            ]
+          }
+        ]
+      },
+      "Ng William S": {
+        "competitor": {
+          "name": "Ng William S"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "324B+3",
+              "312A+3",
+              "142A+3",
+              "312A+324B+5",
+              "212A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "324B+3",
+              "312A+3",
+              "142A+3",
+              "312A+324B+5",
+              "212A"
+            ]
+          }
+        ]
+      },
+      "Shen Justin": {
+        "competitor": {
+          "name": "Shen Justin"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "312A+324C+5",
+              "143B+212A",
+              "312B+8"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "312A+324C+5",
+              "143B+212A",
+              "312B+8"
+            ]
+          }
+        ]
+      },
+      "Huang Victor": {
+        "competitor": {
+          "name": "Huang Victor"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "312A+324B+5",
+              "324B+3",
+              "143B+212A",
+              "212A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "143A+212A",
+              "312A+324B+5",
+              "324B+3",
+              "143B+212A"
+            ]
+          }
+        ]
+      },
+      "Tay Matthew": {
+        "competitor": {
+          "name": "Tay Matthew"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "143B+3",
+              "142A+3",
+              "143A+3",
+              "143A+212A",
+              "143B+212A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "143B+3",
+              "142A+3",
+              "143A+3",
+              "143A+212A",
+              "143B+212A"
+            ]
+          }
+        ]
+      },
+      "Wong Kadyn": {
+        "competitor": {
+          "name": "Wong Kadyn"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "312A+324B+5",
+              "312A+3",
+              "143A",
+              "323B+3",
+              "143B+3"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "143B",
+              "312A+324B+5",
+              "143A+3",
+              "323B+3",
+              "312A+3"
+            ]
+          }
+        ]
+      },
+      "Zhu Ethan": {
+        "competitor": {
+          "name": "Zhu Ethan"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Men´s Taijijian",
+            "nandu": [
+              "312A+324B+5",
+              "312B+8",
+              "143B",
+              "323B+3"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Men´s Taijiquan",
+            "nandu": [
+              "312A+324B+5",
+              "312B+8",
+              "323B+3",
+              "143B"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "FEMALES": {
+    "CQ_DS_GS": {
+      "Chand Tara": {
+        "competitor": {
+          "name": "Chand Tara"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "312A+324A+6",
+              "323A+1",
+              "324A+1",
+              "323A+6",
+              "312A+6",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "312A+324A+6",
+              "323A+1",
+              "324A+1",
+              "323A+6",
+              "312A+6",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+324A+6",
+              "323A+1",
+              "324A+1",
+              "323A+6",
+              "312A+6",
+              "333A"
+            ]
+          }
+        ]
+      },
+      "Cheng Maggie": {
+        "competitor": {
+          "name": "Cheng Maggie"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "324A+7",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "324A+7",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "333A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "324A+7",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Chew Allison": {
+        "competitor": {
+          "name": "Chew Allison"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "323A+4",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "312A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "323A+4",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+6",
+              "312A+335A",
+              "323A+4",
+              "353B+4",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Chow Elena": {
+        "competitor": {
+          "name": "Chow Elena"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "323A+1",
+              "312A+6",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "323A+1",
+              "312A+6",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "333A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "323A+1",
+              "312A+6",
+              "312A+335A",
+              "323A+4",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Diaz Brooklyn": {
+        "competitor": {
+          "name": "Diaz Brooklyn"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "335A+4"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "323A+4"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "112A",
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "323A+4",
+              "323A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Folk Hannah": {
+        "competitor": {
+          "name": "Folk Hannah"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "312A+324A+1",
+              "335A",
+              "323A+1",
+              "324A+6",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "323A+1",
+              "312A+324A+1",
+              "323A",
+              "324A+6",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "335A",
+              "323A+1",
+              "324A+6",
+              "312A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Hung Charisse": {
+        "competitor": {
+          "name": "Hung Charisse"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "324A+6",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "324A+6",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "324A+6",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+1",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Jian Emily": {
+        "competitor": {
+          "name": "Jian Emily"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Kooc Kolette": {
+        "competitor": {
+          "name": "Kooc Kolette"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "324A+7",
+              "312A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "324A+7",
+              "312A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "324A+7",
+              "312A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Nguyen Chloe": {
+        "competitor": {
+          "name": "Nguyen Chloe"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "312A+6",
+              "324A+1",
+              "312A+335A",
+              "323A+4",
+              "324A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "324A+7",
+              "312A+6",
+              "312A+335A",
+              "323A+4",
+              "324A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "324A+1",
+              "312A+6",
+              "312A+335A",
+              "323A+4",
+              "324A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Huang LanHong": {
+        "competitor": {
+          "name": "Huang LanHong"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "312A+324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "312A+324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Tran Audrey": {
+        "competitor": {
+          "name": "Tran Audrey"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "324A+1",
+              "312A+335A",
+              "323A+4",
+              "333A+6",
+              "312A+323A+1"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "324A+1",
+              "312A+335A",
+              "323A+4",
+              "333A+6",
+              "312A+323A+1"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "324A+1",
+              "312A+335A",
+              "323A+4",
+              "333A+6",
+              "312A+323A+1"
+            ]
+          }
+        ]
+      },
+      "Wu-Inouye Michiko": {
+        "competitor": {
+          "name": "Wu-Inouye Michiko"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "324A+1",
+              "312A+335A",
+              "323A+1",
+              "244A+6",
+              "323A+353B",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "324A+1",
+              "323A+353B",
+              "244A+6",
+              "312A+335A",
+              "323A+1",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "324B+1",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Zhou Julia": {
+        "competitor": {
+          "name": "Zhou Julia"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Daoshu",
+            "nandu": [
+              "312A+324B+6",
+              "312A+335A",
+              "323A+4",
+              "333A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Gunshu",
+            "nandu": [
+              "312A+324B+6",
+              "312A+335A",
+              "323A+4",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+324B+6",
+              "312A+335A",
+              "323A+4",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      }
+    },
+    "CQ_JS_QS": {
+      "Diaz Brooklyn": {
+        "competitor": {
+          "name": "Diaz Brooklyn"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "323A+4"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "112A",
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "323A+4",
+              "323A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Ding Victoria": {
+        "competitor": {
+          "name": "Ding Victoria"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "324A+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "324A+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "324A+1",
+              "312A+335A",
+              "323A+1",
+              "312A+324A+6",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Fung Rylee Kate": {
+        "competitor": {
+          "name": "Fung Rylee Kate"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "324A+6",
+              "312A+335A",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "312A+324A+1",
+              "312A+335A",
+              "323A+1",
+              "324A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "324A+6",
+              "353B",
+              "323A+1",
+              "324A+1",
+              "312A+6",
+              "312A+335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Jian Emily": {
+        "competitor": {
+          "name": "Jian Emily"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "312A+324A+1",
+              "353B+4",
+              "312A+335A",
+              "333A+6",
+              "335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+324A+1",
+              "323A+353B+4",
+              "312A+335A",
+              "335A"
+            ]
+          }
+        ]
+      },
+      "Shao Sophia": {
+        "competitor": {
+          "name": "Shao Sophia"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+335A"
+            ]
+          }
+        ]
+      },
+      "Zhao Hailey": {
+        "competitor": {
+          "name": "Zhao Hailey"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "312A+335A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+335A"
+            ]
+          }
+        ]
+      },
+      "Oshiba Ashley": {
+        "competitor": {
+          "name": "Oshiba Ashley"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "323A+1",
+              "324A+1",
+              "312A+335A",
+              "312A+6",
+              "324A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "323A+1",
+              "324A+1",
+              "312A+335A",
+              "312A+6",
+              "324A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "323A+1",
+              "324A+1",
+              "312A+335A",
+              "312A+6",
+              "324A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Shen Joy": {
+        "competitor": {
+          "name": "Shen Joy"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "323A+1",
+              "324A+1",
+              "312A+335A",
+              "323A+6",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "323A+1",
+              "324A+1",
+              "312A+335A",
+              "323A+6",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "323A+1",
+              "324A+1",
+              "312A+335A",
+              "323A+6",
+              "312A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Schmidt Dusty": {
+        "competitor": {
+          "name": "Schmidt Dusty"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "324A+1",
+              "353B+323B+6",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "324A+1",
+              "353B+323B+6",
+              "312A+6",
+              "335A",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+6",
+              "353B+323B+6",
+              "324A+1",
+              "335A",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Wong Amy": {
+        "competitor": {
+          "name": "Wong Amy"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "312A+324A+6",
+              "335A",
+              "323A+6",
+              "324A+1",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "312A+324A+6",
+              "335A",
+              "323A+6",
+              "324A+1",
+              "312A+6",
+              "333A+6"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "312A+324A+6",
+              "335A",
+              "323A+6",
+              "324A+1",
+              "312A+6",
+              "333A+6"
+            ]
+          }
+        ]
+      },
+      "Wang Katherine": {
+        "competitor": {
+          "name": "Wang Katherine"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Jianshu",
+            "nandu": [
+              "133B",
+              "312A+335A",
+              "312A+6",
+              "323A+1",
+              "323A+4",
+              "324A+1",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Qiangshu",
+            "nandu": [
+              "133B",
+              "312A+335A",
+              "312A+6",
+              "323A+1",
+              "323A+4",
+              "324A+1",
+              "333A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Changquan",
+            "nandu": [
+              "133B",
+              "312A+335A",
+              "312A+6",
+              "323A+1",
+              "323A+4",
+              "324A+1",
+              "333A"
+            ]
+          }
+        ]
+      }
+    },
+    "NQ_ND_NG": {
+      "Franco Luna": {
+        "competitor": {
+          "name": "Franco Luna"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Nandao",
+            "nandu": [
+              "335A+10",
+              "323A+1",
+              "323A+2",
+              "312A",
+              "324A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nangun",
+            "nandu": [
+              "335A+10",
+              "323A+1",
+              "323A+2",
+              "312A",
+              "324A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nanquan",
+            "nandu": [
+              "335A+10",
+              "323A+1",
+              "323A+2",
+              "312A",
+              "324A+1",
+              "447A+2",
+              "423A"
+            ]
+          }
+        ]
+      },
+      "Fung Rylee Kate": {
+        "competitor": {
+          "name": "Fung Rylee Kate"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Nandao",
+            "nandu": [
+              "346A+2",
+              "323A+1",
+              "323A+2",
+              "324A+1",
+              "335A+10",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nangun",
+            "nandu": [
+              "312A+3",
+              "323A+1",
+              "323A+2",
+              "324A+1",
+              "335A+10",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nanquan",
+            "nandu": [
+              "346A+2",
+              "323A+1",
+              "323A+2",
+              "324A+1",
+              "335A+10",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Kooc Kolette": {
+        "competitor": {
+          "name": "Kooc Kolette"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Nandao",
+            "nandu": [
+              "324A+1",
+              "312A+3",
+              "335A+10",
+              "323A+2",
+              "323A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nangun",
+            "nandu": [
+              "324A+1",
+              "312A+3",
+              "335A+10",
+              "323A+2",
+              "323A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nanquan",
+            "nandu": [
+              "346A+2",
+              "324A+1",
+              "335A+10",
+              "323A+2",
+              "323A+1",
+              "447A+2",
+              "423A"
+            ]
+          }
+        ]
+      },
+      "Li Queenie": {
+        "competitor": {
+          "name": "Li Queenie"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Nandao",
+            "nandu": [
+              "323B+2",
+              "312A+3",
+              "324A+1",
+              "323A+2",
+              "335A+10",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nangun",
+            "nandu": [
+              "323B+2",
+              "324A+1",
+              "323A+312A+3",
+              "335A+10",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nanquan",
+            "nandu": [
+              "323B+2",
+              "312A+3",
+              "324A+1",
+              "323A+2",
+              "335A+10",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Lee Lucy": {
+        "competitor": {
+          "name": "Lee Lucy"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Nandao",
+            "nandu": [
+              "346A+2",
+              "323B+2",
+              "335A+10",
+              "323A+2",
+              "324A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nangun",
+            "nandu": [
+              "346A+2",
+              "323B+2",
+              "335A+10",
+              "323A+2",
+              "324A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nanquan",
+            "nandu": [
+              "346A+2",
+              "323B+2",
+              "335A+10",
+              "323A+2",
+              "324A+1",
+              "447A+2",
+              "423A"
+            ]
+          }
+        ]
+      },
+      "Meenakshisundaram Shakthimeena": {
+        "competitor": {
+          "name": "Meenakshisundaram Shakthimeena"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Nandao",
+            "nandu": [
+              "323B+2",
+              "323A+312A",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nangun",
+            "nandu": [
+              "323B+2",
+              "323A+312A",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nanquan",
+            "nandu": [
+              "323B+2",
+              "323A+312A",
+              "324A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Meng Elina": {
+        "competitor": {
+          "name": "Meng Elina"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Nandao",
+            "nandu": [
+              "323B+2",
+              "323A+312A",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nangun",
+            "nandu": [
+              "323B+2",
+              "323A+312A",
+              "323A+2",
+              "324A+1",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nanquan",
+            "nandu": [
+              "323B+2"
+            ]
+          }
+        ]
+      },
+      "Thenuwara Riyana": {
+        "competitor": {
+          "name": "Thenuwara Riyana"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Nandao",
+            "nandu": [
+              "312A",
+              "323B+2",
+              "324A+1",
+              "323A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nangun",
+            "nandu": [
+              "312A",
+              "323B+2",
+              "324A+1",
+              "323A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nanquan",
+            "nandu": [
+              "312A",
+              "323B+2",
+              "324A+1",
+              "323A+1",
+              "323A+2",
+              "423A",
+              "447A+2"
+            ]
+          }
+        ]
+      },
+      "Yuen Leianna": {
+        "competitor": {
+          "name": "Yuen Leianna"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Nandao",
+            "nandu": [
+              "323B+2",
+              "323A+346B+2",
+              "324A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nangun",
+            "nandu": [
+              "323B+2",
+              "323A+346B+2",
+              "324A+1",
+              "447A+2",
+              "423A"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Nanquan",
+            "nandu": [
+              "323B+2",
+              "323A+346B+2",
+              "324A+1",
+              "447A+2",
+              "423A"
+            ]
+          }
+        ]
+      }
+    },
+    "TQ_TJ": {
+      "Chow Naomi": {
+        "competitor": {
+          "name": "Chow Naomi"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Taijijian",
+            "nandu": [
+              "142A",
+              "312A+324B",
+              "324B+5",
+              "312A+3",
+              "143A+212A",
+              "142A+3",
+              "323A+3"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Taijiquan",
+            "nandu": [
+              "142A",
+              "312A+324B",
+              "324B+5",
+              "312A+3",
+              "143A+212A",
+              "142A+3",
+              "323A+3"
+            ]
+          }
+        ]
+      },
+      "Ding Victoria": {
+        "competitor": {
+          "name": "Ding Victoria"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Taijijian",
+            "nandu": [
+              "312A+324C+5",
+              "312A+3",
+              "143B+212A",
+              "312B+8"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Taijiquan",
+            "nandu": [
+              "312A+324C+5",
+              "143B+212A",
+              "312A+3",
+              "312B+8"
+            ]
+          }
+        ]
+      },
+      "Zou Priscilla": {
+        "competitor": {
+          "name": "Zou Priscilla"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Taijijian",
+            "nandu": [
+              "143B+212A",
+              "312A+324B+5",
+              "312B+8",
+              "312A+3"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Taijiquan",
+            "nandu": [
+              "312A+324B+5",
+              "312A+3",
+              "312B+8",
+              "143B+212A"
+            ]
+          }
+        ]
+      },
+      "Schegolev Antonina": {
+        "competitor": {
+          "name": "Schegolev Antonina"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Taijijian",
+            "nandu": [
+              "143A+3",
+              "212A",
+              "312A+324B+5",
+              "312A+3",
+              "312B+8"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Taijiquan",
+            "nandu": [
+              "143A+3",
+              "212A",
+              "312A+324B+5",
+              "312A+3",
+              "312B+8"
+            ]
+          }
+        ]
+      },
+      "Zhao Chloe": {
+        "competitor": {
+          "name": "Zhao Chloe"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Taijijian",
+            "nandu": [
+              "312A+324B+5",
+              "323A+3",
+              "143B+212A",
+              "312A+3"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Taijiquan",
+            "nandu": [
+              "312A+324B+5",
+              "312A+3",
+              "324B+3",
+              "143B+212A"
+            ]
+          }
+        ]
+      },
+      "Ahl Michelle": {
+        "competitor": {
+          "name": "Ahl Michelle"
+        },
+        "events": [
+          {
+            "event": "Taolu Team Trials - Women´s Taijijian",
+            "nandu": [
+              "143B+3",
+              "212A",
+              "312A+324B+5",
+              "323A+3",
+              "312B+8"
+            ]
+          },
+          {
+            "event": "Taolu Team Trials - Women´s Taijiquan",
+            "nandu": [
+              "143B+3",
+              "312A+324B+5",
+              "143A",
+              "312B+8",
+              "323A+3"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

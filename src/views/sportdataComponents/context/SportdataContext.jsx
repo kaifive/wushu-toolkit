@@ -4,7 +4,11 @@ export const SportdataContext = createContext(null)
 
 export const useSportdata = () => useContext(SportdataContext)
 
-export const SportdataProvider = ({ competition, getData, children }) => {
+import { getData } from '../utils/getData';
+import { COMPETITION_CONFIG } from '../utils/competitionConfig';
+
+
+export const SportdataProvider = ({ competition, children }) => {
     const [filters, setFilters] = useState(() => {
         const stored = localStorage.getItem(`WushuToolkit-Sportdata-${competition}`);
         return stored ? JSON.parse(stored) : {
@@ -31,7 +35,7 @@ export const SportdataProvider = ({ competition, getData, children }) => {
             }));
 
             try {
-                const athleteData = await getData();
+                const athleteData = await getData(COMPETITION_CONFIG[competition]);
 
                 setData({
                     athleteData,
