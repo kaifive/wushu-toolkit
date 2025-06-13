@@ -120,5 +120,57 @@ export async function getData(config) {
     delete ATHLETE_DATA.MALES.CQ
     delete ATHLETE_DATA.FEMALES.CQ
 
+    Object.entries(ATHLETE_DATA).forEach(([gender, categories]) => {
+        Object.entries(categories).forEach(([category, registrations]) => {
+            // Convert registrations object to an array of [athleteName, registration]
+            const athletesArray = Object.entries(registrations).map(([athleteName, registration]) => {
+                const averageFinalScoreRaw = registration.events.reduce(
+                    (sum, item) => sum + parseFloat(item.finalScore || 0),
+                    0
+                ) / registration.events.length;
+
+                const averageFinalScore = Number(averageFinalScoreRaw.toFixed(3));
+
+                const aTeamEligible = registration.events.some(event => {
+                    return event.C && Array.isArray(event.C.isNotMissed) &&
+                        event.C.isNotMissed.length > 0 &&
+                        event.C.isNotMissed.every(val => val === true);
+                });
+
+                return {
+                    athleteName,
+                    registration,
+                    averageFinalScore,
+                    aTeamEligible,
+                };
+            });
+
+            // Sort by averageFinalScore descending (highest first)
+            athletesArray.sort((a, b) => b.averageFinalScore - a.averageFinalScore);
+
+            if (!athletesArray[0]?.aTeamEligible) {
+                const firstEligibleIndex = athletesArray.findIndex(a => a.aTeamEligible);
+              
+                if (firstEligibleIndex > 0) {
+                  // Remove the eligible athlete from their current position
+                  const [eligibleAthlete] = athletesArray.splice(firstEligibleIndex, 1);
+              
+                  // Insert them at the front
+                  athletesArray.unshift(eligibleAthlete);
+                }
+              }
+
+            // Optional: overwrite original object registrations with sorted athletes (if you want)
+            ATHLETE_DATA[gender][category] = {}; // Clear original object
+
+            athletesArray.forEach(({ athleteName, registration, averageFinalScore, aTeamEligible }) => {
+                // Add calculations to registration
+                registration.calculations = { averageFinalScore, aTeamEligible };
+
+                ATHLETE_DATA[gender][category][athleteName] = registration;
+            });
+        });
+    });
+
     return ATHLETE_DATA;
 }

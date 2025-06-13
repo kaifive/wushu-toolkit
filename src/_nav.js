@@ -443,6 +443,12 @@ const ADULTS_25 = [
   },
   {
     component: CNavItem,
+    name: 'US Team',
+    to: '/2025-adults/us-team',
+    icon: <CIcon icon={cilClipboard} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
     name: 'Scorecard',
     to: '/2025-adults/scorecard',
     icon: <CIcon icon={cilAirplay} customClassName="nav-icon" />,

@@ -33,8 +33,6 @@ const SportDataStandingsTable = () => {
         )
     }
 
-
-
     const genderKey = window.location.hash.includes("female") ? "FEMALES" : "MALES"
 
     const dataMap = {

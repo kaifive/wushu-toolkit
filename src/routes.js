@@ -75,7 +75,7 @@ const SportdataScorecards = React.lazy(() => import('./views/sportdataComponents
 
 // 2025 Team Trials
 const About2025 = React.lazy(() => import('./views/2025team-trials/about/About'))
-
+const USTeam = React.lazy(() => import('./views/2025team-trials/USTeam'))
 
 
 // Coming Soon
@@ -142,6 +142,7 @@ const adults2025_routes = [
   { path: '/2025-adults/schedule', name: 'Schedule2025', element: ComingSoon, protected: true },
   { path: '/2025-adults/male-standings', name: 'MaleStandings2025', element: SportdataSportDataStandingsTable, protected: true },
   { path: '/2025-adults/female-standings', name: 'FemaleStandings2025', element: SportdataSportDataStandingsTable, protected: true },
+  { path: '/2025-adults/us-team', name: 'USTeam', element: USTeam, protected: true },
   { path: '/2025-adults/scorecard', name: 'Scorecard2025', element: SportdataScorecards, protected: true },
 ]
 

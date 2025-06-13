@@ -18,6 +18,6 @@ async function snapshot(competitionConfig) {
 }
 
 console.log("Snapshotting data...")
-await snapshot(COMPETITION_CONFIG["2025-adults"])
+await snapshot(COMPETITION_CONFIG["2025-phoenix"])
 
 console.log("...snapshot succeeded!")

@@ -14,12 +14,20 @@ import {
 import CIcon from '@coreui/icons-react'
 
 import {
-    cilMagnifyingGlass
+    cilMagnifyingGlass,
+    cilCheckCircle
 } from '@coreui/icons'
-
 
 import { EVENT_ABBREVIATIONS } from "../lookups/eventAbbreviations.js"
 import { useSportdata } from '../context/SportdataContext.jsx';
+import { CATEGORY_MAP } from '../lookups/categoryMap.js'
+
+import { determineAdultWushuTeam } from "../../2025team-trials/utils/determineAdultWushuTeam.js"
+import { getTeamStatus } from "../../2025team-trials/utils/getTeamStatus.js"
+
+function getCategoryKeyByValue(value) {
+    return Object.entries(CATEGORY_MAP).find(([key, val]) => val === value)?.[0] || null;
+  }
 
 const StandingsTable = ({
     gender,
@@ -27,7 +35,15 @@ const StandingsTable = ({
     data
 }) => {
     const sportdataContext = useSportdata();
-    const { filters, setFilters } = sportdataContext
+    const { data: contextData, filters, setFilters } = sportdataContext
+    const { athleteData, date, isLoading, error } = contextData
+
+    const genderKey = gender === "Male" ? "MALES" : "FEMALES";
+
+    const isForAdults = true;
+    // const isForAdults = window.location.hash.includes("adults")
+
+    const allTeamsData = determineAdultWushuTeam(athleteData[genderKey])
 
     return (
         <CCard className="mb-4">
@@ -52,7 +68,12 @@ const StandingsTable = ({
                     </CTableHead>
                     <CTableBody>
                         {Object.values(data).map((registration, idx) => {
-                            const teamStatus = "#" + (idx + 1);
+                            let teamStatus = getTeamStatus(registration.competitor.name, getCategoryKeyByValue(category), allTeamsData)
+
+                            if (teamStatus === "Not Assigned" || !isForAdults) {
+                                teamStatus = `#${idx + 1}`
+                            }
+
                             const categories = category.split(",").map((c) => c.trim());
 
                             // Map category → matching event (or undefined)
@@ -60,22 +81,22 @@ const StandingsTable = ({
                                 registration.events.find((event) => event.event.includes(cat))
                             );
 
-                            const validScores = categoryEvents
-                                .map(event => parseFloat(event?.finalScore))
-                                .filter(score => !isNaN(score));
-
-                            const average = validScores.length > 0
-                                ? validScores.reduce((sum, score) => sum + score, 0) / validScores.length
-                                : 0;
-
-                            const formattedAvgScore = average.toFixed(3);
-
                             const competitionId = window.location.hash.split("/")[1]
 
                             return (
                                 <CTableRow key={idx}>
                                     <CTableHeaderCell scope="row">{teamStatus}</CTableHeaderCell>
-                                    <CTableDataCell>{registration.competitor.name}</CTableDataCell>
+                                    <CTableDataCell>
+                                        {registration.competitor.name}
+                                        {registration.calculations.aTeamEligible && (<CTooltip content="Eligible for A Team">
+                                            <CIcon
+                                                icon={cilCheckCircle}
+                                                size="sm"
+                                                className="ms-2"
+                                                color='success'
+                                            />
+                                        </CTooltip>)}
+                                    </CTableDataCell>
 
                                     {categoryEvents.map((event, i) => (
                                         <CTableDataCell key={i}>
@@ -109,7 +130,7 @@ const StandingsTable = ({
                                         </CTableDataCell>
                                     ))}
 
-                                    <CTableDataCell>{formattedAvgScore}</CTableDataCell>
+                                    <CTableDataCell>{registration.calculations.averageFinalScore}</CTableDataCell>
                                 </CTableRow>
                             );
                         })}

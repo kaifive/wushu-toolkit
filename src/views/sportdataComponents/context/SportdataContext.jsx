@@ -7,6 +7,8 @@ export const useSportdata = () => useContext(SportdataContext)
 import { getData } from '../utils/getData';
 import { COMPETITION_CONFIG } from '../utils/competitionConfig';
 
+import test from "../utils/snapshots/2025-adults-2025-06-13T20-55-51-605Z.json"
+
 
 export const SportdataProvider = ({ competition, children }) => {
     const [filters, setFilters] = useState(() => {
