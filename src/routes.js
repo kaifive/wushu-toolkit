@@ -57,6 +57,7 @@ const ContactUs = React.lazy(() => import('./views/contact/ContactUs'))
 // Athlete Toolkit
 const DeductionCodeLookup = React.lazy(() => import('./views/toolkit/deduction-code-lookup/DeductionCodeLookup'))
 const RequiredMovements = React.lazy(() => import('./views/toolkit/required-movements/RequiredMovements'))
+const AverageScoreCalculator = React.lazy(() => import('./views/toolkit/average-score-beater/AverageScoreCalculator'))
 
 // 2024 Team Trials
 const About2024 = React.lazy(() => import('./views/2024team-trials/about/About'))
@@ -134,6 +135,7 @@ const base_routes = [
   { path: '/contact-us', name: 'ContactUs', element: ContactUs },
   { path: '/toolkit/deduction-code-lookup', name: 'DeductionCodeLookup', element: DeductionCodeLookup },
   { path: '/toolkit/required-movements', name: 'RequiredMovements', element: RequiredMovements },
+  { path: '/toolkit/average-score-calculator', name: 'AverageScoreCalculator', element: AverageScoreCalculator },
   { path: '/nandu-calculator', name: 'NanduCalculator', element: ComingSoon },
 ]
 

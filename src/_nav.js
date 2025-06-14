@@ -484,6 +484,12 @@ const live_nav = [
     to: '/toolkit/required-movements',
     icon: <CIcon icon={cilCheckCircle} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'Average Score Calculator',
+    to: '/toolkit/average-score-calculator',
+    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+  },
   ...ADULTS_25,
   {
     component: CNavTitle,
