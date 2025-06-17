@@ -7,6 +7,11 @@ const scrapeWaitingList = async (competitionId, eventFilter) => {
     const url = `${BASE_URL}popup_nennungen_main.php?popup_action=waitlistallpublic&verid=${competitionId}`;
 
     const response = await axios.get(url);
+
+const htmlContent = response.data;
+
+console.log(htmlContent);
+
     const $ = cheerio.load(response.data);
 
     const waitingList = {};
@@ -18,6 +23,7 @@ const scrapeWaitingList = async (competitionId, eventFilter) => {
         const cells = $(row).find('td').map((_, cell) =>
             $(cell).text().trim()
         ).get();
+        console.log(cells)
 
         const eventInfo = cells[4];
         if (eventInfo && eventInfo.includes(eventFilter)) {

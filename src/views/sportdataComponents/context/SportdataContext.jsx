@@ -7,7 +7,8 @@ export const useSportdata = () => useContext(SportdataContext)
 import { getData } from '../utils/getData';
 import { COMPETITION_CONFIG } from '../utils/competitionConfig';
 
-import test from "../utils/snapshots/2025-adults-2025-06-13T20-55-51-605Z.json"
+import latestPhoenixSnapshot from "../utils/snapshots/2025-phoenix-2025-06-13T20-57-34-230Z.json"
+import latestAdults25Snapshot from "../utils/snapshots/2025-adults-2025-06-13T20-55-51-605Z.json"
 
 
 export const SportdataProvider = ({ competition, children }) => {
@@ -37,7 +38,14 @@ export const SportdataProvider = ({ competition, children }) => {
             }));
 
             try {
-                const athleteData = await getData(COMPETITION_CONFIG[competition]);
+                const SNAPSHOTS = {
+                    "2025-adults": latestAdults25Snapshot,
+                    "2025-phoenix": latestPhoenixSnapshot
+                }
+
+                const athleteData = SNAPSHOTS[competition];
+
+                //const athleteData = await getData(COMPETITION_CONFIG[competition]);
 
                 setData({
                     athleteData,
