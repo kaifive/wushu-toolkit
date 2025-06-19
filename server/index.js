@@ -7,8 +7,11 @@ import scrapeRegistration from './sportdata-utils/scrapeRegistration.js';
 import scrapeCategories from './sportdata-utils/scrapeCategories.js';
 import scrapeScorecard from './sportdata-utils/scrapeScorecard.js'
 
+import parseGoogleDoc from './utils/parseGoogleDoc.js'
+
 const app = express();
 app.use(cors()); // enable CORS for your frontend to call this
+app.use(express.json());
 
 const PORT = 5000;
 
@@ -63,5 +66,18 @@ app.get("/:competition/scorecard-data/:scorecardId", async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
+// Define the API endpoint
+app.post('/parse-google-doc', async (req, res) => {
+    const { doc_url } = req.body;
+
+    try {
+        const data = await parseGoogleDoc(doc_url);
+        res.json({ data });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 
 app.listen(PORT, () => console.log(`Server listening on ${PORT}`));

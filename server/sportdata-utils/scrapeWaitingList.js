@@ -8,10 +8,6 @@ const scrapeWaitingList = async (competitionId, eventFilter) => {
 
     const response = await axios.get(url);
 
-const htmlContent = response.data;
-
-console.log(htmlContent);
-
     const $ = cheerio.load(response.data);
 
     const waitingList = {};
@@ -23,7 +19,6 @@ console.log(htmlContent);
         const cells = $(row).find('td').map((_, cell) =>
             $(cell).text().trim()
         ).get();
-        console.log(cells)
 
         const eventInfo = cells[4];
         if (eventInfo && eventInfo.includes(eventFilter)) {
