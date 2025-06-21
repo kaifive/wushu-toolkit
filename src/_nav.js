@@ -449,9 +449,15 @@ const ADULTS_25 = [
   },
   {
     component: CNavItem,
-    name: 'Scorecard',
+    name: 'Scorecards',
     to: '/2025-adults/scorecard',
     icon: <CIcon icon={cilAirplay} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Scorecard Stats',
+    to: '/2025-adults/scorecard-stats',
+    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },
 ]
 
