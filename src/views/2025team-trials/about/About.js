@@ -64,6 +64,8 @@ const About2025 = () => {
                             <div>✔ Live Standings for Girls</div>
                             <div>✔ Live Standings for Boys</div>
                             <div>✔ Athlete Event Scorecards</div>
+                            <div>✔ US Team Standings</div>
+                            <div>✔ Scorecard Statistics</div>
                         </CCardBody>
                     </CCard>
                 </CCol>
@@ -140,7 +142,7 @@ const OrderForm2025 = ({
 
     return (
         <>
-            <CButton color="primary" onClick={() => setVisible(!visible)}>Order Form</CButton>
+            <CButton color="primary" onClick={() => setVisible(!visible)} disabled>Order Form</CButton>
             <CModal
                 visible={visible}
                 onClose={() => setVisible(false)}

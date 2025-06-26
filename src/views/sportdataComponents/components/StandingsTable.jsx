@@ -40,8 +40,8 @@ const StandingsTable = ({
 
     const genderKey = gender === "Male" ? "MALES" : "FEMALES";
 
-    const isForAdults = true;
-    // const isForAdults = window.location.hash.includes("adults")
+    //const isForAdults = true;
+    const isForAdults = window.location.hash.includes("adults")
 
     const allTeamsData = determineAdultWushuTeam(athleteData[genderKey])
 
