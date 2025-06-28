@@ -95,7 +95,8 @@ const EventSchedule = ({ event, order }) => {
         const allNonZero = scores.every(score => score !== 0)
         const isMixed = !allZero && !allNonZero
 
-        setExpanded(isMixed) // Expand only if scores are mixed
+        //setExpanded(isMixed) // Expand only if scores are mixed
+        setExpanded(false) // Expand only if scores are mixed
     }, [event, order, genderedAthleteData])
 
     return (

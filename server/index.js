@@ -79,15 +79,4 @@ app.post('/parse-google-doc', async (req, res) => {
     }
 });
 
-// Define the API endpoint
-app.post('/2025-temp', async (req, res) => {
-    const SPREADSHEET = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgstJyFanBRdFU1vigTWD6MHYhsiFGAuvZCbl6nZF9imiq4MZR4qkbUC73Go86XgvMrCKAjBW03HaR/pub?output=csv"
-    try {
-        const data = await parseGoogleSheet([SPREADSHEET]);
-        res.json({ data });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
 app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
