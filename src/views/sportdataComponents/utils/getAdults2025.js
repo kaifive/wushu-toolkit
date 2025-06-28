@@ -38,6 +38,26 @@ const GOOGLE_DOCS_MAPPING = {
     "Taolu Team Trials - Women´s Taijiquan": "https://docs.google.com/document/d/e/2PACX-1vTEip61C6n4BdiegxtwD3kz7JDlXkLe_bwP1mAOVAawSBeXVkrxeplneXAbLc-he8DSsxAxgJXtYzN0/pub",
 }
 
+const TEMP_DATA = {
+    "Taolu Team Trials - Women´s Gunshu": {
+        "Chand Tara": 7.743,
+        "Diaz Brooklyn": 7.06,
+        "Hung Charisse": 9.253,
+        "Tran Audrey": 8.45,
+        "Nguyen Chloe": 8.483,
+        "Kooc Kolette": 8.133,
+        "Chew Allison": 8.616,
+        "Zhou Julia": 8.48,
+        "Chow Elena": 9.47,
+        "Huang LanHong": 8.826,
+        "Folk Hannah": 8.33,
+        "Wu-Inouye Michiko": 9.14,
+        "Jian Emily": 9.066,
+        "Cheng Maggie": 8.93
+    }
+
+}
+
 const fetchScorecardsByEvent = async (eventName, googleDocUrl) => {
     try {
         const response = await fetch(`${apiUrl}/parse-google-doc`, {
@@ -83,20 +103,32 @@ export async function getAdults2025(config) {
             scorecardData = Object.assign({}, ...scorecards);
         });
 
+
         const ATHLETE_DATA = registrationData
 
         Object.entries(ATHLETE_DATA).forEach(([gender, categories]) => {
             Object.entries(categories).forEach(([category, registrations]) => {
                 Object.entries(registrations).forEach(([athleteName, registration]) => {
                     registration.events = registration.events.map((event) => {
-                        const athleteEventScorecard = scorecardData[event.event]?.[athleteName.toLowerCase()] || {};
+                        const eventName = event.event;
+                        const lowerAthleteName = athleteName.toLowerCase();
+
+                        const tempFinalScore =
+                            TEMP_DATA?.[eventName]?.[athleteName] ?? "0.000";
+
+                        const athleteEventScorecard =
+                            scorecardData?.[eventName]?.[lowerAthleteName] ?? {
+                                finalScore: tempFinalScore,
+                            };
+
                         return {
                             ...event,
-                            ...athleteEventScorecard
+                            ...athleteEventScorecard,
                         };
                     });
+
                 })
-                
+
             })
         })
 
