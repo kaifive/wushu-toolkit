@@ -84,12 +84,7 @@ export async function getAdults2025(config) {
         // });
 
         
-        const temp = await fetch(`${apiUrl}/get-temp-2025-adults-data`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const temp = await fetch(`${apiUrl}/get-temp-2025-adults-data`);
 
         const data = await temp.json();
 
