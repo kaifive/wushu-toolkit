@@ -262,7 +262,7 @@ export async function getAdults2025(config) {
                     //     return event.C && Array.isArray(event.C.isNotMissed) &&
                     //         event.C.isNotMissed.length > 0 &&
                     //         event.C.isNotMissed.every(val => val === true);
-                    // });
+                    // }); 
 
                     const aTeamEligible = registration.events.every(event => {
                         if (event.event !== "Taolu Team Trials - Women´s Taijijian") {
