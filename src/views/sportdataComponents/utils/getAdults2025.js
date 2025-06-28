@@ -158,7 +158,15 @@ const TEMP_DATA = {
         "Kwan Antony": 8.723,
         "Tu Danny": 9.08,
         "Chao Nathan": 9.373
-    }
+    },
+    "Taolu Team Trials - Women´s Taijijian": {
+        "Ding Victoria": 7.726,
+        "Schegolev Antonina": 0,
+        "Chow Naomi": 8.235,
+        "Zhao Chloe": 8.87,
+        "Zou Priscilla": 9.28,
+        "Ahl Michelle": 8.43
+    },
 
 }
 
@@ -240,10 +248,13 @@ export async function getAdults2025(config) {
             Object.entries(categories).forEach(([category, registrations]) => {
                 // Convert registrations object to an array of [athleteName, registration]
                 const athletesArray = Object.entries(registrations).map(([athleteName, registration]) => {
-                    const averageFinalScoreRaw = registration.events.reduce(
-                        (sum, item) => sum + parseFloat(item.finalScore || 0),
-                        0
-                    ) / registration.events.length;
+                    const validScores = registration.events
+                        .map(event => parseFloat(event.finalScore))
+                        .filter(score => !isNaN(score) && score > 0); // filter only meaningful scores
+
+                    const averageFinalScoreRaw = validScores.length > 0
+                        ? validScores.reduce((sum, score) => sum + score, 0) / validScores.length
+                        : 0;
 
                     const averageFinalScore = Number(averageFinalScoreRaw.toFixed(3));
 
@@ -253,7 +264,12 @@ export async function getAdults2025(config) {
                     //         event.C.isNotMissed.every(val => val === true);
                     // });
 
-                    const aTeamEligible = true;
+                    const aTeamEligible = registration.events.every(event => {
+                        if (event.event !== "Taolu Team Trials - Women´s Taijijian") {
+                            return true;
+                        }
+                        return false;
+                    });
 
 
                     return {
