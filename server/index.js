@@ -8,6 +8,7 @@ import scrapeCategories from './sportdata-utils/scrapeCategories.js';
 import scrapeScorecard from './sportdata-utils/scrapeScorecard.js'
 
 import parseGoogleDoc from './utils/parseGoogleDoc.js'
+import readGoogleDoc from './utils/readGoogleDoc.js'
 
 const app = express();
 app.use(cors()); // enable CORS for your frontend to call this
@@ -78,5 +79,17 @@ app.post('/parse-google-doc', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
+
+app.post('/get-temp-2025-adults-data', async (req, res) => {
+    const doc_url = "https://docs.google.com/document/d/e/2PACX-1vSK1W_kyUFHnK3f3pQRwxrqj9iFAGHheoft1msqw2jNtBCgrP2NYdD7l-i1zyMNneY2SUoZxa52Smjp/pub"
+    try {
+        const data = await readGoogleDoc(doc_url);
+        res.json({ data });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 
 app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
