@@ -2,161 +2,174 @@ export function determineAdultWushuTeam(genderedAthleteDataByCategory) {
     const aTeam = [];
     const bTeam = [];
     const cTeam = [];
-    const assignedAthletes = new Set(); // Stores athlete names already assigned to any team
+    const assignedAthletes = new Set(); // Stores athlete names already assigned to any team (global)
 
     // Define the specific categories that provide initial slots for A, B, and C teams
     const primaryCategories = ["CQ_DS_GS", "CQ_JS_QS", "NQ_ND_NG", "TQ_TJ"];
 
-    // Step 1: Consolidate all unique athletes with their overall best score, eligibility, and all categories they are in.
-    // This consolidated view helps for overall sorting for "next X highest scores" phases.
-    const consolidatedAthletes = {}; // athleteName -> {name, score, aTeamEligible, allCategories: Set}
+    // Step 1: Consolidate athletes' performances PER CATEGORY.
+    // This structure will be:
+    // {
+    //   "athleteName": {
+    //     "categoryKey1": { name, score, aTeamEligible, representingCategory: categoryKey1 },
+    //     "categoryKey2": { name, score, aTeamEligible, representingCategory: categoryKey2 },
+    //     ...
+    //   }
+    // }
+    const athletesPerformanceByCategory = {};
+
     for (const categoryKey in genderedAthleteDataByCategory) {
-        if (!primaryCategories.includes(categoryKey)) {
-            // Optionally handle other categories not explicitly listed in primaryCategories,
-            // or just ignore them for the purpose of team selection based on these rules.
-            // For this problem, we only care about the athletes in the specified primaryCategories.
-            continue;
-        }
-        const categoryAthletes = genderedAthleteDataByCategory[categoryKey];
-        for (const athleteName in categoryAthletes) {
-            const data = categoryAthletes[athleteName];
-            const currentScore = parseFloat(data.calculations.averageFinalScore);
-            const currentEligible = data.calculations.aTeamEligible;
+        // We only process primary categories for team selection as per the rules
+        // If an athlete from a non-primary category is needed for "overall highest",
+        // they'd need to be explicitly included or rules adjusted.
+        // For now, we stick to selecting from primary categories and then overall highest from these.
+        if (Object.hasOwnProperty.call(genderedAthleteDataByCategory, categoryKey) && typeof genderedAthleteDataByCategory[categoryKey] === 'object') {
+            const categoryAthletes = genderedAthleteDataByCategory[categoryKey];
 
-            if (currentScore <= 0) {
-                continue; // Skip this athlete if their score is 0 or less
+            for (const athleteName in categoryAthletes) {
+                if (Object.hasOwnProperty.call(categoryAthletes, athleteName) && typeof categoryAthletes[athleteName] === 'object') {
+                    const data = categoryAthletes[athleteName];
+                    const averageFinalScore = parseFloat(data.calculations.averageFinalScore);
+                    const aTeamEligible = data.calculations.aTeamEligible;
+
+                    // Skip this athlete/event if their score is invalid or 0
+                    if (isNaN(averageFinalScore) || averageFinalScore <= 0) {
+                        continue;
+                    }
+
+                    if (!athletesPerformanceByCategory[athleteName]) {
+                        athletesPerformanceByCategory[athleteName] = {};
+                    }
+
+                    // Store performance for this athlete within this specific category
+                    athletesPerformanceByCategory[athleteName][categoryKey] = {
+                        name: athleteName,
+                        score: averageFinalScore,
+                        aTeamEligible: aTeamEligible,
+                        representingCategory: categoryKey // This is the score for THIS category
+                    };
+                }
             }
-
-            if (!consolidatedAthletes[athleteName]) {
-                consolidatedAthletes[athleteName] = {
-                    name: athleteName,
-                    score: currentScore,
-                    aTeamEligible: currentEligible,
-                    allCategories: new Set(), // To keep track of all categories the athlete is part of
-                    // Store the first category they were found in, as a fallback for 'representingCategory'
-                    // if they are selected as an 'overall highest' athlete.
-                    firstCategory: categoryKey
-                };
-            }
-            // Add the current category to the athlete's list of categories
-            consolidatedAthletes[athleteName].allCategories.add(categoryKey);
-
-            // Assuming `averageFinalScore` and `aTeamEligible` are athlete-global and consistent.
-            // If an athlete *could* have different scores/eligibility per category, more complex logic is needed here
-            // to store the best score/eligibility across all categories or per category.
         }
     }
 
-    // Helper function to get an athlete's comprehensive info (name, score, eligibility, all categories)
-    // Converts the `allCategories` Set to an Array for the output.
-    const getAthleteComprehensiveInfo = (name) => {
-        const info = consolidatedAthletes[name];
-        if (!info) return null;
-        return {
-            name: info.name,
-            score: info.score,
-            aTeamEligible: info.aTeamEligible,
-            allCategories: Array.from(info.allCategories),
-            firstCategory: info.firstCategory // For fallback representingCategory
-        };
+    // --- Helper to filter and sort candidates for a given category or overall ---
+    // This function now expects the full `athletesPerformanceByCategory` map
+    // and a specific `targetCategory` if we're looking for category-specific candidates.
+    // If `targetCategory` is null, it means we're looking at overall candidates.
+    const getCandidates = (targetCategory = null, filterAssigned = true, filterATeamEligible = false) => {
+        const candidates = [];
+        for (const athleteName in athletesPerformanceByCategory) {
+            const athleteCategories = athletesPerformanceByCategory[athleteName];
+
+            if (targetCategory) {
+                // Look for performance in a specific category
+                if (athleteCategories[targetCategory]) {
+                    const performance = athleteCategories[targetCategory];
+                    if (filterAssigned && assignedAthletes.has(performance.name)) continue;
+                    if (filterATeamEligible && !performance.aTeamEligible) continue;
+                    candidates.push(performance);
+                }
+            } else {
+                // Look at overall best performance across all primary categories they competed in
+                // This is for the 'overall highest unassigned' slots
+                let bestPerformance = null;
+                for (const catKey in athleteCategories) {
+                    // Only consider performances from primary categories for overall selection,
+                    // unless a specific rule dictates otherwise.
+                    // If you want to include athletes from *any* category for overall, remove this check.
+                    if (primaryCategories.includes(catKey)) {
+                        const performance = athleteCategories[catKey];
+                        if (filterAssigned && assignedAthletes.has(performance.name)) continue;
+                        if (filterATeamEligible && !performance.aTeamEligible) continue;
+
+                        if (!bestPerformance || performance.score > bestPerformance.score) {
+                            bestPerformance = performance;
+                        }
+                    }
+                }
+                if (bestPerformance) {
+                    candidates.push(bestPerformance);
+                }
+            }
+        }
+        return candidates.sort((a, b) => b.score - a.score);
     };
 
     // Helper to add an athlete to a team and mark them as assigned
-    const addAthleteToTeam = (team, athlete, representingCategory) => {
+    const addAthleteToTeam = (team, athlete) => {
         team.push({
             name: athlete.name,
             score: athlete.score,
-            representingCategory: representingCategory
+            representingCategory: athlete.representingCategory
         });
         assignedAthletes.add(athlete.name);
     };
 
     // --- Team Selection Logic ---
 
-    // A-Team Selection: 4 members total. Highest score, aTeamEligible, 1 from each primary category first.
-    // If fewer than 4 are chosen via categories, fill remaining slots from overall eligible unassigned.
+    // A-Team Selection: 4 members total.
+    // Phase 1: Try to get one from each primary category (up to 4 members)
+    // with `aTeamEligible` criteria
     for (const categoryKey of primaryCategories) {
         if (aTeam.length >= 4) break; // A-Team is full
 
-        // Get eligible unassigned athletes specific to this category, sorted by score
-        const categoryAthletesInInput = genderedAthleteDataByCategory[categoryKey] || {};
-        const eligibleUnassignedCandidates = Object.values(categoryAthletesInInput)
-            .map(athlete => getAthleteComprehensiveInfo(athlete.competitor.name)) // Get comprehensive info
-            .filter(athlete => athlete && athlete.aTeamEligible && !assignedAthletes.has(athlete.name))
-            .sort((a, b) => b.score - a.score);
+        const eligibleUnassignedCandidates = getCandidates(categoryKey, true, true); // Category-specific, unassigned, eligible
 
         if (eligibleUnassignedCandidates.length > 0) {
-            const chosenAthlete = eligibleUnassignedCandidates[0];
-            addAthleteToTeam(aTeam, chosenAthlete, categoryKey);
+            addAthleteToTeam(aTeam, eligibleUnassignedCandidates[0]);
         }
     }
 
-    // If A-Team isn't full, fill remaining slots with the highest eligible unassigned athletes overall
-    let overallEligibleUnassigned = Object.values(consolidatedAthletes)
-        .filter(athlete => athlete.aTeamEligible && !assignedAthletes.has(athlete.name))
-        .sort((a, b) => b.score - a.score);
+    // Phase 2: If A-Team isn't full, fill remaining slots with the highest eligible unassigned athletes overall.
+    // For these, we pick the highest score regardless of category, but ensure they are eligible.
+    let overallEligibleUnassigned = getCandidates(null, true, true); // Overall best, unassigned, eligible
 
     for (let i = 0; aTeam.length < 4 && i < overallEligibleUnassigned.length; i++) {
         const athlete = overallEligibleUnassigned[i];
-        // For these 'wildcard' slots, the representingCategory can be their 'firstCategory' or 'Overall'
-        addAthleteToTeam(aTeam, athlete, athlete.firstCategory);
+        addAthleteToTeam(aTeam, athlete);
     }
 
 
-    // B-Team Selection: 6 members total. Next 4 from categories, then next 2 highest overall.
+    // B-Team Selection: 6 members total.
     // Phase 1: Try to get one from each primary category (up to 4 members)
     for (const categoryKey of primaryCategories) {
         if (bTeam.length >= 4) break; // Filled target category slots for B-Team
 
-        const categoryAthletesInInput = genderedAthleteDataByCategory[categoryKey] || {};
-        const unassignedCandidates = Object.values(categoryAthletesInInput)
-            .map(athlete => getAthleteComprehensiveInfo(athlete.competitor.name))
-            .filter(athlete => athlete && !assignedAthletes.has(athlete.name))
-            .sort((a, b) => b.score - a.score);
+        const unassignedCandidates = getCandidates(categoryKey, true, false); // Category-specific, unassigned (eligibility not required for B/C)
 
         if (unassignedCandidates.length > 0) {
-            const chosenAthlete = unassignedCandidates[0];
-            addAthleteToTeam(bTeam, chosenAthlete, categoryKey);
+            addAthleteToTeam(bTeam, unassignedCandidates[0]);
         }
     }
 
-    // Phase 2: Fill remaining B-Team slots (up to 6 total) with the highest overall unassigned athletes
-    let overallUnassignedForB = Object.values(consolidatedAthletes)
-        .filter(athlete => !assignedAthletes.has(athlete.name))
-        .sort((a, b) => b.score - a.score);
+    // Phase 2: Fill remaining B-Team slots (up to 6 total) with the highest overall unassigned athletes.
+    let overallUnassignedForB = getCandidates(null, true, false); // Overall best, unassigned (eligibility not required for B/C)
 
     for (let i = 0; bTeam.length < 6 && i < overallUnassignedForB.length; i++) {
         const athlete = overallUnassignedForB[i];
-        // For these 'wildcard' slots, use their first category as representing
-        addAthleteToTeam(bTeam, athlete, athlete.firstCategory);
+        addAthleteToTeam(bTeam, athlete);
     }
 
 
-    // C-Team Selection: 6 members total. Same logic as B-Team.
+    // C-Team Selection: 6 members total.
     // Phase 1: Try to get one from each primary category (up to 4 members)
     for (const categoryKey of primaryCategories) {
         if (cTeam.length >= 4) break; // Filled target category slots for C-Team
 
-        const categoryAthletesInInput = genderedAthleteDataByCategory[categoryKey] || {};
-        const unassignedCandidates = Object.values(categoryAthletesInInput)
-            .map(athlete => getAthleteComprehensiveInfo(athlete.competitor.name))
-            .filter(athlete => athlete && !assignedAthletes.has(athlete.name))
-            .sort((a, b) => b.score - a.score);
+        const unassignedCandidates = getCandidates(categoryKey, true, false); // Category-specific, unassigned
 
         if (unassignedCandidates.length > 0) {
-            const chosenAthlete = unassignedCandidates[0];
-            addAthleteToTeam(cTeam, chosenAthlete, categoryKey);
+            addAthleteToTeam(cTeam, unassignedCandidates[0]);
         }
     }
 
-    // Phase 2: Fill remaining C-Team slots (up to 6 total) with the highest overall unassigned athletes
-    let overallUnassignedForC = Object.values(consolidatedAthletes)
-        .filter(athlete => !assignedAthletes.has(athlete.name))
-        .sort((a, b) => b.score - a.score);
+    // Phase 2: Fill remaining C-Team slots (up to 6 total) with the highest overall unassigned athletes.
+    let overallUnassignedForC = getCandidates(null, true, false); // Overall best, unassigned
 
     for (let i = 0; cTeam.length < 6 && i < overallUnassignedForC.length; i++) {
         const athlete = overallUnassignedForC[i];
-        addAthleteToTeam(cTeam, athlete, athlete.firstCategory);
+        addAthleteToTeam(cTeam, athlete);
     }
 
     return {

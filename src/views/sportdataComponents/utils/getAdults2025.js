@@ -54,6 +54,110 @@ const TEMP_DATA = {
         "Wu-Inouye Michiko": 9.14,
         "Jian Emily": 9.066,
         "Cheng Maggie": 8.93
+    },
+    "Taolu Team Trials - Men´s Gunshu": {
+        "Bitner Owen": 8.31,
+        "Ma Jake": 8.46,
+        "Tjhin Joshua": 8.393,
+        "Fung Josiah Christian": 9.143,
+        "Wang Tony": 9.32,
+        "Ye Brian": 8.73,
+        "Zheng Lin": 8.286,
+        "Yim Ashton": 9.456,
+        "Thio Julian": 8.616,
+        "Yu Elijah Jordan Dizon": 9.01,
+        "Sun Nicholas": 9.39,
+        "Chao Nathan": 9.03,
+        "Lu Dazhi": 9.05,
+        "Wang Derek": 9.26,
+        "Ambrose Elijah": 9,
+        "Land Preston": 9.27,
+        "Gao Bryan": 9.043,
+        "Wu Ashton": 9.42,
+        "Yang Nianjin": 8.47,
+        "Wong Brendan": 9.0666,
+        "Kono Shoma": 8.736,
+        "Lee Ryan": 9.406,
+        "Sahertian Paul": 8.533,
+        "Ly Nathan": 8.883,
+        "Lou Justin": 8.09,
+        "Liu Shangshang": 9.166,
+        "Yang Chien-Mu": 9.316,
+        "Chen Shaun": 9.316,
+        "Chen Kevin": 8.35,
+        "Che Ethan": 9.103,
+        "Candra Jayden": 8.563,
+        "Payumo Jonathan": 9.306,
+        "Emmert Alex": 8.603,
+        "Shultz Ball Sage": 8.323,
+        "Gao Sen": 9.376,
+        "Huang Ryan": 9.316,
+        "Zhou Zheng": 9.36,
+        "Zheng Nathan": 8.59,
+        "Briones Zachary": 8.75,
+        "Burns Seth": 9.34
+    },
+    "Taolu Team Trials - Women´s Qiangshu": {
+        "Wong Amy": 8.82,
+        "Oshiba Ashley": 9.26,
+        "Jian Emily": 8.89,
+        "Shen Joy": 8.593,
+        "Shao Sophia": 0,
+        "Fung Rylee Kate": 9.083,
+        "Zhao Hailey": 8.303,
+        "Ding Victoria": 8.84,
+        "Wang Katherine": 7.88,
+        "Schmidt Dusty": 7.656
+    },
+    "Taolu Team Trials - Men´s Qiangshu": {
+        "Shen Justin": 9.093,
+        "Imanverdi Kayvon": 7.69,
+        "Zhuang Evan": 8.733,
+        "Gao Sen": 9.396,
+        "Vo William": 9.123,
+        "Wong Matthew Yum Ping": 7.013,
+        "Liang Kong": 7,
+        "Hirahara Kai": 8.736,
+        "Signore Jacopo": 9.3,
+        "Guo Trevor": 8.83,
+        "Zhang Alex": 9.12,
+        "Wang Benjamin": 8.573,
+        "Chen Shaun": 9.413,
+        "Wu Ashton": 9.436,
+        "Liu Bruce": 8.57,
+        "Yeager Blake": 7.536,
+        "Fung Josiah Christian": 9.073,
+        "Tran Ryan": 8.686
+    },
+    "Taolu Team Trials - Women´s Nangun": {
+        "Lee Lucy": 9.516,
+        "Thenuwara Riyana": 9.276,
+        "Yuen Leianna": 9.46,
+        "Franco Luna": 7.603,
+        "Li Queenie": 8.76,
+        "Meenakshisundaram Shakthimeena": 8.35,
+        "Kooc Kolette": 9.153,
+        "Fung Rylee Kate": 9.253,
+        "Meng Elina": 8.47
+    },
+    "Taolu Team Trials - Men´s Nangun": {
+        "Candra Jayden": 9.13,
+        "Che Ethan": 8.926,
+        "Yang Aaron": 9.413,
+        "Meng Stanley": 9.443,
+        "Chow Justin": 8.046,
+        "Li William": 9.233,
+        "Zheng Lin": 8.753,
+        "Payumo Jonathan": 9.34,
+        "Yang Kevin": 7.996,
+        "Yim Augustin": 8.609,
+        "Deng Darren": 9.133,
+        "Wong Marcus": 9.106,
+        "Burns Seth": 9.413,
+        "Ly Nathan": 9.463,
+        "Kwan Antony": 8.723,
+        "Tu Danny": 9.08,
+        "Chao Nathan": 9.373
     }
 
 }
@@ -99,9 +203,9 @@ export async function getAdults2025(config) {
 
         let scorecardData;
 
-        await fetchAllScorecards().then((scorecards) => {
-            scorecardData = Object.assign({}, ...scorecards);
-        });
+        // await fetchAllScorecards().then((scorecards) => {
+        //     scorecardData = Object.assign({}, ...scorecards);
+        // });
 
 
         const ATHLETE_DATA = registrationData
@@ -143,11 +247,14 @@ export async function getAdults2025(config) {
 
                     const averageFinalScore = Number(averageFinalScoreRaw.toFixed(3));
 
-                    const aTeamEligible = registration.events.some(event => {
-                        return event.C && Array.isArray(event.C.isNotMissed) &&
-                            event.C.isNotMissed.length > 0 &&
-                            event.C.isNotMissed.every(val => val === true);
-                    });
+                    // const aTeamEligible = registration.events.some(event => {
+                    //     return event.C && Array.isArray(event.C.isNotMissed) &&
+                    //         event.C.isNotMissed.length > 0 &&
+                    //         event.C.isNotMissed.every(val => val === true);
+                    // });
+
+                    const aTeamEligible = true;
+
 
                     return {
                         athleteName,
