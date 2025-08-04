@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { COMPETITION_CONFIG } from '../utils/competitionConfig';
 import latestPhoenixSnapshot from "../utils/snapshots/2025-phoenix-2025-06-13T20-57-34-230Z.json";
-import latestAdults25Snapshot from "../utils/snapshots/2025-adults-2025-06-13T20-55-51-605Z.json";
+import latestAdults25Snapshot from "../utils/snapshots/tempadults2025-2025-08-04T16-02-48-343Z.json";
 import { getAdults2025 } from '../utils/getAdults2025.js';
 
 export const SportdataContext = createContext(null);
@@ -44,10 +44,10 @@ export const SportdataProvider = ({ competition, children }) => {
     }));
 
     try {
-      const adults2025 = await getAdults2025(COMPETITION_CONFIG[competition]);
+      //const adults2025 = await getAdults2025(COMPETITION_CONFIG[competition]);
 
       const dataMap = {
-        "2025-adults": adults2025,
+        "2025-adults": latestAdults25Snapshot,
         "2025-phoenix": latestPhoenixSnapshot,
       };
 

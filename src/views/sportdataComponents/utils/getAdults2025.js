@@ -1,4 +1,5 @@
 import registrationData from "./snapshots/2025-adults-2025-06-13T20-55-51-605Z.json"
+import hardcodedScores from "./snapshots/2025hardcoded"
 
 const apiUrl = import.meta.env?.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -180,7 +181,8 @@ export async function getAdults2025(config) {
             });
         });
 
-        return ATHLETE_DATA;
+        //return ATHLETE_DATA;
+        return hardcodedScores
     } catch (err) {
         console.log(err)
     }

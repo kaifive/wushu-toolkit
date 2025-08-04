@@ -88,14 +88,14 @@ const StandingsTable = ({
                                     <CTableHeaderCell scope="row">{teamStatus}</CTableHeaderCell>
                                     <CTableDataCell>
                                         {registration.competitor.name}
-                                        {/* {registration.calculations.aTeamEligible && (<CTooltip content="Eligible for A Team">
+                                        {registration.calculations.aTeamEligible && (<CTooltip content="Eligible for A Team">
                                             <CIcon
                                                 icon={cilCheckCircle}
                                                 size="sm"
                                                 className="ms-2"
                                                 color='success'
                                             />
-                                        </CTooltip>)} */}
+                                        </CTooltip>)}
                                     </CTableDataCell>
 
                                     {categoryEvents.map((event, i) => (
@@ -115,17 +115,17 @@ const StandingsTable = ({
                                                     >
                                                         {(event.finalScore ?? "0.000")}
                                                     </a>
-                                                    <CTooltip content={event.nandu.join(", ")}>
+                                                    {/* <CTooltip content={event.nandu.join(", ")}>
                                                         <CIcon
                                                             icon={cilMagnifyingGlass}
                                                             size="sm"
                                                             className="ms-2"
                                                             style={{ cursor: "pointer" }}
                                                         />
-                                                    </CTooltip>
+                                                    </CTooltip> */}
                                                 </>
                                             ) : (
-                                                <p>{event ? (event.score ?? "0.000") : "-"}</p>
+                                                <p>{event ? (event.finalScore ?? "0.000") : "-"}</p>
                                             )}
                                         </CTableDataCell>
                                     ))}
