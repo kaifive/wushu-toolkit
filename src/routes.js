@@ -142,12 +142,12 @@ const base_routes = [
 
 const adults2025_routes = [
   { path: '/2025-adults/about', name: 'About2025', element: About2025 },
-  { path: '/2025-adults/schedule', name: 'Schedule2025', element: AdultsSchedule2025, protected: true },
-  { path: '/2025-adults/male-standings', name: 'MaleStandings2025', element: SportdataSportDataStandingsTable, protected: true },
-  { path: '/2025-adults/female-standings', name: 'FemaleStandings2025', element: SportdataSportDataStandingsTable, protected: true },
-  { path: '/2025-adults/us-team', name: 'USTeam', element: USTeam, protected: true },
-  { path: '/2025-adults/scorecard', name: 'Scorecard2025', element: SportdataScorecards, protected: true },
-  { path: '/2025-adults/scorecard-stats', name: 'ScorecardStats2025', element: ScorecardStats, protected: true },
+  { path: '/2025-adults/schedule', name: 'Schedule2025', element: AdultsSchedule2025, protected: false },
+  { path: '/2025-adults/male-standings', name: 'MaleStandings2025', element: SportdataSportDataStandingsTable, protected: false },
+  { path: '/2025-adults/female-standings', name: 'FemaleStandings2025', element: SportdataSportDataStandingsTable, protected: false },
+  { path: '/2025-adults/us-team', name: 'USTeam', element: USTeam, protected: false },
+  { path: '/2025-adults/scorecard', name: 'Scorecard2025', element: SportdataScorecards, protected: false },
+  { path: '/2025-adults/scorecard-stats', name: 'ScorecardStats2025', element: ScorecardStats, protected: false },
 ]
 
 const phoenix2025_routes = [
