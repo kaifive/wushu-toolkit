@@ -36,7 +36,7 @@ const Login = () => {
     try {
       await login(email, password);
       //window.location.reload(); // Refresh to apply session check
-      window.location.hash = "#/2025-adults/about";
+      window.location.hash = "#/2025-juniors/male-standings";
     } catch (err) {
       setError("Invalid credentials");
     }
