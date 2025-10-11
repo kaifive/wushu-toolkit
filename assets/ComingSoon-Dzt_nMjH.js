@@ -1,0 +1,1 @@
+import{j as r}from"./index-D9pTWRYl.js";import{C as o,a as s}from"./CRow-BRfYMvTF.js";import{C as e}from"./CAlert-DJ4SByvo.js";import"./authService-g5Crp7Nd.js";const m=()=>r.jsx(r.Fragment,{children:r.jsx(o,{children:r.jsx(s,{xs:12,children:r.jsx(e,{color:"warning",children:"This feature is coming soon, please check back later."})})})});export{m as default};
