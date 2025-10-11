@@ -31,6 +31,9 @@ const AppContent = () => {
               '2025-phoenix': {
                 provider: SportdataProvider,
               },
+              '2025-juniors': {
+                provider: SportdataProvider,
+              }
             }
 
             let elementWithContext = wrapped;

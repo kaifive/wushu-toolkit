@@ -80,6 +80,9 @@ const USTeam = React.lazy(() => import('./views/2025team-trials/USTeam'))
 const ScorecardStats = React.lazy(() => import('./views/2025team-trials/ScorecardStats'))
 const AdultsSchedule2025 = React.lazy(() => import('./views/2025team-trials/AdultsSchedule2025'))
 
+// 2025 Junior Team Trials
+const Scores2025 = React.lazy(() => import('./views/2025-junior-team-trials/Scores'))
+
 // Coming Soon
 const ComingSoon = React.lazy(() => import('./views/coming-soon/ComingSoon'))
 
@@ -130,7 +133,7 @@ const dev_routes = [
 ]
 
 const base_routes = [
-  { path: '/', name: 'About2025', element: About2025 },
+  { path: '/', name: 'About', element: About },
 
   { path: '/about', name: 'About', element: About },
   { path: '/contact-us', name: 'ContactUs', element: ContactUs },
@@ -138,6 +141,12 @@ const base_routes = [
   { path: '/toolkit/required-movements', name: 'RequiredMovements', element: RequiredMovements },
   { path: '/toolkit/average-score-calculator', name: 'AverageScoreCalculator', element: AverageScoreCalculator },
   { path: '/nandu-calculator', name: 'NanduCalculator', element: ComingSoon },
+]
+
+const juniors2025_routes = [
+  // { path: '/2025-juniors/about', name: 'About2025Juniors', element: About2025 },
+  { path: '/2025-juniors/male-standings', name: 'Juniors2025MaleScores', element: Scores2025, protected: true },
+  { path: '/2025-juniors/female-standings', name: 'Juniors2025FemaleScores', element: Scores2025, protected: true },
 ]
 
 const adults2025_routes = [
@@ -170,6 +179,7 @@ const juniors2024_routes = [
 
 const live_routes = [
   ...base_routes,
+  ...juniors2025_routes,
   ...adults2025_routes,
   ...phoenix2025_routes,
   ...juniors2024_routes,

@@ -409,10 +409,6 @@ const PHOENIX_25 = [
 
 const ADULTS_25 = [
   {
-    component: CNavTitle,
-    name: '2025 Adult Team Trials',
-  },
-  {
     component: CNavItem,
     name: 'ConMon Information',
     to: '/2025-adults/about',
@@ -461,6 +457,30 @@ const ADULTS_25 = [
   },
 ]
 
+const JUNIORS_25 = [
+  {
+    component: CNavTitle,
+    name: '2025 Junior Team Trials',
+  },
+  {
+    component: CNavGroup,
+    name: 'Live Standings',
+    icon: <CIcon icon={cilWc} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Male Standings',
+        to: '/2025-juniors/male-standings',
+      },
+      {
+        component: CNavItem,
+        name: 'Female Standings',
+        to: '/2025-juniors/female-standings',
+      },
+    ],
+  },
+]
+
 const live_nav = [
   {
     component: CNavItem,
@@ -496,10 +516,17 @@ const live_nav = [
     to: '/toolkit/average-score-calculator',
     icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
   },
-  ...ADULTS_25,
+  ...JUNIORS_25,
   {
     component: CNavTitle,
     name: 'Past Competitions',
+  },
+  {
+    component: CNavGroup,
+    name: '2025 Adult Team Trials',
+    items: [
+      ...ADULTS_25,
+    ],
   },
   {
     component: CNavGroup,

@@ -1,0 +1,899 @@
+{
+  "Tse Aiden": {
+    "athleteName": "Tse Aiden",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Bitner Owen": {
+    "athleteName": "Bitner Owen",
+    "ageGroup": "A",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Chan Thea": {
+    "athleteName": "Chan Thea",
+    "ageGroup": "C",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Qiangshu",
+        "abbreviation": "QS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Croughwell Maximus": {
+    "athleteName": "Croughwell Maximus",
+    "ageGroup": "B",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Sinor Daniel": {
+    "athleteName": "Sinor Daniel",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "He Henry": {
+    "athleteName": "He Henry",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Hoang Brendan": {
+    "athleteName": "Hoang Brendan",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Li Mochen Jasmine": {
+    "athleteName": "Li Mochen Jasmine",
+    "ageGroup": "C",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Park Zachary": {
+    "athleteName": "Park Zachary",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Le Benjamin": {
+    "athleteName": "Le Benjamin",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Qiangshu",
+        "abbreviation": "QS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Le Elizabeth": {
+    "athleteName": "Le Elizabeth",
+    "ageGroup": "B",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Le Joshua": {
+    "athleteName": "Le Joshua",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Nanquan",
+        "abbreviation": "NQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Qiangshu",
+        "abbreviation": "QS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Candra Jayden": {
+    "athleteName": "Candra Jayden",
+    "ageGroup": "B",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Nandao",
+        "abbreviation": "ND",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Nanquan",
+        "abbreviation": "NQ",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Zheng Alex": {
+    "athleteName": "Zheng Alex",
+    "ageGroup": "A",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Taijijian",
+        "abbreviation": "TJ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Taijiquan",
+        "abbreviation": "TQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Taijishan",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Law Iris": {
+    "athleteName": "Law Iris",
+    "ageGroup": "B",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Qiangshu",
+        "abbreviation": "QS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Lin Victoria": {
+    "athleteName": "Lin Victoria",
+    "ageGroup": "C",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "liu Kathie": {
+    "athleteName": "liu Kathie",
+    "ageGroup": "C",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Qiangshu",
+        "abbreviation": "QS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Taijijian",
+        "abbreviation": "TJ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Taijiquan",
+        "abbreviation": "TQ",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "liu Kevin": {
+    "athleteName": "liu Kevin",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Taijijian",
+        "abbreviation": "TJ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Taijiquan",
+        "abbreviation": "TQ",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Li Mikaela": {
+    "athleteName": "Li Mikaela",
+    "ageGroup": "C",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Li Brendan": {
+    "athleteName": "Li Brendan",
+    "ageGroup": "B",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Mon Ethan": {
+    "athleteName": "Mon Ethan",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Nandao",
+        "abbreviation": "ND",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Nangun",
+        "abbreviation": "NG",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Nanquan",
+        "abbreviation": "NQ",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Mon Lukas": {
+    "athleteName": "Mon Lukas",
+    "ageGroup": "B",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Nguyen Chloe": {
+    "athleteName": "Nguyen Chloe",
+    "ageGroup": "A",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Shi Aiden": {
+    "athleteName": "Shi Aiden",
+    "ageGroup": "C",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Qiangshu",
+        "abbreviation": "QS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Shi Ryan": {
+    "athleteName": "Shi Ryan",
+    "ageGroup": "A",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Sudibyo Elaine": {
+    "athleteName": "Sudibyo Elaine",
+    "ageGroup": "A",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Qiangshu",
+        "abbreviation": "QS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Tsang Liam": {
+    "athleteName": "Tsang Liam",
+    "ageGroup": "A",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Wei Derek": {
+    "athleteName": "Wei Derek",
+    "ageGroup": "B",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Wong Connor": {
+    "athleteName": "Wong Connor",
+    "ageGroup": "A",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Nandao",
+        "abbreviation": "ND",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Nangun",
+        "abbreviation": "NG",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Nanquan",
+        "abbreviation": "NQ",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Lu Kelvin": {
+    "athleteName": "Lu Kelvin",
+    "ageGroup": "A",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Zhai Chloe": {
+    "athleteName": "Zhai Chloe",
+    "ageGroup": "A",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Taijijian",
+        "abbreviation": "TJ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Taijiquan",
+        "abbreviation": "TQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Taijishan",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Zhou Jason": {
+    "athleteName": "Zhou Jason",
+    "ageGroup": "A",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Liu Jordan": {
+    "athleteName": "Liu Jordan",
+    "ageGroup": "B",
+    "gender": "Male",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Daoshu",
+        "abbreviation": "DS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Gunshu",
+        "abbreviation": "GS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Liu Michelle": {
+    "athleteName": "Liu Michelle",
+    "ageGroup": "B",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Qiangshu",
+        "abbreviation": "QS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  },
+  "Shao Sophia": {
+    "athleteName": "Shao Sophia",
+    "ageGroup": "B",
+    "gender": "Female",
+    "events": [
+      {
+        "name": "Changquan",
+        "abbreviation": "CQ",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Jianshu",
+        "abbreviation": "JS",
+        "score": 0,
+        "deductions": []
+      },
+      {
+        "name": "Qiangshu",
+        "abbreviation": "QS",
+        "score": 0,
+        "deductions": []
+      }
+    ]
+  }
+}
