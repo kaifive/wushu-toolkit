@@ -57,7 +57,7 @@ const StandingsTable = ({
                             const longWeaponEvents = [];
 
                             let maxBarehandScore = 0;
-                            const maxWeaponScore = 0;
+                            let maxWeaponScore = 0;
 
                             Object.entries(registration.events).map(([abbreviation, eventInfo]) => {
                                 if (BAREHAND_ABBREVIATIONS.includes(abbreviation)) {
