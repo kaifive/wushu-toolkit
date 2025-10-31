@@ -49,7 +49,7 @@ const StandingsTable = ({
 
 
                             const BAREHAND_ABBREVIATIONS = ["CQ", "NQ", "TQ"];
-                            const SHORT_WEAPON_ABBREVIATIONS = ["DS", "JS", "ND", "TJ"]
+                            const SHORT_WEAPON_ABBREVIATIONS = ["DS", "JS", "ND", "TJ", "TS"]
                             const LONG_WEAPON_ABBREVIATIONS = ["GS", "QS", "NG"]
 
                             const barehandEvents = [];
