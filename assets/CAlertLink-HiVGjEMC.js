@@ -1,1 +1,0 @@
-import{r as n,_ as i,R as m,a as o,c as p,P as a}from"./index-x8vDTjmY.js";import{C as d}from"./index.es-Dm7Leri4.js";var e=n.forwardRef(function(s,r){var l=s.children,t=s.className,c=i(s,["children","className"]);return m.createElement(d,o({className:p("alert-link",t)},c,{ref:r}),l)});e.propTypes={children:a.node,className:a.string};e.displayName="CAlertLink";export{e as C};
