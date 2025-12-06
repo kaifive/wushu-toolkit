@@ -241,7 +241,7 @@ const getWaitingListRegistration = async () => {
 console.log("Starting HTML file processing...");
 
 await getRegistrationsFromFile()
-await getWaitingListRegistration()
+//await getWaitingListRegistration()
 
 const jsonData = JSON.stringify(REGISTRATIONS, null, 2);
         
