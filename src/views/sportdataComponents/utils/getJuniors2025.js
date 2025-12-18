@@ -112,15 +112,60 @@ const fetchAllScorecards = async () => {
     return results;
 };
 
+async function getScoresFromSpreadsheet() {
+    try {
+        const googleSheetUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSQ2zsg_hgZjMkoUJCGWIa6BsTlP9j6x61k68b-7ZuXHDWIBe5_UBVNdtRgxOEhh9545XMXfvNxi7Oo/pub?gid=563998125&single=true&output=csv&cachebust=${Date.now()}`;
+
+        // Fetch through your proxy
+        const res = await fetch(`${apiUrl}/proxy?url=${encodeURIComponent(googleSheetUrl)}`);
+
+        // 1. GET AS TEXT, NOT JSON
+        const csvText = await res.text();
+
+        const scorecardData = {};
+
+        const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== "").splice(1);
+
+        rows.forEach((row, index) => {
+            const columns = row.split(',');
+
+            const athleteName = columns[0].trim().toLowerCase().replace(/_/g, " ");
+            const athleteNameArr = athleteName.split(' ');
+            const lastElement = athleteNameArr.pop();
+            athleteNameArr.unshift(lastElement);
+            const athleteNameKey = athleteNameArr.join(' ');
+
+            const eventName = "Taolu " + columns[1].trim();
+            const finalScore = columns[2].trim();
+
+            if (!scorecardData[eventName]) {
+                scorecardData[eventName] = {};
+            }
+
+            scorecardData[eventName][athleteNameKey] = {
+                finalScore: finalScore,
+            };
+        });
+
+        return scorecardData;
+    } catch (err) {
+        console.error("Fetch error:", err);
+    }
+}
+
 export async function getJuniors2025(config) {
     try {
         const { competition, searchTerm, mensLookupTerm, showWaitingList } = config;
 
         let scorecardData;
 
-        await fetchAllScorecards().then((scorecards) => {
-            scorecardData = Object.assign({}, ...scorecards);
-        });
+        // Parse google doc sport data html
+        // await fetchAllScorecards().then((scorecards) => {
+        //     scorecardData = Object.assign({}, ...scorecards);
+        // });
+
+        // Parse spreadsheet data
+        scorecardData = await getScoresFromSpreadsheet();
 
         const ATHLETE_DATA = registrationData
 
@@ -134,6 +179,8 @@ export async function getJuniors2025(config) {
                         ...ATHLETE_DATA[athleteDataKey].events[eventKey],
                         ...scorecardData?.[eventInfo]?.[athleteName.toLowerCase()]
                     };
+                } else {
+                    console.log("No match", athleteName, eventInfo)
                 }
             });
         });
@@ -161,7 +208,7 @@ export async function getJuniors2025(config) {
                 const eventScore = parseFloat(event.finalScore) || 0;
 
                 if (barehandEvents.includes(eventName)) {
-                    const discipline = eventName; 
+                    const discipline = eventName;
                     if (!maxScores[discipline]) {
                         maxScores[discipline] = { barehand: 0, weapon: 0 };
                     }
@@ -189,23 +236,6 @@ export async function getJuniors2025(config) {
                     details.totalScores = totalScore;
                 }
             });
-
-
-
-            // let totalCombinedChangquan = maxScores["Changquan"].barehand + maxScores["Changquan"].weapon;
-            // let totalCombinedNanquan = maxScores["Nanquan"].barehand + maxScores["Nanquan"].weapon;
-            // let totalCombinedTaijiquan = maxScores["Taijiquan"].barehand + maxScores["Taijiquan"].weapon;
-
-            // if (totalCombinedChangquan >= totalCombinedNanquan && totalCombinedChangquan >= totalCombinedTaijiquan) {
-            //     details.topDiscipline = "Changquan";
-            //     details.totalScores = totalCombinedChangquan;
-            // } else if (totalCombinedNanquan >= totalCombinedChangquan && totalCombinedNanquan >= totalCombinedTaijiquan) {
-            //     details.topDiscipline = "Nanquan";
-            //     details.totalScores = totalCombinedNanquan;
-            // } else {
-            //     details.topDiscipline = "Taijiquan";
-            //     details.totalScores = totalCombinedTaijiquan;
-            // }
         });
 
         return ATHLETE_DATA;
