@@ -64,34 +64,60 @@ const Juniors2025Schedule = () => {
                 scheduleData.sessions.map((session, index) => (
                     <CRow key={index} className="mb-4">
                         <CCol xs={12}>
-                            <CCard>
-                                <CCardHeader>
-                                    <strong>{session.name}</strong>
-                                </CCardHeader>
-                                <CCardBody>
-                                    <CRow>
-                                        {session.rings.map((ring, ringIndex) => (
-                                            <CCol xs={12} md={6} key={ringIndex} className="mb-4">
-                                                <CCard className="mb-4">
-                                                    <CCardHeader>
-                                                        <strong>Ring {ring.ringNumber}</strong>
-                                                    </CCardHeader>
-                                                    <CCardBody>
-                                                        {ring.events.map((event, eventIndex) => (
-                                                            <EventCard key={eventIndex} event={event} />
-                                                        ))}
-                                                    </CCardBody>
-                                                </CCard>
-                                            </CCol>
-                                        ))}
-                                    </CRow>
-                                </CCardBody>
-                            </CCard>
+                            <SessionCard session={session} />
                         </CCol>
                     </CRow>
                 ))
             )}
         </>
+    )
+}
+
+const SessionCard = ({ session }) => {
+    const [isExpanded, setIsExpanded] = useState(true);
+
+    return (
+        <CCard className="mb-4">
+            <CCardHeader
+                style={{ cursor: 'pointer' }}
+                onClick={() => setIsExpanded(prev => !prev)}
+            >
+                <strong>{session.name} {isExpanded ? "▾" : "▸"}</strong>
+            </CCardHeader>
+            {isExpanded && (
+                <CCardBody>
+                    <CRow>
+                                        {session.rings.map((ring, ringIndex) => (
+                                            <CCol xs={12} md={6} key={ringIndex} className="mb-4">
+                                                <RingCard ring={ring} />
+                                            </CCol>
+                                        ))}
+                                    </CRow>
+                </CCardBody>
+            )}
+        </CCard>
+    )
+}
+
+const RingCard = ({ ring }) => {
+    const [isExpanded, setIsExpanded] = useState(true);
+
+    return (
+        <CCard className="mb-4">
+            <CCardHeader
+                style={{ cursor: 'pointer' }}
+                onClick={() => setIsExpanded(prev => !prev)}
+            >
+                <strong>Ring {ring.ringNumber} {isExpanded ? "▾" : "▸"}</strong>
+            </CCardHeader>
+            {isExpanded && (
+                <CCardBody>
+                    {ring.events.map((event, eventIndex) => (
+                        <EventCard key={eventIndex} event={event} />
+                    ))}
+                </CCardBody>
+            )}
+        </CCard>
     )
 }
 
