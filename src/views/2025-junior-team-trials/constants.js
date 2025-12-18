@@ -1,4 +1,4 @@
-export const NOVA_WUSHU_ATHLETES = [
+const novaWushuAthleteNames = [
     "Chloe Nguyen",
     "Alexander Lieu",
     "Ryan Tran",
@@ -9,3 +9,9 @@ export const NOVA_WUSHU_ATHLETES = [
     "Benjamin Le",
     "Daniel Sinor"
 ]
+
+export const NOVA_WUSHU_ATHLETES = [
+    ...novaWushuAthleteNames,
+    ...novaWushuAthleteNames.map(name => name.split(' ').reverse().join(' '))
+]
+

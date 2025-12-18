@@ -18,6 +18,7 @@ import {
     cilCheckCircle
 } from '@coreui/icons'
 
+import { NOVA_WUSHU_ATHLETES } from '../constants.js';
 import { determineUSTeam } from '../utils/determineUSTeam'
 
 const StandingsTable = ({
@@ -75,7 +76,7 @@ const StandingsTable = ({
                             })
 
                             return (
-                                <CTableRow key={idx}>
+                                <CTableRow key={idx} color={NOVA_WUSHU_ATHLETES.includes(registration.athleteName) ? "primary" : ""}>
                                     <CTableHeaderCell scope="row">{teamStatus}</CTableHeaderCell>
                                     <CTableDataCell>
                                         {registration.athleteName}

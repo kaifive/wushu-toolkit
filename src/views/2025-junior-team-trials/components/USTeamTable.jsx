@@ -13,6 +13,8 @@ import {
 
 import { determineUSTeam } from '../utils/determineUSTeam'
 
+import { NOVA_WUSHU_ATHLETES } from '../constants.js';
+
 const USTeamTable = ({
     gender,
     group,
@@ -39,7 +41,7 @@ const USTeamTable = ({
                         {Object.entries(teams).map(([teamLevel, athletes]) => (
                             <React.Fragment key={teamLevel}>
                                 {athletes.map((athlete) => (
-                                    <CTableRow key={athlete.athleteName}>
+                                    <CTableRow key={athlete.athleteName} color={NOVA_WUSHU_ATHLETES.includes(athlete.athleteName) ? "primary" : ""}>
                                         <CTableHeaderCell scope="row">
                                             {teamLevel} Team
                                         </CTableHeaderCell>
