@@ -24,8 +24,7 @@ const StandingsTable = ({
     group,
     data
 }) => {
-    
-
+    const sortedData = Object.values(data).sort((a, b) => b.totalScores - a.totalScores);
     return (
         <CCard className="mb-4">
             <CCardHeader>
@@ -40,13 +39,13 @@ const StandingsTable = ({
                             <CTableHeaderCell scope="col">Barehand</CTableHeaderCell>
                             <CTableHeaderCell scope="col">Short Weapon</CTableHeaderCell>
                             <CTableHeaderCell scope="col">Long Weapon</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Discipline</CTableHeaderCell>
                             <CTableHeaderCell scope="col">Total Score</CTableHeaderCell>
                         </CTableRow>
                     </CTableHead>
                     <CTableBody>
-                        {Object.values(data).map((registration, idx) => {
+                        {Object.values(sortedData).map((registration, idx) => {
                             let teamStatus = `#${idx + 1}`;
-
 
                             const BAREHAND_ABBREVIATIONS = ["CQ", "NQ", "TQ"];
                             const SHORT_WEAPON_ABBREVIATIONS = ["DS", "JS", "ND", "TJ", "TS"]
@@ -56,29 +55,15 @@ const StandingsTable = ({
                             const shortWeaponEvents = [];
                             const longWeaponEvents = [];
 
-                            let maxBarehandScore = 0;
-                            let maxWeaponScore = 0;
-
                             Object.entries(registration.events).map(([abbreviation, eventInfo]) => {
-                                if (BAREHAND_ABBREVIATIONS.includes(abbreviation)) {
+                                if (BAREHAND_ABBREVIATIONS.includes(eventInfo.abbreviation)) {
                                     barehandEvents.push(eventInfo);
-                                    if (eventInfo.score > maxBarehandScore) {
-                                        maxBarehandScore = eventInfo.score;
-                                    }
-                                } else if (SHORT_WEAPON_ABBREVIATIONS.includes(abbreviation)) {
+                                } else if (SHORT_WEAPON_ABBREVIATIONS.includes(eventInfo.abbreviation)) {
                                     shortWeaponEvents.push(eventInfo);
-                                    if (eventInfo.score > maxWeaponScore) {
-                                        maxWeaponScore = eventInfo.score;
-                                    }
-                                } else if (LONG_WEAPON_ABBREVIATIONS.includes(abbreviation)) {
+                                } else if (LONG_WEAPON_ABBREVIATIONS.includes(eventInfo.abbreviation)) {
                                     longWeaponEvents.push(eventInfo);
-                                    if (eventInfo.score > maxWeaponScore) {
-                                        maxWeaponScore = eventInfo.score;
-                                    }
                                 }
                             })
-
-                            const finalScore = maxBarehandScore + maxWeaponScore;
 
                             return (
                                 <CTableRow key={idx}>
@@ -88,17 +73,17 @@ const StandingsTable = ({
                                     </CTableDataCell>
                                     <CTableDataCell>
                                         {barehandEvents.map((event) => {
-                                            return <div>{event.name} - {parseFloat(event.score).toFixed(3)}</div>
+                                            return <div key={event.name}>{event.name} - {parseFloat(event.finalScore).toFixed(3)}</div>
                                         })}
                                     </CTableDataCell>
                                     <CTableDataCell>
                                         {shortWeaponEvents.map((event) => {
-                                            return <div>{event.name} - {parseFloat(event.score).toFixed(3)}</div>
+                                            return <div key={event.name}>{event.name} - {parseFloat(event.finalScore).toFixed(3)}</div>
                                         })}
                                     </CTableDataCell>
                                     <CTableDataCell>
                                         {longWeaponEvents.map((event) => {
-                                            return <div>{event.name} - {parseFloat(event.score).toFixed(3)}</div>
+                                            return <div key={event.name}>{event.name} - {parseFloat(event.finalScore).toFixed(3)}</div>
                                         })}
                                     </CTableDataCell>
 
@@ -133,8 +118,9 @@ const StandingsTable = ({
                                             )}
                                         </CTableDataCell>
                                     ))} */}
+                                    <CTableDataCell>{registration.topDiscipline}</CTableDataCell>
 
-                                    <CTableDataCell>{parseFloat(finalScore).toFixed(3)}</CTableDataCell>
+                                    <CTableDataCell>{parseFloat(registration.totalScores).toFixed(3)}</CTableDataCell>
                                 </CTableRow>
                             );
                         })}

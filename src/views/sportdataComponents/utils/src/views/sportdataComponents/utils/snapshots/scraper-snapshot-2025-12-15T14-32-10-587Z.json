@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-12-15T14:32:10.610Z",
+  "totalTargets": 3,
+  "successCount": 3,
+  "failureCount": 0,
+  "results": [
+    {
+      "success": true,
+      "data": {
+        "source": "2025 Adults - Changquan",
+        "timestamp": "2025-12-15T14:32:06.087Z",
+        "data": {}
+      }
+    },
+    {
+      "success": true,
+      "data": {
+        "source": "2025 Adults - Taijiquan",
+        "timestamp": "2025-12-15T14:32:08.255Z",
+        "data": {}
+      }
+    },
+    {
+      "success": true,
+      "data": {
+        "source": "2025 Phoenix - Changquan",
+        "timestamp": "2025-12-15T14:32:10.557Z",
+        "data": {}
+      }
+    }
+  ]
+}

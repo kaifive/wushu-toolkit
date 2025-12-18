@@ -54,10 +54,6 @@ const Juniors2025Standings = () => {
         }
     ];
 
-    // const filteredCategories = filters.categoryFilter
-    //     ? [filters.categoryFilter]
-    //     : Object.keys(CATEGORY_MAP);
-
     const standingTables = (
         groupData.map((dataObj) => (
             <CRow key={`${genderKey}_${dataObj.group}_Group`}>

@@ -463,6 +463,12 @@ const JUNIORS_25 = [
     name: '2025 Junior Team Trials',
   },
   {
+    component: CNavItem,
+    name: 'Schedule',
+    to: '/2025-juniors/schedule',
+    icon: <CIcon icon={cilListNumbered} customClassName="nav-icon" />,
+  },
+  {
     component: CNavGroup,
     name: 'Live Standings',
     icon: <CIcon icon={cilWc} customClassName="nav-icon" />,

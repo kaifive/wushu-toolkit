@@ -4,6 +4,8 @@ import latestPhoenixSnapshot from "../utils/snapshots/2025-phoenix-2025-06-13T20
 import latestAdults25Snapshot from "../utils/snapshots/tempadults2025-2025-08-04T16-02-48-343Z.json";
 import juniors2025 from "../../2025-junior-team-trials/scripts/Juniors2025.json"
 import { getAdults2025 } from '../utils/getAdults2025.js';
+import { getData } from '../utils/getData.js';
+import { getJuniors2025 } from '../utils/getJuniors2025.js';
 
 export const SportdataContext = createContext(null);
 export const useSportdata = () => useContext(SportdataContext);
@@ -45,12 +47,12 @@ export const SportdataProvider = ({ competition, children }) => {
     }));
 
     try {
-      //const adults2025 = await getAdults2025(COMPETITION_CONFIG[competition]);
+      const juniors2025live = await getJuniors2025(COMPETITION_CONFIG[competition]);
 
       const dataMap = {
         "2025-adults": latestAdults25Snapshot,
         "2025-phoenix": latestPhoenixSnapshot,
-        "2025-juniors": juniors2025,
+        "2025-juniors": juniors2025live,
       };
 
       const athleteData = dataMap[competition];

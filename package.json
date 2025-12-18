@@ -18,7 +18,8 @@
     "start": "concurrently -n \"CLIENT,SERVER\" -c \"blue,green\" \"npm run frontend\" \"npm run backend\"",
     "frontend": "vite",
     "backend": "nodemon --watch server/* server/index.js",
-    "postinstall": "puppeteer install"
+    "postinstall": "puppeteer install",
+    "scrape": "node src/views/sportdataComponents/utils/runScraper.js"
   },
   "type": "module",
   "dependencies": {
@@ -47,6 +48,7 @@
     "firebase": "11.4.0",
     "html-entities": "2.6.0",
     "jsdom": "26.1.0",
+    "nodemailer": "^7.0.11",
     "papaparse": "5.5.3",
     "prop-types": "15.8.1",
     "puppeteer-core": "10.4.0",

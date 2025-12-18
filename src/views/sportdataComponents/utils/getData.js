@@ -20,6 +20,7 @@ const fetchScoresByCategory = async (competition, categoryName, categoryId) => {
 }
 
 const fetchAllCategories = async (competition, categoryData) => {
+    console.log("Fetching all categories for competition:", competition, categoryData);
     const promises = Object.entries(categoryData).map(([categoryName, categoryId]) =>
         fetchScoresByCategory(competition, categoryName, categoryId)
     );
@@ -39,9 +40,15 @@ export async function getData(config) {
 
     let scorecardData;
 
-    await fetchAllCategories(competition, categoryData.data).then((categories) => {
-        scorecardData = Object.assign({}, ...categories);
-    });
+    console.log("here")
+    try {
+        await fetchAllCategories(competition, categoryData.data).then((categories) => {
+            scorecardData = Object.assign({}, ...categories);
+        });
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        throw error;
+    }
 
     const ATHLETE_DATA = {
         MALES: {

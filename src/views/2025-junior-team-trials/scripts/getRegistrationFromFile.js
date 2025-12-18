@@ -1,10 +1,10 @@
 import { JSDOM } from "jsdom";
-import * as fs from 'fs/promises'; 
+import * as fs from 'fs/promises';
 import * as path from 'path'; // Import path module for handling file paths
 
 const REGISTRATION_FILE_PATH = "2025juniorsHTMLBody.html";
 const WAITING_LIST_FILE_PATH = "2025juniorsHTMLBodyWaitingList.html";
-const OUTPUT_DIR = "backup"; 
+const OUTPUT_DIR = "backup/registration";
 const OUTPUT_FILE_NAME = "Juniors2025.json";
 
 // Function to create a file-system safe timestamp string
@@ -15,7 +15,7 @@ const createTimestamp = () => {
 
 // Define the two output paths:
 // 1. The main file (in the current directory)
-const REGISTRATION_DATA_FILE_PATH = OUTPUT_FILE_NAME; 
+const REGISTRATION_DATA_FILE_PATH = OUTPUT_FILE_NAME;
 // 2. The timestamped backup file (in the 'backup' directory)
 const BACKUP_FILE_PATH = path.join(OUTPUT_DIR, `${path.parse(OUTPUT_FILE_NAME).name}_${createTimestamp()}.json`);
 
@@ -32,7 +32,7 @@ const getRegistrationsFromFile = async () => {
         const document = dom.window.document;
 
         const tables = document.querySelectorAll("table");
-        
+
         if (tables.length === 0) {
             console.error("Error: No <table> elements found in the HTML file.");
             return REGISTRATIONS;
@@ -52,31 +52,32 @@ const getRegistrationsFromFile = async () => {
                 return;
             }
 
-            const athleteName = cells[2];
+            const athleteName = cells[2].toLowerCase();
             const eventInfo = cells[6];
             const eventInfoLower = eventInfo.toLowerCase();
 
+            let ageGroup = "";
+            if (eventInfoLower.includes("youth")) {
+                ageGroup = "A";
+            } else if (eventInfoLower.includes("junior")) {
+                ageGroup = "B";
+            } else if (eventInfoLower.includes("child")) {
+                ageGroup = "C";
+            }
+
+            const registrationKey = `${athleteName}_${ageGroup}`;
             if (eventInfoLower.includes("taolu")) {
-                if (!REGISTRATIONS[athleteName]) {
-                    REGISTRATIONS[athleteName] = {
-                        athleteName: athleteName,
+                if (!REGISTRATIONS[registrationKey]) {
+                    REGISTRATIONS[registrationKey] = {
+                        athleteName: cells[2],
                         ageGroup: "",
                         gender: "",
                         events: {},
                     };
                 }
 
-                let ageGroup = "";
-                if (eventInfoLower.includes("youth")) {
-                    ageGroup = "A";
-                } else if (eventInfoLower.includes("junior")) {
-                    ageGroup = "B";
-                } else if (eventInfoLower.includes("child")) {
-                    ageGroup = "C";
-                }
-                
                 if (ageGroup) {
-                    REGISTRATIONS[athleteName].ageGroup = ageGroup;
+                    REGISTRATIONS[registrationKey].ageGroup = ageGroup;
                 }
 
                 let gender = "";
@@ -87,12 +88,12 @@ const getRegistrationsFromFile = async () => {
                 }
 
                 if (gender) {
-                    REGISTRATIONS[athleteName].gender = gender;
+                    REGISTRATIONS[registrationKey].gender = gender;
                 }
 
                 const eventArr = eventInfo.split(" ");
                 // Extract the last word as the event name
-                const eventName = eventArr[eventArr.length - 1]; 
+                const eventName = eventArr[eventArr.length - 1];
 
                 const EVENT_ABBREVIATIONS = {
                     Changquan: "CQ",
@@ -109,11 +110,12 @@ const getRegistrationsFromFile = async () => {
                 }
 
                 const eventAbbreviation = EVENT_ABBREVIATIONS[eventName];
-                
-                REGISTRATIONS[athleteName].events[eventAbbreviation] = {
+
+                REGISTRATIONS[registrationKey].events[eventAbbreviation] = {
                     name: eventName,
+                    eventInfo: eventInfo,
                     abbreviation: eventAbbreviation,
-                    score: 0.000,
+                    finalScore: 0.000,
                     deductions: [],
                     adjustment: 0,
                 };
@@ -137,7 +139,7 @@ const getWaitingListRegistration = async () => {
         const document = dom.window.document;
 
         const tables = document.querySelectorAll("table");
-        
+
         if (tables.length === 0) {
             console.error("Error: No <table> elements found in the HTML file.");
             return REGISTRATIONS;
@@ -155,7 +157,7 @@ const getWaitingListRegistration = async () => {
                 return;
             }
 
-            
+
 
             const athleteName = cells[1];
 
@@ -184,7 +186,7 @@ const getWaitingListRegistration = async () => {
                 } else if (eventInfoLower.includes("child")) {
                     ageGroup = "C";
                 }
-                
+
                 if (ageGroup) {
                     REGISTRATIONS[athleteName].ageGroup = ageGroup;
                 }
@@ -202,7 +204,7 @@ const getWaitingListRegistration = async () => {
 
                 const eventArr = eventInfo.split(" ");
                 // Extract the last word as the event name
-                const eventName = eventArr[eventArr.length - 1]; 
+                const eventName = eventArr[eventArr.length - 1];
 
                 const EVENT_ABBREVIATIONS = {
                     Changquan: "CQ",
@@ -219,7 +221,7 @@ const getWaitingListRegistration = async () => {
                 }
 
                 const eventAbbreviation = EVENT_ABBREVIATIONS[eventName];
-                
+
                 REGISTRATIONS[athleteName].events[eventAbbreviation] = {
                     name: eventName,
                     abbreviation: eventAbbreviation,
@@ -244,7 +246,7 @@ await getRegistrationsFromFile()
 //await getWaitingListRegistration()
 
 const jsonData = JSON.stringify(REGISTRATIONS, null, 2);
-        
+
 // 1. Create the backup directory if it doesn't exist (if it exists, it does nothing)
 await fs.mkdir(OUTPUT_DIR, { recursive: true });
 

@@ -91,5 +91,17 @@ app.get('/get-temp-2025-adults-data', async (req, res) => {
     }
 });
 
+app.get('/proxy', async (req, res) => {
+    const { url } = req.query;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.text();
+        res.send(data);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 
 app.listen(PORT, () => console.log(`Server listening on ${PORT}`));

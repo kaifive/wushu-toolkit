@@ -8,7 +8,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -16,7 +16,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -24,7 +24,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -39,7 +39,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -47,7 +47,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -55,7 +55,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -70,7 +70,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -78,7 +78,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -86,7 +86,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -101,7 +101,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -109,7 +109,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Male 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -117,7 +117,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -132,7 +132,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -140,7 +140,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -148,7 +148,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -163,7 +163,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -171,7 +171,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -179,7 +179,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -194,7 +194,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -202,7 +202,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -210,7 +210,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -218,7 +218,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Female Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -226,7 +226,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -241,7 +241,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -249,7 +249,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -257,7 +257,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -272,7 +272,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -280,7 +280,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -288,7 +288,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -303,7 +303,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Female 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -311,7 +311,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Female 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -326,7 +326,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -334,7 +334,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -342,7 +342,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -357,7 +357,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -365,7 +365,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -373,7 +373,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -388,7 +388,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -396,7 +396,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -404,7 +404,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -419,7 +419,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -427,7 +427,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -435,7 +435,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -450,7 +450,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -458,7 +458,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -466,7 +466,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -481,7 +481,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -489,7 +489,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -497,7 +497,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -512,7 +512,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -520,7 +520,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -528,7 +528,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -536,7 +536,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -544,7 +544,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -559,7 +559,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -567,7 +567,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -575,7 +575,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -583,7 +583,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -598,7 +598,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -606,7 +606,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -614,7 +614,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Female Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -622,7 +622,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -637,7 +637,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -645,7 +645,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -653,7 +653,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -668,7 +668,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Male 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -676,7 +676,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -684,7 +684,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -699,7 +699,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -707,7 +707,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -715,7 +715,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -730,7 +730,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -738,7 +738,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Female 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -746,7 +746,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -754,7 +754,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -762,7 +762,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -777,7 +777,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -785,7 +785,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -793,7 +793,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -801,7 +801,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -816,7 +816,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -824,7 +824,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -832,7 +832,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -847,7 +847,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -855,7 +855,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -863,7 +863,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Female Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -878,7 +878,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -886,7 +886,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -894,7 +894,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Female 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -902,7 +902,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Female 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -910,7 +910,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -925,7 +925,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -933,7 +933,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -941,7 +941,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -956,7 +956,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -964,7 +964,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Female 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -972,7 +972,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -987,7 +987,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -995,7 +995,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1003,7 +1003,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1011,7 +1011,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1019,7 +1019,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1034,7 +1034,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1042,7 +1042,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1050,7 +1050,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1065,7 +1065,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1073,7 +1073,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1081,7 +1081,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1096,7 +1096,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Male 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1104,7 +1104,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1119,7 +1119,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Female 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1127,7 +1127,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1142,7 +1142,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1150,7 +1150,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1158,7 +1158,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1173,7 +1173,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1181,7 +1181,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1196,7 +1196,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1204,7 +1204,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1212,7 +1212,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1227,7 +1227,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1235,7 +1235,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1243,7 +1243,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1258,7 +1258,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1266,7 +1266,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1274,7 +1274,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1282,7 +1282,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Female 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1290,7 +1290,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1298,7 +1298,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1313,7 +1313,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1321,7 +1321,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Male 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1329,7 +1329,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1344,7 +1344,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1352,7 +1352,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1360,7 +1360,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Male Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1368,7 +1368,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1376,7 +1376,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1391,7 +1391,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1399,7 +1399,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1407,7 +1407,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1422,7 +1422,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1430,7 +1430,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1438,7 +1438,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1446,7 +1446,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1454,7 +1454,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Female Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1462,7 +1462,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1477,7 +1477,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1485,7 +1485,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Male 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1493,7 +1493,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1508,7 +1508,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1516,7 +1516,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1524,7 +1524,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1539,7 +1539,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Female 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1547,7 +1547,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Female 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1555,7 +1555,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Female 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1570,7 +1570,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1578,7 +1578,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1586,7 +1586,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1594,7 +1594,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1602,7 +1602,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1617,7 +1617,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1625,7 +1625,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1633,7 +1633,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1641,7 +1641,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1649,7 +1649,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Female 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1657,7 +1657,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Female 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1665,7 +1665,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Female 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1673,7 +1673,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1688,7 +1688,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Female 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1696,7 +1696,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Female 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1704,7 +1704,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Female 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1719,7 +1719,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1727,7 +1727,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1735,7 +1735,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1743,7 +1743,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1751,7 +1751,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1766,7 +1766,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1774,7 +1774,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1782,7 +1782,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1797,7 +1797,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1805,7 +1805,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1813,7 +1813,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1828,7 +1828,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1836,7 +1836,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1844,7 +1844,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1852,7 +1852,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1860,7 +1860,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1875,7 +1875,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1883,7 +1883,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1891,7 +1891,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1899,7 +1899,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Male Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1914,7 +1914,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1922,7 +1922,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1937,7 +1937,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1945,7 +1945,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1953,7 +1953,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1961,7 +1961,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1976,7 +1976,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -1984,7 +1984,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -1999,7 +1999,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2007,7 +2007,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2015,7 +2015,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2030,7 +2030,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2038,7 +2038,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2046,7 +2046,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2061,7 +2061,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2069,7 +2069,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2077,7 +2077,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2092,7 +2092,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2100,7 +2100,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2108,7 +2108,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2116,7 +2116,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Male Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2131,7 +2131,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2139,7 +2139,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2147,7 +2147,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2162,7 +2162,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2170,7 +2170,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2178,7 +2178,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2193,7 +2193,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2201,7 +2201,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2209,7 +2209,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2217,7 +2217,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2225,7 +2225,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2240,7 +2240,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2248,7 +2248,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2256,7 +2256,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2264,7 +2264,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2272,7 +2272,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2280,7 +2280,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2288,7 +2288,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2303,7 +2303,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2311,7 +2311,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2319,7 +2319,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2327,7 +2327,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Children Female Elementary Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2342,7 +2342,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Female 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2350,7 +2350,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2358,7 +2358,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2373,7 +2373,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2381,7 +2381,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2389,7 +2389,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2404,7 +2404,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2412,7 +2412,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2420,7 +2420,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2435,7 +2435,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2443,7 +2443,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2451,7 +2451,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2466,7 +2466,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2474,7 +2474,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2482,7 +2482,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2490,7 +2490,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Male Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2505,7 +2505,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2513,7 +2513,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2528,7 +2528,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2536,7 +2536,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2551,7 +2551,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2559,7 +2559,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2567,7 +2567,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2582,7 +2582,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2590,7 +2590,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2598,7 +2598,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2606,7 +2606,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Male Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2614,7 +2614,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Male Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2629,7 +2629,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2637,7 +2637,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2645,7 +2645,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2660,7 +2660,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2668,7 +2668,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2676,7 +2676,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2691,7 +2691,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2699,7 +2699,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2707,7 +2707,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2715,7 +2715,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2723,7 +2723,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Female Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2731,7 +2731,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Female Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2739,7 +2739,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2754,7 +2754,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2762,7 +2762,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Female 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2770,7 +2770,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2778,7 +2778,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2786,7 +2786,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Female 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2794,7 +2794,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Female 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2802,7 +2802,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Female 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2810,7 +2810,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2825,7 +2825,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2833,7 +2833,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Male 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2841,7 +2841,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2856,7 +2856,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2864,7 +2864,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2879,7 +2879,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2887,7 +2887,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2895,7 +2895,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2910,7 +2910,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2918,7 +2918,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2926,7 +2926,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2941,7 +2941,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2949,7 +2949,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2957,7 +2957,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2965,7 +2965,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2973,7 +2973,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Female Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -2988,7 +2988,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -2996,7 +2996,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3004,7 +3004,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3012,7 +3012,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3020,7 +3020,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3035,7 +3035,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3043,7 +3043,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3051,7 +3051,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3066,7 +3066,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3074,7 +3074,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3082,7 +3082,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3097,7 +3097,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Male 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3105,7 +3105,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3113,7 +3113,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3128,7 +3128,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3136,7 +3136,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3144,7 +3144,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3152,7 +3152,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3160,7 +3160,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Female Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3168,7 +3168,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Female Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3176,7 +3176,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3184,7 +3184,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Female Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3199,7 +3199,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3207,7 +3207,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3215,7 +3215,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3230,7 +3230,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3238,7 +3238,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Male 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3246,7 +3246,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3261,7 +3261,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3269,7 +3269,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3284,7 +3284,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3292,7 +3292,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3300,7 +3300,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3315,7 +3315,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3323,7 +3323,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3338,7 +3338,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3346,7 +3346,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3361,7 +3361,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3369,7 +3369,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3377,7 +3377,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3392,7 +3392,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3400,7 +3400,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3408,7 +3408,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3423,7 +3423,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3431,7 +3431,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3439,7 +3439,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3454,7 +3454,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3462,7 +3462,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3470,7 +3470,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3478,7 +3478,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3486,7 +3486,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3494,7 +3494,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3509,7 +3509,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3517,7 +3517,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Male 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3525,7 +3525,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3540,7 +3540,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3548,7 +3548,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3556,7 +3556,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3564,7 +3564,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Female 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3572,7 +3572,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Female 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3580,7 +3580,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Female 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3595,7 +3595,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3603,7 +3603,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3611,7 +3611,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3626,7 +3626,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3634,7 +3634,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3649,7 +3649,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3657,7 +3657,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3672,7 +3672,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Male 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3680,7 +3680,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3688,7 +3688,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3703,7 +3703,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3711,7 +3711,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3719,7 +3719,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3734,7 +3734,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3742,7 +3742,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3750,7 +3750,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3765,7 +3765,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3773,7 +3773,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3781,7 +3781,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3796,7 +3796,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Male 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3804,7 +3804,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3812,7 +3812,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3827,7 +3827,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3835,7 +3835,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3843,7 +3843,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3858,7 +3858,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Female 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3866,7 +3866,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3874,7 +3874,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3889,7 +3889,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3897,7 +3897,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3912,7 +3912,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3920,7 +3920,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3928,7 +3928,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Female Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3943,7 +3943,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3951,7 +3951,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3966,7 +3966,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3974,7 +3974,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -3982,7 +3982,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -3997,7 +3997,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4005,7 +4005,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4013,7 +4013,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4028,7 +4028,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4036,7 +4036,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4044,7 +4044,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4059,7 +4059,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4067,7 +4067,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4075,7 +4075,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4090,7 +4090,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4098,7 +4098,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Female 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4106,7 +4106,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4121,7 +4121,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4129,7 +4129,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4137,7 +4137,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4152,7 +4152,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4160,7 +4160,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4168,7 +4168,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4183,7 +4183,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4191,7 +4191,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4199,7 +4199,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4214,7 +4214,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4222,7 +4222,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4230,7 +4230,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4245,7 +4245,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4253,7 +4253,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4261,7 +4261,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4276,7 +4276,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4284,7 +4284,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4292,7 +4292,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4307,7 +4307,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4315,7 +4315,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4323,7 +4323,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4338,7 +4338,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4346,7 +4346,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4354,7 +4354,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4369,7 +4369,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4377,7 +4377,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4385,7 +4385,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4400,7 +4400,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4408,7 +4408,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4416,7 +4416,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4431,7 +4431,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4439,7 +4439,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4447,7 +4447,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4462,7 +4462,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4470,7 +4470,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4478,7 +4478,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4493,7 +4493,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4501,7 +4501,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4509,7 +4509,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4524,7 +4524,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4532,7 +4532,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Female 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4540,7 +4540,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4548,7 +4548,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4563,7 +4563,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4571,7 +4571,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4579,7 +4579,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4594,7 +4594,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4602,7 +4602,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4617,7 +4617,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4625,7 +4625,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4633,7 +4633,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4648,7 +4648,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4656,7 +4656,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4664,7 +4664,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4672,7 +4672,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4680,7 +4680,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4695,7 +4695,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4703,7 +4703,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4718,7 +4718,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4726,7 +4726,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4734,7 +4734,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4749,7 +4749,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4757,7 +4757,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4765,7 +4765,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4780,7 +4780,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4788,7 +4788,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4796,7 +4796,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4804,7 +4804,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Female Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4812,7 +4812,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Children Female Elementary Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4820,7 +4820,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Children Female Elementary Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4835,7 +4835,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4843,7 +4843,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4851,7 +4851,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4866,7 +4866,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4874,7 +4874,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4882,7 +4882,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4897,7 +4897,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Female 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4905,7 +4905,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4913,7 +4913,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4928,7 +4928,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4936,7 +4936,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4944,7 +4944,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4959,7 +4959,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4967,7 +4967,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4975,7 +4975,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -4990,7 +4990,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -4998,7 +4998,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5006,7 +5006,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5021,7 +5021,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5029,7 +5029,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5037,7 +5037,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5052,7 +5052,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5060,7 +5060,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5068,7 +5068,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5083,7 +5083,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Female 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5091,7 +5091,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Female 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5099,7 +5099,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Female 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5107,7 +5107,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Junior Female 1st Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5115,7 +5115,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Junior Female 1st Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5130,7 +5130,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5138,7 +5138,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5146,7 +5146,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5154,7 +5154,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5162,7 +5162,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Male 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5170,7 +5170,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5178,7 +5178,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5193,7 +5193,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5201,7 +5201,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Male Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5209,7 +5209,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Male Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5224,7 +5224,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5232,7 +5232,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5247,7 +5247,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5255,7 +5255,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5263,7 +5263,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5271,7 +5271,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5279,7 +5279,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5294,7 +5294,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5302,7 +5302,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5310,7 +5310,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5325,7 +5325,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5333,7 +5333,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5341,7 +5341,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5356,7 +5356,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Female 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5364,7 +5364,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Female 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5372,7 +5372,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Female 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5387,7 +5387,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5395,7 +5395,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5410,7 +5410,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Male 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5418,7 +5418,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5426,7 +5426,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5441,7 +5441,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5449,7 +5449,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Female Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5464,7 +5464,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5472,7 +5472,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5487,7 +5487,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5495,7 +5495,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5503,7 +5503,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Children Female Elementary Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5511,7 +5511,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Children Female Elementary Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5526,7 +5526,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Male 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5534,7 +5534,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5542,7 +5542,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5557,7 +5557,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5565,7 +5565,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5573,7 +5573,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5588,7 +5588,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5596,7 +5596,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5604,7 +5604,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5619,7 +5619,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5627,7 +5627,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5635,7 +5635,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5643,7 +5643,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5651,7 +5651,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5666,7 +5666,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5674,7 +5674,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5682,7 +5682,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5697,7 +5697,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5705,7 +5705,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5713,7 +5713,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5728,7 +5728,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5736,7 +5736,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5744,7 +5744,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5752,7 +5752,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5760,7 +5760,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5775,7 +5775,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Female Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5783,7 +5783,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5798,7 +5798,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Female 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5806,7 +5806,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Female 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5821,7 +5821,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5829,7 +5829,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5837,7 +5837,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5852,7 +5852,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5860,7 +5860,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5868,7 +5868,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5883,7 +5883,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5891,7 +5891,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Female 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5899,7 +5899,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Female 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5907,7 +5907,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Female 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5915,7 +5915,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5930,7 +5930,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5938,7 +5938,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5946,7 +5946,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5961,7 +5961,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5969,7 +5969,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -5977,7 +5977,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Female Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -5992,7 +5992,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6000,7 +6000,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6008,7 +6008,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6023,7 +6023,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6031,7 +6031,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6039,7 +6039,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6054,7 +6054,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Female Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6062,7 +6062,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6077,7 +6077,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6085,7 +6085,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6093,7 +6093,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6108,7 +6108,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6116,7 +6116,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6124,7 +6124,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6132,7 +6132,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6140,7 +6140,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6148,7 +6148,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Male Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6163,7 +6163,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6171,7 +6171,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Male 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6179,7 +6179,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6194,7 +6194,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6202,7 +6202,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6210,7 +6210,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6225,7 +6225,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Female Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6233,7 +6233,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6248,7 +6248,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6256,7 +6256,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6264,7 +6264,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6272,7 +6272,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6280,7 +6280,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6288,7 +6288,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6303,7 +6303,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6311,7 +6311,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6319,7 +6319,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6334,7 +6334,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6342,7 +6342,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6350,7 +6350,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6365,7 +6365,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Junior Female 1st Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6373,7 +6373,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Junior Female 1st Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6388,7 +6388,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6396,7 +6396,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6404,7 +6404,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6419,7 +6419,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6427,7 +6427,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6435,7 +6435,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6450,7 +6450,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6458,7 +6458,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6466,7 +6466,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6481,7 +6481,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6489,7 +6489,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6497,7 +6497,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6505,7 +6505,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6520,7 +6520,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6528,7 +6528,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6536,7 +6536,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6551,7 +6551,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6559,7 +6559,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6567,7 +6567,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6575,7 +6575,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Female Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6583,7 +6583,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Female Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6598,7 +6598,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6606,7 +6606,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6614,7 +6614,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6629,7 +6629,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6637,7 +6637,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6645,7 +6645,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6653,7 +6653,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Junior Female 1st Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6661,7 +6661,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Junior Female 1st Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6676,7 +6676,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6684,7 +6684,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6692,7 +6692,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6707,7 +6707,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6715,7 +6715,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6723,7 +6723,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6738,7 +6738,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Male 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6746,7 +6746,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6754,7 +6754,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Male 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6769,7 +6769,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6777,7 +6777,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6785,7 +6785,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6800,7 +6800,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6808,7 +6808,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6816,7 +6816,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6831,7 +6831,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Youth Male 3rd Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6839,7 +6839,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Youth Male 3rd Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6847,7 +6847,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Youth Male 3rd Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6862,7 +6862,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6870,7 +6870,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6878,7 +6878,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6893,7 +6893,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6901,7 +6901,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6909,7 +6909,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6924,7 +6924,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6932,7 +6932,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6940,7 +6940,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Junior Female 1st Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6948,7 +6948,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Junior Female 1st Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6963,7 +6963,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6971,7 +6971,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -6979,7 +6979,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -6994,7 +6994,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7002,7 +7002,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7010,7 +7010,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7025,7 +7025,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7033,7 +7033,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7041,7 +7041,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7056,7 +7056,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7064,7 +7064,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7072,7 +7072,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7087,7 +7087,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Junior Male 1st Set Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7095,7 +7095,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Junior Male 1st Set Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7103,7 +7103,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Junior Male 1st Set Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7118,7 +7118,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7126,7 +7126,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Female Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7134,7 +7134,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Female Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7149,7 +7149,7 @@
         "name": "Nandao",
         "eventInfo": "Taolu Children Male Elementary Nandao",
         "abbreviation": "ND",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7157,7 +7157,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7165,7 +7165,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7180,7 +7180,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Female 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7188,7 +7188,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7196,7 +7196,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7211,7 +7211,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7219,7 +7219,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7227,7 +7227,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7242,7 +7242,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7250,7 +7250,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7258,7 +7258,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7266,7 +7266,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Male Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7281,7 +7281,7 @@
         "name": "Taijijian",
         "eventInfo": "Taolu Youth Female 3rd Set Taijijian",
         "abbreviation": "TJ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7289,7 +7289,7 @@
         "name": "Taijiquan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijiquan",
         "abbreviation": "TQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7297,7 +7297,7 @@
         "name": "Taijishan",
         "eventInfo": "Taolu Youth Female 3rd Set Taijishan",
         "abbreviation": "TS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7312,7 +7312,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7320,7 +7320,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Female 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7328,7 +7328,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7343,7 +7343,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7351,7 +7351,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7359,7 +7359,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7367,7 +7367,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7375,7 +7375,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7390,7 +7390,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7398,7 +7398,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Female 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7406,7 +7406,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Female 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7414,7 +7414,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7429,7 +7429,7 @@
         "name": "Nangun",
         "eventInfo": "Taolu Children Male Elementary Nangun",
         "abbreviation": "NG",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7437,7 +7437,7 @@
         "name": "Nanquan",
         "eventInfo": "Taolu Children Male Elementary Nanquan",
         "abbreviation": "NQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7452,7 +7452,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Female Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7460,7 +7460,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Children Female Elementary Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7468,7 +7468,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Children Female Elementary Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7483,7 +7483,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7491,7 +7491,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7499,7 +7499,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7514,7 +7514,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7522,7 +7522,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7530,7 +7530,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7538,7 +7538,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7553,7 +7553,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7561,7 +7561,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7569,7 +7569,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7584,7 +7584,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7592,7 +7592,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Youth Male 3rd Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7600,7 +7600,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Youth Male 3rd Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7615,7 +7615,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7623,7 +7623,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Female 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7631,7 +7631,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Female 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7646,7 +7646,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Male 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7654,7 +7654,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Male 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7662,7 +7662,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Male 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7677,7 +7677,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7685,7 +7685,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Male 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7693,7 +7693,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Male 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7708,7 +7708,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7716,7 +7716,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7724,7 +7724,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7739,7 +7739,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Male 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7747,7 +7747,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Junior Male 1st Set Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7755,7 +7755,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Junior Male 1st Set Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7770,7 +7770,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Junior Female 1st Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7778,7 +7778,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Junior Female 1st Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7786,7 +7786,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Junior Female 1st Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7801,7 +7801,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Youth Female 3rd Set Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7809,7 +7809,7 @@
         "name": "Jianshu",
         "eventInfo": "Taolu Youth Female 3rd Set Jianshu",
         "abbreviation": "JS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7817,7 +7817,7 @@
         "name": "Qiangshu",
         "eventInfo": "Taolu Youth Female 3rd Set Qiangshu",
         "abbreviation": "QS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }
@@ -7832,7 +7832,7 @@
         "name": "Changquan",
         "eventInfo": "Taolu Children Male Elementary Changquan",
         "abbreviation": "CQ",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7840,7 +7840,7 @@
         "name": "Daoshu",
         "eventInfo": "Taolu Children Male Elementary Daoshu",
         "abbreviation": "DS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       },
@@ -7848,7 +7848,7 @@
         "name": "Gunshu",
         "eventInfo": "Taolu Children Male Elementary Gunshu",
         "abbreviation": "GS",
-        "finalScore": 0,
+        "score": 0,
         "deductions": [],
         "adjustment": 0
       }

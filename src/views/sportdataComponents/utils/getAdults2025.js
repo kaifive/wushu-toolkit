@@ -80,14 +80,14 @@ export async function getAdults2025(config) {
 
         let scorecardData;
 
-        // await fetchAllScorecards().then((scorecards) => {
-        //     scorecardData = Object.assign({}, ...scorecards);
-        // });
+        await fetchAllScorecards().then((scorecards) => {
+            scorecardData = Object.assign({}, ...scorecards);
+        });
 
         
-        const temp = await fetch(`${apiUrl}/get-temp-2025-adults-data`);
+        // const temp = await fetch(`${apiUrl}/get-temp-2025-adults-data`);
 
-        const data = await temp.json();
+        // const data = await temp.json();
 
 
         const ATHLETE_DATA = registrationData
