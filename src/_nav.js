@@ -485,6 +485,23 @@ const JUNIORS_25 = [
       },
     ],
   },
+  {
+    component: CNavGroup,
+    name: 'US Team',
+    icon: <CIcon icon={cilClipboard} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Male US Team',
+        to: '/2025-juniors/male-us-team',
+      },
+      {
+        component: CNavItem,
+        name: 'Female US Team',
+        to: '/2025-juniors/female-us-team',
+      },
+    ],
+  },
 ]
 
 const live_nav = [

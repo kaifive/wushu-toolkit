@@ -18,6 +18,7 @@ import {
     cilCheckCircle
 } from '@coreui/icons'
 
+import { determineUSTeam } from '../utils/determineUSTeam'
 
 const StandingsTable = ({
     gender,
@@ -25,6 +26,7 @@ const StandingsTable = ({
     data
 }) => {
     const sortedData = Object.values(data).sort((a, b) => b.totalScores - a.totalScores);
+    const teams = determineUSTeam(data, group);
     return (
         <CCard className="mb-4">
             <CCardHeader>
@@ -46,6 +48,13 @@ const StandingsTable = ({
                     <CTableBody>
                         {Object.values(sortedData).map((registration, idx) => {
                             let teamStatus = `#${idx + 1}`;
+                            if (teams.A.find(a => a.athleteName === registration.athleteName)) {
+                                teamStatus = "A Team";
+                            } else if (teams.B.find(a => a.athleteName === registration.athleteName)) {
+                                teamStatus = "B Team";
+                            } else if (teams.C.find(a => a.athleteName === registration.athleteName)) {
+                                teamStatus = "C Team";
+                            }
 
                             const BAREHAND_ABBREVIATIONS = ["CQ", "NQ", "TQ"];
                             const SHORT_WEAPON_ABBREVIATIONS = ["DS", "JS", "ND", "TJ", "TS"]

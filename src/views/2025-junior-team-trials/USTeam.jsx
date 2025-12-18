@@ -6,11 +6,10 @@ import {
 
 import { useSportdata } from '../sportdataComponents/context/SportdataContext.jsx';
 
-import StandingsTable from './components/StandingsTable.jsx';
-
 import { getAthletesByGender, divideAthletesByGroup } from './utils/categorizeAthleteData.js'
+import USTeamTable from './components/USTeamTable.jsx';
 
-const Juniors2025Standings = () => {
+const Juniors2025USTeam = () => {
     const sportdataContext = useSportdata();
     const { data, filters } = sportdataContext
 
@@ -34,31 +33,6 @@ const Juniors2025Standings = () => {
 
     const { aGroup, bGroup, cGroup } = divideAthletesByGroup(genderAthletes);
 
-    const groupData = [
-        {
-            group: "A",
-            data: aGroup,
-        },
-        {
-            group: "B",
-            data: bGroup,
-        },
-        {
-            group: "C",
-            data: cGroup
-        }
-    ];
-
-    const standingTables = (
-        groupData.map((dataObj) => (
-            <CRow key={`${genderKey}_${dataObj.group}_Group`}>
-                <CCol xs={12}>
-                    <StandingsTable gender={genderKey} group={dataObj.group} data={dataObj.data} />
-                </CCol>
-            </CRow>
-        ))
-    );
-
     return (
         <>
             <CRow>
@@ -66,9 +40,25 @@ const Juniors2025Standings = () => {
                     <CAlert color="info">Standings as of {date}. To update scores, refresh this page or wait 1 minute.</CAlert>
                 </CCol>
             </CRow>
-            {standingTables}
+            <GenderGroupTable gender={genderKey} group="A" data={aGroup} />
+            <GenderGroupTable gender={genderKey} group="B" data={bGroup} />
+            <GenderGroupTable gender={genderKey} group="C" data={cGroup} />
         </>
     )
 }
 
-export default Juniors2025Standings
+const GenderGroupTable = ({
+    gender,
+    group,
+    data
+}) => {
+    return (
+        <CRow>
+            <CCol xs={12}>
+                <USTeamTable gender={gender} group={group} data={data} />
+            </CCol>
+        </CRow>
+    );
+}
+
+export default Juniors2025USTeam

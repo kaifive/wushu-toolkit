@@ -16,10 +16,9 @@ import {
 
 import { useSportdata } from '../sportdataComponents/context/SportdataContext.jsx';
 
-import SportdataFilters from '../sportdataComponents/components/filters/SportdataFilters.jsx';
-import StandingsTable from './components/StandingsTable.jsx';
-
 import { parseScheduleData } from './utils/parseScheduleData.js'
+
+import { NOVA_WUSHU_ATHLETES } from './constants.js';
 
 const apiUrl = import.meta.env?.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -102,7 +101,7 @@ const EventCard = ({ event }) => {
 
     const { athleteData } = data
 
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(true);
 
     useEffect(() => {
         const scores = event.athletes.map((eventInfo) => {
@@ -117,7 +116,7 @@ const EventCard = ({ event }) => {
 
         const isMixed = hasZeroScores && hasNonZeroScores;
 
-        setExpanded(isMixed);
+        // setExpanded(isMixed);
     }, [event, athleteData]);
 
     let simpleEventName = event.category.replace(/(Youth|Junior|Children)/gi, '').trim();
@@ -153,7 +152,7 @@ const EventCard = ({ event }) => {
                                     let matchedName = ""
 
                                     return (
-                                        <CTableRow key={`${data.name.toLowerCase()}`}>
+                                        <CTableRow key={`${data.name.toLowerCase()}`} color={NOVA_WUSHU_ATHLETES.includes(sanitizedAthleteName) ? "primary" : ""}>
                                             <CTableHeaderCell>{data.order}</CTableHeaderCell>
                                             <CTableDataCell>{sanitizedAthleteName}</CTableDataCell>
                                             <CTableDataCell>
