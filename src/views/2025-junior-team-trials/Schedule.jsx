@@ -76,23 +76,28 @@ const Juniors2025Schedule = () => {
 const SessionCard = ({ session }) => {
     const [isExpanded, setIsExpanded] = useState(true);
 
+    const sportdataContext = useSportdata();
+    const { data, filters } = sportdataContext
+
+    const { athleteData, date, isLoading, error } = data
+
     return (
         <CCard className="mb-4">
             <CCardHeader
                 style={{ cursor: 'pointer' }}
                 onClick={() => setIsExpanded(prev => !prev)}
             >
-                <strong>{session.name} {isExpanded ? "▾" : "▸"}</strong>
+                <strong>{session.name}</strong> - {averageScoreBySession(session, athleteData)} {isExpanded ? "▾" : "▸"}
             </CCardHeader>
             {isExpanded && (
                 <CCardBody>
                     <CRow>
-                                        {session.rings.map((ring, ringIndex) => (
-                                            <CCol xs={12} md={6} key={ringIndex} className="mb-4">
-                                                <RingCard ring={ring} />
-                                            </CCol>
-                                        ))}
-                                    </CRow>
+                        {session.rings.map((ring, ringIndex) => (
+                            <CCol xs={12} md={6} key={ringIndex} className="mb-4">
+                                <RingCard ring={ring} />
+                            </CCol>
+                        ))}
+                    </CRow>
                 </CCardBody>
             )}
         </CCard>
@@ -102,13 +107,18 @@ const SessionCard = ({ session }) => {
 const RingCard = ({ ring }) => {
     const [isExpanded, setIsExpanded] = useState(true);
 
+    const sportdataContext = useSportdata();
+    const { data, filters } = sportdataContext
+
+    const { athleteData, date, isLoading, error } = data
+
     return (
         <CCard className="mb-4">
             <CCardHeader
                 style={{ cursor: 'pointer' }}
                 onClick={() => setIsExpanded(prev => !prev)}
             >
-                <strong>Ring {ring.ringNumber} {isExpanded ? "▾" : "▸"}</strong>
+                <strong>Ring {ring.ringNumber}</strong> - {averageScoreByRing(ring, athleteData)} {isExpanded ? "▾" : "▸"}
             </CCardHeader>
             {isExpanded && (
                 <CCardBody>
@@ -157,7 +167,7 @@ const EventCard = ({ event }) => {
                     style={{ cursor: 'pointer' }}
                     onClick={() => setExpanded(prev => !prev)}
                 >
-                    <strong>{simpleEventName}</strong> {expanded ? "▾" : "▸"}
+                    <strong>{simpleEventName}</strong> - {averageScoreByEvent(event, athleteData)} {expanded ? "▾" : "▸"}
                 </CCardHeader>
                 {expanded && (
                     <CCardBody>
@@ -216,8 +226,7 @@ function getAthleteEventScore(athleteName, event, athleteData) {
     const individualAthleteData = athleteData[athleteNameKey]
 
     if (!individualAthleteData) {
-//        console.log("No athlete data found for:", athleteNameKey);
-console.log(athleteData)
+        console.log("No athlete data found for:", athleteNameKey);
         return 0.000;
     }
 
@@ -239,5 +248,63 @@ console.log(athleteData)
     return finalScore;
 }
 
+function averageScoreByEvent(event, athleteData) {
+    const scores = event.athletes.map((athleteInfo) => {
+        const sanitizedAthleteName = athleteInfo.name.replace(/_/g, " ")
+
+        const finalScore = getAthleteEventScore(sanitizedAthleteName, event.category, athleteData);
+
+        return parseFloat(finalScore);
+    });
+
+    const validScores = scores.filter(score => score > 0);
+
+    if (validScores.length === 0) {
+        return "(0.000)";
+    }
+
+    const totalScore = validScores.reduce((acc, score) => acc + score, 0);
+    return `(${(totalScore / validScores.length).toFixed(3)})`;
+}
+
+function averageScoreByRing(ring, athleteData) {
+    const allScores = [];
+
+    ring.events.forEach((event) => {
+        const eventAverage = averageScoreByEvent(event, athleteData);
+        const numericAverage = parseFloat(eventAverage.replace(/[()]/g, ''));
+        if (!isNaN(numericAverage) && numericAverage > 0) {
+            allScores.push(numericAverage);
+        }
+    });
+
+    if (allScores.length === 0) {
+        return "(0.000)";
+    }
+
+    const totalScore = allScores.reduce((acc, score) => acc + score, 0);
+    return `(${(totalScore / allScores.length).toFixed(3)})`;
+}
+
+function averageScoreBySession(session, athleteData) {
+    const allScores = [];
+
+    session.rings.forEach((ring) => {
+        ring.events.forEach((event) => {
+            const eventAverage = averageScoreByEvent(event, athleteData);
+            const numericAverage = parseFloat(eventAverage.replace(/[()]/g, ''));
+            if (!isNaN(numericAverage) && numericAverage > 0) {
+                allScores.push(numericAverage);
+            }
+        });
+    });
+
+    if (allScores.length === 0) {
+        return "(0.000)";
+    }
+
+    const totalScore = allScores.reduce((acc, score) => acc + score, 0);
+    return `(${(totalScore / allScores.length).toFixed(3)})`;
+}
 
 export default Juniors2025Schedule
