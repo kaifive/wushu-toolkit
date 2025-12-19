@@ -131,6 +131,15 @@ const RingCard = ({ ring }) => {
     )
 }
 
+const finished_events = [
+    "Junior Female 1st Set Changquan",
+    "Junior Male 1st Set Nanquan",
+    "Youth Female 3rd Set Changquan",
+    "Children Female Elementary Nanquan",
+    "Junior Female 1st Set Nanquan",
+    "Junior Male 1st Set Changquan",
+]
+
 const EventCard = ({ event }) => {
     const sportdataContext = useSportdata();
     const { data } = sportdataContext
@@ -151,6 +160,10 @@ const EventCard = ({ event }) => {
         const hasNonZeroScores = scores.some(score => score !== 0.000);
 
         const isMixed = hasZeroScores && hasNonZeroScores;
+
+        if (finished_events.includes(event.category)) {
+            setExpanded(false);
+        }
 
         // setExpanded(isMixed);
     }, [event, athleteData]);
