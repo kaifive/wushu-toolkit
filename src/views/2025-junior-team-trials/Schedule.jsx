@@ -161,6 +161,9 @@ const finished_events = [
     "Youth Male 3rd Set Taijijian",
     "Children Male Elementary Nandao",
     "Children Female Elementary Taijijian",
+    "Youth Female 3rd Set Taijijian",
+    "Junior Female 1st Set Taijijian",
+    
 ]
 
 const EventCard = ({ event }) => {
