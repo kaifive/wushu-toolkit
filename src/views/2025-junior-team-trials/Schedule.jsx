@@ -152,6 +152,15 @@ const finished_events = [
     "Junior Male 1st Set Qiangshu",
     "Children Female Elementary Taijiquan",
     "Youth Male 3rd Set Nanquan",
+    "Junior Male 1st Set Nandao",
+    "Children Male Elementary Daoshu",
+    "Children Female Elementary Daoshu",
+    "Junior Female 1st Set Daoshu",
+    "Youth Male 3rd Set Daoshu",
+    "Youth Female 3rd Set Daoshu",
+    "Youth Male 3rd Set Taijijian",
+    "Children Male Elementary Nandao",
+    "Children Female Elementary Taijijian",
 ]
 
 const EventCard = ({ event }) => {
