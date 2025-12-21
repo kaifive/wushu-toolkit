@@ -1,1 +1,0 @@
-const e=["Chloe Nguyen","Alexander Lieu","Ryan Tran","Joshua Le","Elizabeth Le","Aivy Stone","Joshua Dai","Benjamin Le","Daniel Sinor"],n=[...e,...e.map(a=>a.split(" ").reverse().join(" "))];export{n as N};

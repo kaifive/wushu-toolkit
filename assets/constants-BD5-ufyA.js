@@ -1,0 +1,1 @@
+const a=["Chloe Nguyen","Alexander Lieu","Ryan Tran","Joshua Le","Elizabeth Le","Aivy Stone","Joshua Dai","Benjamin Le","Daniel Sinor"],o=[...a,...a.map(e=>e.split(" ").reverse().join(" ")),...a.map(e=>e.toLowerCase()),...a.map(e=>e.toLowerCase().split(" ").reverse().join(" "))];export{o as N};
