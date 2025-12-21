@@ -84,6 +84,7 @@ const AdultsSchedule2025 = React.lazy(() => import('./views/2025team-trials/Adul
 const Scores2025 = React.lazy(() => import('./views/2025-junior-team-trials/Scores'))
 const Juniors2025Schedule = React.lazy(() => import('./views/2025-junior-team-trials/Schedule'))
 const Juniors2025USTeam = React.lazy(() => import('./views/2025-junior-team-trials/USTeam'))
+const Juniors2025Scorecards = React.lazy(() => import('./views/2025-junior-team-trials/scorecard/Scorecard'))
 
 // Coming Soon
 const ComingSoon = React.lazy(() => import('./views/coming-soon/ComingSoon'))
@@ -152,6 +153,7 @@ const juniors2025_routes = [
   { path: '/2025-juniors/schedule', name: 'Juniors2025Schedule', element: Juniors2025Schedule, protected: true },
   { path: '/2025-juniors/male-us-team', name: 'Juniors2025MaleUSTeam', element: Juniors2025USTeam, protected: true },
   { path: '/2025-juniors/female-us-team', name: 'Juniors2025FemaleUSTeam', element: Juniors2025USTeam, protected: true },
+  { path: '/2025-juniors/scorecards', name: 'Juniors2025Scorecards', element: Juniors2025Scorecards, protected: true },
 ]
 
 const adults2025_routes = [

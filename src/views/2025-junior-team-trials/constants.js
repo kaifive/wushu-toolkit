@@ -12,6 +12,8 @@ const novaWushuAthleteNames = [
 
 export const NOVA_WUSHU_ATHLETES = [
     ...novaWushuAthleteNames,
-    ...novaWushuAthleteNames.map(name => name.split(' ').reverse().join(' '))
+    ...novaWushuAthleteNames.map(name => name.split(' ').reverse().join(' ')),
+    ...novaWushuAthleteNames.map(name => name.toLowerCase()),
+    ...novaWushuAthleteNames.map(name => name.toLowerCase().split(' ').reverse().join(' ')),
 ]
 

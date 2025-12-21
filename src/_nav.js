@@ -502,6 +502,12 @@ const JUNIORS_25 = [
       },
     ],
   },
+  {
+    component: CNavItem,
+    name: 'Scorecards',
+    to: '/2025-juniors/scorecards',
+    icon: <CIcon icon={cilAirplay} customClassName="nav-icon" />,
+  },
 ]
 
 const live_nav = [
