@@ -163,6 +163,19 @@ const finished_events = [
     "Children Female Elementary Taijijian",
     "Youth Female 3rd Set Taijijian",
     "Junior Female 1st Set Taijijian",
+    "Youth Female 3rd Set Qiangshu",
+    "Junior Female 1st Set Nandao",
+    "Youth Male 3rd Set Nandao",
+    "Youth Female 3rd Set Nandao",
+    "Youth Male 3rd Set Jianshu",
+    "Junior Female 1st Set Jianshu",
+    "Junior Male 1st Set Gunshu",
+    "Children Female Elementary Nandao",
+    "Junior Male 1st Set Daoshu",
+    "Children Male Elementary Jianshu",
+    "Youth Male 3rd Set Gunshu",
+    "Children Female Elementary Jianshu",
+    "Junior Male 1st Set Jianshu",
     
 ]
 
