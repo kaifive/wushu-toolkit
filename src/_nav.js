@@ -457,11 +457,59 @@ const ADULTS_25 = [
   },
 ]
 
-const JUNIORS_25 = [
+const PWC_26 = [
   {
     component: CNavTitle,
-    name: '2025 Junior Team Trials',
+    name: '2026 PWC',
   },
+  {
+    component: CNavGroup,
+    name: 'Schedule',
+    icon: <CIcon icon={cilListNumbered} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Ring 1',
+        to: '/2026-pwc/schedule/ring-1',
+      },
+      {
+        component: CNavItem,
+        name: 'Ring 2',
+        to: '/2026-pwc/schedule/ring-2',
+      },
+      {
+        component: CNavItem,
+        name: 'Ring 3',
+        to: '/2026-pwc/schedule/ring-3',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Live Standings',
+    icon: <CIcon icon={cilWc} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Male Standings',
+        to: '/2026-pwc/male-standings',
+      },
+      {
+        component: CNavItem,
+        name: 'Female Standings',
+        to: '/2026-pwc/female-standings',
+      },
+    ],
+  },
+  {
+    component: CNavItem,
+    name: 'Grand Champion',
+    to: '/2026-pwc/grand-champion',
+    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+  },
+]
+
+const JUNIORS_25 = [
   {
     component: CNavItem,
     name: 'Schedule',
@@ -545,10 +593,17 @@ const live_nav = [
     to: '/toolkit/average-score-calculator',
     icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
   },
-  ...JUNIORS_25,
+  ...PWC_26,
   {
     component: CNavTitle,
     name: 'Past Competitions',
+  },
+  {
+    component: CNavGroup,
+    name: '2025 Junior Team Trials',
+    items: [
+      ...JUNIORS_25,
+    ],
   },
   {
     component: CNavGroup,

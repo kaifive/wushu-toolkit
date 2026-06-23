@@ -86,6 +86,11 @@ const Juniors2025Schedule = React.lazy(() => import('./views/2025-junior-team-tr
 const Juniors2025USTeam = React.lazy(() => import('./views/2025-junior-team-trials/USTeam'))
 const Juniors2025Scorecards = React.lazy(() => import('./views/2025-junior-team-trials/scorecard/Scorecard'))
 
+// 2026 PWC
+const PWC2026Standings = React.lazy(() => import('./views/2026-pwc/Standings'))
+const PWC2026GrandChampion = React.lazy(() => import('./views/2026-pwc/GrandChampion'))
+const PWC2026Schedule = React.lazy(() => import('./views/2026-pwc/Schedule'))
+
 // Coming Soon
 const ComingSoon = React.lazy(() => import('./views/coming-soon/ComingSoon'))
 
@@ -146,6 +151,15 @@ const base_routes = [
   { path: '/nandu-calculator', name: 'NanduCalculator', element: ComingSoon },
 ]
 
+const pwc2026_routes = [
+  { path: '/2026-pwc/male-standings', name: 'PWC2026MaleStandings', element: PWC2026Standings, protected: false },
+  { path: '/2026-pwc/female-standings', name: 'PWC2026FemaleStandings', element: PWC2026Standings, protected: false },
+  { path: '/2026-pwc/grand-champion', name: 'PWC2026GrandChampion', element: PWC2026GrandChampion, protected: false },
+  { path: '/2026-pwc/schedule/ring-1', name: 'PWC2026ScheduleRing1', element: PWC2026Schedule, protected: false },
+  { path: '/2026-pwc/schedule/ring-2', name: 'PWC2026ScheduleRing2', element: PWC2026Schedule, protected: false },
+  { path: '/2026-pwc/schedule/ring-3', name: 'PWC2026ScheduleRing3', element: PWC2026Schedule, protected: false },
+]
+
 const juniors2025_routes = [
   // { path: '/2025-juniors/about', name: 'About2025Juniors', element: About2025 },
   { path: '/2025-juniors/male-standings', name: 'Juniors2025MaleScores', element: Scores2025, protected: true },
@@ -186,6 +200,7 @@ const juniors2024_routes = [
 
 const live_routes = [
   ...base_routes,
+  ...pwc2026_routes,
   ...juniors2025_routes,
   ...adults2025_routes,
   ...phoenix2025_routes,

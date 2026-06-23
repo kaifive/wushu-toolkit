@@ -1,0 +1,8 @@
+/* Highlight an entire table row. CoreUI's striped/hover styles paint each cell
+   with an inset box-shadow overlay that covers a plain <tr> background, so we
+   override the cells directly and clear that overlay. The color is supplied per
+   row via the --pwc-row-bg custom property. */
+.pwc-highlight-row > * {
+  background-color: var(--pwc-row-bg) !important;
+  box-shadow: none !important;
+}

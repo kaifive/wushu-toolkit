@@ -8,6 +8,7 @@ import routes from '../routes'
 import AuthRoute from '../authentication/AuthRoute'
 
 import { SportdataProvider } from '../views/sportdataComponents/context/SportdataContext'
+import { PWCProvider } from '../views/2026-pwc/context/PWCContext'
 
 const AppContent = () => {
   return (
@@ -33,6 +34,9 @@ const AppContent = () => {
               },
               '2025-juniors': {
                 provider: SportdataProvider,
+              },
+              '2026-pwc': {
+                provider: PWCProvider,
               }
             }
 
