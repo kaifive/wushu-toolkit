@@ -22,6 +22,7 @@ export const ATHLETE_GROUPS = [
       ['Elizabeth', 'Le'],
       ['Arya', 'Mohan'],
       ['Denisa', 'Bento'],
+      ['Nanette', 'Hill'],
       ['Samson', 'Turner'],
     ],
   },
