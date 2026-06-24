@@ -11,11 +11,16 @@
 // shares the same column layout (only column A's header differs per ring).
 
 export const PWC_2026 = {
-  // Production sheet (live, read-only):
-  SHEET_ID: '12lE2WHVVp9LE5cUUlE9ilUyEEezZNbaytqLXPUlKIRc',
-  // Test copy (used while entering test scores). Must be shared
-  // "Anyone with the link can view" for gviz to read it.
-  // SHEET_ID: '11kwXcCvledDdkZW6R_U4JvhWlXxTtJYeYU7OBEeRdXA',
+  // Production sheet (live, read-only) — drives the schedule and the live scores.
+  SHEET_ID: '1QBaEYns9YHykZpj3UdUPftrGfnn1W8nwhbzS6IKyh-w',
+  // Previous sheets (kept for reference):
+  // SHEET_ID: '12lE2WHVVp9LE5cUUlE9ilUyEEezZNbaytqLXPUlKIRc', // earlier prod
+  // SHEET_ID: '11kwXcCvledDdkZW6R_U4JvhWlXxTtJYeYU7OBEeRdXA', // test copy
+
+  // The prod sheet no longer carries Age or the all-around-champion registration
+  // flag. We look those up by athlete name from this reference sheet (the older
+  // copy), which still has both. Same ring-tab gids as prod.
+  REFERENCE_SHEET_ID: '11kwXcCvledDdkZW6R_U4JvhWlXxTtJYeYU7OBEeRdXA',
 
   // The three ring tabs we care about (gid + display name). A 4th tab on the
   // sheet (gid 1596685463) is intentionally excluded.
@@ -25,20 +30,28 @@ export const PWC_2026 = {
     { gid: '0', name: 'Ring 3' },
   ],
 
-  // Columns referenced by their spreadsheet letter (gviz column id), since a few
-  // columns have blank header text.
+  // Columns of the PROD sheet (gviz column letters). Prod dropped Age and the
+  // qualifier flag, and shifted everything left by one vs the old layout.
   COLUMNS: {
     firstName: 'B',
     lastName: 'C',
-    age: 'D',
-    gender: 'E',
-    event: 'G', // event name (shown as a tooltip on each score)
-    qualifier: 'H', // must equal `qualifierValue` for a score to count
-    score: 'J',
+    gender: 'D',
+    event: 'F', // event name (shown as a tooltip on each score)
+    score: 'G',
   },
 
-  // A row's score only counts toward standings when column H equals this.
-  qualifierValue: 'Yes',
+  // Columns of the REFERENCE sheet (the copy) used to look up age + registration
+  // by athlete name. This sheet keeps the original layout.
+  REFERENCE_COLUMNS: {
+    firstName: 'B',
+    lastName: 'C',
+    age: 'D',
+    registered: 'H', // "Yes" = registered for the all-around (grand) champion
+  },
+
+  // An athlete is registered for the all-around champion when their reference
+  // `registered` column equals this.
+  registeredValue: 'Yes',
 
   // Sum the highest N scores per athlete to form the total.
   TOP_N: 3,
@@ -66,14 +79,14 @@ export const PWC_2026 = {
   scheduleCsvUrl: (sheetId, gid) =>
     `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`,
 
-  // Column indexes (0-based) used when reading the schedule CSV.
+  // Column indexes (0-based) used when reading the prod schedule CSV.
   SCHEDULE_COLUMNS: {
     time: 0, // A
     firstName: 1, // B
     lastName: 2, // C
-    experience: 5, // F
-    event: 6, // G
-    score: 9, // J
+    experience: 4, // E
+    event: 5, // F
+    score: 6, // G
   },
 }
 

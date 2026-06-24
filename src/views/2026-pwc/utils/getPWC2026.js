@@ -1,6 +1,6 @@
 import { PWC_2026 } from './pwcConfig.js'
 
-// Build the gviz JSON endpoint for a given tab (gid) of the configured sheet.
+// Build the gviz JSON endpoint for a given tab (gid) of a sheet.
 const buildGvizUrl = (sheetId, gid) =>
   `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=${gid}`
 
@@ -21,15 +21,12 @@ const parseGvizResponse = (text) => {
 }
 
 // Convert a gviz table into plain row objects keyed by column LETTER (A, B, C...).
-// We key by letter rather than header because several columns have blank headers
-// and the user maps fields by column letter.
 const tableToRows = (table) => {
   const letters = table.cols.map((col, idx) => col.id || `col${idx}`)
   return table.rows.map((row) => {
     const obj = {}
     letters.forEach((letter, idx) => {
       const cell = row.c?.[idx]
-      // Prefer the raw value `v`; fall back to the formatted value `f`.
       obj[letter] = cell == null ? '' : cell.v != null ? cell.v : (cell.f ?? '')
     })
     return obj
@@ -39,10 +36,26 @@ const tableToRows = (table) => {
 const toNumber = (value) => {
   if (typeof value === 'number') return value
   const n = parseFloat(String(value).replace(/[^0-9.\-]/g, ''))
-  return Number.isFinite(n) ? n : null
+  return Number.isFinite(n) ? n : 0
 }
 
 const clean = (value) => String(value ?? '').trim()
+
+// Athlete identity used to merge rows and to join prod <-> reference: first + last
+// name, case-insensitive.
+const nameKey = (first, last) => `${clean(first).toLowerCase()}|${clean(last).toLowerCase()}`
+
+// Fetch every configured ring tab of a sheet and return all rows merged.
+const fetchAllTabs = async (sheetId) => {
+  const tables = await Promise.all(
+    PWC_2026.TABS.map(async ({ gid }) => {
+      const res = await fetch(buildGvizUrl(sheetId, gid))
+      if (!res.ok) throw new Error(`Failed to load tab ${gid} (HTTP ${res.status}).`)
+      return tableToRows(parseGvizResponse(await res.text()))
+    }),
+  )
+  return tables.flat()
+}
 
 // Decide which gender bucket ("Male" | "Female" | null) a raw value belongs to.
 export const resolveGender = (genderRaw) => {
@@ -53,57 +66,69 @@ export const resolveGender = (genderRaw) => {
   return null
 }
 
-// Unique athlete key = First + Last + Age + Gender (columns B–E).
-const athleteKey = (row, C) =>
-  [clean(row[C.firstName]), clean(row[C.lastName]), clean(row[C.age]), clean(row[C.gender])]
-    .join('|')
-    .toLowerCase()
+// Build a name -> { age, registered } lookup from the reference (copy) sheet,
+// which still carries Age and the all-around-champion registration flag.
+const getReference = async (config) => {
+  const R = config.REFERENCE_COLUMNS
+  const rows = await fetchAllTabs(config.REFERENCE_SHEET_ID)
+  const ref = new Map()
+  rows.forEach((row) => {
+    const first = clean(row[R.firstName])
+    if (!first) return
+    const key = nameKey(first, row[R.lastName])
+    const registered =
+      clean(row[R.registered]).toLowerCase() === config.registeredValue.toLowerCase()
+    const prev = ref.get(key)
+    if (prev) {
+      // Age is constant per athlete; registration counts if any row says yes.
+      prev.age = prev.age || clean(row[R.age])
+      prev.registered = prev.registered || registered
+    } else {
+      ref.set(key, { age: clean(row[R.age]), registered })
+    }
+  })
+  return ref
+}
 
-// Fetch + merge all configured ring tabs, then build one athlete per unique key.
+// Fetch prod scores + the reference lookup, then build one athlete per name with
+// age/registration joined in. `config` defaults to the configured sheet.
 export async function getPWC2026(config = PWC_2026) {
-  const { SHEET_ID, TABS, COLUMNS: C, qualifierValue, TOP_N } = config
+  const { COLUMNS: C, TOP_N } = config
 
-  const tables = await Promise.all(
-    TABS.map(async ({ gid }) => {
-      const res = await fetch(buildGvizUrl(SHEET_ID, gid))
-      if (!res.ok) throw new Error(`Failed to load tab ${gid} (HTTP ${res.status}).`)
-      return tableToRows(parseGvizResponse(await res.text()))
-    }),
-  )
+  const [reference, rows] = await Promise.all([
+    getReference(config),
+    fetchAllTabs(config.SHEET_ID),
+  ])
 
-  const rows = tables.flat()
   const byKey = new Map()
-
-  for (const row of rows) {
+  rows.forEach((row) => {
     const firstName = clean(row[C.firstName])
-    if (!firstName) continue // skip blank / group rows
+    if (!firstName) return
+    const lastName = clean(row[C.lastName])
+    const key = nameKey(firstName, lastName)
 
-    // Only rows flagged in column H count toward standings.
-    if (clean(row[C.qualifier]).toLowerCase() !== qualifierValue.toLowerCase()) continue
-
-    const key = athleteKey(row, C)
     if (!byKey.has(key)) {
+      const ref = reference.get(key) || { age: '', registered: false }
       byKey.set(key, {
         key,
         firstName,
-        lastName: clean(row[C.lastName]),
-        age: clean(row[C.age]),
+        lastName,
         genderRaw: clean(row[C.gender]),
+        age: ref.age,
+        registered: ref.registered,
         qualifyingEvents: [],
       })
     }
 
     byKey.get(key).qualifyingEvents.push({
       event: clean(row[C.event]),
-      score: toNumber(row[C.score]) ?? 0,
+      score: toNumber(row[C.score]),
     })
-  }
+  })
 
   // Per athlete: keep the highest TOP_N scoring events; total = their sum.
   const athletes = Array.from(byKey.values()).map((a) => {
-    const topEvents = [...a.qualifyingEvents]
-      .sort((x, y) => y.score - x.score)
-      .slice(0, TOP_N)
+    const topEvents = [...a.qualifyingEvents].sort((x, y) => y.score - x.score).slice(0, TOP_N)
     const totalScore = topEvents.reduce((sum, e) => sum + e.score, 0)
     return { ...a, topEvents, totalScore }
   })
@@ -111,10 +136,10 @@ export async function getPWC2026(config = PWC_2026) {
   return { athletes, topN: TOP_N }
 }
 
-// Athletes for one gender bucket, sorted by total score descending.
+// Standings show the all-around-champion registrants for one gender, ranked by total.
 export const getStandings = (athletes, gender) =>
   athletes
-    .filter((a) => resolveGender(a.genderRaw) === gender)
+    .filter((a) => a.registered && resolveGender(a.genderRaw) === gender)
     .sort((a, b) => b.totalScore - a.totalScore)
 
 // The eight Grand Champion age divisions (each awarded per gender).
@@ -135,11 +160,12 @@ export const getAgeGroup = (age) => {
   return AGE_GROUPS.find((g) => n >= g.min && n <= g.max) || null
 }
 
-// Grand Champion eligibility: must have competed at least 3 forms. (Per the
-// award rules one must be a hand form and one a weapon form; athletes flagged
-// "Yes" are assumed to satisfy that split at registration.)
+// Grand Champion eligibility: registered for the all-around award and competed
+// at least 3 forms. (Per the rules one must be a hand form and one a weapon
+// form; registered athletes are assumed to satisfy that split at registration.)
 export const GC_MIN_FORMS = 3
-export const isGrandChampionEligible = (a) => a.qualifyingEvents.length >= GC_MIN_FORMS
+export const isGrandChampionEligible = (a) =>
+  a.registered && a.qualifyingEvents.length >= GC_MIN_FORMS
 
 // Overall grand champion = highest total across all eligible athletes (any gender).
 export const getGrandChampion = (athletes) =>
