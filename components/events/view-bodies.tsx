@@ -1,5 +1,4 @@
 import { StatTile } from "@/components/ui/card";
-import { Notice } from "@/components/ui/notice";
 import { Tabs } from "@/components/ui/tabs";
 import type { EventData } from "@/lib/domain/types";
 import type { AthleteHighlight, EventView } from "@/lib/events/types";
@@ -52,7 +51,7 @@ export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
                   <section key={m.division.id}>
                     <h2 className="mb-1 font-display text-lg font-bold tracking-wide">Overall · {m.division.label}</h2>
                     <p className="mb-3 text-xs text-ink-muted">
-                      {m.scored}/{m.total} routines scored. Bold scores count toward the total.
+                      {m.scored}/{m.total} routines scored
                     </p>
                     <OverallTable model={m} highlights={hl} />
                   </section>
@@ -75,15 +74,6 @@ export function TeamBody({ ruleset, data }: ViewProps) {
   const models = selectionModel(data, ruleset);
   return (
     <>
-      {!ruleset.source.verified && (
-        <div className="mb-4">
-          <Notice tone="warn" title="Rules pending verification">
-            Team math follows {ruleset.source.title}
-            {ruleset.source.revision ? ` (${ruleset.source.revision})` : ""}, but some values haven&apos;t been checked against the official
-            document yet. <a className="underline" href="/rules">See the rules</a>.
-          </Notice>
-        </div>
-      )}
       <Tabs
         label="Gender"
         param="gender"

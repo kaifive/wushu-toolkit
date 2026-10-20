@@ -13,12 +13,10 @@ export function DataStatus({ data }: { data: EventData }) {
     <div className="mb-4">
       {data.stale ? (
         <Notice tone="warn">
-          The live source isn&apos;t responding. Showing the last saved copy from {formatAsOf(data.asOf)}.
+          Live scores unavailable. Showing the saved copy from {formatAsOf(data.asOf)}.
         </Notice>
       ) : (
-        <Notice>
-          Scores as of {formatAsOf(data.asOf)} · {data.source}
-        </Notice>
+        <p className="text-sm text-ink-muted">As of {formatAsOf(data.asOf)}</p>
       )}
     </div>
   );
@@ -30,13 +28,5 @@ export function LoadError({ error }: { error: string }) {
       <p>The data source didn&apos;t respond. Try again in a minute.</p>
       <p className="mt-1 font-mono text-xs">{error}</p>
     </Notice>
-  );
-}
-
-export function Disclaimer() {
-  return (
-    <p className="mt-8 text-sm text-ink-muted">
-      Not an official results service. Projections follow the published rules; confirm results with the organizers.
-    </p>
   );
 }

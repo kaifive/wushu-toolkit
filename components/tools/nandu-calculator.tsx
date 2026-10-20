@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  CONN_CAP, CONN_VALUE, CONNECTION_ONLY, FAMILY_LABEL, LANDINGS, NANDU_MAX, TECH_CAP, TECH_VALUE, TECHNIQUES,
+  CONN_CAP, CONN_VALUE, CONNECTION_ONLY, LANDINGS, NANDU_MAX, TECH_CAP, TECH_VALUE, TECHNIQUES,
   chainFromCode, chainToCode, familyOfEvent, nextOptions, scoreNandu, technique, type Chain, type Family,
 } from "@/lib/rules/iwuf-2024/nandu";
 import { EVENTS } from "@/lib/rules";
@@ -62,8 +62,6 @@ export function NanduCalculator() {
     setChains(next);
   };
   const setChain = (i: number, ch: Chain | null) => setChains(ch ? chains.map((c, j) => (j === i ? ch : c)) : chains.filter((_, j) => j !== i));
-  const needTech = Math.max(0, TECH_CAP - score.techniqueRaw);
-  const needConn = Math.max(0, CONN_CAP - score.connectionRaw);
 
   return (
     <div className="space-y-5">
@@ -89,11 +87,10 @@ export function NanduCalculator() {
               </option>
             ))}
           </select>
-          <p className="mt-1 text-xs text-ink-muted">Uses the {FAMILY_LABEL[family]} tables.</p>
         </div>
         <div>
           <label htmlFor="codes" className="mb-1 block text-sm font-semibold">
-            Load from codes <span className="font-normal text-ink-muted">(optional)</span>
+            Load codes
           </label>
           <div className="flex gap-2">
             <input id="codes" value={codes} onChange={(e) => setCodes(e.target.value)} placeholder="353B+323C+1, 324B+1" className={field} />
@@ -126,13 +123,6 @@ export function NanduCalculator() {
         </div>
         <Bar label="Techniques" value={score.techniqueRaw} cap={TECH_CAP} />
         <Bar label="Connections" value={score.connectionRaw} cap={CONN_CAP} />
-        {score.total < NANDU_MAX && chains.length > 0 && (
-          <p className="mt-2 text-sm text-ink-muted">
-            {needTech > 0 && `Add ${fmt(needTech)} in techniques`}
-            {needTech > 0 && needConn > 0 && " and "}
-            {needConn > 0 && `${needTech > 0 ? "" : "Add "}${fmt(needConn)} in connections`}.
-          </p>
-        )}
       </section>
 
       <ol className="space-y-3">
@@ -159,16 +149,6 @@ export function NanduCalculator() {
           <h2 className="font-semibold">Rule breaks ({score.warnings.length})</h2>
           <ul className="mt-1 list-disc space-y-1 pl-5 text-sm">
             {score.warnings.map((w) => (
-              <li key={w}>{w}</li>
-            ))}
-          </ul>
-        </section>
-      )}
-      {chains.length > 0 && score.reminders.length > 0 && (
-        <section className="rounded-card border border-info-ink/15 bg-info p-3 text-info-ink">
-          <h2 className="font-semibold">Remember</h2>
-          <ul className="mt-1 list-disc space-y-1 pl-5 text-sm">
-            {score.reminders.map((w) => (
               <li key={w}>{w}</li>
             ))}
           </ul>
@@ -218,8 +198,7 @@ function RegistrationCodes({ chains, score }: { chains: Chain[]; score: ReturnTy
         })}
       </ol>
       <p className="border-t border-line px-4 py-2 text-sm text-ink-muted">
-        {copied === "select" ? "Copy isn't allowed here; press and hold a code to select it. " : ""}
-        Register them in the order you perform them. Total {score.total.toFixed(2)}.
+        {copied === "select" ? "Copy is blocked here; press and hold a code to select it." : `Total ${score.total.toFixed(2)}`}
       </p>
     </section>
   );
@@ -233,7 +212,7 @@ function Bar({ label, value, cap }: { label: string; value: number; cap: number 
         <span className="font-semibold">{label}</span>
         <span className="tnum text-ink-muted">
           {fmt(Math.min(value, cap))} / {fmt(cap)}
-          {over ? ` (${fmt(value)} declared, capped)` : ""}
+          {over ? ` (${fmt(value)})` : ""}
         </span>
       </div>
       <div className="mt-1 h-2 overflow-hidden rounded-full bg-line" aria-hidden>
@@ -350,7 +329,7 @@ function ChainEditor({
               {link && (
                 <p className={`text-sm ${link.listed ? "text-ink-muted" : "text-seal"}`}>
                   {link.listed
-                    ? `Connection ${link.grade} · +${fmt(link.value)}${link.steps ? ` · within ${link.steps} step${link.steps > 1 ? "s" : ""}` : !isLanding ? " · straight after a two-foot landing" : ""}`
+                    ? `Connection ${link.grade} · +${fmt(link.value)}${link.steps ? ` · within ${link.steps} step${link.steps > 1 ? "s" : ""}` : ""}`
                     : "Not a listed connection · +0"}
                   {link.note ? ` · ${link.note}` : ""}
                 </p>
@@ -389,7 +368,6 @@ function ChainEditor({
             Undo last
           </button>
         )}
-        {options.length === 0 && !ended && <p className="text-sm text-ink-muted">No listed connection starts from this move.</p>}
       </div>
     </div>
   );

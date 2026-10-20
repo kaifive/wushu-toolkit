@@ -97,13 +97,6 @@ test("rule breaks: throw and catch once, weapons only", () => {
   assert.deepEqual(scoreNandu("changquan", [chainFromCode("323A+9")], { weapon: true }).warnings, []);
 });
 
-test("reminders explain caps and execution rules", () => {
-  const r = scoreNandu("changquan", ["353B+323C+1", "324B+1", "312A+335A"].map(chainFromCode));
-  assert.match(r.reminders[0]!, /Connections add up to 0.7; only 0.6 counts/);
-  assert.ok(r.reminders.some((x) => /two complete movements/.test(x)));
-  assert.equal(r.warnings.length, 0);
-});
-
 test("familyOfEvent", () => {
   assert.deepEqual(familyOfEvent("DS"), { family: "changquan", weapon: true });
   assert.deepEqual(familyOfEvent("NQ"), { family: "nanquan", weapon: false });

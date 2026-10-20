@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { EventData } from "@/lib/domain/types";
 import { loadEvent, type LoadedEvent } from "@/lib/events/load";
 import type { EventView } from "@/lib/events/types";
-import { DataStatus, Disclaimer, LoadError } from "./data-status";
+import { DataStatus, LoadError } from "./data-status";
 import { GatedEventView } from "./gated-event-view";
 import { WatchLegend } from "@/components/watchlist/legend";
 import { LiveRefresh } from "./live-refresh";
@@ -33,7 +33,6 @@ export async function EventBody({
       {view !== "overview" && <DataStatus data={loaded.data} />}
       {view !== "overview" && <WatchLegend />}
       {children(loaded, loaded.data)}
-      <Disclaimer />
     </>
   );
 }

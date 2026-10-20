@@ -13,3 +13,8 @@ export function Notice({ tone = "info", title, children }: { tone?: keyof typeof
     </div>
   );
 }
+
+/** One quiet line naming where data comes from (replaces "pending verification" boxes). */
+export function SourceNote({ children }: { children: React.ReactNode }) {
+  return <p className="mb-4 text-sm text-ink-muted">{children}</p>;
+}

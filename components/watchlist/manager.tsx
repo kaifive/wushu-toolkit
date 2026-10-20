@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Notice } from "@/components/ui/notice";
 import { nameTokens, parseRoster, WATCH_COLORS, type WatchList } from "@/lib/watchlist/match";
 import { newId, useWatchLists, writeLists } from "@/lib/watchlist/store";
 import { AthletePicker } from "./athlete-picker";
@@ -25,19 +24,13 @@ export function WatchlistManager() {
 
   return (
     <div className="space-y-4">
-      {lists.length === 0 && (
-        <Notice>
-          Make a list per school or team, give it a color, and those athletes are highlighted on every competition page. Lists stay on this
-          device.
-        </Notice>
-      )}
+
       {lists.map((l, i) => (
         <ListEditor key={l.id} list={l} first={i === 0} last={i === lists.length - 1} onChange={(p) => update(l.id, p)} onRemove={() => remove(l.id)} onMove={(d) => move(i, d)} />
       ))}
       <button type="button" onClick={add} className="min-h-12 w-full rounded-card bg-primary font-semibold text-primary-ink">
         New watch list
       </button>
-      {lists.length > 1 && <p className="text-sm text-ink-muted">If an athlete is on two lists, the higher list&apos;s color wins.</p>}
     </div>
   );
 }
@@ -115,7 +108,7 @@ function ListEditor({
         />
         <div>
           <label className="mb-1 block text-sm font-semibold" htmlFor={`ath-${list.id}`}>
-            On this list <span className="font-normal text-ink-muted">(one per line, any name order; paste a roster here)</span>
+            On this list
           </label>
           <textarea
             id={`ath-${list.id}`}
@@ -130,7 +123,7 @@ function ListEditor({
             <p className="mt-2 text-sm text-warn-ink">Add a last name so these can match: {oneWord.join(", ")}</p>
           )}
           <div className="mt-2 flex items-center justify-between gap-2">
-            <p className="text-sm text-ink-muted">{saved ? "Saved on this device." : "Unsaved changes"}</p>
+            <p className="text-sm text-ink-muted">{saved ? "" : "Unsaved changes"}</p>
             <button
               type="button"
               disabled={saved}

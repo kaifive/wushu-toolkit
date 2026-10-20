@@ -8,8 +8,7 @@ export default function WatchlistsPage() {
   return (
     <Container className="max-w-2xl">
       <PageHeader title="Watch lists">
-        Athletes on your lists are highlighted in standings, team projections, scorecards and schedules. Names match in any order and
-        capitalization.
+        Highlight athletes on every competition page. Saved on this device.
       </PageHeader>
       <WatchlistManager />
     </Container>

@@ -264,8 +264,6 @@ export interface NanduScore {
   total: number;
   /** Rule breaks in what was declared: these cost points. */
   warnings: string[];
-  /** Execution rules that depend on how the element is performed. */
-  reminders: string[];
 }
 
 /** Options that refine the checks: the exact event decides barehand vs weapon rules. */
@@ -297,7 +295,6 @@ export function chainToCode(chain: Chain): string {
  */
 export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions = {}): NanduScore {
   const warnings: string[] = [];
-  const reminders: string[] = [];
   const scored = chains.map((ch) => {
     const techniques: ScoredChain["techniques"] = [];
     const links: ScoredLink[] = [];
@@ -339,20 +336,11 @@ export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions =
   if (throws > 1) warnings.push("Only one throw-and-catch connection is allowed per weapon routine.");
   if (throws > 0 && opts.weapon === false) warnings.push("Throw-and-catch connections are for weapon routines.");
 
-  // Execution reminders for what was declared.
-  if (links.some((l) => l.code.endsWith("+8"))) reminders.push("Single-foot landings: land on the same foot that kicked.");
-  if (links.some((l) => /\+\d{3}[A-D]$/.test(l.code) && l.steps === undefined))
-    reminders.push("Jump-to-jump connections without a step count must take off straight after a two-foot landing.");
-  if (links.some((l) => /\+\d{1,2}$/.test(l.code) && !l.code.endsWith("+9")))
-    reminders.push("Hold landings and balances still, and do at least two complete movements before the next difficulty element (else 0.1 off).");
-  reminders.push("If a technique is missed, the connections before and after it don't count either.");
 
   const techniqueRaw = r3(scored.flatMap((c) => c.techniques).reduce((s, x) => s + x.value, 0));
   const connectionRaw = r3(scored.flatMap((c) => c.links).reduce((s, x) => s + x.value, 0));
   const tech = Math.min(TECH_CAP, techniqueRaw);
   const conn = Math.min(CONN_CAP, connectionRaw);
-  if (techniqueRaw > TECH_CAP) reminders.unshift(`Techniques add up to ${techniqueRaw}; only ${TECH_CAP} counts (the last technique is the one reduced). The extra is a safety margin.`);
-  if (connectionRaw > CONN_CAP) reminders.unshift(`Connections add up to ${connectionRaw}; only ${CONN_CAP} counts (the last connection is the one reduced).`);
   return {
     chains: scored,
     techniqueRaw,
@@ -361,7 +349,6 @@ export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions =
     connection: r3(conn),
     total: r3(tech + conn),
     warnings: [...new Set(warnings)],
-    reminders: [...new Set(reminders)],
   };
 }
 

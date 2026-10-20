@@ -39,7 +39,6 @@ export function TeamProjection({ model }: { model: ScopeModel }) {
           )}
         </Card>
       ))}
-      <p className="text-sm text-ink-muted lg:col-span-3">Projection only: where athletes land if the competition ended now.</p>
     </div>
   );
 }

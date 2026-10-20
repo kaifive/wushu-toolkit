@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Notice } from "@/components/ui/notice";
+import { SourceNote } from "@/components/ui/notice";
 import { Container, PageHeader } from "@/components/ui/page-header";
 import { ScrollTable, td, th } from "@/components/ui/table";
 import { CURRENT_RULESET, EVENTS, formatDuration, type TieBreak } from "@/lib/rules";
@@ -35,20 +35,14 @@ export default function RulesPage() {
       </PageHeader>
 
       {!r.source.verified && (
-        <div className="mb-6">
-          <Notice tone="warn" title="Pending verification">
-            <ul className="list-disc space-y-1 pl-5">
-              {r.source.notes?.map((n) => <li key={n}>{n}</li>)}
-            </ul>
-            {r.source.url && (
-              <p className="mt-2">
-                <a href={r.source.url} className="underline" target="_blank" rel="noopener noreferrer">
-                  Read the official document
-                </a>
-              </p>
-            )}
-          </Notice>
-        </div>
+        <SourceNote>
+          Minimum averages, team sizes and tie-breaks not yet confirmed against the official document.{" "}
+          {r.source.url && (
+            <a href={r.source.url} className="underline" target="_blank" rel="noopener noreferrer">
+              Official document
+            </a>
+          )}
+        </SourceNote>
       )}
 
       <section className="mb-8">
