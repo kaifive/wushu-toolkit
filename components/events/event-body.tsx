@@ -3,7 +3,7 @@ import type { EventData } from "@/lib/domain/types";
 import { loadEvent, type LoadedEvent } from "@/lib/events/load";
 import type { EventView } from "@/lib/events/types";
 import { DataStatus, Disclaimer, LoadError } from "./data-status";
-import { GatedNotice } from "./gated";
+import { GatedEventView } from "./gated-event-view";
 import { LiveRefresh } from "./live-refresh";
 
 type Ok = Extract<LoadedEvent, { state: "ok" }>;
@@ -20,7 +20,11 @@ export async function EventBody({
 }) {
   const loaded = await loadEvent(slug);
   if (!loaded || (view !== "overview" && !loaded.event.views.includes(view))) notFound();
-  if (loaded.state === "gated") return <GatedNotice eventName={loaded.event.name} />;
+  if (loaded.state === "gated") {
+    if (view === "overview") return null;
+    const e = loaded.event;
+    return <GatedEventView slug={e.slug} view={view} eventName={e.name} rulesetId={e.rulesetId} highlights={e.highlights} refreshSeconds={e.revalidate ?? 60} />;
+  }
   if (loaded.state === "error") return <LoadError error={loaded.error} />;
   return (
     <>
