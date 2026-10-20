@@ -37,6 +37,11 @@ export interface EventConfig {
   description?: string;
   links?: { label: string; url: string }[];
   highlights?: AthleteHighlight[];
+  /**
+   * Pre-scrape on a schedule (ADR-008): the snapshot GitHub Action saves this
+   * event's live data to data/snapshots/<slug>/ while `until` is in the future.
+   */
+  snapshot?: { until: string };
   /** Notes shown on the event page (e.g. how scores were collected). */
   notes?: string[];
 }

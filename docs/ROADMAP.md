@@ -54,7 +54,7 @@ Resume from the first unchecked item. One commit per item.
 - [ ] (Needs Firebase keys) End-to-end check of sign-in, session lock and granting on a Vercel preview
 
 ## Phase 8 — Ship
-- [ ] Snapshot GitHub Action
+- [x] Snapshot GitHub Action (also runnable by hand from the Actions tab with a slug)
 - [ ] CI workflow (check, test, build)
 - [ ] Legacy hash-route redirect page (ADR-007)
 - [ ] Push branch, open PR

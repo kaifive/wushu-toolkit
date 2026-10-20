@@ -1,0 +1,52 @@
+/**
+ * Save an event's live data as a snapshot (ADR-008).
+ *
+ *   npm run snapshot -- 2026-pwc            one event
+ *   npm run snapshot -- --scheduled         every event whose config has snapshot.until in the future
+ *
+ * A snapshot is written only when the live source answered (not a stale
+ * fallback) and the data changed since the newest saved file.
+ */
+import { mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
+import { EVENT_CONFIGS } from "../content/events";
+import { latestSnapshot, snapshotFileName } from "../lib/data/snapshot";
+import type { EventData } from "../lib/domain/types";
+import { writeSnapshotIndex } from "./snapshot-index";
+
+const args = process.argv.slice(2);
+const now = Date.now();
+const targets = args.includes("--scheduled")
+  ? EVENT_CONFIGS.filter((e) => e.snapshot && Date.parse(e.snapshot.until) > now)
+  : EVENT_CONFIGS.filter((e) => args.includes(e.slug));
+
+if (!targets.length) {
+  console.log(args.includes("--scheduled") ? "No events scheduled for snapshots." : `Usage: npm run snapshot -- <slug>... | --scheduled`);
+  process.exit(0);
+}
+
+/** Compare without the volatile timestamp. */
+const fingerprint = (d: EventData) => JSON.stringify({ ...d, asOf: undefined, source: undefined, stale: undefined });
+
+let failures = 0;
+for (const event of targets) {
+  try {
+    const data = await event.data().load();
+    if (data.stale) throw new Error("live source unavailable (got the saved copy)");
+    const dir = join(process.cwd(), "data/snapshots", event.slug);
+    mkdirSync(dir, { recursive: true });
+    const last = latestSnapshot(existsSync(dir) ? readdirSync(dir) : []);
+    if (last && fingerprint(JSON.parse(readFileSync(join(dir, last), "utf8")) as EventData) === fingerprint(data)) {
+      console.log(`${event.slug}: unchanged`);
+      continue;
+    }
+    const file = snapshotFileName(new Date(data.asOf || now));
+    writeFileSync(join(dir, file), `${JSON.stringify({ ...data, source: `${data.source} (saved)` })}\n`);
+    console.log(`${event.slug}: saved ${file} (${data.scores.length} entries)`);
+  } catch (err) {
+    failures++;
+    console.error(`${event.slug}: ${err instanceof Error ? err.message : err}`);
+  }
+}
+writeSnapshotIndex();
+process.exit(failures === targets.length ? 1 : 0);
