@@ -54,9 +54,15 @@ export function findWatch(lists: WatchList[], athleteName: string): WatchList | 
   return lists.find((l) => l.enabled && l.athletes.some((a) => namesMatch(a, athleteName)));
 }
 
-/** Parse a pasted roster: one name per line, or comma/semicolon separated when on one line. */
+/**
+ * Parse a pasted roster: one name per line, or ";" separated, or ","
+ * separated when every part is a full name. "Wu, Ashton" stays one name.
+ */
 export function parseRoster(text: string): string[] {
-  const lines = text.includes("\n") ? text.split(/\r?\n/) : text.split(/[;,]/);
+  const lines = text.split(/\r?\n|;/).flatMap((line) => {
+    const parts = line.split(",");
+    return parts.length > 1 && parts.every((p) => nameTokens(p).length >= 2) ? parts : [line];
+  });
   const seen = new Set<string>();
   const out: string[] = [];
   for (const raw of lines) {

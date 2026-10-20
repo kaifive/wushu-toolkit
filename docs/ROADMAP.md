@@ -43,6 +43,7 @@ Resume from the first unchecked item. One commit per item.
 ## Phase 5b — Watch lists
 - [x] Local watch lists (multiple, colored, one per school) with fuzzy name matching
 - [x] Highlight on every competition page (standings, team, results, scorecards, schedule, all-around)
+- [x] Type-ahead from past competitions, plus "add everyone from this club"
 - [ ] Optional: sync lists to the account once accounts are live
 
 ## Phase 5c — Nandu calculator

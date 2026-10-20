@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Notice } from "@/components/ui/notice";
 import { nameTokens, parseRoster, WATCH_COLORS, type WatchList } from "@/lib/watchlist/match";
 import { newId, useWatchLists, writeLists } from "@/lib/watchlist/store";
+import { AthletePicker } from "./athlete-picker";
 
 const input = "min-h-tap w-full rounded-card border border-line bg-surface px-3";
 
@@ -104,9 +105,17 @@ function ListEditor({
             </label>
           </div>
         </fieldset>
+        <AthletePicker
+          exclude={parseRoster(draft)}
+          onAdd={(names) => {
+            const next = parseRoster([...parseRoster(draft), ...names].join("\n"));
+            setDraft(next.join("\n"));
+            onChange({ athletes: next });
+          }}
+        />
         <div>
           <label className="mb-1 block text-sm font-semibold" htmlFor={`ath-${list.id}`}>
-            Athletes <span className="font-normal text-ink-muted">(one per line, any name order)</span>
+            On this list <span className="font-normal text-ink-muted">(one per line, any name order; paste a roster here)</span>
           </label>
           <textarea
             id={`ath-${list.id}`}

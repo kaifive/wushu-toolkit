@@ -42,4 +42,45 @@ test("findWatch uses the first enabled list", () => {
 test("parseRoster handles lines, commas and duplicates", () => {
   assert.deepEqual(parseRoster("Ada Chen\n  Ben  Ortiz \n\nchen ada"), ["Ada Chen", "Ben Ortiz"]);
   assert.deepEqual(parseRoster("Ada Chen, Ben Ortiz; Cy Lee"), ["Ada Chen", "Ben Ortiz", "Cy Lee"]);
+  assert.deepEqual(parseRoster("Wu, Ashton"), ["Wu, Ashton"], "Last, First stays one name");
+  assert.deepEqual(parseRoster("Wu, Ashton\nChen, Ada"), ["Wu, Ashton", "Chen, Ada"]);
+});
+
+import { buildAthleteIndex, suggestAthletes, suggestClubs } from "@/lib/watchlist/suggest";
+import type { EventData } from "@/lib/domain/types";
+
+const ev = (label: string, rows: [string, string?][]): { label: string; data: EventData } => ({
+  label,
+  data: {
+    registrations: rows.map(([name, club]) => ({ athlete: { id: name.toLowerCase(), name, club }, entries: [] })),
+    scores: [],
+    schedules: [],
+    asOf: "",
+    source: "",
+  },
+});
+
+const index = buildAthleteIndex([
+  ev("2024 Juniors", [["Abram Tang", "Elite Kung Fu"], ["Ada Chen", "Elite Kung Fu"], ["Solo", "X"]]),
+  ev("2025 Juniors", [["TANG ABRAM", "Elite Kung Fu"], ["Ben Ortiz", "Individual"], ["Cy Lee", "Nova Wushu"]]),
+]);
+
+test("index merges spellings across events and prefers mixed case", () => {
+  const tang = index.athletes.find((a) => a.name === "Abram Tang");
+  assert.ok(tang);
+  assert.deepEqual(tang.events, ["2024 Juniors", "2025 Juniors"]);
+  assert.equal(index.athletes.length, 4, "one-word names are skipped");
+  assert.deepEqual(index.clubs.map((c) => [c.name, c.athletes.length]), [["Elite Kung Fu", 2]]);
+});
+
+test("suggestAthletes matches word prefixes in any order and skips listed athletes", () => {
+  assert.deepEqual(suggestAthletes(index, "tan ab").map((a) => a.name), ["Abram Tang"]);
+  assert.deepEqual(suggestAthletes(index, "a"), [], "one letter is too little");
+  assert.deepEqual(suggestAthletes(index, "ada").map((a) => a.name), ["Ada Chen"]);
+  assert.deepEqual(suggestAthletes(index, "ada", ["chen_ada"]), []);
+});
+
+test("suggestClubs finds clubs by word prefix", () => {
+  assert.deepEqual(suggestClubs(index, "elite k").map((c) => c.name), ["Elite Kung Fu"]);
+  assert.deepEqual(suggestClubs(index, "no"), []);
 });
