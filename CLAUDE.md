@@ -65,7 +65,7 @@ npm run build    # production build
 
 ## Mobile-first checklist
 
-- Bottom tab bar on phones, top nav on desktop.
+- Bottom tab bar on phones, dark sidebar on desktop.
 - Tap targets at least 44px.
 - Every table must work at 375px wide: sticky first column, horizontal
   scroll inside the table only, no page-level horizontal scroll.
