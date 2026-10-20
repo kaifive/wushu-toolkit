@@ -17,7 +17,7 @@ Resume from the first unchecked item. One commit per item.
 - [ ] Published Google Doc adapter (JSON body and Sportdata scorecard HTML)
 - [ ] JSON API adapter (bowuu)
 - [ ] Snapshot adapter (`data/snapshots/`)
-- [ ] Sportdata adapter (registration, categories, scorecards) with saved fixtures
+- [x] Sportdata adapter (registration, categories, scorecards) with saved fixtures (scorecard fixture synthetic, see OPEN_QUESTIONS #9)
 
 ## Phase 3 — Rules engine
 - [ ] `lib/rules` types + registry
