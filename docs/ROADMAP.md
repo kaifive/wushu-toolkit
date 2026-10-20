@@ -41,7 +41,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] Rules page for the current ruleset
 
 ## Phase 6 — Brand + landing
-- [ ] Three logo concepts for review
+- [x] Three logo concepts for review (`/brand`, screenshot in docs/logo-concepts.png)
 - [ ] Landing page
 - [ ] Finalize logo (after Khai picks)
 
