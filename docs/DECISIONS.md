@@ -1,0 +1,155 @@
+# Architecture decisions
+
+Each decision is an ADR. To change one, add a new ADR that supersedes it.
+
+---
+
+## ADR-001 — Next.js App Router + TypeScript + Tailwind on Vercel
+
+**Status:** accepted
+
+The old app was a CoreUI admin template (React + Vite + Redux + MUI + CoreUI +
+Chart.js) with an Express scraping server that only ran on a laptop. Most of
+the bundle was template demo code.
+
+**Decision:** Next.js App Router, TypeScript `strict`, Tailwind CSS v4,
+deployed on Vercel.
+
+- Static generation and ISR first. Archived events are fully static. Live
+  events revalidate on a short interval (30–60 s) instead of every phone
+  polling Google directly.
+- Route handlers replace the Express server. Scraping uses `fetch` plus a
+  small HTML parser. **No puppeteer in production.**
+- No component libraries. Hand-written components on Tailwind. Icons are
+  inline SVG.
+- Client JS only where needed (filters, live refresh, auth).
+
+---
+
+## ADR-002 — One `DataSource` interface for every data path
+
+**Status:** accepted
+
+Competition data has come from five places: a JSON API (bowuu, 2024), live
+Sportdata HTML, Google Sheets (gviz JSON and CSV), published Google Docs, and
+pre-scraped snapshots committed to the repo.
+
+**Decision:** every source implements `DataSource` in `lib/data/`. It returns
+normalized domain types (`Registration`, `ScoreEntry`, `ScheduleBlock`) from
+`lib/domain/`. Pages never know where data came from. Adapters are pure
+functions over `fetch` and can be tested with saved fixtures.
+
+Sources can be layered: `withFallback(primary, snapshot)` serves the snapshot
+when the live source fails, which is what the 2024 page did by hand.
+
+---
+
+## ADR-003 — Each competition is a config file
+
+**Status:** accepted
+
+The old app had a hand-built folder of pages per competition, each with its
+own copy of standings, schedule and team logic.
+
+**Decision:** a competition is one file in `content/events/<slug>.ts`
+describing its dates, ruleset, data sources, divisions and which views it
+has. One shared engine under `app/events/[slug]/` renders every event.
+Archived events keep their data as committed snapshots so they never break
+when an upstream sheet disappears.
+
+---
+
+## ADR-004 — Rules are versioned data with citations
+
+**Status:** accepted
+
+**Decision:** `lib/rules/` holds rulesets as typed data, each with a `source`
+(document, revision, URL) and a `verified` flag. Selection math is a pure
+function parameterized by the ruleset, so last year's events keep last year's
+rules.
+
+- `usawkf-junior-trials-2025-26` (r15) for the current junior trials.
+- Deductions, nandu and judging come from the IWUF 2024 Taolu Competition
+  Rules, which the USAWKF document defers to.
+- Data that has not been checked against the official document is marked
+  `verified: false` and the UI shows a "pending verification" note.
+
+---
+
+## ADR-005 — Accounts: Firebase Auth, single-device session lock, per-competition entitlements
+
+**Status:** accepted (payments deferred)
+
+Access to current competitions is sold per competition, and an account may be
+signed in on only one device at a time.
+
+**Decision:**
+
+- **Auth:** Firebase Auth, email + password (the project the old app already
+  used), with email-link sign-in as a later option. The client SDK is loaded
+  only on account and gated pages.
+- **Session lock:** on sign-in the client creates a random `sessionId` and
+  calls `POST /api/session`, which writes `sessions/{uid} = { sessionId,
+  device, updatedAt }` with the Admin SDK. The newest sign-in wins. Each
+  client listens to its own `sessions/{uid}` doc and signs out with a "signed
+  in on another device" notice when the id changes. Gated API routes also
+  check the `x-session-id` header against the doc, so the lock holds even
+  if a client ignores the listener.
+- **Entitlements:** `entitlements/{uid}` = `{ events: { [slug]: { grantedAt,
+  grantedBy, source: "manual" | "purchase", expiresAt? } } }`. Only the
+  Admin SDK writes it. Firestore rules deny client writes to `sessions` and
+  `entitlements`.
+- **Gating:** archived events are public and static. A current event marked
+  `access: "paid"` renders its shell statically and loads its data from
+  `/api/events/[slug]/data`, which verifies the ID token, session and
+  entitlement.
+- **Granting:** manual first: `npm run grant -- <email> <event-slug>` and an
+  admin page restricted to admin uids. Payments plug into the same
+  entitlement write later.
+
+---
+
+## ADR-006 — Vercel Hobby forbids commercial use
+
+**Status:** accepted, **action needed before payments**
+
+Vercel's Hobby plan is for non-commercial personal use only. Selling access
+(taking payments) counts as commercial use.
+
+**Decision:** build and launch free features on Hobby. **Before payments go
+live, move to Vercel Pro (about $20/month per member) or to another host.**
+This must be raised with Khai again before any payment work merges.
+
+---
+
+## ADR-007 — Redirect the old GitHub Pages URL, including hash routes
+
+**Status:** accepted
+
+The old app is at `kaifive.github.io/wushu-toolkit` and used `HashRouter`, so
+real URLs look like `/wushu-toolkit/#/2026-pwc/male-standings`. Servers never
+see the hash, so a server redirect cannot preserve it.
+
+**Decision:** replace the `gh-pages` branch contents with one static
+`index.html` (plus `404.html`) that reads `location.hash`, maps the old route
+to the new path with `lib/legacy-routes.ts` (shared table, exported as JSON),
+and calls `location.replace(newOrigin + newPath)`. Unknown routes go to the
+home page. A `<noscript>` link and a meta refresh cover no-JS clients.
+
+Pushing to `gh-pages` takes the old site down, so it waits for an explicit go
+from Khai after the Vercel site is live.
+
+---
+
+## ADR-008 — Sportdata registration is pre-scraped on a schedule
+
+**Status:** accepted
+
+Sportdata pages are slow and sometimes captcha-protected, and the old flow
+required running scripts by hand.
+
+**Decision:** a GitHub Action (`.github/workflows/snapshot.yml`) runs
+`scripts/snapshot.ts` on a schedule for each event whose config enables it,
+and commits normalized JSON to `data/snapshots/<slug>/`. The next Vercel
+deploy picks it up. Live scorecard scraping stays available as a source with
+ISR caching, and falls back to the latest snapshot.
