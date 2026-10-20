@@ -57,7 +57,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] Snapshot GitHub Action (also runnable by hand from the Actions tab with a slug)
 - [x] CI workflow (check, test, build)
 - [x] Legacy hash-route redirect page (ADR-007): `npm run legacy-redirect` builds it
-- [ ] Push branch, open PR
+- [x] Push branch, open PR
 - [ ] (Ask first) Vercel project + env vars
 - [ ] (Ask first) Publish redirect to `gh-pages`
 
