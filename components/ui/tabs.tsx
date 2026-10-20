@@ -34,7 +34,7 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
 
   return (
     <div>
-      <div role="tablist" aria-label={label} className="mb-4 flex gap-1 overflow-x-auto rounded-xl bg-line/50 p-1">
+      <div role="tablist" aria-label={label} className="mb-4 flex overflow-x-auto rounded-card border border-line bg-surface">
         {tabs.map((t) => (
           <button
             key={t.id}
@@ -43,8 +43,8 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
             aria-selected={active === t.id}
             aria-controls={`${uid}-panel-${t.id}`}
             onClick={() => select(t.id)}
-            className={`min-h-tap flex-1 whitespace-nowrap rounded-lg px-3 text-sm font-semibold ${
-              active === t.id ? "bg-surface text-ink shadow-sm" : "text-ink-muted"
+            className={`min-h-tap flex-1 whitespace-nowrap border-r border-line px-3 text-[15px] font-semibold last:border-r-0 ${
+              active === t.id ? "bg-primary text-primary-ink" : "text-ink-muted hover:text-ink"
             }`}
           >
             {t.label}

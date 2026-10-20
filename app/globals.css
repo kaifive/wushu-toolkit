@@ -1,47 +1,81 @@
 @import "tailwindcss";
 
-/* Brand tokens. Light by default, dark via prefers-color-scheme. */
+/*
+ * v1 lineage: CoreUI's cool slate neutrals, dark sidebar and indigo primary,
+ * with vermilion kept for the brand seal and "live" only.
+ */
 :root {
-  --paper: #faf7f2;
+  --paper: #f3f4f7; /* page background (v1 tertiary bg) */
   --surface: #ffffff;
-  --ink: #1b1a17;
-  --ink-muted: #5f5b53;
-  --line: #e6e0d5;
-  --seal: #c8321e;
-  --seal-ink: #ffffff;
-  --seal-soft: #fbe9e5;
-  --jade: #1f7a5a;
-  --gold: #b8860b;
+  --surface-2: #f8f9fb; /* card header strip, table stripes */
+  --ink: #1f2430;
+  --ink-muted: #5c6577;
+  --line: #dbdfe6;
+  --primary: #5856d6; /* v1 indigo */
+  --primary-ink: #ffffff;
+  --primary-soft: #ebeafb;
+  --chrome: #212631; /* v1 sidebar */
+  --chrome-ink: #e8eaef;
+  --chrome-muted: #8a93a6;
+  --seal: #d4371f;
+  --seal-soft: #fdecea;
+  --info: #cfe8fc; /* v1 info alert */
+  --info-ink: #0b4a73;
+  --warn: #fff3cd;
+  --warn-ink: #6b4e00;
+  --jade: #1b8a5a;
+  --gold: #b7791f;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #121110;
-    --surface: #1c1b19;
-    --ink: #f3efe7;
-    --ink-muted: #a8a196;
-    --line: #2f2c28;
-    --seal: #e2513a;
-    --seal-ink: #ffffff;
-    --seal-soft: #3a1c17;
-    --jade: #4fb58f;
-    --gold: #e0b44a;
+    --paper: #181b22;
+    --surface: #212631;
+    --surface-2: #272c38;
+    --ink: #e8eaef;
+    --ink-muted: #9aa3b5;
+    --line: #343a48;
+    --primary: #7a78e8;
+    --primary-ink: #ffffff;
+    --primary-soft: #2d2c55;
+    --chrome: #13161c;
+    --chrome-ink: #e8eaef;
+    --chrome-muted: #7f889b;
+    --seal: #ef5a42;
+    --seal-soft: #3d1d19;
+    --info: #12324a;
+    --info-ink: #b9defb;
+    --warn: #3a3014;
+    --warn-ink: #f3d98b;
+    --jade: #4cc38a;
+    --gold: #e3ac4f;
   }
 }
 
 @theme inline {
   --color-paper: var(--paper);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
+  --color-primary-soft: var(--primary-soft);
+  --color-chrome: var(--chrome);
+  --color-chrome-ink: var(--chrome-ink);
+  --color-chrome-muted: var(--chrome-muted);
   --color-seal: var(--seal);
-  --color-seal-ink: var(--seal-ink);
   --color-seal-soft: var(--seal-soft);
+  --color-info: var(--info);
+  --color-info-ink: var(--info-ink);
+  --color-warn: var(--warn);
+  --color-warn-ink: var(--warn-ink);
   --color-jade: var(--jade);
   --color-gold: var(--gold);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-barlow-condensed), var(--font-barlow), ui-sans-serif, sans-serif;
+  --radius-card: 0.375rem;
   --spacing-tap: 2.75rem; /* 44px minimum tap target */
 }
 
@@ -63,11 +97,15 @@ body {
 }
 @media (min-width: 768px) {
   .pb-tabbar {
-    padding-bottom: 2rem;
+    padding-bottom: 0;
   }
 }
 
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
 :focus-visible {
-  outline: 2px solid var(--seal);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
