@@ -30,19 +30,31 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
     window.history.replaceState(null, "", url);
   };
 
+  // WAI-ARIA tabs: arrow keys, Home and End move between tabs.
+  const onKey = (e: React.KeyboardEvent, i: number) => {
+    const n = tabs.length;
+    const next = e.key === "ArrowRight" ? (i + 1) % n : e.key === "ArrowLeft" ? (i - 1 + n) % n : e.key === "Home" ? 0 : e.key === "End" ? n - 1 : -1;
+    if (next === -1) return;
+    e.preventDefault();
+    select(tabs[next]!.id);
+    document.getElementById(`${uid}-tab-${tabs[next]!.id}`)?.focus();
+  };
+
   if (tabs.length <= 1) return <>{panels[0]}</>;
 
   return (
     <div>
       <div role="tablist" aria-label={label} className="mb-4 flex overflow-x-auto rounded-card border border-line bg-surface">
-        {tabs.map((t) => (
+        {tabs.map((t, i) => (
           <button
             key={t.id}
             role="tab"
             id={`${uid}-tab-${t.id}`}
             aria-selected={active === t.id}
             aria-controls={`${uid}-panel-${t.id}`}
+            tabIndex={active === t.id ? 0 : -1}
             onClick={() => select(t.id)}
+            onKeyDown={(e) => onKey(e, i)}
             className={`min-h-tap flex-1 whitespace-nowrap border-r border-line px-3 text-[15px] font-semibold last:border-r-0 ${
               active === t.id ? "bg-primary text-primary-ink" : "text-ink-muted hover:text-ink"
             }`}

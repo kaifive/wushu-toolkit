@@ -17,3 +17,27 @@
 ## Kept from v2
 - Bottom tab bar, 44px targets, tables that fit 375px (v1 failed here: its table overflowed the card on phones).
 - Vermilion is the brand seal only (logo, "Live"), never the button color.
+
+## Impeccable audit (impeccable 4.7.0, `detect` on the running app + `audit` checklist)
+
+Detector: 13 pages scanned at desktop width with Chromium. First pass:
+nested cards on `/rules`, line length on `/tools/deductions`, gray-on-gray tag
+text at 4.4:1, placeholders at 3.1:1. After fixes: **0 findings, 0
+advisories on every page.**
+
+| # | Dimension | Score | Key finding |
+|---|-----------|-------|-------------|
+| 1 | Accessibility | 3 | AA contrast now met; tabs follow WAI-ARIA keyboard pattern. Not tested with a screen reader. |
+| 2 | Performance | 3 | Static/ISR, no UI library, Firebase loaded only on account pages. Event pages still ship each tab's panel in the HTML. |
+| 3 | Theming | 3 | All colors are tokens; dark mode follows the OS. v1 had a manual light/dark toggle, v2 doesn't (P3). |
+| 4 | Responsive | 3 | 44px targets, no page-level scroll at 375px. Text scaling at 200% not tested. |
+| 5 | Implementation integrity | 3 | One system (v1 lineage) used everywhere; landing shows real archive data. Logo not final. |
+| **Total** | | **15/20** | **Good** |
+
+Fixed in this pass: neutral badge text to `ink`, placeholder color to
+`ink-muted` (5.9:1), `text-wrap: pretty` and a 62ch measure on body text,
+flattened the team-selection card on `/rules`, keyboard support for tabs.
+
+Next: `/impeccable harden` (empty and error states on live events once a
+live event exists), a light/dark toggle like v1, then `/impeccable polish`
+after the logo is picked.
