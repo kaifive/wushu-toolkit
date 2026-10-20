@@ -15,7 +15,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] `DataSource` interface + `withFallback`
 - [x] Google Sheets adapter (gviz JSON + CSV)
 - [x] Published Google Doc adapter (JSON body and Sportdata scorecard HTML)
-- [ ] JSON API adapter (bowuu)
+- [x] JSON API adapter (bowuu)
 - [ ] Snapshot adapter (`data/snapshots/`)
 - [x] Sportdata adapter (registration, categories, scorecards) with saved fixtures (scorecard fixture synthetic, see OPEN_QUESTIONS #9)
 
