@@ -69,3 +69,11 @@ npm run build    # production build
 - Tap targets at least 44px.
 - Every table must work at 375px wide: sticky first column, horizontal
   scroll inside the table only, no page-level horizontal scroll.
+
+## Design (see docs/DESIGN_AUDIT.md)
+
+v1 lineage: cool slate neutrals, dark slate sidebar (desktop) / top bar
+(phone), indigo `primary` for actions, vermilion `seal` only for the logo,
+"Live" and errors. Barlow / Barlow Condensed. Use `Card` (gray header strip)
+and `StatTile`; radius `rounded-card` (6px). No eyebrow labels, no serif, no
+cream backgrounds, no mock devices on the landing page; show real data.
