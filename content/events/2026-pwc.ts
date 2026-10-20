@@ -1,3 +1,6 @@
+import { SNAPSHOTS } from "@/data/snapshots";
+import { liveWithSnapshot } from "@/lib/data/event-data";
+import { snapshotSource } from "@/lib/data/snapshot";
 import { joinRegistrationScores, registrationsFromScores } from "@/lib/data/join";
 import { athletesFromRows, scoresFromRows } from "@/lib/data/parsers/sheet-scores";
 import { parseScheduleRows } from "@/lib/data/parsers/schedule";
@@ -18,6 +21,10 @@ const RINGS = [
 const tab = (sheetId: string, r: (typeof RINGS)[number]): TabRef => ({ sheetId, ...r });
 
 function data() {
+  return liveWithSnapshot(live(), snapshotSource(SNAPSHOTS, "2026-pwc"));
+}
+
+function live() {
   return source("Google Sheet (live)", async (ctx): Promise<EventData> => {
     const [prod, ref, schedules] = await Promise.all([
       Promise.all(RINGS.map(async (r) => scoresFromRows(await gvizTab(tab(PROD_SHEET, r)).load(ctx), { firstName: "B", lastName: "C", gender: "D", event: "F", score: "G" }, { ring: r.name }))),

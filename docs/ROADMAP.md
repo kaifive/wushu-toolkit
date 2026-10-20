@@ -30,8 +30,9 @@ Resume from the first unchecked item. One commit per item.
 - [x] Event config types + registry (`content/events`)
 - [x] Archived configs: 2024 Junior Trials, 2025 Adult Trials, 2025 Phoenix, 2025 Junior Trials (r15), 2026 PWC
 - [ ] Current config: next paid competition (OPEN_QUESTIONS #10; the 2025–26 trials already happened and are archived on r15)
-- [ ] Event pages: overview, standings, schedule, team projection, scorecards
-- [ ] Mobile tables at 375px
+- [x] Event pages: overview, standings, schedule, team projection, scorecards, all-around
+- [x] Mobile tables at 375px (sticky first column, no page-level scroll; checked with Playwright)
+- [ ] Snapshot 2026 PWC and 2025 Junior Trials scores once Google Sheets is reachable (`npm run snapshot -- <slug>`)
 
 ## Phase 5 — Tools
 - [ ] Deduction code lookup
