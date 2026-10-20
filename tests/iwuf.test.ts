@@ -65,7 +65,7 @@ test("scoreNandu: technique cap and family-specific tables", () => {
 });
 
 test("scoreNandu: Taiji hurdler's split connection only once", () => {
-  assert.match(scoreNandu("taiji", ["324C+5", "324B+5"].map(chainFromCode)).warnings.join(), /only once/);
+  assert.match(scoreNandu("taiji", ["324C+5", "324B+5"].map(chainFromCode)).warnings.join(), /Only one hurdler/);
 });
 
 test("nandu tables are internally consistent", () => {
@@ -80,4 +80,32 @@ test("nandu tables are internally consistent", () => {
     }
   }
   assert.deepEqual(nextOptions("changquan", "323C").map((c) => c.code).sort(), ["323C+1", "323C+4", "323C+6"]);
+});
+
+import { familyOfEvent } from "@/lib/rules/iwuf-2024/nandu";
+
+test("rule breaks: Taiji 312A+324B must land in a hurdler's split", () => {
+  assert.match(scoreNandu("taiji", [chainFromCode("312A+324B+3")]).warnings.join(), /must land in a hurdler's split/);
+  assert.match(scoreNandu("taiji", [chainFromCode("312A+324B")]).warnings.join(), /must land in a hurdler's split/);
+  assert.doesNotMatch(scoreNandu("taiji", [chainFromCode("312A+324B+5")]).warnings.join(), /must land/);
+});
+
+test("rule breaks: throw and catch once, weapons only", () => {
+  const two = scoreNandu("changquan", ["323A+9", "324A+9"].map(chainFromCode), { weapon: true });
+  assert.match(two.warnings.join(), /Only one throw-and-catch/);
+  assert.match(scoreNandu("changquan", [chainFromCode("323A+9")], { weapon: false }).warnings.join(), /for weapon routines/);
+  assert.deepEqual(scoreNandu("changquan", [chainFromCode("323A+9")], { weapon: true }).warnings, []);
+});
+
+test("reminders explain caps and execution rules", () => {
+  const r = scoreNandu("changquan", ["353B+323C+1", "324B+1", "312A+335A"].map(chainFromCode));
+  assert.match(r.reminders[0]!, /Connections add up to 0.7; only 0.6 counts/);
+  assert.ok(r.reminders.some((x) => /two complete movements/.test(x)));
+  assert.equal(r.warnings.length, 0);
+});
+
+test("familyOfEvent", () => {
+  assert.deepEqual(familyOfEvent("DS"), { family: "changquan", weapon: true });
+  assert.deepEqual(familyOfEvent("NQ"), { family: "nanquan", weapon: false });
+  assert.deepEqual(familyOfEvent("TS"), { family: "taiji", weapon: true });
 });

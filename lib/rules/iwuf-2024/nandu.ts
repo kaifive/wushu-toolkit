@@ -262,7 +262,22 @@ export interface NanduScore {
   technique: number;
   connection: number;
   total: number;
+  /** Rule breaks in what was declared: these cost points. */
   warnings: string[];
+  /** Execution rules that depend on how the element is performed. */
+  reminders: string[];
+}
+
+/** Options that refine the checks: the exact event decides barehand vs weapon rules. */
+export interface ScoreOptions {
+  weapon?: boolean;
+}
+
+/** Map an event code (CQ, DS, …) to its difficulty family and whether it is a weapon routine. */
+export function familyOfEvent(code: string): { family: Family; weapon: boolean } {
+  if (["NQ", "ND", "NG"].includes(code)) return { family: "nanquan", weapon: code !== "NQ" };
+  if (["TQ", "TJ", "TS"].includes(code)) return { family: "taiji", weapon: code !== "TQ" };
+  return { family: "changquan", weapon: code !== "CQ" };
 }
 
 const r3 = (n: number) => Math.round(n * 1000) / 1000;
@@ -280,8 +295,9 @@ export function chainToCode(chain: Chain): string {
  * Score a routine's declared difficulty, assuming everything is completed.
  * Technique value is capped at 1.4 and connection value at 0.6 (2.0 total).
  */
-export function scoreNandu(family: Family, chains: Chain[]): NanduScore {
+export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions = {}): NanduScore {
   const warnings: string[] = [];
+  const reminders: string[] = [];
   const scored = chains.map((ch) => {
     const techniques: ScoredChain["techniques"] = [];
     const links: ScoredLink[] = [];
@@ -306,16 +322,47 @@ export function scoreNandu(family: Family, chains: Chain[]): NanduScore {
     return { techniques, links };
   });
 
+  const links = scored.flatMap((c) => c.links).filter((l) => l.listed);
+
+  // Taiji (3.3.2.3): one hurdler's split per routine; 312A+324B/C must land in it.
   if (family === "taiji") {
-    const splits = scored.flatMap((c) => c.links).filter((l) => l.listed && l.code.endsWith("+5")).length;
-    if (splits > 1) warnings.push("Diē Chā (hurdler's split) connections may be chosen only once per routine.");
+    if (links.filter((l) => l.code.endsWith("+5")).length > 1) warnings.push("Only one hurdler's split (Diē Chā) connection is allowed per routine.");
+    for (const ch of chains) {
+      const code = chainToCode(ch);
+      const m = code.match(/312A\+(324[BC])(\+(\d+))?/);
+      if (m && m[3] !== "5") warnings.push(`312A+${m[1]} must land in a hurdler's split, left leg forward (${m[1]}+5).`);
+    }
   }
+
+  // Throw and catch (+9): one per weapon routine (3.1.2.3); it needs a weapon.
+  const throws = links.filter((l) => l.code.endsWith("+9")).length;
+  if (throws > 1) warnings.push("Only one throw-and-catch connection is allowed per weapon routine.");
+  if (throws > 0 && opts.weapon === false) warnings.push("Throw-and-catch connections are for weapon routines.");
+
+  // Execution reminders for what was declared.
+  if (links.some((l) => l.code.endsWith("+8"))) reminders.push("Single-foot landings: land on the same foot that kicked.");
+  if (links.some((l) => /\+\d{3}[A-D]$/.test(l.code) && l.steps === undefined))
+    reminders.push("Jump-to-jump connections without a step count must take off straight after a two-foot landing.");
+  if (links.some((l) => /\+\d{1,2}$/.test(l.code) && !l.code.endsWith("+9")))
+    reminders.push("Hold landings and balances still, and do at least two complete movements before the next difficulty element (else 0.1 off).");
+  reminders.push("If a technique is missed, the connections before and after it don't count either.");
 
   const techniqueRaw = r3(scored.flatMap((c) => c.techniques).reduce((s, x) => s + x.value, 0));
   const connectionRaw = r3(scored.flatMap((c) => c.links).reduce((s, x) => s + x.value, 0));
   const tech = Math.min(TECH_CAP, techniqueRaw);
   const conn = Math.min(CONN_CAP, connectionRaw);
-  return { chains: scored, techniqueRaw, connectionRaw, technique: r3(tech), connection: r3(conn), total: r3(tech + conn), warnings: [...new Set(warnings)] };
+  if (techniqueRaw > TECH_CAP) reminders.unshift(`Techniques add up to ${techniqueRaw}; only ${TECH_CAP} counts (the last technique is the one reduced). The extra is a safety margin.`);
+  if (connectionRaw > CONN_CAP) reminders.unshift(`Connections add up to ${connectionRaw}; only ${CONN_CAP} counts (the last connection is the one reduced).`);
+  return {
+    chains: scored,
+    techniqueRaw,
+    connectionRaw,
+    technique: r3(tech),
+    connection: r3(conn),
+    total: r3(tech + conn),
+    warnings: [...new Set(warnings)],
+    reminders: [...new Set(reminders)],
+  };
 }
 
 /** Sum of declared technique values (legacy helper used by scorecards). */
