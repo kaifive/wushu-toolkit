@@ -14,7 +14,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] Domain types (`lib/domain`)
 - [x] `DataSource` interface + `withFallback`
 - [x] Google Sheets adapter (gviz JSON + CSV)
-- [ ] Published Google Doc adapter (JSON body and Sportdata scorecard HTML)
+- [x] Published Google Doc adapter (JSON body and Sportdata scorecard HTML)
 - [ ] JSON API adapter (bowuu)
 - [ ] Snapshot adapter (`data/snapshots/`)
 - [x] Sportdata adapter (registration, categories, scorecards) with saved fixtures (scorecard fixture synthetic, see OPEN_QUESTIONS #9)
