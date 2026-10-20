@@ -35,9 +35,10 @@ Resume from the first unchecked item. One commit per item.
 - [ ] Snapshot 2026 PWC and 2025 Junior Trials scores once Google Sheets is reachable (`npm run snapshot -- <slug>`)
 
 ## Phase 5 — Tools
-- [ ] Deduction code lookup
-- [ ] Required movements checklist
-- [ ] Average score calculator
+- [x] Deduction code lookup
+- [x] Required movements checklist
+- [x] Average score calculator (now "Score calculator")
+- [x] Rules page for the current ruleset
 
 ## Phase 6 — Brand + landing
 - [ ] Three logo concepts for review

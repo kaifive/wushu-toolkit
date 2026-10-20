@@ -22,7 +22,7 @@ export const USAWKF_JUNIOR_TRIALS_2025_26: Ruleset = {
     notes: [
       "Trials: December 18–21, 2025, Bethesda North Marriott, Rockville, MD. Selects the team for the 10th World Junior Wushu Championships (Tianjin, March 26–30, 2026) and the 15th Pan American Wushu Championships (2026).",
       "Judging follows the IWUF Wushu Taolu Competition Rules and Judging Methods (2024) unless the regulations say otherwise.",
-      "Minimum averages: the document contradicts itself (OPEN_QUESTIONS #7). Using A 9.0 / B 8.9 / C 8.8.",
+      "Minimum averages: the document gives conflicting values. This app uses A 9.0 / B 8.9 / C 8.8 until that is clarified.",
       "Team sizes and tie-breaks are carried over from 2025 and the 2025 senior regulations until confirmed.",
       "Revision r19 (2025-11-07) exists; compare before relying on these values.",
     ],

@@ -155,3 +155,22 @@ test("helpers", () => {
   assert.equal(formatDuration(70), "1:10");
   assert.equal(formatDuration(undefined), "—");
 });
+
+import { scoreToBeat } from "@/lib/rules/calculator";
+import { REQUIRED_MOVEMENTS } from "@/lib/rules/iwuf-2024/required-movements";
+
+test("scoreToBeat finds the lowest score that strictly beats the average", () => {
+  assert.deepEqual(scoreToBeat(9.1, [9.1, 9.1], 3), { kind: "need", each: 9.101, missing: 1, possible: true });
+  assert.deepEqual(scoreToBeat(9.0, [9.2], 3), { kind: "need", each: 8.901, missing: 2, possible: true });
+  assert.deepEqual(scoreToBeat(9.5, [8.0, 8.0], 3), { kind: "need", each: 12.501, missing: 1, possible: false });
+  assert.deepEqual(scoreToBeat(9.0, [9.1, 9.0, 9.0], 3), { kind: "already", average: 9.033333333333333 });
+  assert.equal(scoreToBeat(9.0, [9.0, 9.0], 2).kind, "short");
+  assert.equal(scoreToBeat(9, [11], 3).kind, "invalid");
+  assert.deepEqual(scoreToBeat(9.0, [], 2), { kind: "need", each: 9.001, missing: 2, possible: true });
+});
+
+test("required movements migrated with event codes", () => {
+  assert.equal(REQUIRED_MOVEMENTS.length, 14);
+  assert.deepEqual(REQUIRED_MOVEMENTS[0]?.events, ["CQ"]);
+  assert.ok(REQUIRED_MOVEMENTS.every((m) => m.requirements.every((r) => r.items.length > 0)));
+});
