@@ -42,7 +42,7 @@ Resume from the first unchecked item. One commit per item.
 
 ## Phase 6 — Brand + landing
 - [x] Three logo concepts for review (`/brand`, screenshot in docs/logo-concepts.png)
-- [ ] Landing page
+- [x] Landing page (+ About page)
 - [ ] Finalize logo (after Khai picks)
 
 ## Phase 7 — Accounts (ADR-005)
