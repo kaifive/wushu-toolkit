@@ -9,6 +9,7 @@ export const metadata: Metadata = { title: "Athlete toolkit", description: "Dedu
 const TOOLS = [
   { href: "/tools/deductions", title: "Deduction code lookup", body: "Search panel A codes by number or keyword." },
   { href: "/tools/required-movements", title: "Required movements", body: "Checklist of content requirements for optional routines." },
+  { href: "/tools/nandu", title: "Nandu calculator", body: "Build your difficulty and see how close you are to 2.0." },
   { href: "/tools/score-calculator", title: "Score calculator", body: "The lowest score you need to beat an average." },
   { href: "/watchlists", title: "Watch lists", body: "Highlight your school's athletes on every competition page." },
   { href: "/rules", title: "Rules", body: "Age groups, events, time limits, music and team selection." },

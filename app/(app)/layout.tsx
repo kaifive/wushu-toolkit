@@ -15,6 +15,7 @@ function navGroups(): SidebarGroup[] {
       items: [
         { href: "/tools/deductions", label: "Deduction codes" },
         { href: "/tools/required-movements", label: "Required movements" },
+        { href: "/tools/nandu", label: "Nandu calculator" },
         { href: "/tools/score-calculator", label: "Score calculator" },
         { href: "/rules", label: "Rules" },
       ],

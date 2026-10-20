@@ -1,0 +1,292 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import {
+  CONN_CAP, CONN_VALUE, CONNECTION_ONLY, FAMILY_LABEL, LANDINGS, NANDU_MAX, TECH_CAP, TECH_VALUE, TECHNIQUES,
+  chainFromCode, chainToCode, nextOptions, scoreNandu, technique, type Chain, type Family,
+} from "@/lib/rules/iwuf-2024/nandu";
+
+const KEY = "wt:nandu:v1";
+const fmt = (n: number) => n.toFixed(2).replace(/0$/, "");
+const field = "min-h-tap w-full rounded-card border border-line bg-surface px-3";
+
+function stepLabel(family: Family, code: string): string {
+  if (/^\d{1,2}$/.test(code)) return LANDINGS[code]?.english ?? `+${code}`;
+  return technique(family, code)?.english ?? CONNECTION_ONLY[code] ?? code;
+}
+
+function load(): { family: Family; chains: Chain[] } {
+  try {
+    const raw = window.localStorage.getItem(KEY);
+    if (raw) return JSON.parse(raw) as { family: Family; chains: Chain[] };
+  } catch {
+    /* storage blocked */
+  }
+  return { family: "changquan", chains: [] };
+}
+
+export function NanduCalculator() {
+  const [family, setFamily] = useState<Family>("changquan");
+  const [chains, setChains] = useState<Chain[]>([]);
+  const [codes, setCodes] = useState("");
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const s = load();
+    // Restore the saved routine once on mount (storage is client-only).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setFamily(s.family);
+    setChains(s.chains);
+    setLoaded(true);
+  }, []);
+  useEffect(() => {
+    if (!loaded) return;
+    try {
+      window.localStorage.setItem(KEY, JSON.stringify({ family, chains }));
+    } catch {
+      /* storage blocked */
+    }
+  }, [family, chains, loaded]);
+
+  const score = useMemo(() => scoreNandu(family, chains), [family, chains]);
+  const setChain = (i: number, ch: Chain | null) => setChains(ch ? chains.map((c, j) => (j === i ? ch : c)) : chains.filter((_, j) => j !== i));
+  const needTech = Math.max(0, TECH_CAP - score.techniqueRaw);
+  const needConn = Math.max(0, CONN_CAP - score.connectionRaw);
+
+  return (
+    <div className="space-y-5">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div>
+          <label htmlFor="family" className="mb-1 block text-sm font-semibold">
+            Event
+          </label>
+          <select
+            id="family"
+            value={family}
+            onChange={(e) => {
+              setFamily(e.target.value as Family);
+              setChains([]);
+            }}
+            className={field}
+          >
+            {(Object.keys(FAMILY_LABEL) as Family[]).map((f) => (
+              <option key={f} value={f}>
+                {FAMILY_LABEL[f]}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="codes" className="mb-1 block text-sm font-semibold">
+            Load from codes <span className="font-normal text-ink-muted">(optional)</span>
+          </label>
+          <div className="flex gap-2">
+            <input id="codes" value={codes} onChange={(e) => setCodes(e.target.value)} placeholder="353B+323C+1, 324B+1" className={field} />
+            <button
+              type="button"
+              onClick={() => {
+                const parsed = codes.split(/[,;\s]+/).filter(Boolean).map(chainFromCode).filter((c) => c.steps.length);
+                if (parsed.length) setChains(parsed);
+              }}
+              className="min-h-tap shrink-0 rounded-card border border-line px-3 font-semibold"
+            >
+              Load
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <section aria-live="polite" className="sticky top-14 z-20 rounded-card border border-line bg-surface p-4 md:top-3">
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <p className="text-sm text-ink-muted">Difficulty (C panel)</p>
+            <p className="font-display text-4xl font-bold tnum">
+              {score.total.toFixed(2)}
+              <span className="text-xl text-ink-muted"> / {NANDU_MAX.toFixed(2)}</span>
+            </p>
+          </div>
+          <p className={`text-right text-sm font-semibold ${score.total >= NANDU_MAX ? "text-jade" : "text-ink-muted"}`}>
+            {score.total >= NANDU_MAX ? "Full difficulty" : `${fmt(NANDU_MAX - score.total)} to go`}
+          </p>
+        </div>
+        <Bar label="Techniques" value={score.techniqueRaw} cap={TECH_CAP} />
+        <Bar label="Connections" value={score.connectionRaw} cap={CONN_CAP} />
+        {score.total < NANDU_MAX && chains.length > 0 && (
+          <p className="mt-2 text-sm text-ink-muted">
+            {needTech > 0 && `Add ${fmt(needTech)} in techniques`}
+            {needTech > 0 && needConn > 0 && " and "}
+            {needConn > 0 && `${needTech > 0 ? "" : "Add "}${fmt(needConn)} in connections`}.
+          </p>
+        )}
+      </section>
+
+      <ol className="space-y-3">
+        {chains.map((ch, i) => (
+          <li key={i}>
+            <ChainEditor family={family} chain={ch} scored={score.chains[i]} index={i} onChange={(c) => setChain(i, c)} />
+          </li>
+        ))}
+      </ol>
+
+      <AddElement family={family} onAdd={(code) => setChains([...chains, { steps: [code] }])} />
+
+      {score.warnings.length > 0 && (
+        <ul className="space-y-1 rounded-card border border-warn-ink/15 bg-warn p-3 text-sm text-warn-ink">
+          {score.warnings.map((w) => (
+            <li key={w}>{w}</li>
+          ))}
+        </ul>
+      )}
+
+      {chains.length > 0 && (
+        <p className="text-sm text-ink-muted">
+          Registration codes: <code className="font-mono text-ink">{chains.map(chainToCode).join(", ")}</code>
+        </p>
+      )}
+    </div>
+  );
+}
+
+function Bar({ label, value, cap }: { label: string; value: number; cap: number }) {
+  const over = value > cap;
+  return (
+    <div className="mt-3">
+      <div className="flex justify-between text-sm">
+        <span className="font-semibold">{label}</span>
+        <span className="tnum text-ink-muted">
+          {fmt(Math.min(value, cap))} / {fmt(cap)}
+          {over ? ` (${fmt(value)} declared, capped)` : ""}
+        </span>
+      </div>
+      <div className="mt-1 h-2 overflow-hidden rounded-full bg-line" aria-hidden>
+        <div className={`h-full ${value >= cap ? "bg-jade" : "bg-primary"}`} style={{ width: `${Math.min(1, value / cap) * 100}%` }} />
+      </div>
+    </div>
+  );
+}
+
+function AddElement({ family, onAdd }: { family: Family; onAdd: (code: string) => void }) {
+  const groups: [string, string][] = [
+    ["jump", "Jumps"],
+    ["balance", "Balances"],
+    ["leg", "Leg techniques"],
+    ["tumbling", "Tumbling"],
+  ];
+  return (
+    <div>
+      <label htmlFor="add" className="mb-1 block text-sm font-semibold">
+        Add a difficulty element
+      </label>
+      <select
+        id="add"
+        value=""
+        onChange={(e) => e.target.value && onAdd(e.target.value)}
+        className={`${field} font-semibold text-primary`}
+      >
+        <option value="">Choose a jump, balance or kick…</option>
+        {groups.map(([cat, label]) => {
+          const list = TECHNIQUES[family].filter((x) => x.category === cat);
+          return list.length ? (
+            <optgroup key={cat} label={label}>
+              {list.map((x) => (
+                <option key={x.code} value={x.code}>
+                  {x.english} · {x.code} · {fmt(TECH_VALUE[x.grade])}
+                </option>
+              ))}
+            </optgroup>
+          ) : null;
+        })}
+        {family === "changquan" && (
+          <optgroup label="Connection only">
+            <option value="445A">Forward dive roll (for throw and catch) · 445A · 0</option>
+          </optgroup>
+        )}
+      </select>
+    </div>
+  );
+}
+
+function ChainEditor({
+  family,
+  chain,
+  scored,
+  index,
+  onChange,
+}: {
+  family: Family;
+  chain: Chain;
+  scored?: ReturnType<typeof scoreNandu>["chains"][number];
+  index: number;
+  onChange: (c: Chain | null) => void;
+}) {
+  const last = chain.steps[chain.steps.length - 1]!;
+  const ended = /^\d{1,2}$/.test(last);
+  const options = ended ? [] : nextOptions(family, last);
+  const value = (scored?.techniques.reduce((s, t) => s + t.value, 0) ?? 0) + (scored?.links.reduce((s, l) => s + l.value, 0) ?? 0);
+  let li = 0;
+
+  return (
+    <div className="rounded-card border border-line bg-surface">
+      <div className="flex items-center justify-between gap-2 border-b border-line bg-surface-2 px-4 py-2">
+        <p className="text-sm">
+          <span className="font-semibold">Element {index + 1}</span>
+          <span className="text-ink-muted"> · {chainToCode(chain)} · {fmt(value)}</span>
+        </p>
+        <button type="button" onClick={() => onChange(null)} className="min-h-tap px-2 text-sm font-semibold text-seal">
+          Remove
+        </button>
+      </div>
+      <ol className="space-y-2 p-4">
+        {chain.steps.map((s, i) => {
+          const isLanding = /^\d{1,2}$/.test(s);
+          const tech = isLanding ? undefined : scored?.techniques.find((t, k) => k === chain.steps.slice(0, i + 1).filter((x) => !/^\d{1,2}$/.test(x)).length - 1);
+          const link = i > 0 ? scored?.links[li++] : undefined;
+          return (
+            <li key={i} className="space-y-1">
+              {link && (
+                <p className={`text-sm ${link.listed ? "text-ink-muted" : "text-seal"}`}>
+                  {link.listed
+                    ? `Connection ${link.grade} · +${fmt(link.value)}${link.steps ? ` · within ${link.steps} step${link.steps > 1 ? "s" : ""}` : !isLanding ? " · straight after a two-foot landing" : ""}`
+                    : "Not a listed connection · +0"}
+                  {link.note ? ` · ${link.note}` : ""}
+                </p>
+              )}
+              <p className="flex items-center justify-between gap-3">
+                <span className="font-semibold">{isLanding ? `Land in ${stepLabel(family, s).toLowerCase()}` : stepLabel(family, s)}</span>
+                {!isLanding && <span className="shrink-0 tnum text-sm text-ink-muted">{tech?.grade ? `${tech.grade} · ${fmt(tech.value)}` : "0"}</span>}
+              </p>
+            </li>
+          );
+        })}
+      </ol>
+      <div className="flex flex-col gap-2 border-t border-line p-4 sm:flex-row">
+        {options.length > 0 && (
+          <select
+            aria-label={`Then, for element ${index + 1}`}
+            value=""
+            onChange={(e) => e.target.value && onChange({ steps: [...chain.steps, e.target.value] })}
+            className={field}
+          >
+            <option value="">Then… (connection)</option>
+            {options.map((o) => {
+              const next = o.code.slice(last.length + 1);
+              const isLanding = /^\d{1,2}$/.test(next);
+              return (
+                <option key={o.code} value={next}>
+                  {isLanding ? `Land in ${stepLabel(family, next).toLowerCase()}` : `Into ${stepLabel(family, next)}`} · {o.grade} +{fmt(CONN_VALUE[o.grade])}
+                  {o.steps ? ` (≤${o.steps} steps)` : ""}
+                </option>
+              );
+            })}
+          </select>
+        )}
+        {chain.steps.length > 1 && (
+          <button type="button" onClick={() => onChange({ steps: chain.steps.slice(0, -1) })} className="min-h-tap shrink-0 rounded-card border border-line px-3 font-semibold">
+            Undo last
+          </button>
+        )}
+        {options.length === 0 && !ended && <p className="text-sm text-ink-muted">No listed connection starts from this move.</p>}
+      </div>
+    </div>
+  );
+}

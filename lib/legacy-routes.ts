@@ -11,7 +11,7 @@ export const LEGACY_ROUTES: Record<string, string> = {
   "/toolkit/deduction-code-lookup": "/tools/deductions",
   "/toolkit/required-movements": "/tools/required-movements",
   "/toolkit/average-score-calculator": "/tools/score-calculator",
-  "/nandu-calculator": "/rules",
+  "/nandu-calculator": "/tools/nandu",
 
   "/2026-pwc/male-standings": "/events/2026-pwc/all-around?view=male",
   "/2026-pwc/female-standings": "/events/2026-pwc/all-around?view=female",

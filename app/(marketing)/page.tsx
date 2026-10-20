@@ -18,6 +18,7 @@ const AT_EVENT = [
 
 const FREE = [
   ["/tools/deductions", "Deduction code lookup"],
+  ["/tools/nandu", "Nandu calculator"],
   ["/tools/required-movements", "Required movements checklist"],
   ["/tools/score-calculator", "Score calculator"],
   ["/rules", "2025–26 junior trials rules"],

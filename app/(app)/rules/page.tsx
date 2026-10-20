@@ -160,9 +160,12 @@ export default function RulesPage() {
             Deductions: <Link href="/tools/deductions" className="text-primary underline">deduction code lookup</Link>.
           </p>
           <p className="text-ink-muted">
-            Difficulty (nandu) codes look like <code className="font-mono">353B+323C+1</code>: three-digit movements with a level letter, joined by
-            &ldquo;+&rdquo;, then a connection code. The movement table and values are{" "}
-            {NANDU_SOURCE.verified ? "from IWUF 2024" : "pending the official IWUF 2024 document"}.
+            Difficulty (nandu): techniques A/B/C are worth 0.2/0.3/0.4 (up to 1.4) and listed connections A/B/C/D are worth
+            0.1/0.15/0.2/0.25 (up to 0.6), for 2.0 in total. Build yours in the{" "}
+            <Link href="/tools/nandu" className="text-primary underline">
+              nandu calculator
+            </Link>{" "}
+            ({NANDU_SOURCE.revision} tables).
           </p>
         </div>
       </section>
