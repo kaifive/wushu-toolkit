@@ -29,7 +29,7 @@ export default function RulesPage() {
   const sel = r.selection;
   return (
     <Container className="max-w-4xl">
-      <PageHeader eyebrow="Rules" title={r.name}>
+      <PageHeader title={r.name}>
         {r.source.title}
         {r.source.revision ? ` (${r.source.revision})` : ""}. Judging, deductions and difficulty follow {r.judging?.label}.
       </PageHeader>
@@ -52,10 +52,10 @@ export default function RulesPage() {
       )}
 
       <section className="mb-8">
-        <h2 className="mb-3 font-display text-xl font-semibold">Age groups and events</h2>
-        <div className="grid gap-3 md:grid-cols-3">
+        <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Age groups and events</h2>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {r.divisions.map((d) => (
-            <div key={d.id} className="rounded-2xl border border-line bg-surface p-4 text-sm">
+            <div key={d.id} className="rounded-card border border-line bg-surface p-4 text-sm">
               <h3 className="font-semibold">{d.label}</h3>
               {d.born && (
                 <p className="text-ink-muted">
@@ -70,7 +70,7 @@ export default function RulesPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="mb-3 font-display text-xl font-semibold">Time limits</h2>
+        <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Time limits</h2>
         <ScrollTable caption="Time limits">
           <thead className="border-b border-line">
             <tr>
@@ -97,11 +97,11 @@ export default function RulesPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="mb-3 font-display text-xl font-semibold">Music</h2>
+        <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Music</h2>
         <ul className="space-y-2 text-sm">
           {r.music.map((m, i) => (
-            <li key={i} className="rounded-xl border border-line bg-surface p-3">
-              <Badge tone={m.requirement === "required" ? "seal" : "neutral"}>{m.requirement}</Badge> Group {m.division}: {names(m.events)}
+            <li key={i} className="rounded-card border border-line bg-surface p-3">
+              <Badge tone={m.requirement === "required" ? "primary" : "neutral"}>{m.requirement}</Badge> Group {m.division}: {names(m.events)}
               {m.note && <span className="block text-ink-muted">{m.note}</span>}
             </li>
           ))}
@@ -111,8 +111,8 @@ export default function RulesPage() {
 
       {sel && (
         <section className="mb-8">
-          <h2 className="mb-3 font-display text-xl font-semibold">Team selection</h2>
-          <div className="space-y-3 rounded-2xl border border-line bg-surface p-4 text-sm">
+          <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Team selection</h2>
+          <div className="space-y-3 rounded-card border border-line bg-surface p-4 text-sm">
             <p>
               {sel.scoring.method === "barehand-plus-weapon"
                 ? `Selection score = best barehand + best weapon${sel.scoring.pairing === "same-discipline" ? " in the same discipline (Changquan, Nanquan or Taijiquan)" : ""}. The average is that total divided by two.`
@@ -154,10 +154,10 @@ export default function RulesPage() {
       )}
 
       <section className="mb-8">
-        <h2 className="mb-3 font-display text-xl font-semibold">Judging</h2>
+        <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Judging</h2>
         <div className="space-y-2 text-sm">
           <p>
-            Deductions: <Link href="/tools/deductions" className="text-seal underline">deduction code lookup</Link>.
+            Deductions: <Link href="/tools/deductions" className="text-primary underline">deduction code lookup</Link>.
           </p>
           <p className="text-ink-muted">
             Difficulty (nandu) codes look like <code className="font-mono">353B+323C+1</code>: three-digit movements with a level letter, joined by

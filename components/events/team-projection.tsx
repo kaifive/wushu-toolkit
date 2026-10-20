@@ -1,37 +1,35 @@
-import { TeamBadge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import type { ScopeModel } from "@/lib/events/views";
-import { DISCIPLINE_LABEL } from "@/lib/rules";
-import type { Discipline } from "@/lib/domain/types";
+
+const G = { male: "Male", female: "Female" } as const;
 
 export function TeamProjection({ model }: { model: ScopeModel }) {
   return (
-    <div className="grid gap-3 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
       {model.teams.map((t) => (
-        <section key={t.id} className="rounded-2xl border border-line bg-surface p-4">
-          <header className="flex items-center justify-between">
-            <h3 className="font-display text-lg font-semibold">{t.id} Team</h3>
-            <span className="text-xs text-ink-muted">
-              {t.members.length}/{t.size}
-              {t.minAverage !== undefined ? ` · min avg ${t.minAverage.toFixed(1)}` : ""}
-            </span>
-          </header>
+        <Card
+          key={t.id}
+          title={`${t.id} Team`}
+          context={`${G[model.gender]} · ${t.members.length}/${t.size}${t.minAverage !== undefined ? ` · min ${t.minAverage.toFixed(1)}` : ""}`}
+          bodyClassName=""
+        >
           {t.members.length === 0 ? (
-            <p className="mt-3 text-sm text-ink-muted">No athlete qualifies yet.</p>
+            <p className="px-4 py-3 text-ink-muted">No athlete qualifies yet.</p>
           ) : (
-            <ol className="mt-3 space-y-2">
+            <ol className="divide-y divide-line">
               {t.members.map((m, i) => (
-                <li key={m.athleteName} className="flex items-start justify-between gap-3 text-sm">
+                <li key={m.athleteName} className="flex items-center justify-between gap-3 px-4 py-2.5">
                   <div className="min-w-0">
-                    <p className="font-semibold">
-                      <span className="mr-1 text-ink-muted">{i + 1}.</span>
+                    <p className="truncate font-semibold">
+                      <span className="mr-1.5 text-ink-muted tnum">{i + 1}</span>
                       {m.athleteName}
                     </p>
-                    <p className="truncate text-xs text-ink-muted">
-                      {DISCIPLINE_LABEL[m.discipline as Discipline] ?? m.discipline}
+                    <p className="truncate text-sm text-ink-muted">
+                      {m.discipline}
                       {m.club ? ` · ${m.club}` : ""}
                     </p>
                   </div>
-                  <div className="text-right tabular-nums">
+                  <div className="text-right tnum">
                     <p className="font-semibold">{m.score.toFixed(3)}</p>
                     <p className="text-xs text-ink-muted">avg {m.average.toFixed(3)}</p>
                   </div>
@@ -39,12 +37,9 @@ export function TeamProjection({ model }: { model: ScopeModel }) {
               ))}
             </ol>
           )}
-        </section>
+        </Card>
       ))}
-      <p className="text-xs text-ink-muted md:col-span-3">
-        Projection only. <TeamBadge team="A" /> <TeamBadge team="B" /> <TeamBadge team="C" /> labels are where athletes would land if the
-        competition ended now.
-      </p>
+      <p className="text-sm text-ink-muted lg:col-span-3">Projection only: where athletes land if the competition ended now.</p>
     </div>
   );
 }

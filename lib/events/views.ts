@@ -1,6 +1,7 @@
 import { athleteKey } from "@/lib/domain/names";
 import type { EventCode, EventData, Gender, ScoreEntry } from "@/lib/domain/types";
-import { EVENTS, type Ruleset, type TeamId } from "@/lib/rules";
+import { DISCIPLINE_LABEL, EVENTS, type Ruleset, type TeamId } from "@/lib/rules";
+import type { Discipline } from "@/lib/domain/types";
 import { ageGroupChampions, allAround, grandChampion, standings as aaStandings, type AllAroundAthlete } from "@/lib/rules/all-around";
 import { runSelection, withDivisions, type Candidate, type Team } from "@/lib/rules/selection";
 import type { AthleteHighlight } from "./types";
@@ -82,6 +83,13 @@ const toRow = (c: Candidate & { rank: number; team?: TeamId }, entries: ScoreEnt
   };
 };
 
+/** Human label for a selection key: a discipline, or a 2025-adults style category. */
+export function selectionKeyLabel(ruleset: Ruleset, key: string): string {
+  const s = ruleset.selection?.scoring;
+  if (s?.method === "category-average") return s.categories.find((c) => c.id === key)?.label ?? key;
+  return DISCIPLINE_LABEL[key as Discipline] ?? key;
+}
+
 /** Overall standings and team projection for every gender × division. */
 export function selectionModel(data: EventData, ruleset: Ruleset): ScopeModel[] {
   if (!ruleset.selection) return [];
@@ -98,10 +106,12 @@ export function selectionModel(data: EventData, ruleset: Ruleset): ScopeModel[] 
         gender: g,
         division: div,
         eventCodes: eventColumns(pool),
-        rows: result.ranked.map((c) => toRow(c, byAthlete.get(c.athleteId) ?? [])),
+        rows: result.ranked.map((c) => ({ ...toRow(c, byAthlete.get(c.athleteId) ?? []), discipline: selectionKeyLabel(ruleset, c.key) })),
         teams: result.teams.map((t) => ({
           ...t,
-          members: t.members.map((m) => ({ athleteName: m.athleteName, club: m.club, score: m.score, average: m.average, discipline: m.key })),
+          members: [...t.members]
+            .sort((a, b) => b.score - a.score)
+            .map((m) => ({ athleteName: m.athleteName, club: m.club, score: m.score, average: m.average, discipline: selectionKeyLabel(ruleset, m.key) })),
         })),
         scored: pool.filter((s) => s.finalScore != null).length,
         total: pool.length,

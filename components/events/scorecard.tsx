@@ -6,7 +6,7 @@ const f = (n: number | null | undefined, d = 3) => (n == null ? "—" : n.toFixe
 export function ScorecardCard({ row }: { row: ScorecardRow }) {
   const { a, b, c, adjustment } = row.scorecard;
   return (
-    <details className="rounded-xl border border-line bg-surface">
+    <details className="rounded-card border border-line bg-surface">
       <summary className="flex min-h-tap cursor-pointer list-none items-center justify-between gap-3 px-4 py-2">
         <span className="min-w-0">
           <span className="block truncate font-semibold">{row.athleteName}</span>
@@ -14,7 +14,7 @@ export function ScorecardCard({ row }: { row: ScorecardRow }) {
         </span>
         <span className="shrink-0 font-semibold tabular-nums">{f(row.finalScore)}</span>
       </summary>
-      <dl className="grid gap-3 px-4 pb-4 text-sm sm:grid-cols-2">
+      <dl className="grid grid-cols-1 gap-3 px-4 pb-4 text-sm sm:grid-cols-2">
         {a && (
           <div>
             <dt className="text-xs font-semibold uppercase text-ink-muted">A · Quality {f(a.score, 2)}</dt>

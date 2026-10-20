@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Deduction codes", description: "Sear
 export default function DeductionsPage() {
   return (
     <Container className="max-w-3xl">
-      <PageHeader eyebrow="Tools" title="Deduction codes">
+      <PageHeader crumbs={[{ href: "/tools", label: "Toolkit" }]} title="Deduction codes">
         Panel A (quality of movements) codes by event family.
       </PageHeader>
       {!DEDUCTIONS_SOURCE.verified && (

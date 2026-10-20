@@ -44,15 +44,15 @@ export function AccountPanel({ events }: { events: { slug: string; name: string 
   const name = (slug: string) => events.find((e) => e.slug === slug)?.name ?? slug;
   return (
     <div className="space-y-4">
-      <section className="rounded-2xl border border-line bg-surface p-5">
+      <section className="rounded-card border border-line bg-surface p-5">
         <p className="text-sm text-ink-muted">Signed in as</p>
         <p className="font-semibold">{user.email}</p>
-        <button type="button" onClick={() => void signOut()} className="mt-3 min-h-tap rounded-xl border border-line px-4 font-semibold">
+        <button type="button" onClick={() => void signOut()} className="mt-3 min-h-tap rounded-card border border-line px-4 font-semibold">
           Sign out
         </button>
       </section>
-      <section className="rounded-2xl border border-line bg-surface p-5">
-        <h2 className="font-display text-lg font-semibold">Event passes</h2>
+      <section className="rounded-card border border-line bg-surface p-5">
+        <h2 className="font-display text-lg font-bold tracking-wide">Event passes</h2>
         {error && <Notice tone="error">{error}</Notice>}
         {!me && !error && <p className="text-sm text-ink-muted">Loading…</p>}
         {me && me.passes.length === 0 && <p className="mt-1 text-sm text-ink-muted">No passes yet. Past events are free.</p>}
@@ -60,7 +60,7 @@ export function AccountPanel({ events }: { events: { slug: string; name: string 
           <ul className="mt-2 space-y-1">
             {me.passes.map((slug) => (
               <li key={slug}>
-                <Link href={`/events/${slug}`} className="inline-flex min-h-tap items-center font-semibold text-seal">
+                <Link href={`/events/${slug}`} className="inline-flex min-h-tap items-center font-semibold text-primary">
                   {name(slug)}
                 </Link>
               </li>
@@ -91,10 +91,10 @@ function AdminGrant({ events }: { events: { slug: string; name: string }[] }) {
   };
 
   return (
-    <section className="space-y-3 rounded-2xl border border-gold/40 bg-surface p-5">
-      <h2 className="font-display text-lg font-semibold">Admin: grant a pass</h2>
-      <input type="email" placeholder="athlete@example.com" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email" className="min-h-tap w-full rounded-xl border border-line bg-surface px-3" />
-      <select value={slug} onChange={(e) => setSlug(e.target.value)} aria-label="Event" className="min-h-tap w-full rounded-xl border border-line bg-surface px-3">
+    <section className="space-y-3 rounded-card border border-gold/40 bg-surface p-5">
+      <h2 className="font-display text-lg font-bold tracking-wide">Admin: grant a pass</h2>
+      <input type="email" placeholder="athlete@example.com" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email" className="min-h-tap w-full rounded-card border border-line bg-surface px-3" />
+      <select value={slug} onChange={(e) => setSlug(e.target.value)} aria-label="Event" className="min-h-tap w-full rounded-card border border-line bg-surface px-3">
         {events.map((e) => (
           <option key={e.slug} value={e.slug}>
             {e.name}
@@ -102,10 +102,10 @@ function AdminGrant({ events }: { events: { slug: string; name: string }[] }) {
         ))}
       </select>
       <div className="flex gap-2">
-        <button type="button" onClick={() => void send(false)} className="min-h-tap flex-1 rounded-xl bg-seal font-semibold text-seal-ink">
+        <button type="button" onClick={() => void send(false)} className="min-h-tap flex-1 rounded-card bg-primary font-semibold text-primary-ink">
           Grant
         </button>
-        <button type="button" onClick={() => void send(true)} className="min-h-tap flex-1 rounded-xl border border-line font-semibold">
+        <button type="button" onClick={() => void send(true)} className="min-h-tap flex-1 rounded-card border border-line font-semibold">
           Revoke
         </button>
       </div>

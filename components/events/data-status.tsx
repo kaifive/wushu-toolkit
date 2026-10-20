@@ -7,17 +7,18 @@ export function formatAsOf(iso: string): string {
   return d.toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short", timeZone: "America/Chicago" }) + " CT";
 }
 
+/** v1's "Standings as of …" info bar. */
 export function DataStatus({ data }: { data: EventData }) {
   return (
     <div className="mb-4">
       {data.stale ? (
-        <Notice tone="warn" title="Showing saved data">
-          The live source didn&apos;t respond, so this is the last saved copy from {formatAsOf(data.asOf)}.
+        <Notice tone="warn">
+          The live source isn&apos;t responding. Showing the last saved copy from {formatAsOf(data.asOf)}.
         </Notice>
       ) : (
-        <p className="text-xs text-ink-muted">
-          Source: {data.source} · as of {formatAsOf(data.asOf)}
-        </p>
+        <Notice>
+          Scores as of {formatAsOf(data.asOf)} · {data.source}
+        </Notice>
       )}
     </div>
   );
@@ -34,9 +35,8 @@ export function LoadError({ error }: { error: string }) {
 
 export function Disclaimer() {
   return (
-    <p className="mt-8 text-xs text-ink-muted">
-      Wushu Toolkit is not affiliated with the event organizers and is not an official results service. Projections follow the
-      published rules as closely as we can, but always confirm results with the organizers.
+    <p className="mt-8 text-sm text-ink-muted">
+      Not an official results service. Projections follow the published rules; confirm results with the organizers.
     </p>
   );
 }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EventNav } from "@/components/events/event-nav";
 import { Badge } from "@/components/ui/badge";
@@ -14,18 +15,25 @@ export default async function EventLayout({ children, params }: { children: Reac
   const event = getEvent(slug);
   if (!event) notFound();
   return (
-    <Container>
-      <div className="mb-4">
-        <div className="flex flex-wrap items-center gap-2">
-          {event.status === "live" && <Badge tone="seal">Live</Badge>}
-          {event.status === "archived" && <Badge>Archive</Badge>}
-          <span className="text-sm text-ink-muted">{formatEventDates(event)}</span>
+    <>
+      <div className="border-b border-line bg-surface">
+        <div className="mx-auto max-w-6xl px-4 pt-4 md:px-8">
+          <nav aria-label="Breadcrumb" className="text-sm text-ink-muted">
+            <Link href="/events" className="hover:text-ink">
+              Competitions
+            </Link>
+          </nav>
+          <h1 className="mt-0.5 font-display text-3xl font-bold leading-tight tracking-wide sm:text-4xl">{event.name}</h1>
+          <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-sm text-ink-muted">
+            {event.status === "live" && <Badge tone="seal">Live</Badge>}
+            {event.status === "archived" && <Badge>Final</Badge>}
+            <span>{formatEventDates(event)}</span>
+            {event.location && <span>· {event.location}</span>}
+          </p>
+          <EventNav slug={event.slug} views={event.views} />
         </div>
-        <h1 className="mt-1 font-display text-2xl font-semibold leading-tight sm:text-3xl">{event.name}</h1>
-        {event.location && <p className="text-sm text-ink-muted">{event.location}</p>}
       </div>
-      <EventNav slug={event.slug} views={event.views} />
-      {children}
-    </Container>
+      <Container>{children}</Container>
+    </>
   );
 }

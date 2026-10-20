@@ -39,7 +39,7 @@ export function MovementChecklist({ sets }: { sets: RequiredMovementSet[] }) {
       <label htmlFor="mv-set" className="mb-1 block text-sm font-semibold">
         Routine
       </label>
-      <select id="mv-set" value={setId} onChange={(e) => setSetId(e.target.value)} className="mb-4 min-h-tap w-full rounded-xl border border-line bg-surface px-3">
+      <select id="mv-set" value={setId} onChange={(e) => setSetId(e.target.value)} className="mb-4 min-h-tap w-full rounded-card border border-line bg-surface px-3">
         {sets.map((s) => (
           <option key={s.id} value={s.id}>
             {s.type}
@@ -53,7 +53,7 @@ export function MovementChecklist({ sets }: { sets: RequiredMovementSet[] }) {
         <button
           type="button"
           onClick={() => update(Object.fromEntries(Object.entries(ticked).filter(([k]) => !k.startsWith(`${set.id}:`))))}
-          className="min-h-tap rounded-lg px-3 text-sm font-semibold text-seal"
+          className="min-h-tap rounded-lg px-3 text-sm font-semibold text-primary"
         >
           Reset
         </button>
@@ -63,7 +63,7 @@ export function MovementChecklist({ sets }: { sets: RequiredMovementSet[] }) {
       </div>
       <ol className="mt-4 space-y-3">
         {set.requirements.map((r, ri) => (
-          <li key={r.title} className="rounded-xl border border-line bg-surface p-3">
+          <li key={r.title} className="rounded-card border border-line bg-surface p-3">
             <p className="text-sm font-semibold">{r.title}</p>
             <ul className="mt-2 space-y-1">
               {r.items.map((item, ii) => {
@@ -75,7 +75,7 @@ export function MovementChecklist({ sets }: { sets: RequiredMovementSet[] }) {
                         type="checkbox"
                         checked={!!ticked[k]}
                         onChange={(e) => update({ ...ticked, [k]: e.target.checked })}
-                        className="h-5 w-5 accent-[var(--jade)]"
+                        className="h-5 w-5 accent-[var(--primary)]"
                       />
                       {item}
                     </label>

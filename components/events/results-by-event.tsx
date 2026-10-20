@@ -8,7 +8,7 @@ export function ResultsByEvent({ results }: { results: EventResult[] }) {
       {results.map((r) => {
         const scored = r.rows.filter((x) => x.finalScore != null).length;
         return (
-          <details key={r.raw} className="group rounded-xl border border-line bg-surface">
+          <details key={r.raw} className="group rounded-card border border-line bg-surface">
             <summary className="flex min-h-tap cursor-pointer list-none items-center justify-between gap-3 px-4 py-2">
               <span className="font-semibold">{r.raw}</span>
               <span className="shrink-0 text-xs text-ink-muted">

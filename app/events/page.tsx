@@ -1,37 +1,28 @@
 import type { Metadata } from "next";
-import { EventCard } from "@/components/events/event-card";
+import { EventRow } from "@/components/events/event-card";
+import { Card } from "@/components/ui/card";
 import { Container, PageHeader } from "@/components/ui/page-header";
 import { allEvents } from "@/lib/events/registry";
 
-export const metadata: Metadata = { title: "Events", description: "Live and past wushu competitions: standings, team projections, scorecards and schedules." };
+export const metadata: Metadata = { title: "Competitions", description: "Live and past wushu competitions: standings, team projections, scorecards and schedules." };
 
 export default function EventsPage() {
   const events = allEvents();
   const current = events.filter((e) => e.status !== "archived");
   const archived = events.filter((e) => e.status === "archived");
   return (
-    <Container>
-      <PageHeader eyebrow="Events" title="Competitions">
-        Standings, team projections, scorecards and schedules for each competition.
-      </PageHeader>
-      <section aria-labelledby="current" className="mb-8">
-        <h2 id="current" className="mb-3 text-sm font-semibold uppercase tracking-wide text-ink-muted">
-          Live &amp; upcoming
-        </h2>
+    <Container className="space-y-5">
+      <PageHeader title="Competitions">Standings, team projections, scorecards and schedules for each competition.</PageHeader>
+      <Card title="Live and upcoming" bodyClassName="">
         {current.length ? (
-          <div className="grid gap-3 md:grid-cols-2">{current.map((e) => <EventCard key={e.slug} event={e} />)}</div>
+          <div className="divide-y divide-line">{current.map((e) => <EventRow key={e.slug} event={e} />)}</div>
         ) : (
-          <p className="rounded-2xl border border-dashed border-line p-4 text-sm text-ink-muted">
-            No competition is live right now. The next one will show up here.
-          </p>
+          <p className="px-4 py-4 text-ink-muted">Nothing live right now. The next competition will show up here.</p>
         )}
-      </section>
-      <section aria-labelledby="archive">
-        <h2 id="archive" className="mb-3 text-sm font-semibold uppercase tracking-wide text-ink-muted">
-          Archive
-        </h2>
-        <div className="grid gap-3 md:grid-cols-2">{archived.map((e) => <EventCard key={e.slug} event={e} />)}</div>
-      </section>
+      </Card>
+      <Card title="Past competitions" context={`${archived.length} events, free to view`} bodyClassName="divide-y divide-line">
+        {archived.map((e) => <EventRow key={e.slug} event={e} />)}
+      </Card>
     </Container>
   );
 }

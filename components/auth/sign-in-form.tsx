@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Notice } from "@/components/ui/notice";
 import { useAuth } from "./auth-provider";
 
-const input = "min-h-tap w-full rounded-xl border border-line bg-surface px-3";
+const input = "min-h-tap w-full rounded-card border border-line bg-surface px-3";
 
 function friendly(err: unknown): string {
   const code = (err as { code?: string }).code ?? "";
@@ -47,13 +47,13 @@ export function SignInForm() {
   };
 
   return (
-    <form onSubmit={submit} className="space-y-4 rounded-2xl border border-line bg-surface p-5">
+    <form onSubmit={submit} className="space-y-4 rounded-card border border-line bg-surface p-5">
       {kicked && (
         <Notice tone="warn" title="Signed out">
           Your account was signed in on {kicked}. An account can be used on one device at a time.
         </Notice>
       )}
-      <h2 className="font-display text-xl font-semibold">{mode === "in" ? "Sign in" : "Create an account"}</h2>
+      <h2 className="font-display text-xl font-bold tracking-wide">{mode === "in" ? "Sign in" : "Create an account"}</h2>
       <div>
         <label htmlFor="email" className="mb-1 block text-sm font-semibold">
           Email
@@ -76,11 +76,11 @@ export function SignInForm() {
         />
       </div>
       {msg && <Notice tone={msg.tone === "error" ? "error" : "info"}>{msg.text}</Notice>}
-      <button type="submit" disabled={busy} className="min-h-12 w-full rounded-xl bg-seal font-semibold text-seal-ink disabled:opacity-60">
+      <button type="submit" disabled={busy} className="min-h-12 w-full rounded-card bg-primary font-semibold text-primary-ink disabled:opacity-60">
         {busy ? "One moment…" : mode === "in" ? "Sign in" : "Create account"}
       </button>
       <div className="flex flex-wrap justify-between gap-2 text-sm">
-        <button type="button" className="min-h-tap font-semibold text-seal" onClick={() => setMode(mode === "in" ? "up" : "in")}>
+        <button type="button" className="min-h-tap font-semibold text-primary" onClick={() => setMode(mode === "in" ? "up" : "in")}>
           {mode === "in" ? "New here? Create an account" : "Have an account? Sign in"}
         </button>
         {mode === "in" && (

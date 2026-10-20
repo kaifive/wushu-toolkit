@@ -4,31 +4,25 @@ import { ChevronRightIcon, LockIcon } from "@/components/ui/icons";
 import { formatEventDates, requiresEntitlement } from "@/lib/events/registry";
 import type { EventConfig } from "@/lib/events/types";
 
-const STATUS = { live: ["seal", "Live"], upcoming: ["gold", "Upcoming"], archived: ["neutral", "Archive"] } as const;
+const STATUS = { live: ["seal", "Live"], upcoming: ["gold", "Upcoming"], archived: ["neutral", "Final"] } as const;
 
-export function EventCard({ event }: { event: EventConfig }) {
+/** One competition as a list row (sits inside a Card list). */
+export function EventRow({ event }: { event: EventConfig }) {
   const [tone, label] = STATUS[event.status];
   return (
-    <Link
-      href={`/events/${event.slug}`}
-      className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-surface p-4 transition hover:border-seal/50"
-    >
-      <div className="min-w-0">
-        <div className="flex items-center gap-2">
-          <Badge tone={tone}>{label}</Badge>
-          {requiresEntitlement(event) && (
-            <span className="inline-flex items-center gap-1 text-xs text-ink-muted">
-              <LockIcon className="h-3.5 w-3.5" /> Pass required
-            </span>
-          )}
-        </div>
-        <h3 className="mt-2 font-display text-lg font-semibold leading-snug">{event.name}</h3>
-        <p className="text-sm text-ink-muted">
+    <Link href={`/events/${event.slug}`} className="group flex min-h-16 items-center gap-3 px-4 py-3 hover:bg-surface-2">
+      <div className="min-w-0 flex-1">
+        <p className="flex items-center gap-2 font-semibold">
+          <span className="truncate">{event.name}</span>
+          {requiresEntitlement(event) && <LockIcon className="h-4 w-4 shrink-0 text-ink-muted" aria-label="Pass required" />}
+        </p>
+        <p className="truncate text-sm text-ink-muted">
           {formatEventDates(event)}
           {event.location ? ` · ${event.location}` : ""}
         </p>
       </div>
-      <ChevronRightIcon className="h-5 w-5 shrink-0 text-ink-muted group-hover:text-seal" />
+      <Badge tone={tone}>{label}</Badge>
+      <ChevronRightIcon className="h-5 w-5 shrink-0 text-ink-muted group-hover:text-primary" />
     </Link>
   );
 }

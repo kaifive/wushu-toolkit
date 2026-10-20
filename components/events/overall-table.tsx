@@ -1,8 +1,6 @@
 import { TeamBadge } from "@/components/ui/badge";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import type { ScopeModel } from "@/lib/events/views";
-import { DISCIPLINE_LABEL } from "@/lib/rules";
-import type { Discipline } from "@/lib/domain/types";
 
 const fmt = (n: number | null | undefined) => (n == null ? "—" : n.toFixed(3));
 
@@ -32,7 +30,7 @@ export function OverallTable({ model, highlights }: { model: ScopeModel; highlig
                   <div className="min-w-0">
                     <p className="truncate font-semibold">{r.athleteName}</p>
                     <p className="truncate text-xs text-ink-muted">
-                      {DISCIPLINE_LABEL[r.discipline as Discipline] ?? r.discipline}
+                      {r.discipline}
                       {r.club ? ` · ${r.club}` : ""}
                     </p>
                     {r.team && (

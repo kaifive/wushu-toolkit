@@ -8,17 +8,17 @@ export const metadata: Metadata = { title: "Logo concepts", robots: { index: fal
 export default function BrandPage() {
   return (
     <Container>
-      <PageHeader eyebrow="Brand review" title="Three logo concepts">
+      <PageHeader title="Three logo concepts">
         Each mark at app-icon, header and favicon sizes, on light and dark.
       </PageHeader>
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {CONCEPTS.map(({ id, name, Mark, idea, strengths, risks }) => (
-          <section key={id} className="overflow-hidden rounded-2xl border border-line bg-surface">
+          <section key={id} className="overflow-hidden rounded-card border border-line bg-surface">
             <div className="grid grid-cols-2">
-              <div className="flex items-center justify-center bg-[#faf7f2] p-6 [--ink:#1b1a17] [--surface:#ffffff] [--seal:#c8321e]">
+              <div className="flex items-center justify-center bg-[#f3f4f7] p-6 [--ink:#1f2430] [--surface:#ffffff] [--seal:#d4371f]">
                 <Mark className="h-24 w-24" />
               </div>
-              <div className="flex items-center justify-center bg-[#121110] p-6 [--ink:#f3efe7] [--surface:#1c1b19] [--seal:#e2513a]">
+              <div className="flex items-center justify-center bg-[#212631] p-6 [--ink:#e8eaef] [--surface:#272c38] [--seal:#ef5a42]">
                 <Mark className="h-24 w-24" />
               </div>
             </div>
@@ -26,12 +26,12 @@ export default function BrandPage() {
               <Mark className="h-12 w-12" />
               <Mark className="h-8 w-8" />
               <Mark className="h-4 w-4" />
-              <span className="ml-auto font-display text-lg font-semibold">
-                Wushu <span className="text-seal">Toolkit</span>
+              <span className="ml-auto font-display text-lg font-bold tracking-wide">
+                Wushu Toolkit
               </span>
             </div>
             <div className="p-4 text-sm">
-              <h2 className="font-display text-lg font-semibold">
+              <h2 className="font-display text-lg font-bold tracking-wide">
                 {id}. {name}
               </h2>
               <p className="mt-1 text-ink-muted">{idea}</p>

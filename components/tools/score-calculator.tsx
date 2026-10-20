@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { scoreToBeat } from "@/lib/rules/calculator";
 
-const input = "min-h-tap w-full rounded-xl border border-line bg-surface px-3 tabular-nums";
+const input = "min-h-tap w-full rounded-card border border-line bg-surface px-3 tabular-nums";
 
 export function ScoreCalculator() {
   const [count, setCount] = useState(2);
@@ -25,7 +25,7 @@ export function ScoreCalculator() {
               type="button"
               aria-pressed={count === n}
               onClick={() => setCount(n)}
-              className={`min-h-tap flex-1 rounded-xl border px-3 font-semibold ${count === n ? "border-seal bg-seal-soft text-seal" : "border-line bg-surface"}`}
+              className={`min-h-tap flex-1 rounded-card border px-3 font-semibold ${count === n ? "border-primary bg-primary-soft text-primary" : "border-line bg-surface"}`}
             >
               {n === 2 ? "2 (barehand + weapon)" : "3"}
             </button>
@@ -38,7 +38,7 @@ export function ScoreCalculator() {
         </label>
         <input id="target" inputMode="decimal" placeholder="e.g. 9.000" value={target} onChange={(e) => setTarget(e.target.value)} className={input} />
       </div>
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {labels.map((l, i) => (
           <div key={l}>
             <label htmlFor={`s${i}`} className="mb-1 block text-sm font-semibold">
@@ -55,17 +55,17 @@ export function ScoreCalculator() {
           </div>
         ))}
       </div>
-      <output aria-live="polite" className="block rounded-2xl border border-line bg-surface p-4">
+      <output aria-live="polite" className="block rounded-card border border-line bg-surface p-4">
         {!result && <span className="text-ink-muted">Enter the average you need to beat.</span>}
         {result?.kind === "invalid" && <span className="text-seal">{result.reason}</span>}
         {result?.kind === "already" && <span className="font-semibold text-jade">Average {result.average.toFixed(3)} already beats it.</span>}
-        {result?.kind === "short" && <span className="font-semibold text-seal">Average {result.average.toFixed(3)} doesn&apos;t beat it.</span>}
+        {result?.kind === "short" && <span className="font-semibold text-primary">Average {result.average.toFixed(3)} doesn&apos;t beat it.</span>}
         {result?.kind === "need" && (
           <span>
             <span className="block text-sm text-ink-muted">
               Lowest score needed{result.missing > 1 ? ` on each of ${result.missing} routines` : ""}
             </span>
-            <span className={`block font-display text-3xl font-semibold tabular-nums ${result.possible ? "" : "text-seal"}`}>{result.each.toFixed(3)}</span>
+            <span className={`block font-display text-3xl font-bold tracking-wide tabular-nums ${result.possible ? "" : "text-seal"}`}>{result.each.toFixed(3)}</span>
             {!result.possible && <span className="text-sm text-seal">That&apos;s above 10, so it can&apos;t be beaten.</span>}
           </span>
         )}

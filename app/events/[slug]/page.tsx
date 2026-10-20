@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { VIEW_LABEL } from "@/components/events/event-nav";
+import { VIEW_LABEL } from "@/lib/events/labels";
 import { ChevronRightIcon } from "@/components/ui/icons";
+import { Card } from "@/components/ui/card";
 import { Notice } from "@/components/ui/notice";
 import { getEvent, requiresEntitlement } from "@/lib/events/registry";
 import type { EventView } from "@/lib/events/types";
@@ -30,22 +31,21 @@ export default async function EventOverview({ params }: { params: Promise<{ slug
     <div className="space-y-6">
       {event.description && <p className="max-w-2xl text-ink-muted">{event.description}</p>}
       {requiresEntitlement(event) && <Notice title="Event pass">Live data for this event needs an event pass on your account.</Notice>}
-      <ul className="grid gap-3 sm:grid-cols-2">
+      <Card title="Views" bodyClassName="divide-y divide-line">
         {event.views.map((v) => (
-          <li key={v}>
-            <Link href={`/events/${event.slug}/${v}`} className="flex min-h-tap items-center justify-between gap-3 rounded-2xl border border-line bg-surface p-4 hover:border-seal/50">
+          <div key={v}>
+            <Link href={`/events/${event.slug}/${v}`} className="group flex min-h-16 items-center justify-between gap-3 px-4 py-3 hover:bg-surface-2">
               <span>
                 <span className="block font-semibold">{VIEW_LABEL[v]}</span>
-                <span className="block text-sm text-ink-muted">{VIEW_BLURB[v]}</span>
+                <span className="block text-ink-muted">{VIEW_BLURB[v]}</span>
               </span>
-              <ChevronRightIcon className="h-5 w-5 shrink-0 text-ink-muted" />
+              <ChevronRightIcon className="h-5 w-5 shrink-0 text-ink-muted group-hover:text-primary" />
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
-      <section className="rounded-2xl border border-line bg-surface p-4 text-sm">
-        <h2 className="font-semibold">Rules</h2>
-        <p className="mt-1 text-ink-muted">
+      </Card>
+      <Card title="Rules">
+        <p className="text-ink-muted">
           {ruleset.name}
           {ruleset.source.revision ? ` · ${ruleset.source.revision}` : ""}
           {ruleset.source.verified ? "" : " · pending verification"}
@@ -54,7 +54,7 @@ export default async function EventOverview({ params }: { params: Promise<{ slug
           <ul className="mt-2 space-y-1">
             {event.links.map((l) => (
               <li key={l.url}>
-                <a href={l.url} className="text-seal underline" rel="noopener noreferrer" target="_blank">
+                <a href={l.url} className="text-primary underline" rel="noopener noreferrer" target="_blank">
                   {l.label}
                 </a>
               </li>
@@ -66,7 +66,7 @@ export default async function EventOverview({ params }: { params: Promise<{ slug
             {n}
           </p>
         ))}
-      </section>
+      </Card>
     </div>
   );
 }

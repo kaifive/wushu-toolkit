@@ -31,7 +31,7 @@ export function DeductionSearch({ groups }: { groups: DeductionGroup[] }) {
         id="ded-group"
         value={groupId}
         onChange={(e) => setGroupId(e.target.value as DeductionGroup["id"])}
-        className="mb-3 min-h-tap w-full rounded-xl border border-line bg-surface px-3"
+        className="mb-3 min-h-tap w-full rounded-card border border-line bg-surface px-3"
       >
         {groups.map((g) => (
           <option key={g.id} value={g.id}>
@@ -48,7 +48,7 @@ export function DeductionSearch({ groups }: { groups: DeductionGroup[] }) {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           aria-label="Search deduction codes"
-          className="min-h-tap w-full rounded-xl border border-line bg-surface pl-10 pr-3"
+          className="min-h-tap w-full rounded-card border border-line bg-surface pl-10 pr-3"
         />
       </div>
       <p className="mb-2 text-xs text-ink-muted" aria-live="polite">
@@ -56,9 +56,9 @@ export function DeductionSearch({ groups }: { groups: DeductionGroup[] }) {
       </p>
       <ul className="space-y-2">
         {codes.map((c) => (
-          <li key={`${c.category}-${c.code}`} className="rounded-xl border border-line bg-surface p-3">
+          <li key={`${c.category}-${c.code}`} className="rounded-card border border-line bg-surface p-3">
             <div className="flex items-baseline gap-3">
-              <span className="w-8 shrink-0 font-mono text-lg font-semibold text-seal">{c.code}</span>
+              <span className="w-8 shrink-0 font-mono text-lg font-semibold text-primary">{c.code}</span>
               <div className="min-w-0">
                 <p className="font-semibold">
                   {c.english}
@@ -75,7 +75,7 @@ export function DeductionSearch({ groups }: { groups: DeductionGroup[] }) {
           </li>
         ))}
       </ul>
-      <details className="mt-6 rounded-xl border border-line bg-surface p-3 text-sm">
+      <details className="mt-6 rounded-card border border-line bg-surface p-3 text-sm">
         <summary className="min-h-tap cursor-pointer font-semibold">Deduction standards</summary>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-ink-muted">
           {group.standards.map((s) => (

@@ -1,3 +1,4 @@
+import { StatTile } from "@/components/ui/card";
 import { Notice } from "@/components/ui/notice";
 import { Tabs } from "@/components/ui/tabs";
 import type { EventData } from "@/lib/domain/types";
@@ -25,7 +26,15 @@ export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
   const models = selectionModel(data, ruleset);
   const results = resultsByEvent(data, ruleset);
   const hl = highlightMap(highlights);
+  const scored = data.scores.filter((s) => s.finalScore != null);
+  const avg = scored.length ? scored.reduce((t, s) => t + (s.finalScore ?? 0), 0) / scored.length : 0;
   return (
+    <>
+    <div className="mb-5 grid grid-cols-3 gap-3">
+      <StatTile value={data.registrations.length} label="athletes" />
+      <StatTile value={`${scored.length}/${data.scores.length}`} label="routines scored" progress={data.scores.length ? scored.length / data.scores.length : 0} />
+      <StatTile value={scored.length ? avg.toFixed(3) : "—"} label="average score" progress={avg / 10} />
+    </div>
     <Tabs
       label="Gender"
       param="gender"
@@ -41,7 +50,7 @@ export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
                 tabs={mine.map((m) => ({ id: m.division.id, label: m.division.label }))}
                 panels={mine.map((m) => (
                   <section key={m.division.id}>
-                    <h2 className="mb-1 font-display text-lg font-semibold">Overall · {m.division.label}</h2>
+                    <h2 className="mb-1 font-display text-lg font-bold tracking-wide">Overall · {m.division.label}</h2>
                     <p className="mb-3 text-xs text-ink-muted">
                       {m.scored}/{m.total} routines scored. Bold scores count toward the total.
                     </p>
@@ -51,13 +60,14 @@ export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
               />
             )}
             <section>
-              <h2 className="mb-3 font-display text-lg font-semibold">Results by event</h2>
+              <h2 className="mb-3 font-display text-lg font-bold tracking-wide">Results by event</h2>
               <ResultsByEvent results={results.filter((r) => r.gender === g.id)} />
             </section>
           </div>
         );
       })}
     />
+    </>
   );
 }
 

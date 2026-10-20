@@ -14,7 +14,7 @@ export function ScheduleView({ schedule, highlights }: { schedule: Schedule; hig
             {b.label}
           </p>
         ) : (
-          <details key={i} open={!b.finished} className="rounded-xl border border-line bg-surface">
+          <details key={i} open={!b.finished} className="rounded-card border border-line bg-surface">
             <summary className="flex min-h-tap cursor-pointer list-none items-center justify-between px-4 py-2">
               <span className="font-semibold">
                 {b.start}

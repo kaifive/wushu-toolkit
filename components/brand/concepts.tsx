@@ -17,7 +17,7 @@ export function ConceptEnso(props: P) {
       <path d="M44.5 12.6 A22 22 0 0 0 20 14.5" fill="none" stroke="var(--ink, #1b1a17)" strokeWidth="9" strokeLinecap="round" opacity="0.9" />
       {/* jian, bottom-left to top-right, tip in vermilion */}
       <g transform="rotate(45 32 32)">
-        <path d="M30.6 40 L32 2.5 L33.4 40 Z" fill="var(--seal, #c8321e)" />
+        <path d="M30.6 40 L32 2.5 L33.4 40 Z" fill="var(--seal, #d4371f)" />
         <rect x="26.5" y="39.5" width="11" height="3" rx="1.5" fill="var(--ink, #1b1a17)" />
         <rect x="30.8" y="42.5" width="2.4" height="8" rx="1" fill="var(--ink, #1b1a17)" />
         <circle cx="32" cy="52.5" r="2.4" fill="var(--ink, #1b1a17)" />
@@ -39,7 +39,7 @@ export function ConceptDial(props: P) {
       </g>
       {/* needle: jian pointing to ~1 o'clock */}
       <g transform="rotate(28 32 34)">
-        <path d="M30.7 36 L32 9 L33.3 36 Z" fill="var(--seal, #c8321e)" />
+        <path d="M30.7 36 L32 9 L33.3 36 Z" fill="var(--seal, #d4371f)" />
         <rect x="27.5" y="35" width="9" height="2.8" rx="1.4" fill="var(--ink, #1b1a17)" />
       </g>
       <circle cx="32" cy="40.5" r="3.4" fill="var(--ink, #1b1a17)" />

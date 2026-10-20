@@ -63,10 +63,10 @@ export function AllAroundTable({ athletes, topN, highlights }: { athletes: AllAr
 export function Champions({ model }: { model: AllAroundModel }) {
   return (
     <div className="space-y-4">
-      <section className="rounded-2xl border border-gold/40 bg-gold/10 p-4">
+      <section className="rounded-card border border-gold/40 bg-gold/10 p-4">
         <p className="text-xs font-semibold uppercase tracking-wider text-gold">Grand Champion</p>
         {model.grandChampion ? (
-          <p className="mt-1 font-display text-2xl font-semibold">
+          <p className="mt-1 font-display text-2xl font-bold tracking-wide">
             {model.grandChampion.athleteName} <span className="text-base tabular-nums text-ink-muted">{f(model.grandChampion.total)}</span>
           </p>
         ) : (
@@ -76,9 +76,9 @@ export function Champions({ model }: { model: AllAroundModel }) {
           Highest total of the top {model.topN} forms among registered athletes with at least {model.minForms} forms.
         </p>
       </section>
-      <div className="grid gap-2 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {model.ageGroups.map(({ group, male, female }) => (
-          <section key={group.id} className="rounded-xl border border-line bg-surface p-3 text-sm">
+          <section key={group.id} className="rounded-card border border-line bg-surface p-3 text-sm">
             <h3 className="font-semibold">{group.label}</h3>
             <dl className="mt-2 grid grid-cols-[4.5rem_1fr_auto] gap-x-2 gap-y-1">
               {[

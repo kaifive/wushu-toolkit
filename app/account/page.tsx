@@ -10,7 +10,7 @@ export default function AccountPage() {
   const events = allEvents().map((e) => ({ slug: e.slug, name: e.name }));
   return (
     <Container className="max-w-md">
-      <PageHeader eyebrow="Account" title="Your account" />
+      <PageHeader title="Your account" />
       <AuthProvider>
         <AccountPanel events={events} />
       </AuthProvider>
