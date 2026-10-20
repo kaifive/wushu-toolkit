@@ -109,3 +109,14 @@ body {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
+
+::placeholder {
+  color: var(--ink-muted);
+  opacity: 1;
+}
+
+p,
+li {
+  text-wrap: pretty;
+  max-width: 62ch; /* ~75 characters in Barlow */
+}

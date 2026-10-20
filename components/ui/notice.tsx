@@ -9,7 +9,7 @@ export function Notice({ tone = "info", title, children }: { tone?: keyof typeof
   return (
     <div role={tone === "error" ? "alert" : "note"} className={`rounded-card border px-4 py-3 text-[15px] ${TONES[tone]}`}>
       {title && <p className="font-semibold">{title}</p>}
-      <div className={title ? "mt-0.5" : ""}>{children}</div>
+      <div className={`max-w-[62ch] ${title ? "mt-0.5" : ""}`}>{children}</div>
     </div>
   );
 }

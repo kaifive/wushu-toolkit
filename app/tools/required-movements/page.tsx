@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Required movements", description: "C
 
 export default function RequiredMovementsPage() {
   return (
-    <Container className="max-w-3xl">
+    <Container className="max-w-2xl">
       <PageHeader crumbs={[{ href: "/tools", label: "Toolkit" }]} title="Required movements">
         Tick off each required element as you check your routine. Your ticks stay on this device.
       </PageHeader>

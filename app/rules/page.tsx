@@ -112,7 +112,7 @@ export default function RulesPage() {
       {sel && (
         <section className="mb-8">
           <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Team selection</h2>
-          <div className="space-y-3 rounded-card border border-line bg-surface p-4 text-sm">
+          <div className="space-y-3">
             <p>
               {sel.scoring.method === "barehand-plus-weapon"
                 ? `Selection score = best barehand + best weapon${sel.scoring.pairing === "same-discipline" ? " in the same discipline (Changquan, Nanquan or Taijiquan)" : ""}. The average is that total divided by two.`

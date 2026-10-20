@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "About" };
 
 export default function AboutPage() {
   return (
-    <Container className="max-w-3xl">
+    <Container className="max-w-2xl">
       <PageHeader title="About Wushu Toolkit">
         Built by {SITE.author}, a wushu athlete, so families and coaches can follow competitions without refreshing five spreadsheets.
       </PageHeader>

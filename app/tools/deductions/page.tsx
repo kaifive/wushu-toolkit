@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Deduction codes", description: "Sear
 
 export default function DeductionsPage() {
   return (
-    <Container className="max-w-3xl">
+    <Container className="max-w-2xl">
       <PageHeader crumbs={[{ href: "/tools", label: "Toolkit" }]} title="Deduction codes">
         Panel A (quality of movements) codes by event family.
       </PageHeader>

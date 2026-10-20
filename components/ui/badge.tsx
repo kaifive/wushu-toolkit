@@ -1,5 +1,5 @@
 const TONES = {
-  neutral: "bg-line text-ink-muted",
+  neutral: "bg-line text-ink",
   seal: "bg-seal text-white",
   primary: "bg-primary-soft text-primary",
   jade: "bg-jade/15 text-jade",

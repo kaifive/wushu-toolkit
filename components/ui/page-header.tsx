@@ -23,5 +23,7 @@ export function PageHeader({ crumbs, title, children }: { crumbs?: { href: strin
 }
 
 export function Container({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div className={`mx-auto max-w-6xl px-4 py-5 sm:py-7 md:px-8 ${className}`}>{children}</div>;
+  // A max-w-* in className replaces the default width (two max-w classes would fight).
+  const width = /(^|\s)max-w-/.test(className) ? "" : "max-w-6xl";
+  return <div className={`mx-auto ${width} px-4 py-5 sm:py-7 md:px-8 ${className}`}>{children}</div>;
 }
