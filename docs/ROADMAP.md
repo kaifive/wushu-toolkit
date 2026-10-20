@@ -8,7 +8,7 @@ Resume from the first unchecked item. One commit per item.
 
 ## Phase 1 — Scaffold
 - [x] Next.js + TS strict + Tailwind, `check` / `test` / `build` scripts green
-- [ ] App shell: top nav (desktop), bottom tab bar (mobile), 44px targets
+- [x] App shell: top nav (desktop), bottom tab bar (mobile), 44px targets
 
 ## Phase 2 — Data layer
 - [ ] Domain types (`lib/domain`)
