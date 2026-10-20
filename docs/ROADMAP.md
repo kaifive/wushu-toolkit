@@ -46,11 +46,12 @@ Resume from the first unchecked item. One commit per item.
 - [ ] Finalize logo (after Khai picks)
 
 ## Phase 7 — Accounts (ADR-005)
-- [ ] Firebase client + sign-in page
-- [ ] Single-device session lock
-- [ ] Entitlements + gated data route
-- [ ] Manual grant script + admin page
-- [ ] Firestore security rules
+- [x] Firebase client + sign-in page
+- [x] Single-device session lock
+- [x] Entitlements + gated data route
+- [x] Manual grant script + admin page
+- [x] Firestore security rules
+- [ ] (Needs Firebase keys) End-to-end check of sign-in, session lock and granting on a Vercel preview
 
 ## Phase 8 — Ship
 - [ ] Snapshot GitHub Action
