@@ -36,20 +36,25 @@ async function sample() {
   }
 }
 
+/**
+ * Totals across every competition whose data loads. They grow on their own as
+ * events are added; a sheet-only event counts once it is reachable or snapshotted.
+ */
 async function archiveStats() {
-  const archived = allEvents().filter((e) => e.status === "archived");
-  let athletes = 0;
+  let events = 0;
+  const athletes = new Set<string>(); // the same athlete across years counts once
   let routines = 0;
-  for (const e of archived) {
+  for (const e of allEvents()) {
     try {
-      const d = await e.data().load();
-      athletes += d.registrations.length;
+      const d = await e.data().load({ revalidate: 3600 });
+      events++;
+      for (const r of d.registrations) athletes.add(r.athlete.id);
       routines += d.scores.filter((s) => s.finalScore != null).length;
     } catch {
       /* live-only archive not reachable at build */
     }
   }
-  return { events: archived.length, athletes, routines };
+  return { events, athletes: athletes.size, routines };
 }
 
 export default async function HomePage() {
@@ -99,7 +104,7 @@ export default async function HomePage() {
 
       <div className="mx-auto max-w-6xl space-y-6 px-4 py-8 md:px-8">
         <div className="grid grid-cols-3 gap-3">
-          <StatTile value={stats.events} label="competitions archived" />
+          <StatTile value={stats.events} label="competitions" />
           <StatTile value={stats.athletes.toLocaleString("en-US")} label="athletes tracked" />
           <StatTile value={stats.routines.toLocaleString("en-US")} label="routines scored" />
         </div>

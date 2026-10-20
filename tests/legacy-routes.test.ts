@@ -25,7 +25,7 @@ test("every redirect target exists in the app", () => {
   const walk = (dir: string, route: string) => {
     for (const f of readdirSync(dir)) {
       const p = join(dir, f);
-      if (statSync(p).isDirectory()) walk(p, `${route}/${f}`);
+      if (statSync(p).isDirectory()) walk(p, /^\(.*\)$/.test(f) ? route : `${route}/${f}`); // (group) folders don't add a segment
       else if (f === "page.tsx") pages.add(route || "/");
     }
   };
