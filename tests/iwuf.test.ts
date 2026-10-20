@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { DEDUCTION_GROUPS, DEDUCTIONS_SOURCE } from "@/lib/rules/iwuf-2024/deductions";
-import { declaredValue, parseNandu, parseNanduList } from "@/lib/rules/iwuf-2024/nandu";
+import { CONNECTIONS, TECHNIQUES, chainFromCode, declaredValue, nextOptions, parseNandu, parseNanduList, scoreNandu } from "@/lib/rules/iwuf-2024/nandu";
 
 test("deduction groups cover every taolu event exactly once", () => {
   const events = DEDUCTION_GROUPS.flatMap((g) => g.events);
@@ -33,9 +33,51 @@ test("parseNandu splits movements and connections", () => {
   assert.equal(parseNandu("hello"), null);
 });
 
-test("parseNanduList keeps unknown entries and values stay null until sourced", () => {
+test("parseNanduList keeps unknown entries", () => {
   const r = parseNanduList(["312A+335A", "??", "324B+1"]);
   assert.equal(r.elements.length, 2);
   assert.deepEqual(r.unknown, ["??"]);
-  assert.equal(declaredValue(r.elements), null);
+  assert.equal(declaredValue(r.elements), 1); // 0.2+0.2+B 0.15, 0.3+B 0.15
+});
+
+test("scoreNandu: a full 2.0 Daoshu set from the 2025 Phoenix scorecards", () => {
+  const r = scoreNandu("changquan", ["353B+323C+1", "324B+1", "312A+335A"].map(chainFromCode));
+  assert.equal(r.techniqueRaw, 1.4);
+  assert.equal(r.connectionRaw, 0.7);
+  assert.equal(r.connection, 0.6, "connections cap at 0.6");
+  assert.equal(r.total, 2);
+  assert.deepEqual(r.warnings, []);
+});
+
+test("scoreNandu: unlisted connections earn nothing and are flagged", () => {
+  const r = scoreNandu("changquan", [chainFromCode("323C+2")]);
+  assert.equal(r.technique, 0.4);
+  assert.equal(r.connection, 0);
+  assert.match(r.warnings.join(), /323C\+2 is not a listed connection/);
+});
+
+test("scoreNandu: technique cap and family-specific tables", () => {
+  const r = scoreNandu("changquan", ["323C", "324C", "353C", "355B", "312B"].map(chainFromCode));
+  assert.equal(r.techniqueRaw, 1.8);
+  assert.equal(r.technique, 1.4);
+  assert.equal(scoreNandu("taiji", [chainFromCode("324C+5")]).total, 0.6, "taiji lotus 540 + hurdler split: 0.4 + C 0.2");
+  assert.match(scoreNandu("nanquan", [chainFromCode("353B")]).warnings.join(), /not a Nanquan difficulty technique/);
+});
+
+test("scoreNandu: Taiji hurdler's split connection only once", () => {
+  assert.match(scoreNandu("taiji", ["324C+5", "324B+5"].map(chainFromCode)).warnings.join(), /only once/);
+});
+
+test("nandu tables are internally consistent", () => {
+  for (const fam of ["changquan", "nanquan", "taiji"] as const) {
+    const codes = new Set(TECHNIQUES[fam].map((t) => t.code));
+    const seen = new Set<string>();
+    for (const c of CONNECTIONS[fam]) {
+      assert.ok(!seen.has(c.code), `${fam} duplicate ${c.code}`);
+      seen.add(c.code);
+      const [first] = c.code.split("+");
+      assert.ok(codes.has(first!) || first === "445A", `${fam} ${c.code} starts with a known technique`);
+    }
+  }
+  assert.deepEqual(nextOptions("changquan", "323C").map((c) => c.code).sort(), ["323C+1", "323C+4", "323C+6"]);
 });

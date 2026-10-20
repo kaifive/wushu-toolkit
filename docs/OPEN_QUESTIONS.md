@@ -22,7 +22,7 @@ documents are entered as `verified: false`:
 - Selection math uses the rules in the brief (best barehand + best weapon,
   discipline spots, minimum averages 9.0/8.9/8.8).
 - Deduction codes are migrated from the old app.
-- Nandu data is a stub.
+- Nandu data: resolved, from the IWUF 2024 PDF Khai supplied (see #12).
 
 Partial data was recovered from search-engine extracts of r15: age groups
 (birth ranges), events per age group, time limits, music and dates. These are
@@ -99,3 +99,11 @@ The calculator needs the IWUF 2024 degree-of-difficulty tables (jumps,
 landings, rotation degrees, connection values and caps). They are in the
 2024 rules PDF on iwuf.org, which this environment can't reach. **Default:**
 not built until the tables arrive. See the chat for the specific questions.
+
+**Answered:** Khai supplied the 2024 PDF. Model per Article 22: techniques
+A/B/C = 0.2/0.3/0.4 (cap 1.4), listed connections A/B/C/D =
+0.1/0.15/0.2/0.25 (cap 0.6). "Landing" is the connection code after "+"
+(Table 10-3-3). Separate tables per event family. Built; checked against
+181 completed routines in the 2025 snapshots (all match). Panel A
+deduction codes in the same PDF are still to be compared with the migrated
+list.

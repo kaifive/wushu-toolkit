@@ -24,7 +24,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] USAWKF 2025–26 Junior Trials (r15): age groups, events, time limits, music, selection math
 - [x] Legacy rulesets for archived events (2024 juniors, 2025 adults, 2025 juniors, PWC)
 - [x] IWUF 2024 deduction codes (migrated, pending verification)
-- [x] IWUF 2024 nandu data: code parser done, movement table pending source
+- [x] IWUF 2024 nandu data: technique and connection tables (10-3-3 to 10-3-9) from the official PDF
 
 ## Phase 4 — Event engine
 - [x] Event config types + registry (`content/events`)
@@ -47,7 +47,8 @@ Resume from the first unchecked item. One commit per item.
 - [ ] Optional: sync lists to the account once accounts are live
 
 ## Phase 5c — Nandu calculator
-- [ ] Blocked: needs the IWUF 2024 degree-of-difficulty tables (OPEN_QUESTIONS #12)
+- [x] Calculator: pick techniques and listed connections, capped 1.4 + 0.6 = 2.0; matches 181/181 completed 2025 scorecards
+- [ ] Optional: prefill from an athlete's Sportdata registration
 
 ## Phase 6 — Brand + landing
 - [x] Three logo concepts for review (`/brand`, screenshot in docs/logo-concepts.png)
