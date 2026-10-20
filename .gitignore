@@ -18,3 +18,4 @@ npm-debug.log*
 # legacy app build output
 /legacy/node_modules
 /legacy/build
+/legacy-redirect/
