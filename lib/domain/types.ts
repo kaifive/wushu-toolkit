@@ -26,6 +26,8 @@ export interface Athlete {
   club?: string;
   /** Division / age-group id from the ruleset, e.g. "A", "B", "C". */
   division?: string;
+  /** Opt-ins and labels from the source, e.g. "all-around". */
+  tags?: string[];
 }
 
 export interface EntryRef {

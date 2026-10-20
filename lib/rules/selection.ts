@@ -43,9 +43,12 @@ function best(entries: ScoreEntry[]): ScoreEntry | undefined {
   return entries.reduce<ScoreEntry | undefined>((b, e) => (e.finalScore != null && (!b || scoreOf(e) > scoreOf(b)) ? e : b), undefined);
 }
 
+/** Full difficulty: every declared element made, or the C panel at its 2.0 maximum. */
 function isClean(e: ScoreEntry): boolean {
-  const made = e.scorecard?.c?.made;
-  return !!made && made.length > 0 && made.every(Boolean);
+  const c = e.scorecard?.c;
+  if (!c) return false;
+  if (c.made.length > 0 && c.made.every(Boolean)) return true;
+  return (c.score ?? 0) >= 2;
 }
 
 function groupByAthlete(scores: ScoreEntry[]): Map<string, ScoreEntry[]> {

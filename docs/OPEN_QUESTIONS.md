@@ -43,8 +43,9 @@ entitlement).
 
 ### 4. Price and access window per competition
 
-**Default:** each paid event config has `access: "paid"`. Entitlements don't
-expire unless `expiresAt` is set.
+The old app charged $50 per user before the 2025 adult trials and $75 after
+the start. **Default:** each paid event config has `access: "paid"`.
+Entitlements don't expire unless `expiresAt` is set.
 
 ### 5. Custom domain
 
@@ -78,3 +79,16 @@ branch and the PR opens from it.
 Sportdata, Google Sheets/Docs and bowuu were unreachable here, so adapters
 are tested only against saved fixtures (from `legacy/`). **Default:** ship
 with fixture tests and check live on the first Vercel preview.
+
+### 10. Which competition is the first paid one?
+
+The 2025–26 Junior Trials (Dec 18–21, 2025) already happened, so they are
+an archived, free event on the r15 rules. **Default:** no live event is
+configured. Paid access is built and tested with a config flag, and the next
+competition gets its own file in `content/events/` once you name it.
+
+### 11. Event dates for archived events
+
+Exact dates for the 2024 Junior Trials, 2025 Adult Trials, 2025 Phoenix and
+2026 PWC aren't in the legacy code. **Default:** they're shown as month and
+year (`approximate: true`). Send exact dates to fix.

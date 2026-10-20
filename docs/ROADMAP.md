@@ -27,9 +27,9 @@ Resume from the first unchecked item. One commit per item.
 - [x] IWUF 2024 nandu data: code parser done, movement table pending source
 
 ## Phase 4 — Event engine
-- [ ] Event config types + registry (`content/events`)
-- [ ] Archived configs: 2024 Junior Trials, 2025 Adult Trials, 2025 Phoenix, 2025 Junior Trials, 2026 PWC
-- [ ] Current config: 2025–26 Junior Trials
+- [x] Event config types + registry (`content/events`)
+- [x] Archived configs: 2024 Junior Trials, 2025 Adult Trials, 2025 Phoenix, 2025 Junior Trials (r15), 2026 PWC
+- [ ] Current config: next paid competition (OPEN_QUESTIONS #10; the 2025–26 trials already happened and are archived on r15)
 - [ ] Event pages: overview, standings, schedule, team projection, scorecards
 - [ ] Mobile tables at 375px
 

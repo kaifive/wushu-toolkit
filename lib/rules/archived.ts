@@ -41,25 +41,6 @@ export const USAWKF_JUNIOR_TRIALS_2024: Ruleset = {
   },
 };
 
-/** 2025 Junior Team Trials: best barehand + weapon within one discipline; one athlete per discipline per team. */
-export const USAWKF_JUNIOR_TRIALS_2025: Ruleset = {
-  ...USAWKF_JUNIOR_TRIALS_2024,
-  id: "usawkf-junior-trials-2025",
-  name: "USAWKF Junior Taolu Team Trials 2025 (as projected)",
-  season: "2025",
-  source: { title: "Legacy 2025 Junior Trials projection", verified: false, notes: ["Reconstructed from legacy determineUSTeam.js, before r15 was applied."] },
-  selection: {
-    scoring: { method: "barehand-plus-weapon", pairing: "same-discipline" },
-    perDivision: true,
-    tieBreaks: ["higher-barehand", "higher-weapon"],
-    teams: [
-      { id: "A", size: { A: 3, "*": 2 }, onePerDiscipline: true },
-      { id: "B", size: { A: 3, "*": 2 }, onePerDiscipline: true },
-      { id: "C", size: { A: 3, "*": 2 }, onePerDiscipline: true },
-    ],
-  },
-};
-
 const ADULT_CATEGORIES = [
   { id: "CQ_DS_GS", label: "Changquan / Daoshu / Gunshu", events: ["CQ", "DS", "GS"] },
   { id: "CQ_JS_QS", label: "Changquan / Jianshu / Qiangshu", events: ["CQ", "JS", "QS"] },

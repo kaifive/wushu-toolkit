@@ -1,4 +1,4 @@
-import { OPEN_TOURNAMENT, PWC_2026, USAWKF_ADULT_TRIALS_2025, USAWKF_JUNIOR_TRIALS_2024, USAWKF_JUNIOR_TRIALS_2025 } from "./archived";
+import { OPEN_TOURNAMENT, PWC_2026, USAWKF_ADULT_TRIALS_2025, USAWKF_JUNIOR_TRIALS_2024 } from "./archived";
 import type { Ruleset } from "./types";
 import { USAWKF_JUNIOR_TRIALS_2025_26 } from "./usawkf-junior-trials-2025-26";
 
@@ -7,7 +7,6 @@ export { EVENTS, DISCIPLINE_LABEL, eventDef } from "./events";
 
 export const RULESETS = {
   "usawkf-junior-trials-2025-26": USAWKF_JUNIOR_TRIALS_2025_26,
-  "usawkf-junior-trials-2025": USAWKF_JUNIOR_TRIALS_2025,
   "usawkf-junior-trials-2024": USAWKF_JUNIOR_TRIALS_2024,
   "usawkf-adult-trials-2025": USAWKF_ADULT_TRIALS_2025,
   "pwc-2026": PWC_2026,
