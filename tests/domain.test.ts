@@ -34,3 +34,14 @@ test("titleCaseName and toNumber", () => {
   assert.equal(toNumber(""), null);
   assert.equal(toNumber("DNS"), null);
 });
+
+test("eventCodeFromName handles 2024 bowuu names with spaces", () => {
+  assert.equal(eventCodeFromName("Elementary Broad Sword (IWuF)"), "DS");
+  assert.equal(eventCodeFromName("3rd Set Southern Broad Sword (IWuF)"), "ND");
+  assert.equal(eventCodeFromName("Compulsory Southern Broadsword  (IWuF)"), "ND");
+  assert.equal(eventCodeFromName("1st Set Straight Sword (IWuf)"), "JS");
+  assert.equal(eventCodeFromName("3rd Set Southern Staff (IWuF)"), "NG");
+  assert.equal(eventCodeFromName("Elementary Staff (IWuF)"), "GS");
+  assert.equal(eventCodeFromName("32 Movements Taijijian "), "TJ");
+  assert.equal(eventCodeFromName("3rd Set Taijishan (IWuF)"), "TS");
+});

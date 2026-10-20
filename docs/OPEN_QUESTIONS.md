@@ -24,6 +24,14 @@ documents are entered as `verified: false`:
 - Deduction codes are migrated from the old app.
 - Nandu data is a stub.
 
+Partial data was recovered from search-engine extracts of r15: age groups
+(birth ranges), events per age group, time limits, music and dates. These are
+in the ruleset but still marked unverified. The time-limit text was garbled
+in the extract (the 1:10 minimum is ambiguous).
+
+**A newer revision, r19 (2025-11-07), exists.** Should the app follow r19
+instead of r15?
+
 To finish: allow `usawkf.org` and `iwuf.org` in the environment's network
 settings, or drop the PDFs into `docs/sources/`.
 

@@ -1,0 +1,157 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import type { EventCode, ScoreEntry } from "@/lib/domain/types";
+import { RULESETS, formatDuration } from "@/lib/rules";
+import { buildCandidates, rankCandidates, runSelection, scoreNeeded, selectTeams, withDivisions } from "@/lib/rules/selection";
+import { ageGroupChampions, allAround, grandChampion, standings } from "@/lib/rules/all-around";
+
+let n = 0;
+function e(name: string, code: EventCode, score: number | null, extra: Partial<ScoreEntry> = {}): ScoreEntry {
+  n++;
+  return { athleteId: name.toLowerCase(), athleteName: name, raw: `Taolu Youth Male 3rd Set ${code}#${n}`, code, gender: "male", finalScore: score, ...extra };
+}
+
+test("every ruleset id matches its registry key", () => {
+  for (const [k, r] of Object.entries(RULESETS)) assert.equal(r.id, k);
+});
+
+test("r15 has three divisions with birth ranges and is marked unverified", () => {
+  const r = RULESETS["usawkf-junior-trials-2025-26"];
+  assert.deepEqual(r.divisions.map((d) => d.id), ["A", "B", "C"]);
+  assert.equal(r.divisions[0]?.born?.from, "2008-11-14");
+  assert.equal(r.source.verified, false);
+  assert.deepEqual(r.selection?.teams.map((t) => t.minAverage), [9.0, 8.9, 8.8]);
+});
+
+test("same-discipline pairing ranks athletes in their best discipline", () => {
+  const [c] = buildCandidates(
+    [e("Ada", "CQ", 9.0), e("Ada", "DS", 8.0), e("Ada", "NQ", 8.9), e("Ada", "ND", 8.95)],
+    { method: "barehand-plus-weapon", pairing: "same-discipline" },
+  );
+  assert.equal(c?.key, "nanquan");
+  assert.equal(c?.score, 17.85);
+  assert.equal(c?.average, 8.925);
+});
+
+test("any pairing takes best barehand and best weapon across disciplines (2024)", () => {
+  const [c] = buildCandidates(
+    [e("Ada", "CQ", 9.0), e("Ada", "DS", 8.0), e("Ada", "NQ", 8.9), e("Ada", "ND", 8.95)],
+    { method: "barehand-plus-weapon", pairing: "any" },
+  );
+  assert.equal(c?.score, 17.95);
+  assert.equal(c?.barehand?.code, "CQ");
+  assert.equal(c?.weapon?.code, "ND");
+});
+
+test("unscored events count as zero but do not crash", () => {
+  const [c] = buildCandidates([e("Ada", "CQ", 9.1), e("Ada", "JS", null)], { method: "barehand-plus-weapon", pairing: "same-discipline" });
+  assert.equal(c?.score, 9.1);
+  assert.equal(c?.weapon, undefined);
+});
+
+test("r15 selection: one per discipline, minimum averages push athletes down", () => {
+  const rules = RULESETS["usawkf-junior-trials-2025-26"].selection!;
+  const scores = [
+    e("Cq1", "CQ", 9.5), e("Cq1", "DS", 9.4), // 18.9 avg 9.45
+    e("Cq2", "CQ", 9.3), e("Cq2", "JS", 9.2), // 18.5 avg 9.25, second changquan
+    e("Nq1", "NQ", 9.0), e("Nq1", "ND", 8.95), // avg 8.975 < 9.0 -> not A
+    e("Tq1", "TQ", 9.1), e("Tq1", "TJ", 9.0), // avg 9.05
+    e("Low", "CQ", 8.5), e("Low", "GS", 8.5), // avg 8.5, no team
+  ];
+  const r = runSelection(scores, rules, "A");
+  const names = (id: string) => r.teams.find((t) => t.id === id)!.members.map((m) => m.athleteName);
+  assert.deepEqual(names("A"), ["Cq1", "Tq1"]);
+  assert.deepEqual(names("B"), ["Cq2", "Nq1"]);
+  assert.deepEqual(names("C"), []);
+  assert.equal(r.ranked.find((c) => c.athleteName === "Low")?.team, undefined);
+  assert.equal(r.ranked[0]?.rank, 1);
+});
+
+test("division B/C rosters use 2 per team", () => {
+  const rules = RULESETS["usawkf-junior-trials-2025-26"].selection!;
+  const scores = ["changquan", "nanquan", "taijiquan"].flatMap((d, i) => {
+    const [b, w] = d === "changquan" ? (["CQ", "DS"] as const) : d === "nanquan" ? (["NQ", "ND"] as const) : (["TQ", "TJ"] as const);
+    return [e(`X${i}`, b, 9.5), e(`X${i}`, w, 9.5)];
+  });
+  const r = runSelection(scores, rules, "B");
+  assert.equal(r.teams[0]?.members.length, 2);
+  assert.equal(r.teams[1]?.members.length, 1);
+});
+
+test("tie-breaks: highest single event, then full nandu, then name; flags unresolved ties", () => {
+  const a = e("Bee", "CQ", 9.0, { scorecard: { c: { score: 2, elements: ["1"], made: [true] } } });
+  const ranked = rankCandidates(
+    buildCandidates(
+      [a, e("Bee", "DS", 9.0), e("Ace", "CQ", 9.2), e("Ace", "DS", 8.8), e("Cat", "CQ", 9.0), e("Cat", "DS", 9.0)],
+      { method: "barehand-plus-weapon", pairing: "same-discipline" },
+    ),
+    ["highest-single-event", "more-full-nandu"],
+  );
+  assert.deepEqual(ranked.map((c) => c.athleteName), ["Ace", "Bee", "Cat"]);
+  assert.equal(ranked[1]?.tiedWithAbove, undefined);
+  const plain = rankCandidates(
+    buildCandidates([e("Q", "CQ", 9), e("Q", "DS", 9), e("P", "CQ", 9), e("P", "DS", 9)], { method: "barehand-plus-weapon", pairing: "same-discipline" }),
+    ["highest-single-event"],
+  );
+  assert.deepEqual(plain.map((c) => [c.athleteName, !!c.tiedWithAbove]), [["P", false], ["Q", true]]);
+});
+
+test("2025 adults: category averages, A team needs clean nandu, then fills to size", () => {
+  const rules = RULESETS["usawkf-adult-trials-2025"].selection!;
+  const clean = { scorecard: { c: { score: 2, elements: ["1", "2"], made: [true, true] } } };
+  const scores = [
+    e("Dirty", "CQ", 9.6), e("Dirty", "DS", 9.6), // best average, no clean nandu
+    e("Clean", "CQ", 9.0, clean), e("Clean", "DS", 9.0),
+    e("Nan", "NQ", 9.1, clean),
+    e("Tai", "TQ", 9.2, clean),
+  ];
+  const ranked = rankCandidates(buildCandidates(scores, rules.scoring), rules.tieBreaks);
+  const teams = selectTeams(ranked, rules);
+  assert.deepEqual(teams[0]?.members.map((m) => m.athleteName), ["Clean", "Nan", "Tai"]);
+  assert.deepEqual(teams[1]?.members.map((m) => m.athleteName), ["Dirty"]);
+});
+
+test("withDivisions classifies by event name", () => {
+  const r = RULESETS["usawkf-junior-trials-2025-26"];
+  const out = withDivisions(
+    [
+      { ...e("A", "CQ", 9), raw: "Taolu Youth Male 3rd Set Changquan" },
+      { ...e("B", "CQ", 9), raw: "Taolu Junior Female 1st Set Changquan" },
+      { ...e("C", "CQ", 9), raw: "Taolu Children Female Elementary Changquan" },
+    ],
+    r,
+  );
+  assert.deepEqual(out.map((s) => s.division), ["A", "B", "C"]);
+});
+
+test("PWC all-around: top 3 sum, opt-in, age-group champions", () => {
+  const rules = RULESETS["pwc-2026"].allAround!;
+  const scores = [
+    e("Ada", "CQ", 9), e("Ada", "JS", 8), e("Ada", "QS", 7), e("Ada", "DS", 6),
+    { ...e("Bea", "TQ", 9.5), gender: "female" as const }, { ...e("Bea", "TJ", 9.5), gender: "female" as const }, { ...e("Bea", "TS", 9.5), gender: "female" as const },
+    e("Cal", "NQ", 9.9),
+  ];
+  const info = new Map([
+    ["ada", { age: 10, optedIn: true }],
+    ["bea", { age: 16, optedIn: true }],
+    ["cal", { age: 16, optedIn: false }],
+  ]);
+  const aa = allAround(scores, rules, info);
+  const ada = aa.find((a) => a.athleteName === "Ada")!;
+  assert.equal(ada.total, 24);
+  assert.equal(ada.top.length, 3);
+  assert.deepEqual(standings(aa, "male").map((a) => a.athleteName), ["Ada"]);
+  assert.equal(grandChampion(aa, rules)?.athleteName, "Bea");
+  const champs = ageGroupChampions(aa, rules);
+  assert.equal(champs.find((c) => c.group.id === "B")?.male?.athleteName, "Ada");
+  assert.equal(champs.find((c) => c.group.id === "D")?.female?.athleteName, "Bea");
+  assert.equal(champs.find((c) => c.group.id === "D")?.male, null);
+});
+
+test("helpers", () => {
+  assert.equal(scoreNeeded(18.5, 9.2), 9.3);
+  assert.equal(scoreNeeded(18.5, 7), null);
+  assert.equal(scoreNeeded(10, 12), 0);
+  assert.equal(formatDuration(70), "1:10");
+  assert.equal(formatDuration(undefined), "—");
+});

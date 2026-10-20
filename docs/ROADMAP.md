@@ -20,9 +20,9 @@ Resume from the first unchecked item. One commit per item.
 - [x] Sportdata adapter (registration, categories, scorecards) with saved fixtures (scorecard fixture synthetic, see OPEN_QUESTIONS #9)
 
 ## Phase 3 — Rules engine
-- [ ] `lib/rules` types + registry
-- [ ] USAWKF 2025–26 Junior Trials (r15): age groups, events, time limits, music, selection math
-- [ ] Legacy rulesets for archived events (2024 juniors, 2025 adults, 2025 juniors, PWC)
+- [x] `lib/rules` types + registry
+- [x] USAWKF 2025–26 Junior Trials (r15): age groups, events, time limits, music, selection math
+- [x] Legacy rulesets for archived events (2024 juniors, 2025 adults, 2025 juniors, PWC)
 - [ ] IWUF 2024 deduction codes (migrated, pending verification)
 - [ ] IWUF 2024 nandu data (pending source)
 
