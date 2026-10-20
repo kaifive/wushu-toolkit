@@ -1,0 +1,45 @@
+{
+  "name": "wushu-toolkit",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Wushu Toolkit: live standings, schedules, team projections and rules tools for wushu competitions",
+  "homepage": "https://wushu-toolkit.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaifive/wushu-toolkit"
+  },
+  "license": "MIT",
+  "author": "Khai Nguyen",
+  "type": "module",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "check": "npm run typecheck && npm run lint",
+    "test": "tsx --test \"tests/**/*.test.ts\"",
+    "snapshot": "tsx scripts/snapshot.ts",
+    "grant": "tsx scripts/grant-access.ts",
+    "legacy-redirect": "tsx scripts/build-legacy-redirect.ts"
+  },
+  "dependencies": {
+    "next": "^16.4.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.2",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3"
+  }
+}

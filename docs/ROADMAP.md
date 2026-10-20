@@ -7,7 +7,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] CLAUDE.md, ROADMAP, DECISIONS, OPEN_QUESTIONS
 
 ## Phase 1 — Scaffold
-- [ ] Next.js + TS strict + Tailwind, `check` / `test` / `build` scripts green
+- [x] Next.js + TS strict + Tailwind, `check` / `test` / `build` scripts green
 - [ ] App shell: top nav (desktop), bottom tab bar (mobile), 44px targets
 
 ## Phase 2 — Data layer

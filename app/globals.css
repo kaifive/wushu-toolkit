@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* Brand tokens. Light by default, dark via prefers-color-scheme. */
+:root {
+  --paper: #faf7f2;
+  --surface: #ffffff;
+  --ink: #1b1a17;
+  --ink-muted: #5f5b53;
+  --line: #e6e0d5;
+  --seal: #c8321e;
+  --seal-ink: #ffffff;
+  --seal-soft: #fbe9e5;
+  --jade: #1f7a5a;
+  --gold: #b8860b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121110;
+    --surface: #1c1b19;
+    --ink: #f3efe7;
+    --ink-muted: #a8a196;
+    --line: #2f2c28;
+    --seal: #e2513a;
+    --seal-ink: #ffffff;
+    --seal-soft: #3a1c17;
+    --jade: #4fb58f;
+    --gold: #e0b44a;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-seal: var(--seal);
+  --color-seal-ink: var(--seal-ink);
+  --color-seal-soft: var(--seal-soft);
+  --color-jade: var(--jade);
+  --color-gold: var(--gold);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --spacing-tap: 2.75rem; /* 44px minimum tap target */
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  color-scheme: light dark;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Room for the fixed bottom tab bar on phones, including the iOS home indicator. */
+.pb-tabbar {
+  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) {
+  .pb-tabbar {
+    padding-bottom: 2rem;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 2px;
+}
