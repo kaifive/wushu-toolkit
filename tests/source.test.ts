@@ -39,5 +39,5 @@ test("liveWithSnapshot marks the snapshot stale and rethrows when both fail", as
   const r = await liveWithSnapshot(fail, constant("snap", emptyEventData("Snapshot X"))).load();
   assert.equal(r.stale, true);
   assert.match(r.source, /Snapshot X \(live source unavailable\)/);
-  await assert.rejects(liveWithSnapshot(fail, fail).load(), /live down/);
+  await assert.rejects(liveWithSnapshot(fail, fail).load(), /live down \(no saved copy: live down\)/);
 });
