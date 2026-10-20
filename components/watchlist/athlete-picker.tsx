@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useId, useMemo, useState } from "react";
-import { suggestAthletes, suggestClubs, type AthleteIndex } from "@/lib/watchlist/suggest";
+import { suggestAthletes, type AthleteIndex } from "@/lib/watchlist/suggest";
 
 let indexPromise: Promise<AthleteIndex> | null = null;
 const loadIndex = () =>
   (indexPromise ??= fetch("/api/athletes")
-    .then((r) => (r.ok ? (r.json() as Promise<AthleteIndex>) : { athletes: [], clubs: [] }))
-    .catch(() => ({ athletes: [], clubs: [] })));
+    .then((r) => (r.ok ? (r.json() as Promise<AthleteIndex>) : { athletes: [] }))
+    .catch(() => ({ athletes: [] })));
 
-type Option = { kind: "athlete"; name: string; detail: string } | { kind: "club"; name: string; athletes: string[] } | { kind: "typed"; name: string };
+type Option = { kind: "athlete"; name: string; detail: string } | { kind: "typed"; name: string };
 
-/** Type-ahead for adding athletes, suggesting names (and whole clubs) from past competitions. */
+/** Type-ahead for adding athletes, suggesting names from past competitions. */
 export function AthletePicker({ exclude, onAdd }: { exclude: string[]; onAdd: (names: string[]) => void }) {
   const [index, setIndex] = useState<AthleteIndex | null>(null);
   const [q, setQ] = useState("");
@@ -24,10 +24,8 @@ export function AthletePicker({ exclude, onAdd }: { exclude: string[]; onAdd: (n
 
   const options = useMemo<Option[]>(() => {
     if (!q.trim()) return [];
-    const clubs = index ? suggestClubs(index, q) : [];
     const people = index ? suggestAthletes(index, q, exclude) : [];
     const out: Option[] = [
-      ...clubs.map((c) => ({ kind: "club" as const, name: c.name, athletes: c.athletes })),
       ...people.map((a) => ({ kind: "athlete" as const, name: a.name, detail: [a.clubs[0], a.events.slice(0, 2).join(", ")].filter(Boolean).join(" · ") })),
     ];
     if (q.trim().split(/\s+/).length >= 2 && !people.some((p) => p.name.toLowerCase() === q.trim().toLowerCase())) out.push({ kind: "typed", name: q.trim() });
@@ -35,7 +33,7 @@ export function AthletePicker({ exclude, onAdd }: { exclude: string[]; onAdd: (n
   }, [index, q, exclude]);
 
   const choose = (o: Option) => {
-    onAdd(o.kind === "club" ? o.athletes : [o.name]);
+    onAdd([o.name]);
     setQ("");
     setActive(0);
   };
@@ -63,7 +61,7 @@ export function AthletePicker({ exclude, onAdd }: { exclude: string[]; onAdd: (n
         aria-activedescendant={options.length ? `${id}-opt-${active}` : undefined}
         aria-autocomplete="list"
         autoComplete="off"
-        placeholder="Start typing a name or club"
+        placeholder="Start typing a name"
         value={q}
         onChange={(e) => {
           setQ(e.target.value);
@@ -85,14 +83,7 @@ export function AthletePicker({ exclude, onAdd }: { exclude: string[]; onAdd: (n
               onMouseEnter={() => setActive(i)}
               className={`flex min-h-tap cursor-pointer flex-col justify-center px-3 py-2 ${i === active ? "bg-primary-soft" : ""}`}
             >
-              {o.kind === "club" ? (
-                <>
-                  <span className="font-semibold">
-                    Add all {o.athletes.length} from {o.name}
-                  </span>
-                  <span className="truncate text-sm text-ink-muted">{o.athletes.slice(0, 4).join(", ")}{o.athletes.length > 4 ? ", …" : ""}</span>
-                </>
-              ) : o.kind === "athlete" ? (
+              {o.kind === "athlete" ? (
                 <>
                   <span className="font-semibold">{o.name}</span>
                   {o.detail && <span className="truncate text-sm text-ink-muted">{o.detail}</span>}

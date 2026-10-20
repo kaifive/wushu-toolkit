@@ -46,7 +46,7 @@ test("parseRoster handles lines, commas and duplicates", () => {
   assert.deepEqual(parseRoster("Wu, Ashton\nChen, Ada"), ["Wu, Ashton", "Chen, Ada"]);
 });
 
-import { buildAthleteIndex, suggestAthletes, suggestClubs } from "@/lib/watchlist/suggest";
+import { buildAthleteIndex, suggestAthletes } from "@/lib/watchlist/suggest";
 import type { EventData } from "@/lib/domain/types";
 
 const ev = (label: string, rows: [string, string?][]): { label: string; data: EventData } => ({
@@ -70,7 +70,6 @@ test("index merges spellings across events and prefers mixed case", () => {
   assert.ok(tang);
   assert.deepEqual(tang.events, ["2024 Juniors", "2025 Juniors"]);
   assert.equal(index.athletes.length, 4, "one-word names are skipped");
-  assert.deepEqual(index.clubs.map((c) => [c.name, c.athletes.length]), [["Elite Kung Fu", 2]]);
 });
 
 test("suggestAthletes matches word prefixes in any order and skips listed athletes", () => {
@@ -78,9 +77,4 @@ test("suggestAthletes matches word prefixes in any order and skips listed athlet
   assert.deepEqual(suggestAthletes(index, "a"), [], "one letter is too little");
   assert.deepEqual(suggestAthletes(index, "ada").map((a) => a.name), ["Ada Chen"]);
   assert.deepEqual(suggestAthletes(index, "ada", ["chen_ada"]), []);
-});
-
-test("suggestClubs finds clubs by word prefix", () => {
-  assert.deepEqual(suggestClubs(index, "elite k").map((c) => c.name), ["Elite Kung Fu"]);
-  assert.deepEqual(suggestClubs(index, "no"), []);
 });

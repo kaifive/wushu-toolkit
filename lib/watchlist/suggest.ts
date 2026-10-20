@@ -9,14 +9,8 @@ export interface KnownAthlete {
   events: string[];
 }
 
-export interface KnownClub {
-  name: string;
-  athletes: string[];
-}
-
 export interface AthleteIndex {
   athletes: KnownAthlete[];
-  clubs: KnownClub[];
 }
 
 const clubKey = (c: string) => c.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -45,16 +39,7 @@ export function buildAthleteIndex(events: { label: string; data: EventData }[]):
   const athletes = [...people.values()]
     .map((p) => ({ name: bestSpelling(p.spellings), clubs: [...p.clubs.values()], events: [...p.events] }))
     .sort((a, b) => a.name.localeCompare(b.name));
-  const clubs = new Map<string, KnownClub>();
-  for (const a of athletes) {
-    for (const c of a.clubs) {
-      const k = clubKey(c);
-      const entry = clubs.get(k) ?? { name: c, athletes: [] };
-      entry.athletes.push(a.name);
-      clubs.set(k, entry);
-    }
-  }
-  return { athletes, clubs: [...clubs.values()].filter((c) => c.athletes.length > 1).sort((a, b) => a.name.localeCompare(b.name)) };
+  return { athletes };
 }
 
 /** Every query word must start some word of the name, in any order: "tan ab" finds "Abram Tang". */
@@ -69,10 +54,4 @@ export function suggestAthletes(index: AthleteIndex, query: string, exclude: str
     .filter((a) => prefixMatch(q, nameTokens(a.name)) && !exclude.some((e) => namesMatch(e, a.name)))
     .sort((a, b) => b.events.length - a.events.length || a.name.localeCompare(b.name))
     .slice(0, limit);
-}
-
-export function suggestClubs(index: AthleteIndex, query: string, limit = 3): KnownClub[] {
-  const q = nameTokens(query);
-  if (!q.length || q.join("").length < 3) return [];
-  return index.clubs.filter((c) => prefixMatch(q, nameTokens(c.name))).slice(0, limit);
 }
