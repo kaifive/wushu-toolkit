@@ -54,6 +54,13 @@ export function NanduCalculator() {
   }, [event, chains, loaded]);
 
   const score = useMemo(() => scoreNandu(family, chains, { weapon }), [family, chains, weapon]);
+  const move = (i: number, d: -1 | 1) => {
+    const j = i + d;
+    if (j < 0 || j >= chains.length) return;
+    const next = [...chains];
+    [next[i], next[j]] = [next[j]!, next[i]!];
+    setChains(next);
+  };
   const setChain = (i: number, ch: Chain | null) => setChains(ch ? chains.map((c, j) => (j === i ? ch : c)) : chains.filter((_, j) => j !== i));
   const needTech = Math.max(0, TECH_CAP - score.techniqueRaw);
   const needConn = Math.max(0, CONN_CAP - score.connectionRaw);
@@ -131,7 +138,16 @@ export function NanduCalculator() {
       <ol className="space-y-3">
         {chains.map((ch, i) => (
           <li key={i}>
-            <ChainEditor family={family} weapon={weapon} chain={ch} scored={score.chains[i]} index={i} onChange={(c) => setChain(i, c)} />
+            <ChainEditor
+              family={family}
+              weapon={weapon}
+              chain={ch}
+              scored={score.chains[i]}
+              index={i}
+              count={chains.length}
+              onMove={(d) => move(i, d)}
+              onChange={(c) => setChain(i, c)}
+            />
           </li>
         ))}
       </ol>
@@ -159,12 +175,53 @@ export function NanduCalculator() {
         </section>
       )}
 
-      {chains.length > 0 && (
-        <p className="text-sm text-ink-muted">
-          Registration codes: <code className="font-mono text-ink">{chains.map(chainToCode).join(", ")}</code>
-        </p>
-      )}
+      {chains.length > 0 && <RegistrationCodes chains={chains} score={score} />}
     </div>
+  );
+}
+
+/** Codes in routine order, ready to type into a registration form. */
+function RegistrationCodes({ chains, score }: { chains: Chain[]; score: ReturnType<typeof scoreNandu> }) {
+  const [copied, setCopied] = useState<string | null>(null);
+  const codes = chains.map(chainToCode);
+  const copy = async (text: string, label: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(label);
+    } catch {
+      setCopied("select");
+    }
+    window.setTimeout(() => setCopied(null), 2000);
+  };
+  return (
+    <section className="overflow-hidden rounded-card border border-line bg-surface">
+      <header className="flex min-h-12 items-center justify-between gap-3 border-b border-line bg-surface-2 px-4 py-2">
+        <h2 className="text-[15px] font-semibold">Registration codes</h2>
+        <button type="button" onClick={() => void copy(codes.join(", "), "all")} className="min-h-tap rounded-card bg-primary px-4 font-semibold text-primary-ink">
+          {copied === "all" ? "Copied" : "Copy all"}
+        </button>
+      </header>
+      <ol className="divide-y divide-line">
+        {codes.map((code, i) => {
+          const sc = score.chains[i];
+          const v = (sc?.techniques.reduce((a, t) => a + t.value, 0) ?? 0) + (sc?.links.reduce((a, l) => a + l.value, 0) ?? 0);
+          return (
+            <li key={i} className="flex items-center gap-3 px-4 py-2">
+              <span className="w-5 text-ink-muted tnum">{i + 1}</span>
+              <code className="flex-1 select-all font-mono text-lg font-semibold">{code}</code>
+              <span className="tnum text-sm text-ink-muted">{fmt(v)}</span>
+              <button type="button" onClick={() => void copy(code, code)} aria-label={`Copy ${code}`} className="min-h-tap rounded-card border border-line px-3 text-sm font-semibold">
+                {copied === code ? "Copied" : "Copy"}
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+      <p className="border-t border-line px-4 py-2 text-sm text-ink-muted">
+        {copied === "select" ? "Copy isn't allowed here; press and hold a code to select it. " : ""}
+        Register them in the order you perform them. Total {score.total.toFixed(2)}.
+      </p>
+    </section>
   );
 }
 
@@ -233,6 +290,8 @@ function ChainEditor({
   chain,
   scored,
   index,
+  count,
+  onMove,
   onChange,
 }: {
   family: Family;
@@ -240,6 +299,8 @@ function ChainEditor({
   chain: Chain;
   scored?: ReturnType<typeof scoreNandu>["chains"][number];
   index: number;
+  count: number;
+  onMove: (d: -1 | 1) => void;
   onChange: (c: Chain | null) => void;
 }) {
   const last = chain.steps[chain.steps.length - 1]!;
@@ -255,9 +316,29 @@ function ChainEditor({
           <span className="font-semibold">Element {index + 1}</span>
           <span className="text-ink-muted"> · {chainToCode(chain)} · {fmt(value)}</span>
         </p>
-        <button type="button" onClick={() => onChange(null)} className="min-h-tap px-2 text-sm font-semibold text-seal">
-          Remove
-        </button>
+        <div className="flex shrink-0 items-center gap-1">
+          <button
+            type="button"
+            disabled={index === 0}
+            onClick={() => onMove(-1)}
+            aria-label={`Move element ${index + 1} earlier`}
+            className="flex h-11 w-11 items-center justify-center rounded-card border border-line bg-surface text-lg disabled:opacity-30"
+          >
+            ↑
+          </button>
+          <button
+            type="button"
+            disabled={index === count - 1}
+            onClick={() => onMove(1)}
+            aria-label={`Move element ${index + 1} later`}
+            className="flex h-11 w-11 items-center justify-center rounded-card border border-line bg-surface text-lg disabled:opacity-30"
+          >
+            ↓
+          </button>
+          <button type="button" onClick={() => onChange(null)} className="min-h-tap px-2 text-sm font-semibold text-seal">
+            Remove
+          </button>
+        </div>
       </div>
       <ol className="space-y-2 p-4">
         {chain.steps.map((s, i) => {
