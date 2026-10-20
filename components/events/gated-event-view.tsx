@@ -8,6 +8,7 @@ import { Notice } from "@/components/ui/notice";
 import type { EventData } from "@/lib/domain/types";
 import type { AthleteHighlight, EventView } from "@/lib/events/types";
 import { getRuleset, type RulesetId } from "@/lib/rules";
+import { WatchLegend } from "@/components/watchlist/legend";
 import { DataStatus } from "./data-status";
 import { VIEW_BODY } from "./view-bodies";
 
@@ -79,6 +80,7 @@ function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds }:
   return (
     <>
       <DataStatus data={data} />
+      <WatchLegend />
       <Body ruleset={getRuleset(rulesetId)} data={data} highlights={highlights} />
     </>
   );

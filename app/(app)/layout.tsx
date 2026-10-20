@@ -1,6 +1,7 @@
 import { Sidebar, type SidebarGroup } from "@/components/layout/sidebar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { WatchlistHighlighter } from "@/components/watchlist/highlighter";
 import { allEvents } from "@/lib/events/registry";
 
 function navGroups(): SidebarGroup[] {
@@ -19,7 +20,7 @@ function navGroups(): SidebarGroup[] {
       ],
     },
     { title: "Past competitions", items: events.filter((e) => e.status === "archived").map((e) => ({ href: `/events/${e.slug}`, label: e.shortName })) },
-    { title: "Account", items: [{ href: "/account", label: "Sign in / passes" }] },
+    { title: "You", items: [{ href: "/watchlists", label: "Watch lists" }, { href: "/account", label: "Sign in / passes" }] },
   ];
 }
 
@@ -35,6 +36,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </main>
         <SiteFooter />
       </div>
+      <WatchlistHighlighter />
     </>
   );
 }

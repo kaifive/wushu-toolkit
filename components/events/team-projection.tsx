@@ -18,7 +18,7 @@ export function TeamProjection({ model }: { model: ScopeModel }) {
           ) : (
             <ol className="divide-y divide-line">
               {t.members.map((m, i) => (
-                <li key={m.athleteName} className="flex items-center justify-between gap-3 px-4 py-2.5">
+                <li key={m.athleteName} data-athlete={m.athleteName} className="flex items-center justify-between gap-3 px-4 py-2.5">
                   <div className="min-w-0">
                     <p className="truncate font-semibold">
                       <span className="mr-1.5 text-ink-muted tnum">{i + 1}</span>

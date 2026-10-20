@@ -92,3 +92,10 @@ competition gets its own file in `content/events/` once you name it.
 Exact dates for the 2024 Junior Trials, 2025 Adult Trials, 2025 Phoenix and
 2026 PWC aren't in the legacy code. **Default:** they're shown as month and
 year (`approximate: true`). Send exact dates to fix.
+
+### 12. Nandu calculator: source and scoring model
+
+The calculator needs the IWUF 2024 degree-of-difficulty tables (jumps,
+landings, rotation degrees, connection values and caps). They are in the
+2024 rules PDF on iwuf.org, which this environment can't reach. **Default:**
+not built until the tables arrive. See the chat for the specific questions.

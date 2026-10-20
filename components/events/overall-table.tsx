@@ -23,7 +23,7 @@ export function OverallTable({ model, highlights }: { model: ScopeModel; highlig
         {model.rows.map((r) => {
           const hl = highlights[r.athleteId];
           return (
-            <tr key={`${r.athleteId}-${r.discipline}`} className="border-b border-line last:border-0">
+            <tr key={`${r.athleteId}-${r.discipline}`} data-athlete={r.athleteName} className="border-b border-line last:border-0">
               <td className={`${td} ${stickyCol} max-w-[11rem]`} style={hl ? { boxShadow: `inset 3px 0 0 ${hl.color}` } : undefined}>
                 <div className="flex items-start gap-2">
                   <span className="w-6 shrink-0 text-right text-ink-muted">{r.tied ? "=" : r.rank}</span>

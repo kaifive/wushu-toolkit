@@ -23,7 +23,7 @@ export function AllAroundTable({ athletes, topN, highlights }: { athletes: AllAr
         {athletes.map((a, i) => {
           const hl = highlights[a.athleteId];
           return (
-            <tr key={a.athleteId} className="border-b border-line last:border-0">
+            <tr key={a.athleteId} data-athlete={a.athleteName} className="border-b border-line last:border-0">
               <td className={`${td} ${stickyCol} max-w-[11rem]`} style={hl ? { boxShadow: `inset 3px 0 0 ${hl.color}` } : undefined}>
                 <div className="flex gap-2">
                   <span className="w-6 shrink-0 text-right text-ink-muted">{i + 1}</span>

@@ -84,7 +84,7 @@ export default async function HomePage() {
                 <table className="w-full text-[15px] tnum">
                   <tbody>
                     {ex.rows.map((r) => (
-                      <tr key={`${r.athleteId}-${r.discipline}`} className="border-b border-line last:border-0 odd:bg-surface-2">
+                      <tr key={`${r.athleteId}-${r.discipline}`} data-athlete={r.athleteName} className="border-b border-line last:border-0 odd:bg-surface-2">
                         <td className="w-8 px-3 py-2 text-ink-muted">{r.rank}</td>
                         <td className="py-2 pr-2 font-semibold">{r.athleteName}</td>
                         <td className="px-2 py-2">

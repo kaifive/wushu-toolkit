@@ -4,6 +4,7 @@ import { LogoMark } from "@/components/brand/logo";
 const LINKS = [
   { href: "/events", label: "Competitions" },
   { href: "/tools", label: "Toolkit" },
+  { href: "/watchlists", label: "Watch lists" },
   { href: "/account", label: "Sign in" },
 ];
 

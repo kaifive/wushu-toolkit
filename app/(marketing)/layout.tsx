@@ -1,5 +1,6 @@
 import { MarketingNav } from "@/components/layout/marketing-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { WatchlistHighlighter } from "@/components/watchlist/highlighter";
 
 /** Landing page: full width, top navigation, no sidebar. */
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
@@ -10,6 +11,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
         {children}
       </main>
       <SiteFooter />
+      <WatchlistHighlighter />
     </div>
   );
 }

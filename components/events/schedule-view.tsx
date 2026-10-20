@@ -28,6 +28,7 @@ export function ScheduleView({ schedule, highlights }: { schedule: Schedule; hig
                 return (
                   <li
                     key={j}
+                    data-athlete={e.athleteName}
                     className={`flex items-center justify-between gap-3 px-4 py-2.5 text-sm ${e.isCurrent ? "bg-seal-soft" : ""}`}
                     style={hl ? { boxShadow: `inset 3px 0 0 ${hl.color}` } : undefined}
                     aria-current={e.isCurrent ? "step" : undefined}

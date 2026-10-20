@@ -26,7 +26,7 @@ export function ResultsByEvent({ results }: { results: EventResult[] }) {
                 </thead>
                 <tbody>
                   {r.rows.map((row) => (
-                    <tr key={row.athleteName} className="border-b border-line last:border-0">
+                    <tr key={row.athleteName} data-athlete={row.athleteName} className="border-b border-line last:border-0">
                       <td className={`${td} w-8 text-ink-muted`}>{row.finalScore == null ? "" : row.place}</td>
                       <td className={td}>
                         <p className="font-semibold">{row.athleteName}</p>

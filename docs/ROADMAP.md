@@ -40,9 +40,17 @@ Resume from the first unchecked item. One commit per item.
 - [x] Average score calculator (now "Score calculator")
 - [x] Rules page for the current ruleset
 
+## Phase 5b — Watch lists
+- [x] Local watch lists (multiple, colored, one per school) with fuzzy name matching
+- [x] Highlight on every competition page (standings, team, results, scorecards, schedule, all-around)
+- [ ] Optional: sync lists to the account once accounts are live
+
+## Phase 5c — Nandu calculator
+- [ ] Blocked: needs the IWUF 2024 degree-of-difficulty tables (OPEN_QUESTIONS #12)
+
 ## Phase 6 — Brand + landing
 - [x] Three logo concepts for review (`/brand`, screenshot in docs/logo-concepts.png)
-- [x] Landing page (+ About page)
+- [x] Landing page (+ About page); own top-nav layout, no sidebar
 - [ ] Finalize logo (after Khai picks)
 
 ## Phase 7 — Accounts (ADR-005)

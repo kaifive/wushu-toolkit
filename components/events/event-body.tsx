@@ -4,6 +4,7 @@ import { loadEvent, type LoadedEvent } from "@/lib/events/load";
 import type { EventView } from "@/lib/events/types";
 import { DataStatus, Disclaimer, LoadError } from "./data-status";
 import { GatedEventView } from "./gated-event-view";
+import { WatchLegend } from "@/components/watchlist/legend";
 import { LiveRefresh } from "./live-refresh";
 
 type Ok = Extract<LoadedEvent, { state: "ok" }>;
@@ -30,6 +31,7 @@ export async function EventBody({
     <>
       {loaded.event.status === "live" && <LiveRefresh seconds={loaded.event.revalidate ?? 60} />}
       {view !== "overview" && <DataStatus data={loaded.data} />}
+      {view !== "overview" && <WatchLegend />}
       {children(loaded, loaded.data)}
       <Disclaimer />
     </>

@@ -120,3 +120,18 @@ li {
   text-wrap: pretty;
   max-width: 62ch; /* ~75 characters in Barlow */
 }
+
+/* Watch-list highlight (components/watchlist/highlighter.tsx sets --watch). */
+[data-watch] {
+  box-shadow: inset 4px 0 0 var(--watch) !important;
+  background-color: color-mix(in srgb, var(--watch) 13%, var(--surface)) !important;
+}
+tr[data-watch] > td {
+  background-color: color-mix(in srgb, var(--watch) 13%, var(--surface)) !important;
+}
+tr[data-watch] > td:first-child {
+  box-shadow: inset 4px 0 0 var(--watch) !important;
+}
+tr[data-watch] {
+  box-shadow: none !important;
+}
