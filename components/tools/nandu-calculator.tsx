@@ -3,10 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   CONN_CAP, CONN_VALUE, CONNECTION_ONLY, FAMILY_LABEL, LANDINGS, NANDU_MAX, TECH_CAP, TECH_VALUE, TECHNIQUES,
-  chainFromCode, chainToCode, nextOptions, scoreNandu, technique, type Chain, type Family,
+  chainFromCode, chainToCode, familyOfEvent, nextOptions, scoreNandu, technique, type Chain, type Family,
 } from "@/lib/rules/iwuf-2024/nandu";
+import { EVENTS } from "@/lib/rules";
+import type { EventCode } from "@/lib/domain/types";
 
-const KEY = "wt:nandu:v1";
+const EVENT_CODES: EventCode[] = ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ", "TS"];
+
+const KEY = "wt:nandu:v2";
 const fmt = (n: number) => n.toFixed(2).replace(/0$/, "");
 const field = "min-h-tap w-full rounded-card border border-line bg-surface px-3";
 
@@ -15,18 +19,19 @@ function stepLabel(family: Family, code: string): string {
   return technique(family, code)?.english ?? CONNECTION_ONLY[code] ?? code;
 }
 
-function load(): { family: Family; chains: Chain[] } {
+function load(): { event: EventCode; chains: Chain[] } {
   try {
     const raw = window.localStorage.getItem(KEY);
-    if (raw) return JSON.parse(raw) as { family: Family; chains: Chain[] };
+    if (raw) return JSON.parse(raw) as { event: EventCode; chains: Chain[] };
   } catch {
     /* storage blocked */
   }
-  return { family: "changquan", chains: [] };
+  return { event: "CQ", chains: [] };
 }
 
 export function NanduCalculator() {
-  const [family, setFamily] = useState<Family>("changquan");
+  const [event, setEvent] = useState<EventCode>("CQ");
+  const { family, weapon } = familyOfEvent(event);
   const [chains, setChains] = useState<Chain[]>([]);
   const [codes, setCodes] = useState("");
   const [loaded, setLoaded] = useState(false);
@@ -35,20 +40,20 @@ export function NanduCalculator() {
     const s = load();
     // Restore the saved routine once on mount (storage is client-only).
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setFamily(s.family);
+    setEvent(s.event);
     setChains(s.chains);
     setLoaded(true);
   }, []);
   useEffect(() => {
     if (!loaded) return;
     try {
-      window.localStorage.setItem(KEY, JSON.stringify({ family, chains }));
+      window.localStorage.setItem(KEY, JSON.stringify({ event, chains }));
     } catch {
       /* storage blocked */
     }
-  }, [family, chains, loaded]);
+  }, [event, chains, loaded]);
 
-  const score = useMemo(() => scoreNandu(family, chains), [family, chains]);
+  const score = useMemo(() => scoreNandu(family, chains, { weapon }), [family, chains, weapon]);
   const setChain = (i: number, ch: Chain | null) => setChains(ch ? chains.map((c, j) => (j === i ? ch : c)) : chains.filter((_, j) => j !== i));
   const needTech = Math.max(0, TECH_CAP - score.techniqueRaw);
   const needConn = Math.max(0, CONN_CAP - score.connectionRaw);
@@ -62,19 +67,22 @@ export function NanduCalculator() {
           </label>
           <select
             id="family"
-            value={family}
+            value={event}
             onChange={(e) => {
-              setFamily(e.target.value as Family);
-              setChains([]);
+              const next = e.target.value as EventCode;
+              // Switching to another difficulty family clears elements that don't exist there.
+              if (familyOfEvent(next).family !== family) setChains([]);
+              setEvent(next);
             }}
             className={field}
           >
-            {(Object.keys(FAMILY_LABEL) as Family[]).map((f) => (
-              <option key={f} value={f}>
-                {FAMILY_LABEL[f]}
+            {EVENT_CODES.map((c) => (
+              <option key={c} value={c}>
+                {EVENTS[c].name} ({EVENTS[c].english})
               </option>
             ))}
           </select>
+          <p className="mt-1 text-xs text-ink-muted">Uses the {FAMILY_LABEL[family]} tables.</p>
         </div>
         <div>
           <label htmlFor="codes" className="mb-1 block text-sm font-semibold">
@@ -123,19 +131,32 @@ export function NanduCalculator() {
       <ol className="space-y-3">
         {chains.map((ch, i) => (
           <li key={i}>
-            <ChainEditor family={family} chain={ch} scored={score.chains[i]} index={i} onChange={(c) => setChain(i, c)} />
+            <ChainEditor family={family} weapon={weapon} chain={ch} scored={score.chains[i]} index={i} onChange={(c) => setChain(i, c)} />
           </li>
         ))}
       </ol>
 
-      <AddElement family={family} onAdd={(code) => setChains([...chains, { steps: [code] }])} />
+      <AddElement family={family} weapon={weapon} onAdd={(code) => setChains([...chains, { steps: [code] }])} />
 
       {score.warnings.length > 0 && (
-        <ul className="space-y-1 rounded-card border border-warn-ink/15 bg-warn p-3 text-sm text-warn-ink">
-          {score.warnings.map((w) => (
-            <li key={w}>{w}</li>
-          ))}
-        </ul>
+        <section role="alert" className="rounded-card border border-warn-ink/15 bg-warn p-3 text-warn-ink">
+          <h2 className="font-semibold">Rule breaks ({score.warnings.length})</h2>
+          <ul className="mt-1 list-disc space-y-1 pl-5 text-sm">
+            {score.warnings.map((w) => (
+              <li key={w}>{w}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {chains.length > 0 && score.reminders.length > 0 && (
+        <section className="rounded-card border border-info-ink/15 bg-info p-3 text-info-ink">
+          <h2 className="font-semibold">Remember</h2>
+          <ul className="mt-1 list-disc space-y-1 pl-5 text-sm">
+            {score.reminders.map((w) => (
+              <li key={w}>{w}</li>
+            ))}
+          </ul>
+        </section>
       )}
 
       {chains.length > 0 && (
@@ -165,7 +186,7 @@ function Bar({ label, value, cap }: { label: string; value: number; cap: number 
   );
 }
 
-function AddElement({ family, onAdd }: { family: Family; onAdd: (code: string) => void }) {
+function AddElement({ family, weapon, onAdd }: { family: Family; weapon: boolean; onAdd: (code: string) => void }) {
   const groups: [string, string][] = [
     ["jump", "Jumps"],
     ["balance", "Balances"],
@@ -196,7 +217,7 @@ function AddElement({ family, onAdd }: { family: Family; onAdd: (code: string) =
             </optgroup>
           ) : null;
         })}
-        {family === "changquan" && (
+        {family === "changquan" && weapon && (
           <optgroup label="Connection only">
             <option value="445A">Forward dive roll (for throw and catch) · 445A · 0</option>
           </optgroup>
@@ -208,12 +229,14 @@ function AddElement({ family, onAdd }: { family: Family; onAdd: (code: string) =
 
 function ChainEditor({
   family,
+  weapon,
   chain,
   scored,
   index,
   onChange,
 }: {
   family: Family;
+  weapon: boolean;
   chain: Chain;
   scored?: ReturnType<typeof scoreNandu>["chains"][number];
   index: number;
@@ -221,7 +244,7 @@ function ChainEditor({
 }) {
   const last = chain.steps[chain.steps.length - 1]!;
   const ended = /^\d{1,2}$/.test(last);
-  const options = ended ? [] : nextOptions(family, last);
+  const options = ended ? [] : nextOptions(family, last).filter((o) => weapon || !o.code.endsWith("+9")); // throw and catch needs a weapon
   const value = (scored?.techniques.reduce((s, t) => s + t.value, 0) ?? 0) + (scored?.links.reduce((s, l) => s + l.value, 0) ?? 0);
   let li = 0;
 

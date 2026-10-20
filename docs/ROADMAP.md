@@ -48,6 +48,7 @@ Resume from the first unchecked item. One commit per item.
 
 ## Phase 5c — Nandu calculator
 - [x] Calculator: pick techniques and listed connections, capped 1.4 + 0.6 = 2.0; matches 181/181 completed 2025 scorecards
+- [x] Rule-break warnings and execution reminders
 - [ ] Optional: prefill from an athlete's Sportdata registration
 
 ## Phase 6 — Brand + landing
