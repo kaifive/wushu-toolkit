@@ -1,0 +1,65 @@
+import type { EventCode, Gender } from "./types";
+
+/** Collapse whitespace and trim. */
+export const clean = (value: unknown): string => String(value ?? "").replace(/\s+/g, " ").trim();
+
+/**
+ * Order-insensitive athlete key. Sportdata prints "Last First", sheets often
+ * print "First Last", and some sources use underscores, so the key is the
+ * sorted lowercase name parts.
+ */
+export function athleteKey(name: string): string {
+  return clean(name)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[_.,]/g, " ")
+    .split(" ")
+    .filter(Boolean)
+    .sort()
+    .join(" ");
+}
+
+/** "MENG STANLEY" -> "Meng Stanley". Leaves mixed-case names alone. */
+export function titleCaseName(name: string): string {
+  const c = clean(name);
+  if (c !== c.toUpperCase()) return c;
+  return c.toLowerCase().replace(/(^|[\s'-])\p{L}/gu, (m) => m.toUpperCase());
+}
+
+export function toNumber(value: unknown): number | null {
+  if (typeof value === "number") return Number.isFinite(value) ? value : null;
+  const s = clean(value);
+  if (!s) return null;
+  const n = Number.parseFloat(s.replace(/[^0-9.\-]/g, ""));
+  return Number.isFinite(n) ? n : null;
+}
+
+const EVENT_WORDS: [RegExp, EventCode][] = [
+  [/taiji\s*jian|taijijian|tai\s*chi\s*sword/i, "TJ"],
+  [/taiji\s*shan|taijishan|tai\s*chi\s*fan/i, "TS"],
+  [/taiji\s*quan|taijiquan|tai\s*chi(?!\s*(sword|fan))/i, "TQ"],
+  [/nan\s*dao|nandao|southern\s*broadsword/i, "ND"],
+  [/nan\s*gun|nangun|southern\s*staff/i, "NG"],
+  [/nan\s*quan|nanquan|southern\s*fist/i, "NQ"],
+  [/dao\s*shu|daoshu|broadsword/i, "DS"],
+  [/jian\s*shu|jianshu|straight\s*sword/i, "JS"],
+  [/gun\s*shu|gunshu|cudgel|staff/i, "GS"],
+  [/qiang\s*shu|qiangshu|spear/i, "QS"],
+  [/chang\s*quan|changquan|long\s*fist/i, "CQ"],
+];
+
+/** Find the event code in a free-text event name. Order matters: Taijijian before Taijiquan, Nandao before Daoshu. */
+export function eventCodeFromName(name: string): EventCode | undefined {
+  for (const [re, code] of EVENT_WORDS) if (re.test(name)) return code;
+  return undefined;
+}
+
+/** Gender from an event name or a gender cell. "Women's" is checked before "Men's". */
+export function genderFromText(text: string): Gender | undefined {
+  const t = clean(text).toLowerCase();
+  if (!t) return undefined;
+  if (/\b(female|women|woman|girls?|f)\b|women´s|women's/.test(t)) return "female";
+  if (/\b(male|men|man|boys?|m)\b|men´s|men's/.test(t)) return "male";
+  return undefined;
+}

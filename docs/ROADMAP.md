@@ -11,7 +11,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] App shell: top nav (desktop), bottom tab bar (mobile), 44px targets
 
 ## Phase 2 — Data layer
-- [ ] Domain types (`lib/domain`)
+- [x] Domain types (`lib/domain`)
 - [ ] `DataSource` interface + `withFallback`
 - [ ] Google Sheets adapter (gviz JSON + CSV)
 - [ ] Published Google Doc adapter (JSON body and Sportdata scorecard HTML)
