@@ -186,7 +186,21 @@ export function runSelection(scores: ScoreEntry[], rules: SelectionRules, divisi
 }
 
 /** Assign each entry its division from the ruleset's name matchers (keeps an existing division). */
+/**
+ * Division from the event name: the division with the most matching words
+ * wins (first on a tie), so "Junior Team Trials Children Elementary …" is
+ * Children, not Junior.
+ */
+export function divisionOf(raw: string, ruleset: Ruleset): string | undefined {
+  let best: { id: string; hits: number } | undefined;
+  for (const d of ruleset.divisions) {
+    const hits = d.matchers.filter((m) => m.test(raw)).length;
+    if (hits && (!best || hits > best.hits)) best = { id: d.id, hits };
+  }
+  return best?.id;
+}
+
 export function withDivisions(scores: ScoreEntry[], ruleset: Ruleset): ScoreEntry[] {
-  return scores.map((s) => (s.division ? s : { ...s, division: ruleset.divisions.find((d) => d.matchers.some((m) => m.test(s.raw)))?.id }));
+  return scores.map((s) => (s.division ? s : { ...s, division: divisionOf(s.raw, ruleset) }));
 }
 

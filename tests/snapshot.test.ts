@@ -20,3 +20,18 @@ test("snapshot file names sort chronologically", () => {
   assert.equal(a, "2025-06-13T20-05-00-000Z.json");
   assert.equal(latestSnapshot([b, a, "README.md"]), b);
 });
+
+test("snapshotRegression refuses scrapes that lost data", async () => {
+  const { snapshotRegression } = await import("@/lib/data/snapshot");
+  const data = (scored: number, entries = scored) => ({
+    registrations: [{ athlete: { id: "a", name: "A" }, entries: [] }],
+    scores: Array.from({ length: entries }, (_, i) => ({ athleteId: `a${i}`, athleteName: "A", raw: "CQ", finalScore: i < scored ? 9 : null })),
+    schedules: [],
+    asOf: "",
+    source: "",
+  });
+  assert.equal(snapshotRegression(null, data(3)), null);
+  assert.equal(snapshotRegression(data(3), data(4)), null);
+  assert.match(snapshotRegression(data(3), data(0, 3)) ?? "", /0 scored routines vs 3/);
+  assert.match(snapshotRegression(null, { registrations: [], scores: [], schedules: [], asOf: "", source: "" }) ?? "", /no entries/);
+});

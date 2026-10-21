@@ -38,11 +38,27 @@ function joinings(tokens: string[]): Set<string> {
  * every Ashton.
  */
 export function namesMatch(a: string, b: string): boolean {
-  const ta = nameTokens(a);
-  const tb = nameTokens(b);
-  if (!ta.length || !tb.length) return false;
-  const sa = new Set(ta);
-  const sb = new Set(tb);
+  return matchPrepared(prepareName(a), prepareName(b));
+}
+
+/** A name tokenized once, for matching against many others. */
+export interface PreparedName {
+  tokens: string[];
+  set: Set<string>;
+  /** Sorted letters: a cheap test that rules out most pairs before joinings. */
+  letters: string;
+  joins?: Set<string>;
+}
+
+export function prepareName(name: string): PreparedName {
+  const tokens = nameTokens(name);
+  return { tokens, set: new Set(tokens), letters: tokens.join("").replace(/-/g, "").split("").sort().join("") };
+}
+
+function matchPrepared(a: PreparedName, b: PreparedName): boolean {
+  if (!a.tokens.length || !b.tokens.length) return false;
+  const { set: sa } = a;
+  const { set: sb } = b;
   if (sa.size === sb.size && [...sa].every((t) => sb.has(t))) return true;
   // Distinct words: "Lee Lee" is one word for this rule, so it can't match every Lee.
   if (sa.size < 2 || sb.size < 2) return false;
@@ -50,9 +66,10 @@ export function namesMatch(a: string, b: string): boolean {
   if ([...small].every((t) => big.has(t))) return true;
   // Split or joined given names, hyphen differences: same letters in the same
   // order once the words are run together (anagrams like "Kim Lee"/"Mike Le" don't count).
-  const ja = joinings(ta);
-  if (([...ja][0]?.length ?? 0) < 6) return false;
-  for (const j of joinings(tb)) if (ja.has(j)) return true;
+  if (a.letters.length < 6 || a.letters !== b.letters) return false;
+  a.joins ??= joinings(a.tokens);
+  b.joins ??= joinings(b.tokens);
+  for (const j of b.joins) if (a.joins.has(j)) return true;
   return false;
 }
 
@@ -66,7 +83,23 @@ export interface WatchList {
 
 /** First enabled list that contains this athlete (lists earlier in the order win). */
 export function findWatch(lists: WatchList[], athleteName: string): WatchList | undefined {
-  return lists.find((l) => l.enabled && l.athletes.some((a) => namesMatch(a, athleteName)));
+  return compileWatch(lists)(athleteName);
+}
+
+/**
+ * findWatch for many names: list entries are tokenized once and each looked-up
+ * name once (pages repeat names, and lists can hold thousands of entries).
+ */
+export function compileWatch(lists: WatchList[]): (athleteName: string) => WatchList | undefined {
+  const entries = lists.filter((l) => l.enabled).map((l) => ({ list: l, names: l.athletes.map(prepareName) }));
+  const memo = new Map<string, WatchList | undefined>();
+  return (name) => {
+    if (!memo.has(name)) {
+      const p = prepareName(name);
+      memo.set(name, entries.find((e) => e.names.some((n) => matchPrepared(n, p)))?.list);
+    }
+    return memo.get(name);
+  };
 }
 
 /**

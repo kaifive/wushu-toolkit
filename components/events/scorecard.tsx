@@ -1,7 +1,8 @@
+import { fmtScore } from "@/lib/rules/score";
 import { ExportButtons } from "@/components/export/export-buttons";
 import { highlightStyle, type HighlightFor, type ScorecardRow } from "@/lib/events/views";
 
-const f = (n: number | null | undefined, d = 3) => (n == null ? "—" : n.toFixed(d));
+const f = fmtScore;
 
 /** One athlete's judge-panel breakdown. Struck marks and missed nandu are shown crossed out. */
 export function ScorecardCard({ row, highlights }: { row: ScorecardRow; highlights?: HighlightFor }) {

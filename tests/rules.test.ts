@@ -220,3 +220,11 @@ test("results by event split men and women when the event name has no gender", a
     ["male", ["1 Ben"]],
   ]);
 });
+
+test("division from the event name: most matching words wins", async () => {
+  const { divisionOf } = await import("@/lib/rules/selection");
+  const r = RULESETS["usawkf-junior-trials-2025-26"];
+  assert.equal(divisionOf("Junior Team Trials Children Male Elementary Changquan", r), "C");
+  assert.equal(divisionOf("Taolu Junior Male 1st Set Changquan", r), "B");
+  assert.equal(divisionOf("Taolu Youth Female 3rd Set Daoshu", r), "A");
+});

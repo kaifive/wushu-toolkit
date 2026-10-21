@@ -1,8 +1,9 @@
+import { fmtScore } from "@/lib/rules/score";
 import { TeamBadge } from "@/components/ui/badge";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import { type ScopeModel, type HighlightFor, highlightStyle } from "@/lib/events/views";
 
-const fmt = (n: number | null | undefined) => (n == null ? "—" : n.toFixed(3));
+const fmt = fmtScore;
 
 export function OverallTable({ model, highlights }: { model: ScopeModel; highlights: HighlightFor }) {
   return (

@@ -17,7 +17,8 @@ export class GrantError extends Error {
 /** "2027-01-31" -> end of that day (UTC) in ms. Throws on anything else. */
 export function parseExpiry(value: string): number {
   const ms = /^\d{4}-\d{2}-\d{2}$/.test(value) ? Date.parse(`${value}T23:59:59Z`) : NaN;
-  if (!Number.isFinite(ms)) throw new GrantError(`Bad expiry date "${value}". Use YYYY-MM-DD.`, "bad-expiry");
+  // Date.parse rolls impossible dates over (2027-02-31 -> March 3); require a round trip.
+  if (!Number.isFinite(ms) || new Date(ms).toISOString().slice(0, 10) !== value) throw new GrantError(`Bad expiry date "${value}". Use YYYY-MM-DD.`, "bad-expiry");
   return ms;
 }
 

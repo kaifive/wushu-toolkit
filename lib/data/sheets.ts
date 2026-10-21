@@ -64,10 +64,6 @@ export function columnLetter(index: number): string {
   return s;
 }
 
-export function letterIndex(letter: string): number {
-  return letter.toUpperCase().split("").reduce((n, ch) => n * 26 + (ch.charCodeAt(0) - 64), 0) - 1;
-}
-
 export interface TabRef {
   sheetId: string;
   gid: string;

@@ -35,4 +35,5 @@ test("parseExpiry accepts only YYYY-MM-DD", async () => {
   assert.equal(parseExpiry("2027-01-31"), Date.parse("2027-01-31T23:59:59Z"));
   assert.throws(() => parseExpiry("2027-1-31"), /Bad expiry/);
   assert.throws(() => parseExpiry(""), /Bad expiry/);
+  assert.throws(() => parseExpiry("2027-02-31"), /Bad expiry/, "no roll-over to March");
 });

@@ -70,7 +70,8 @@ export function eventCodeFromName(name: string): EventCode | undefined {
 export function genderFromText(text: string): Gender | undefined {
   const t = clean(text).toLowerCase();
   if (!t) return undefined;
-  if (/\b(female|women|woman|girls?|f)\b|women´s|women's/.test(t)) return "female";
-  if (/\b(male|men|man|boys?|m)\b|men´s|men's/.test(t)) return "male";
+  // "F"/"M" only as a whole cell: inside an event name a letter is often an age group ("Group F").
+  if (t === "f" || /\b(female|women|woman|girls?)\b|women´s|women's/.test(t)) return "female";
+  if (t === "m" || /\b(male|men|man|boys?)\b|men´s|men's/.test(t)) return "male";
   return undefined;
 }

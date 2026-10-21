@@ -12,14 +12,21 @@ export function formatAsOf(iso: string, timeZone = "America/Chicago"): string {
 
 /** v1's "Standings as of …" info bar. */
 export function DataStatus({ data, timeZone }: { data: EventData; timeZone?: string }) {
+  // Tables split by gender; an entry the source didn't give one can't be shown, so say so.
+  const noGender = data.scores.filter((s) => !s.gender).length;
   return (
-    <div className="mb-4">
+    <div className="mb-4 space-y-2">
       {data.stale ? (
         <Notice tone="warn">
           Live scores unavailable. Showing the saved copy from {formatAsOf(data.asOf, timeZone)}.
         </Notice>
       ) : (
         <p className="text-sm text-ink-muted">As of {formatAsOf(data.asOf, timeZone)}</p>
+      )}
+      {noGender > 0 && (
+        <Notice tone="warn">
+          {noGender} {noGender === 1 ? "entry has" : "entries have"} no gender in the source, so {noGender === 1 ? "it isn't" : "they aren't"} in the tables below.
+        </Notice>
       )}
     </div>
   );

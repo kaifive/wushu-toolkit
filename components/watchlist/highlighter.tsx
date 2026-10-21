@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { findWatch } from "@/lib/watchlist/match";
+import { compileWatch } from "@/lib/watchlist/match";
 import { useWatchLists } from "@/lib/watchlist/store";
 
 /**
@@ -12,12 +12,8 @@ import { useWatchLists } from "@/lib/watchlist/store";
 export function WatchlistHighlighter() {
   const lists = useWatchLists();
   useEffect(() => {
-    // One lookup per distinct name: pages repeat names across tables, and live pages re-render often.
-    const memo = new Map<string, ReturnType<typeof findWatch>>();
-    const lookup = (name: string) => {
-      if (!memo.has(name)) memo.set(name, findWatch(lists, name));
-      return memo.get(name);
-    };
+    // Lists tokenized once, one lookup per distinct name (pages repeat names; live pages re-render often).
+    const lookup = compileWatch(lists);
     const apply = () => {
       document.querySelectorAll<HTMLElement>("[data-athlete]").forEach((el) => {
         const hit = lookup(el.dataset.athlete ?? "");

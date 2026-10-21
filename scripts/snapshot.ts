@@ -3,6 +3,7 @@
  *
  *   npm run snapshot -- 2026-pwc            one event
  *   npm run snapshot -- --scheduled         every event whose config has snapshot.until in the future
+ *   add --force to save a scrape with fewer scored routines than the saved copy
  *
  * A snapshot is written only when the live source answered (not a stale
  * fallback) and the data changed since the newest saved file.
@@ -10,7 +11,7 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { EVENT_CONFIGS } from "../content/events";
-import { latestSnapshot, snapshotFileName } from "../lib/data/snapshot";
+import { latestSnapshot, snapshotFileName, snapshotRegression } from "../lib/data/snapshot";
 import type { EventData } from "../lib/domain/types";
 import { writeSnapshotIndex } from "./snapshot-index";
 
@@ -36,10 +37,14 @@ for (const event of targets) {
     const dir = join(process.cwd(), "data/snapshots", event.slug);
     mkdirSync(dir, { recursive: true });
     const last = latestSnapshot(existsSync(dir) ? readdirSync(dir) : []);
-    if (last && fingerprint(JSON.parse(readFileSync(join(dir, last), "utf8")) as EventData) === fingerprint(data)) {
+    const prev = last ? (JSON.parse(readFileSync(join(dir, last), "utf8")) as EventData) : null;
+    if (prev && fingerprint(prev) === fingerprint(data)) {
       console.log(`${event.slug}: unchanged`);
       continue;
     }
+    // Never let a broken source wipe the archive; --force overrides after a manual check.
+    const regression = snapshotRegression(prev, data);
+    if (regression && !args.includes("--force")) throw new Error(`not saved: ${regression} (rerun with --force if that's right)`);
     const file = snapshotFileName(new Date(data.asOf || now));
     writeFileSync(join(dir, file), `${JSON.stringify({ ...data, source: `${data.source} (saved)` })}\n`);
     console.log(`${event.slug}: saved ${file} (${data.scores.length} entries)`);

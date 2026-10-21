@@ -43,3 +43,16 @@ export function latestSnapshot(files: string[]): string | undefined {
 export function emptyEventData(sourceLabel: string, asOf = new Date().toISOString()): EventData {
   return { registrations: [], scores: [], schedules: [], asOf, source: sourceLabel };
 }
+
+/**
+ * Why a fresh scrape must not replace the saved copy, or null if it may.
+ * A source that answers but lost data (cleared sheet, moved columns, an HTML
+ * error page) must never wipe the archive.
+ */
+export function snapshotRegression(prev: EventData | null, next: EventData): string | null {
+  if (!next.registrations.length && !next.scores.length) return "the live source returned no entries";
+  if (!prev) return null;
+  const scored = (d: EventData) => d.scores.filter((s) => s.finalScore != null).length;
+  if (scored(next) < scored(prev)) return `${scored(next)} scored routines vs ${scored(prev)} in the saved copy`;
+  return null;
+}

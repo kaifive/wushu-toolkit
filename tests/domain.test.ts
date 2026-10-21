@@ -56,3 +56,9 @@ test("eventCodeFromName reads English taiji names", () => {
   assert.equal(eventCodeFromName("Tai Chi 24 Form"), "TQ");
   assert.equal(eventCodeFromName("Taijijian"), "TJ");
 });
+
+test("genderFromText: single letters only as a whole cell", () => {
+  assert.equal(genderFromText("F"), "female");
+  assert.equal(genderFromText("m"), "male");
+  assert.equal(genderFromText("Taolu Group F 22-29 Changquan"), undefined);
+});

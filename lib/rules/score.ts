@@ -9,6 +9,9 @@ export const round3 = (n: number) => Math.round(n * 1000) / 1000;
  */
 export const floor3 = (n: number) => Math.floor(n * 1000 + 1e-9) / 1000;
 
+/** A score for display: "—" when missing, else fixed decimals (3 by default). */
+export const fmtScore = (n: number | null | undefined, decimals = 3) => (n == null ? "—" : n.toFixed(decimals));
+
 /** Entries per athlete id, in input order. */
 export function groupByAthlete(scores: ScoreEntry[]): Map<string, ScoreEntry[]> {
   const m = new Map<string, ScoreEntry[]>();

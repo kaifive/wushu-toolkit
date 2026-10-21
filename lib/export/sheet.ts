@@ -1,3 +1,4 @@
+import { fmtScore } from "@/lib/rules/score";
 import { slugify } from "@/lib/domain/names";
 import { GENDER_LABEL, type EventResult, type ScopeModel, type ScorecardRow } from "@/lib/events/views";
 
@@ -33,7 +34,7 @@ export interface Sheet {
 }
 
 const c = (text: string, extra: Omit<Cell, "text"> = {}): Cell => ({ text, ...extra });
-const f = (n: number | null | undefined, d = 3) => (n == null ? "—" : n.toFixed(d));
+const f = fmtScore;
 
 /** Safe file name: "2025 Adults – Ashton Wu – CQ" -> "2025-adults-ashton-wu-cq". */
 export function fileName(...parts: string[]): string {

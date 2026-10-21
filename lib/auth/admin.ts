@@ -37,6 +37,16 @@ function services() {
   return { auth: getAuth(a), db: getFirestore(a) };
 }
 
+/** firebase-admin codes that mean the token itself is no good (anything else is an outage). */
+const TOKEN_ERRORS = new Set([
+  "auth/argument-error",
+  "auth/id-token-expired",
+  "auth/id-token-revoked",
+  "auth/invalid-id-token",
+  "auth/user-disabled",
+  "auth/user-not-found",
+]);
+
 /** Verify the bearer ID token. Returns the user's uid and email. */
 export async function verifyUser(req: Request) {
   const { auth } = services();
@@ -49,7 +59,7 @@ export async function verifyUser(req: Request) {
   } catch (err) {
     // Only token problems mean "sign in again"; outages stay server errors.
     const code = (err as { code?: string })?.code ?? "";
-    if (code.startsWith("auth/")) throw new AuthError("Your sign-in expired. Sign in again.", 401, "bad-token");
+    if (TOKEN_ERRORS.has(code)) throw new AuthError("Your sign-in expired. Sign in again.", 401, "bad-token");
     throw err;
   }
 }
@@ -90,9 +100,6 @@ export async function verifySessionWithPass(req: Request, slug: string) {
   return user;
 }
 
-export async function requireEntitlement(uid: string, slug: string) {
-  if (!hasEntitlement(await getEntitlements(uid), slug)) throw new AuthError("This account doesn't have a pass for this event.", 403, "no-pass");
-}
 
 export function requireAdmin(uid: string) {
   if (!parseAdminUids(process.env.ADMIN_UIDS).has(uid)) throw new AuthError("Admins only.", 403, "not-admin");

@@ -10,12 +10,13 @@ import { fromBowuu, fromJuniors2025Registration, fromLegacyAthleteData } from ".
 import { joinRegistrationScores } from "../lib/data/join";
 import type { EventData } from "../lib/domain/types";
 import { writeSnapshotIndex } from "./snapshot-index";
+import { snapshotFileName } from "../lib/data/snapshot";
 
 const L = (p: string) => JSON.parse(readFileSync(join(process.cwd(), "legacy/src/views", p), "utf8"));
 const out = (slug: string, isoAsOf: string, data: EventData) => {
   const dir = join(process.cwd(), "data/snapshots", slug);
   mkdirSync(dir, { recursive: true });
-  const file = `${isoAsOf.replace(/[:.]/g, "-")}.json`;
+  const file = snapshotFileName(new Date(isoAsOf));
   writeFileSync(join(dir, file), `${JSON.stringify(data)}\n`);
   console.log(`${slug}/${file}: ${data.registrations.length} athletes, ${data.scores.length} entries`);
 };

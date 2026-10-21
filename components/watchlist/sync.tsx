@@ -88,8 +88,7 @@ function Sync() {
     return fetchRef.current("/api/watchlists", { method: "PUT", headers: { "content-type": "application/json" }, body, keepalive: keepalive && small }).catch(() => null);
   }, []);
 
-  const saveLoopRef = useRef<((uid: string) => Promise<void>) | null>(null);
-  const saveLoop = useCallback(async (forUid: string, keepalive = false) => {
+  const saveLoop = useCallback(async function saveLoopRef(forUid: string, keepalive = false): Promise<void> {
     const s = saver.current;
     if (s.busy) {
       // The page is going away: the running save won't outlive it, so send the newest lists now.
@@ -143,17 +142,13 @@ function Sync() {
     // (Never the same lists that just failed: those wait for "online", hide or the next edit.)
     const s2 = saver.current;
     const pending = s2.next && JSON.stringify(s2.next);
-    if (pending && pending !== s2.rejected && pending !== s2.sent && pending !== s2.failed) void saveLoopRef.current?.(forUid);
+    if (pending && pending !== s2.rejected && pending !== s2.sent && pending !== s2.failed) void saveLoopRef(forUid);
   }, [put]);
-  useEffect(() => {
-    saveLoopRef.current = saveLoop;
-  }, [saveLoop]);
 
   // On sign-in: pull the account's lists (retrying until it works) and merge.
   useEffect(() => {
     const s = saver.current;
     // Starting over for this account (state reset is the effect's job here).
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setReady(false);
     s.sent = "";
     if (!uid) return;
@@ -240,6 +235,16 @@ function Sync() {
 
 // ------------------------------------------------------------------ status line
 
+const MESSAGE: Record<State, string> = {
+  loading: "Syncing with your account…",
+  saving: "Saving…",
+  saved: "Saved to your account.",
+  trimmed: `Saved to your account, trimmed to ${SYNC_LIMITS.lists} lists of ${SYNC_LIMITS.athletes} names.`,
+  error: "Couldn't reach your account. Changes are kept on this device and will sync when it's back.",
+  "too-big": "These watch lists are too big to save to an account. They're kept on this device.",
+  refused: "Your account didn't accept the sync. Sign in again to keep lists on all your devices.",
+};
+
 /** "Saved to your account" / "Sign in to keep lists…" for /watchlists. */
 export function WatchlistSyncStatus() {
   const signedIn = useSignedInHere();
@@ -256,19 +261,7 @@ export function WatchlistSyncStatus() {
     );
   return (
     <p className="text-sm text-ink-muted" aria-live="polite">
-      {current === "loading"
-        ? "Syncing with your account…"
-        : current === "saving"
-          ? "Saving…"
-          : current === "error"
-            ? "Couldn't reach your account. Changes are kept on this device and will sync when it's back."
-            : current === "too-big"
-              ? "These watch lists are too big to save to an account. They're kept on this device."
-              : current === "refused"
-                ? "Your account didn't accept the sync. Sign in again to keep lists on all your devices."
-                : current === "trimmed"
-              ? `Saved to your account, trimmed to ${SYNC_LIMITS.lists} lists of ${SYNC_LIMITS.athletes} names.`
-              : "Saved to your account."}
+      {MESSAGE[current]}
     </p>
   );
 }

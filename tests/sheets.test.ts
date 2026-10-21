@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { parseCsv } from "@/lib/data/csv";
-import { columnLetter, csvToLetterRows, gvizTab, letterIndex, parseGviz } from "@/lib/data/sheets";
+import { columnLetter, csvToLetterRows, gvizTab, parseGviz } from "@/lib/data/sheets";
 import { athletesFromRows, scoresFromRows } from "@/lib/data/parsers/sheet-scores";
 import { parseScheduleRows } from "@/lib/data/parsers/schedule";
 import { withCurrentCompetitor } from "@/lib/domain/schedule";
@@ -17,8 +17,6 @@ test("parseCsv handles quotes, escaped quotes and CRLF", () => {
 test("column letters round-trip", () => {
   assert.equal(columnLetter(0), "A");
   assert.equal(columnLetter(26), "AA");
-  assert.equal(letterIndex("G"), 6);
-  assert.equal(letterIndex("AA"), 26);
 });
 
 test("parseGviz unwraps the response and keys rows by letter", () => {
