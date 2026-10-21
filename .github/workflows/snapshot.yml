@@ -30,6 +30,9 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Snapshot
+        id: snapshot
+        # Keep going so snapshots that did succeed are still committed; the job fails at the end.
+        continue-on-error: true
         env:
           SLUG: ${{ github.event.inputs.slug }}
         run: |
@@ -53,3 +56,8 @@ jobs:
           else
             echo "No changes"
           fi
+      - name: Fail if any event failed
+        if: steps.snapshot.outcome == 'failure'
+        run: |
+          echo "At least one event failed to snapshot; see the Snapshot step." >&2
+          exit 1

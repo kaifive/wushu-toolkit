@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { SIGNED_IN_EVENT, SIGNED_IN_KEY, useAuth } from "@/components/auth/auth-provider";
 import { authConfigured } from "@/lib/auth/client";
 import type { WatchList } from "@/lib/watchlist/match";
@@ -23,7 +23,7 @@ const syncedKey = (uid: string) => `wt:watchlists:synced:${uid}`;
 /** Browsers drop keepalive requests with bodies over 64 KB. */
 const KEEPALIVE_MAX = 60_000;
 
-type State = "loading" | "saving" | "saved" | "trimmed" | "error";
+type State = "loading" | "saving" | "saved" | "trimmed" | "error" | "too-big" | "refused";
 
 const wasTrimmed = (stored: WatchList[], sent: WatchList[]) =>
   stored.length !== sent.length || stored.some((l, i) => l.athletes.length !== sent[i]?.athletes.length);
@@ -70,25 +70,49 @@ function Sync() {
   }, [authedFetch]);
 
   /** One save at a time; edits made meanwhile are sent next, newest wins. */
-  const saver = useRef<{ busy: boolean; next: WatchList[] | null; sent: string; ready: boolean }>({ busy: false, next: null, sent: "", ready: false });
+  const saver = useRef<{ busy: boolean; next: WatchList[] | null; sent: string; rejected: string }>({ busy: false, next: null, sent: "", rejected: "" });
+  // State (not a ref) so the change listeners below start once the first pull is done.
+  const [ready, setReady] = useState(false);
 
-  const saveLoop = async (forUid: string, keepalive = false) => {
+  // Both read refs only, so they never change identity.
+  const put = useCallback((lists: WatchList[], keepalive: boolean) => {
+    const body = JSON.stringify({ lists });
+    const small = new TextEncoder().encode(body).length < KEEPALIVE_MAX;
+    return fetchRef.current("/api/watchlists", { method: "PUT", headers: { "content-type": "application/json" }, body, keepalive: keepalive && small }).catch(() => null);
+  }, []);
+
+  const saveLoop = useCallback(async (forUid: string, keepalive = false) => {
     const s = saver.current;
-    if (s.busy) return;
+    if (s.busy) {
+      // The page is going away: the running save won't outlive it, so send the newest lists now.
+      if (keepalive && s.next) void put(s.next, true);
+      return;
+    }
     s.busy = true;
     try {
       while (s.next) {
         const next = s.next;
         s.next = null;
         const json = JSON.stringify(next);
-        if (json === s.sent) continue;
+        if (json === s.sent) {
+          publish("saved"); // back in step (e.g. an edit was undone)
+          continue;
+        }
+        if (json === s.rejected) continue; // already refused as too big; wait for a real change
         publish("saving");
-        const body = JSON.stringify({ lists: next });
-        const small = new TextEncoder().encode(body).length < KEEPALIVE_MAX;
-        const res = await fetchRef.current("/api/watchlists", { method: "PUT", headers: { "content-type": "application/json" }, body, keepalive: keepalive && small }).catch(() => null);
+        const res = await put(next, keepalive);
+        if (res?.status === 413) {
+          s.rejected = json;
+          publish("too-big");
+          break;
+        }
+        if (res && (res.status === 401 || res.status === 403)) {
+          publish("refused"); // signed out or not allowed; auth handles the rest
+          break;
+        }
         if (!res?.ok) {
           publish("error");
-          s.next ??= next; // try again with the next change or flush
+          s.next ??= next; // network or server trouble: retried when online or on the next change
           break;
         }
         // The server trims over-long lists; adopt its copy only when it really cut something
@@ -105,12 +129,14 @@ function Sync() {
     } finally {
       s.busy = false;
     }
-  };
+  }, [put]);
 
   // On sign-in: pull the account's lists (retrying until it works) and merge.
   useEffect(() => {
     const s = saver.current;
-    s.ready = false;
+    // Starting over for this account (state reset is the effect's job here).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setReady(false);
     s.sent = "";
     if (!uid) return;
     let alive = true;
@@ -122,7 +148,13 @@ function Sync() {
       for (let attempt = 0; alive; attempt++) {
         const res = await fetchRef.current("/api/watchlists").catch(() => null);
         if (!alive) return;
+        if (res && [401, 403, 503].includes(res.status)) {
+          // Not a passing blip (signed out elsewhere, no access, accounts off on the server): stop.
+          publish("refused");
+          return;
+        }
         const remote = res?.ok ? (((await res.json().catch(() => null)) as { lists?: WatchList[] } | null)?.lists ?? null) : null;
+        if (!alive) return;
         if (remote) {
           const local = readLists();
           // Lists synced with a different account (a shared device) are that
@@ -131,7 +163,7 @@ function Sync() {
           const merged = owner && owner !== uid ? remote : mergeLists(local, remote, storageGet(syncedKey(uid)) === JSON.stringify(local));
           storageSet(OWNER_KEY, uid);
           s.sent = JSON.stringify(remote);
-          s.ready = true;
+          setReady(true);
           if (!sameLists(merged, local)) writeLists(merged);
           if (sameLists(merged, remote)) {
             storageSet(syncedKey(uid), s.sent);
@@ -158,12 +190,12 @@ function Sync() {
       wake();
       window.removeEventListener("online", onOnline);
     };
-  }, [uid]);
+  }, [uid, saveLoop]);
 
   // After the first pull, queue each change (debounced) and flush when the page hides.
   useEffect(() => {
     const s = saver.current;
-    if (!uid || !s.ready) return;
+    if (!uid || !ready) return;
     const queue = (keepalive = false) => {
       s.next = lists;
       void saveLoop(uid, keepalive);
@@ -183,7 +215,7 @@ function Sync() {
       window.removeEventListener("pagehide", onPageHide);
       window.removeEventListener("online", onOnline);
     };
-  }, [lists, uid]);
+  }, [lists, uid, ready, saveLoop]);
 
   return null;
 }
@@ -212,7 +244,11 @@ export function WatchlistSyncStatus() {
           ? "Saving…"
           : current === "error"
             ? "Couldn't reach your account. Changes are kept on this device and will sync when it's back."
-            : current === "trimmed"
+            : current === "too-big"
+              ? "These watch lists are too big to save to an account. They're kept on this device."
+              : current === "refused"
+                ? "Your account didn't accept the sync. Sign in again to keep lists on all your devices."
+                : current === "trimmed"
               ? `Saved to your account, trimmed to ${SYNC_LIMITS.lists} lists of ${SYNC_LIMITS.athletes} names.`
               : "Saved to your account."}
     </p>

@@ -61,6 +61,19 @@ let claiming = false;
 /** Latest session doc from the listener. */
 let lastDoc: SessionDoc | undefined;
 let signOutNow: (() => void) | null = null;
+let token: string | null = null;
+
+/** The server is the final word on the lock: a request it refuses as "other device" signs this device out. */
+async function serverSaysKicked(res: Response) {
+  if (res.status !== 401) return;
+  const body = (await res.clone().json().catch(() => null)) as { code?: string } | null;
+  if (body?.code !== "other-device" || claiming || readLocal()?.claimedAt === null) return;
+  const device = lastDoc?.device || "another device";
+  storageSet(KICKED_KEY, device);
+  writeLocal(null);
+  set({ kicked: device });
+  signOutNow?.();
+}
 let recheck: number | undefined;
 
 function set(patch: Partial<Snapshot>) {
@@ -77,7 +90,7 @@ function settle() {
   switch (sessionVerdict(lastDoc, local, Date.now())) {
     case "ok":
       markSignedIn(true);
-      return set({ status: "signed-in" });
+      return set({ status: "signed-in", kicked: null });
     case "pending":
       // Another tab is signing in; look again when its claim would expire.
       recheck = window.setTimeout(settle, Math.max(0, CLAIM_TTL - (Date.now() - (local?.startedAt ?? 0))) + 50);
@@ -100,8 +113,13 @@ function start() {
   // Another tab changing this device's session (claim done, kicked, signed out).
   window.addEventListener("storage", (e) => e.key === SESSION_STORAGE_KEY && settle());
   void firebase().then(async ({ auth, db }) => {
-    const [{ onAuthStateChanged, signOut }, { doc, onSnapshot }] = await Promise.all([import("firebase/auth"), import("firebase/firestore")]);
+    const [{ onAuthStateChanged, onIdTokenChanged, signOut }, { doc, onSnapshot }] = await Promise.all([import("firebase/auth"), import("firebase/firestore")]);
     signOutNow = () => void signOut(auth);
+    // Fresh token kept at hand so unload-time saves can start fetch() without awaiting a refresh.
+    onIdTokenChanged(auth, (u) => {
+      token = null;
+      void u?.getIdToken().then((t) => (token = t));
+    });
     let unsubSession = () => {};
     onAuthStateChanged(auth, (u) => {
       unsubSession();
@@ -112,10 +130,20 @@ function start() {
         return settle();
       }
       settle();
-      unsubSession = onSnapshot(doc(db, "sessions", u.uid), (s) => {
-        lastDoc = s.data() as SessionDoc | undefined;
-        settle();
-      });
+      // If the listener fails (e.g. permission before the token reaches
+      // Firestore), listen again shortly; the server's "other-device" answers
+      // (see authedFetch) still sign the device out in the meantime.
+      const listen = () => {
+        unsubSession = onSnapshot(
+          doc(db, "sessions", u.uid),
+          (s) => {
+            lastDoc = s.data() as SessionDoc | undefined;
+            settle();
+          },
+          () => window.setTimeout(() => snap.user?.uid === u.uid && listen(), 5000),
+        );
+      };
+      listen();
     });
   });
 }
@@ -141,6 +169,12 @@ async function withClaim(signInFn: () => Promise<User>) {
     throw new Error("This browser is blocking site storage, which accounts need. Allow storage for this site and try again.");
   }
   claiming = true;
+  // Keep the pending claim fresh while this tab works on it (slow networks),
+  // so other tabs only treat it as abandoned if this tab really went away.
+  const beat = window.setInterval(() => {
+    const cur = readLocal();
+    if (cur?.id === id && cur.claimedAt === null) writeLocal({ ...cur, startedAt: Date.now() });
+  }, 10_000);
   try {
     const user = await signInFn();
     try {
@@ -163,6 +197,7 @@ async function withClaim(signInFn: () => Promise<User>) {
     throw err;
   } finally {
     claiming = false;
+    window.clearInterval(beat);
   }
   set({ kicked: null });
   settle();
@@ -208,10 +243,14 @@ export function useAuth(): AuthState {
   const authedFetch = useCallback(
     async (input: string, init: RequestInit = {}) => {
       const headers = new Headers(init.headers);
-      if (user) headers.set("authorization", `Bearer ${await user.getIdToken()}`);
+      // Unload-time (keepalive) requests use the cached token so fetch starts at once.
+      const bearer = init.keepalive && token ? token : user ? await user.getIdToken() : null;
+      if (bearer) headers.set("authorization", `Bearer ${bearer}`);
       const sid = readLocal()?.id;
       if (sid) headers.set(SESSION_HEADER, sid);
-      return fetch(input, { ...init, headers });
+      const res = await fetch(input, { ...init, headers });
+      void serverSaysKicked(res);
+      return res;
     },
     [user],
   );
