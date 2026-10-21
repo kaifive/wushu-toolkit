@@ -49,7 +49,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] Local watch lists (multiple, colored, one per school) with fuzzy name matching
 - [x] Highlight on every competition page (standings, team, results, scorecards, schedule, all-around)
 - [x] Type-ahead from past competitions
-- [ ] Optional: sync lists to the account once accounts are live
+- [x] Sync lists to the account (ADR-009); end-to-end check waits on Firebase keys (Phase 7)
 
 ## Phase 5c — Nandu calculator
 - [x] Calculator: pick techniques and listed connections, capped 1.4 + 0.6 = 2.0; matches 181/181 completed 2025 scorecards

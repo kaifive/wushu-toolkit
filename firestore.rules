@@ -11,6 +11,10 @@ service cloud.firestore {
       allow read: if request.auth != null && request.auth.uid == uid;
       allow write: if false;
     }
+    // Watch lists are read and written through /api/watchlists only.
+    match /watchlists/{uid} {
+      allow read, write: if false;
+    }
     match /{document=**} {
       allow read, write: if false;
     }

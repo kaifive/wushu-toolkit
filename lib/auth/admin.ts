@@ -2,6 +2,7 @@ import "server-only";
 import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
+import type { WatchList } from "@/lib/watchlist/match";
 import { hasEntitlement, isSessionCurrent, parseAdminUids, SESSION_HEADER, type EntitlementsDoc, type SessionDoc } from "./model";
 
 /**
@@ -91,6 +92,20 @@ export async function setGrant(email: string, slug: string, grantedBy: string, o
     await ref.set({ email: user.email, events: { [slug]: grant } }, { merge: true });
   }
   return { uid: user.uid, email: user.email };
+}
+
+/** Watch lists saved to the account (watchlists/{uid}). */
+export async function getWatchlists(uid: string): Promise<{ lists: WatchList[]; updatedAt: number } | null> {
+  const { db } = services();
+  const snap = await db.collection("watchlists").doc(uid).get();
+  return (snap.data() as { lists: WatchList[]; updatedAt: number } | undefined) ?? null;
+}
+
+export async function setWatchlists(uid: string, lists: WatchList[]) {
+  const { db } = services();
+  const updatedAt = Date.now();
+  await db.collection("watchlists").doc(uid).set({ lists, updatedAt });
+  return updatedAt;
 }
 
 export function authErrorResponse(err: unknown): Response {

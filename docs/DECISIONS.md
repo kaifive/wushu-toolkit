@@ -153,3 +153,19 @@ required running scripts by hand.
 and commits normalized JSON to `data/snapshots/<slug>/`. The next Vercel
 deploy picks it up. Live scorecard scraping stays available as a source with
 ISR caching, and falls back to the latest snapshot.
+
+## ADR-009 — Watch lists sync through the server, merged on sign-in
+
+**Status:** accepted (2026-10-21)
+
+Watch lists stay in localStorage so highlighting works without an account.
+Signed-in users also get a copy in Firestore `watchlists/{uid}`, read and
+written only through `/api/watchlists` (Admin SDK, session-checked, input
+cleaned and size-limited), matching ADR-005's "clients never write".
+
+On sign-in the device merges with the account: if nothing changed locally
+since the last sync, the account copy wins (so deletions made on another
+device stick); otherwise lists merge by id, athletes are combined and this
+device's name, colour and on/off win. After that each change is saved,
+debounced. The single-device lock (ADR-005) makes simultaneous edits rare,
+so no finer conflict handling is needed.
