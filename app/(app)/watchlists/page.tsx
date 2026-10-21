@@ -7,9 +7,7 @@ export const metadata: Metadata = { title: "Watch lists", description: "Highligh
 export default function WatchlistsPage() {
   return (
     <Container className="max-w-2xl">
-      <PageHeader title="Watch lists">
-        Highlight athletes on every competition page. Saved on this device.
-      </PageHeader>
+      <PageHeader title="Watch lists" />
       <WatchlistManager />
     </Container>
   );

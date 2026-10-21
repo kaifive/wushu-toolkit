@@ -9,9 +9,7 @@ export const metadata: Metadata = { title: "Deduction codes", description: "Sear
 export default function DeductionsPage() {
   return (
     <Container className="max-w-2xl">
-      <PageHeader crumbs={[{ href: "/tools", label: "Toolkit" }]} title="Deduction codes">
-        Panel A (quality of movements) codes by event family.
-      </PageHeader>
+      <PageHeader title="Deduction codes" />
       {!DEDUCTIONS_SOURCE.verified && <SourceNote>Not yet checked against the IWUF 2024 rules.</SourceNote>}
       <DeductionSearch groups={DEDUCTION_GROUPS} />
     </Container>

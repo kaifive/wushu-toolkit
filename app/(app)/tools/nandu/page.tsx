@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 export default function NanduPage() {
   return (
     <Container className="max-w-2xl">
-      <PageHeader crumbs={[{ href: "/tools", label: "Toolkit" }]} title="Nandu calculator">
-        IWUF 2024 degree of difficulty.
-      </PageHeader>
+      <PageHeader title="Nandu calculator" />
       <NanduCalculator />
     </Container>
   );

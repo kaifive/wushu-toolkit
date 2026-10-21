@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EventNav } from "@/components/events/event-nav";
 import { Badge } from "@/components/ui/badge";
@@ -18,12 +17,7 @@ export default async function EventLayout({ children, params }: { children: Reac
     <>
       <div className="border-b border-line bg-surface">
         <div className="mx-auto max-w-6xl px-4 pt-4 md:px-8">
-          <nav aria-label="Breadcrumb" className="text-sm text-ink-muted">
-            <Link href="/events" className="hover:text-ink">
-              Competitions
-            </Link>
-          </nav>
-          <h1 className="mt-0.5 font-display text-3xl font-bold leading-tight tracking-wide sm:text-4xl">{event.name}</h1>
+          <h1 className="font-display text-3xl font-bold leading-tight tracking-wide sm:text-4xl">{event.name}</h1>
           <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-sm text-ink-muted">
             {event.status === "live" && <Badge tone="seal">Live</Badge>}
             {event.status === "archived" && <Badge>Final</Badge>}

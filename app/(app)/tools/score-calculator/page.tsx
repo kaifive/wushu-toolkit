@@ -7,9 +7,7 @@ export const metadata: Metadata = { title: "Score calculator", description: "Wor
 export default function ScoreCalculatorPage() {
   return (
     <Container className="max-w-2xl">
-      <PageHeader crumbs={[{ href: "/tools", label: "Toolkit" }]} title="Score calculator">
-        The lowest score that beats an average.
-      </PageHeader>
+      <PageHeader title="Score calculator" />
       <ScoreCalculator />
     </Container>
   );

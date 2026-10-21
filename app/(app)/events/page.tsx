@@ -12,7 +12,7 @@ export default function EventsPage() {
   const archived = events.filter((e) => e.status === "archived");
   return (
     <Container className="space-y-5">
-      <PageHeader title="Competitions">Standings, team projections, scorecards and schedules for each competition.</PageHeader>
+      <PageHeader title="Competitions" />
       <Card title="Live and upcoming" bodyClassName="">
         {current.length ? (
           <div className="divide-y divide-line">{current.map((e) => <EventRow key={e.slug} event={e} />)}</div>

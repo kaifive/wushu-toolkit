@@ -8,9 +8,7 @@ export const metadata: Metadata = { title: "Logo concepts", robots: { index: fal
 export default function BrandPage() {
   return (
     <Container>
-      <PageHeader title="Three logo concepts">
-        Each mark at app-icon, header and favicon sizes, on light and dark.
-      </PageHeader>
+      <PageHeader title="Three logo concepts" />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {CONCEPTS.map(({ id, name, Mark, idea, strengths, risks }) => (
           <section key={id} className="overflow-hidden rounded-card border border-line bg-surface">

@@ -7,10 +7,11 @@ export const metadata: Metadata = { title: "About" };
 export default function AboutPage() {
   return (
     <Container className="max-w-2xl">
-      <PageHeader title="About Wushu Toolkit">
-        Built by {SITE.author}, a wushu athlete, so families and coaches can follow competitions without refreshing five spreadsheets.
-      </PageHeader>
+      <PageHeader title="About Wushu Toolkit" />
       <div className="space-y-4 text-ink-muted">
+        <p>
+          Built by {SITE.author}, a wushu athlete, so families and coaches can follow competitions without refreshing five spreadsheets.
+        </p>
         <p>
           Wushu Toolkit reads competition data from the organizers&apos; public sources (Sportdata, published Google Sheets and Docs) and
           applies the published selection rules to project teams. It isn&apos;t affiliated with USAWKF, IWUF or any organizer.

@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 export default function DemoOrderPage() {
   return (
     <Container className="max-w-2xl">
-      <PageHeader crumbs={[{ href: "/tools", label: "Toolkit" }]} title="Demo order">
-        Enter groups and solos with a level from 1 to 5, then generate a running order. Saved on this device.
-      </PageHeader>
+      <PageHeader title="Demo order" />
       <DemoBuilder />
     </Container>
   );

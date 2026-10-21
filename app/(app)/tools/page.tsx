@@ -19,7 +19,7 @@ const TOOLS = [
 export default function ToolsPage() {
   return (
     <Container className="max-w-3xl">
-      <PageHeader title="Athlete toolkit">Free references for competition day.</PageHeader>
+      <PageHeader title="Athlete toolkit" />
       <Card bodyClassName="divide-y divide-line">
         {TOOLS.map((t) => (
           <Link key={t.href} href={t.href} className="group flex min-h-16 items-center justify-between gap-3 px-4 py-3 hover:bg-surface-2">

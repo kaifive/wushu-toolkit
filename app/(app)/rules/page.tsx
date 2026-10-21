@@ -29,10 +29,7 @@ export default function RulesPage() {
   const sel = r.selection;
   return (
     <Container className="max-w-4xl">
-      <PageHeader title={r.name}>
-        {r.source.title}
-        {r.source.revision ? ` (${r.source.revision})` : ""}. Judging, deductions and difficulty follow {r.judging?.label}.
-      </PageHeader>
+      <PageHeader title={r.name} />
 
       {!r.source.verified && (
         <SourceNote>
