@@ -113,7 +113,7 @@ export function RoutineOrder({ sets }: { sets: RequiredMovementSet[] }) {
                   <button type="button" disabled={i === order.length - 1} onClick={() => setOrder(moveItem(order, i, 1))} aria-label={`Move ${item.label} later`} className={iconBtn}>
                     ↓
                   </button>
-                  <button type="button" onClick={() => setOrder(order.filter((_, j) => j !== i))} aria-label={`Remove ${item.label}`} className={`${iconBtn} text-seal`}>
+                  <button type="button" onClick={() => setOrder(order.filter((_, j) => j !== i))} aria-label={`Remove ${item.label}`} className={`${iconBtn} text-ink-muted hover:text-ink`}>
                     ×
                   </button>
                 </li>
@@ -126,7 +126,7 @@ export function RoutineOrder({ sets }: { sets: RequiredMovementSet[] }) {
         {copied === "blocked" && <p className="border-t border-line px-4 py-2 text-sm text-ink-muted">Copy is blocked here; press and hold to select the text.</p>}
         {order.length > 0 && (
           <div className="flex justify-end border-t border-line px-2 py-1">
-            <button type="button" onClick={() => setOrder([])} className="min-h-tap px-3 text-sm font-semibold text-seal">
+            <button type="button" onClick={() => setOrder([])} className="min-h-tap px-3 text-sm font-semibold text-ink-muted hover:text-ink">
               Clear
             </button>
           </div>

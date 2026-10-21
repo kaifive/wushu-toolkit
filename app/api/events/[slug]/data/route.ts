@@ -1,4 +1,4 @@
-import { authErrorResponse, requireEntitlement, verifySession } from "@/lib/auth/admin";
+import { AuthError, authErrorResponse, requireEntitlement, verifySession } from "@/lib/auth/admin";
 import { getEvent, requiresEntitlement } from "@/lib/events/registry";
 
 /** Data for paid live events. Requires a valid token, the current device, and a pass. */
@@ -14,7 +14,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
     const data = await event.data().load({ revalidate: event.revalidate ?? 60 });
     return Response.json(data, { headers: { "cache-control": "private, no-store" } });
   } catch (err) {
-    if (err instanceof Error && !("status" in err)) return Response.json({ error: `Couldn't load scores: ${err.message}` }, { status: 502 });
-    return authErrorResponse(err);
+    if (err instanceof AuthError) return authErrorResponse(err);
+    return Response.json({ error: `Couldn't load scores: ${err instanceof Error ? err.message : String(err)}` }, { status: 502 });
   }
 }

@@ -92,7 +92,13 @@ export function NanduCalculator() {
             <button
               type="button"
               onClick={() => {
-                const parsed = codes.split(/[,;\s]+/).filter(Boolean).map(chainFromCode).filter((c) => c.steps.length);
+                // "353B + 323C + 1" is one chain: join around "+", then split on commas, semicolons or spaces.
+                const parsed = codes
+                  .replace(/\s*\+\s*/g, "+")
+                  .split(/[,;\s]+/)
+                  .filter(Boolean)
+                  .map(chainFromCode)
+                  .filter((c) => c.steps.length);
                 if (parsed.length) setChains(parsed);
               }}
               className="min-h-tap shrink-0 rounded-card border border-line px-3 font-semibold"
@@ -310,7 +316,7 @@ function ChainEditor({
           >
             ↓
           </button>
-          <button type="button" onClick={() => onChange(null)} className="min-h-tap px-2 text-sm font-semibold text-seal">
+          <button type="button" onClick={() => onChange(null)} className="min-h-tap px-2 text-sm font-semibold text-ink-muted hover:text-ink">
             Remove
           </button>
         </div>

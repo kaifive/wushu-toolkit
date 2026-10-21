@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { SourceNote } from "@/components/ui/notice";
 import { Container, PageHeader } from "@/components/ui/page-header";
-import { ScrollTable, td, th } from "@/components/ui/table";
+import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import { CURRENT_RULESET, EVENTS, formatDuration, type TieBreak } from "@/lib/rules";
 import { NANDU_SOURCE } from "@/lib/rules/iwuf-2024/nandu";
 
@@ -65,7 +65,7 @@ export default function RulesPage() {
         <ScrollTable caption="Time limits">
           <thead className="border-b border-line">
             <tr>
-              <th className={th}>Group</th>
+              <th className={`${th} ${stickyCol}`}>Group</th>
               <th className={th}>Events</th>
               <th className={`${th} text-right`}>Min</th>
               <th className={`${th} text-right`}>Max</th>
@@ -74,7 +74,7 @@ export default function RulesPage() {
           <tbody>
             {r.timeLimits.map((t, i) => (
               <tr key={i} className="border-b border-line last:border-0">
-                <td className={td}>{t.division}</td>
+                <td className={`${td} ${stickyCol}`}>{t.division}</td>
                 <td className={td}>
                   {names(t.events)}
                   {t.note && <span className="block text-xs text-ink-muted">{t.note}</span>}
@@ -112,7 +112,7 @@ export default function RulesPage() {
             <ScrollTable caption="Team rosters">
               <thead className="border-b border-line">
                 <tr>
-                  <th className={th}>Team</th>
+                  <th className={`${th} ${stickyCol}`}>Team</th>
                   <th className={th}>Spots</th>
                   <th className={`${th} text-right`}>Minimum average</th>
                 </tr>
@@ -120,7 +120,7 @@ export default function RulesPage() {
               <tbody>
                 {sel.teams.map((t) => (
                   <tr key={t.id} className="border-b border-line last:border-0">
-                    <td className={td}>{t.id}</td>
+                    <td className={`${td} ${stickyCol}`}>{t.id}</td>
                     <td className={td}>
                       {Object.entries(t.size)
                         .map(([div, n]) => `${n} ${div === "*" ? "(other groups)" : `(Group ${div})`}`)

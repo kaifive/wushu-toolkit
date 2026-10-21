@@ -44,16 +44,32 @@ const writeSession = (id: string | null) => {
   }
 };
 
-/** Claim the account for this device: new session id, registered server-side. */
+/**
+ * Claim the account for this device: new session id, registered server-side.
+ * The id is stored locally first, so the session listener never sees the new
+ * server id next to a stale local one and kicks this device.
+ */
 async function claimSession(user: User) {
   const sessionId = newSessionId();
+  writeSession(sessionId);
   const res = await fetch("/api/session", {
     method: "POST",
     headers: { "content-type": "application/json", authorization: `Bearer ${await user.getIdToken()}` },
     body: JSON.stringify({ sessionId }),
   });
   if (!res.ok) throw new Error(((await res.json().catch(() => ({}))) as { error?: string }).error ?? "Couldn't start a session.");
-  writeSession(sessionId);
+}
+
+/** Claim the session, or sign back out so the account isn't left half signed in. */
+async function claimOrSignOut(user: User) {
+  try {
+    await claimSession(user);
+  } catch (err) {
+    writeSession(null);
+    const [{ auth }, { signOut }] = await Promise.all([firebase(), import("firebase/auth")]);
+    await signOut(auth).catch(() => {});
+    throw err;
+  }
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -97,15 +113,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const { auth } = await firebase();
     const { signInWithEmailAndPassword } = await import("firebase/auth");
     const cred = await signInWithEmailAndPassword(auth, email, password);
-    await claimSession(cred.user);
+    await claimOrSignOut(cred.user);
     setKicked(null);
   }, []);
 
   const signUp = useCallback(async (email: string, password: string) => {
     const { auth } = await firebase();
-    const { createUserWithEmailAndPassword } = await import("firebase/auth");
+    const { createUserWithEmailAndPassword, sendEmailVerification } = await import("firebase/auth");
     const cred = await createUserWithEmailAndPassword(auth, email, password);
-    await claimSession(cred.user);
+    // Passes go only to verified emails (lib/auth/grants.ts).
+    await sendEmailVerification(cred.user).catch(() => {});
+    await claimOrSignOut(cred.user);
   }, []);
 
   const resetPassword = useCallback(async (email: string) => {

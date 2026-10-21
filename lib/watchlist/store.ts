@@ -15,7 +15,7 @@ export function readLists(): WatchList[] {
   try {
     raw = window.localStorage.getItem(KEY);
   } catch {
-    return EMPTY;
+    return cache.lists; // storage blocked: in-memory lists from writeLists
   }
   if (raw === cache.raw) return cache.lists;
   let lists: WatchList[] = EMPTY;

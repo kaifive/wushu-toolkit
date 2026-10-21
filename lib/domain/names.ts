@@ -1,5 +1,15 @@
 import type { EventCode, Gender } from "./types";
 
+/** Strip accents and tone marks: "Gōng Bù" -> "Gong Bu". */
+export const foldAccents = (s: string): string => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+/** URL- and file-safe slug: "Gōng Bù (Bow Stance)" -> "gong-bu-bow-stance". */
+export const slugify = (s: string): string =>
+  foldAccents(s)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
 /** Collapse whitespace and trim. */
 export const clean = (value: unknown): string => String(value ?? "").replace(/\s+/g, " ").trim();
 
@@ -9,10 +19,7 @@ export const clean = (value: unknown): string => String(value ?? "").replace(/\s
  * sorted lowercase name parts.
  */
 export function athleteKey(name: string): string {
-  return clean(name)
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+  return foldAccents(clean(name).toLowerCase())
     .replace(/[_.,]/g, " ")
     .split(" ")
     .filter(Boolean)
@@ -36,9 +43,9 @@ export function toNumber(value: unknown): number | null {
 }
 
 const EVENT_WORDS: [RegExp, EventCode][] = [
-  [/taiji\s*jian|taijijian|tai\s*chi\s*sword/i, "TJ"],
-  [/taiji\s*shan|taijishan|tai\s*chi\s*fan/i, "TS"],
-  [/taiji\s*quan|taijiquan|tai\s*chi(?!\s*(sword|fan))/i, "TQ"],
+  [/taiji\s*jian|taijijian|(taiji|tai\s*chi)\s*(straight\s*)?sword/i, "TJ"],
+  [/taiji\s*shan|taijishan|(taiji|tai\s*chi)\s*fan/i, "TS"],
+  [/taiji|tai\s*chi/i, "TQ"],
   [/nan\s*dao|nandao|southern\s*broad\s*sword/i, "ND"],
   [/nan\s*gun|nangun|southern\s*staff/i, "NG"],
   [/nan\s*quan|nanquan|southern\s*fist/i, "NQ"],

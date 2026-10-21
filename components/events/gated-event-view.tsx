@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AuthProvider, useAuth } from "@/components/auth/auth-provider";
 import { LockIcon } from "@/components/ui/icons";
 import { Notice } from "@/components/ui/notice";
@@ -11,6 +11,7 @@ import { getRuleset, type RulesetId } from "@/lib/rules";
 import { WatchLegend } from "@/components/watchlist/legend";
 import { DataStatus } from "./data-status";
 import { VIEW_BODY } from "./view-bodies";
+import { readJson } from "@/lib/http";
 import { ExportProvider } from "@/components/export/export-buttons";
 
 interface Props {
@@ -34,15 +35,17 @@ export function GatedEventView(props: Props) {
 function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds }: Props) {
   const { status, authedFetch, kicked } = useAuth();
   const [data, setData] = useState<EventData | null>(null);
+  const hasData = useRef(false);
   const [problem, setProblem] = useState<{ code?: string; error: string } | null>(null);
 
   const load = useCallback(async () => {
-    const res = await authedFetch(`/api/events/${slug}/data`);
-    const body = (await res.json()) as EventData & { error?: string; code?: string };
-    if (res.ok) {
-      setData(body);
+    const r = await readJson<EventData>(authedFetch(`/api/events/${slug}/data`), "Couldn't load scores.");
+    if (r.ok) {
+      hasData.current = true;
+      setData(r.body);
       setProblem(null);
-    } else setProblem({ code: body.code, error: body.error ?? "Couldn't load scores." });
+    } else if (!hasData.current || r.code) setProblem({ code: r.code, error: r.error });
+    // A failed poll (network, 5xx) with scores on screen keeps showing them.
   }, [authedFetch, slug]);
 
   useEffect(() => {

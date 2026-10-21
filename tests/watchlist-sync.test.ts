@@ -29,3 +29,10 @@ test("mergeLists combines athletes and keeps both sides' lists", () => {
   const remote = [list("a", ["ben ho", "Cara Wu"]), list("other", ["Dan Ng"])];
   assert.deepEqual(mergeLists(local, remote, false), [list("a", ["Amy Lee", "Ben Ho", "Cara Wu"], { color: "#d4371f" }), list("other", ["Dan Ng"]), list("new", ["Zed Q"])]);
 });
+
+test("parseExpiry accepts only YYYY-MM-DD", async () => {
+  const { parseExpiry } = await import("@/lib/auth/grants");
+  assert.equal(parseExpiry("2027-01-31"), Date.parse("2027-01-31T23:59:59Z"));
+  assert.throws(() => parseExpiry("2027-1-31"), /Bad expiry/);
+  assert.throws(() => parseExpiry(""), /Bad expiry/);
+});

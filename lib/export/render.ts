@@ -10,8 +10,8 @@ import { imagesToPdf } from "./pdf";
 
 const BASE_W = 1080;
 const MAX_W = 2400;
-/** Sheet width for the render in progress; wide tables widen it. */
-let W = BASE_W;
+/** Most mobile browsers refuse canvases above ~16.7M pixels (iOS Safari). */
+const MAX_PIXELS = 16_000_000;
 const PAD = 48;
 const FOOTER = 76;
 const C = { paper: "#ffffff", strip: "#f3f4f7", ink: "#1f2430", muted: "#5c6577", line: "#dbdfe6", chrome: "#212631", chromeInk: "#e8eaef", chromeMuted: "#8a93a6", seal: "#d4371f", primary: "#5856d6" };
@@ -92,7 +92,7 @@ function sheetWidth(ctx: CanvasRenderingContext2D, sheet: Sheet, f: Fonts): numb
   return Math.min(MAX_W, need);
 }
 
-function tableUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind: "table" }>, f: Fonts): Unit[] {
+function tableUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind: "table" }>, f: Fonts, W: number): Unit[] {
   const inner = W - PAD * 2;
   // Columns get their natural width; spare room goes to the flexible (weight > 1) columns.
   const nat = naturalWidths(ctx, block, f);
@@ -172,7 +172,7 @@ function headingUnit(text: string, f: Fonts): Unit {
   };
 }
 
-function fieldUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind: "fields" }>, f: Fonts): Unit[] {
+function fieldUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind: "fields" }>, f: Fonts, W: number): Unit[] {
   const units: Unit[] = [];
   if (block.heading) units.push(headingUnit(block.heading, f));
   const inner = W - PAD * 2;
@@ -216,7 +216,7 @@ function fieldUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind:
   return units;
 }
 
-function titleUnit(sheet: Sheet, f: Fonts, ctx: CanvasRenderingContext2D, cont: boolean): Unit {
+function titleUnit(sheet: Sheet, f: Fonts, cont: boolean, W: number): Unit {
   const h = cont ? 72 : sheet.subtitle ? 128 : 96;
   return {
     h,
@@ -228,13 +228,13 @@ function titleUnit(sheet: Sheet, f: Fonts, ctx: CanvasRenderingContext2D, cont: 
       if (!cont && sheet.subtitle) {
         g.font = `400 24px ${f.sans}`;
         g.fillStyle = C.muted;
-        g.fillText(fit(ctx, sheet.subtitle, W - PAD * 2), PAD, y + 98);
+        g.fillText(fit(g, sheet.subtitle, W - PAD * 2), PAD, y + 98);
       }
     },
   };
 }
 
-function drawFooter(g: CanvasRenderingContext2D, y: number, f: Fonts) {
+function drawFooter(g: CanvasRenderingContext2D, y: number, f: Fonts, W: number) {
   g.fillStyle = C.chrome;
   g.fillRect(0, y, W, FOOTER);
   // Seal mark: vermilion square with a W.
@@ -260,21 +260,21 @@ export async function renderSheet(sheet: Sheet, pageHeight = Infinity, scale = 2
   const f = fonts();
   await ensureFonts(f);
   const measure = document.createElement("canvas").getContext("2d")!;
-  W = sheetWidth(measure, sheet, f);
+  const W = sheetWidth(measure, sheet, f);
   const body: Unit[] = sheet.blocks.flatMap((b, i) => {
     const gap: Unit = { h: i ? 24 : 8, draw: () => {} };
-    return [gap, ...(b.kind === "table" ? tableUnits(measure, b, f) : fieldUnits(measure, b, f))];
+    return [gap, ...(b.kind === "table" ? tableUnits(measure, b, f, W) : fieldUnits(measure, b, f, W))];
   });
 
   // Split units into pages.
   const limit = pageHeight - FOOTER - PAD;
   const pages: Unit[][] = [];
-  let cur: Unit[] = [titleUnit(sheet, f, measure, false)];
+  let cur: Unit[] = [titleUnit(sheet, f, false, W)];
   let used = cur[0]!.h + PAD;
   for (const u of body) {
     if (used + u.h > limit && cur.length > 1) {
       pages.push(cur);
-      const cont = titleUnit(sheet, f, measure, true);
+      const cont = titleUnit(sheet, f, true, W);
       cur = u.header ? [cont, u.header] : [cont];
       used = PAD + cur.reduce((s, x) => s + x.h, 0);
     }
@@ -287,10 +287,12 @@ export async function renderSheet(sheet: Sheet, pageHeight = Infinity, scale = 2
     const contentH = units.reduce((s, u) => s + u.h, 0);
     const h = Number.isFinite(pageHeight) ? pageHeight : PAD + contentH + PAD + FOOTER;
     const canvas = document.createElement("canvas");
-    canvas.width = W * scale;
-    canvas.height = Math.ceil(h * scale);
+    // Long single-image sheets drop below 2x so they stay under mobile canvas limits.
+    const k = Math.min(scale, Math.sqrt(MAX_PIXELS / (W * h)));
+    canvas.width = Math.floor(W * k);
+    canvas.height = Math.floor(h * k);
     const g = canvas.getContext("2d")!;
-    g.scale(scale, scale);
+    g.scale(k, k);
     g.fillStyle = C.paper;
     g.fillRect(0, 0, W, h);
     let y = PAD - 16;
@@ -298,7 +300,7 @@ export async function renderSheet(sheet: Sheet, pageHeight = Infinity, scale = 2
       u.draw(g, y);
       y += u.h;
     }
-    drawFooter(g, h - FOOTER, f);
+    drawFooter(g, h - FOOTER, f, W);
     return canvas;
   });
 }

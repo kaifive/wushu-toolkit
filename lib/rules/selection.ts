@@ -87,7 +87,8 @@ export function buildCandidates(scores: ScoreEntry[], scoring: SelectionScoring)
       if (pick) out.push(pick);
     } else {
       for (const cat of scoring.categories) {
-        const inCat = entries.filter((e) => e.code && cat.events.includes(e.code));
+        // Registered-but-unscored events (live) don't drag the average down.
+        const inCat = entries.filter((e) => e.code && cat.events.includes(e.code) && e.finalScore != null);
         if (!inCat.length) continue;
         const avg = round3(inCat.reduce((s, e) => s + scoreOf(e), 0) / inCat.length);
         if (avg <= 0) continue;

@@ -311,6 +311,8 @@ export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions =
       if (i > 0) {
         const prev = ch.steps[i - 1]!;
         if (/^\d{1,2}$/.test(prev)) {
+          // Keep one link per step (the editor lines links up by index); it earns nothing.
+          links.push({ code: `${prev}+${s}`, value: 0, counted: 0, listed: false });
           warnings.push(`Nothing can follow a landing (${chainToCode(ch)}).`);
           return;
         }

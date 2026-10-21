@@ -7,8 +7,9 @@
  */
 import { cert, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
-import { FieldValue, getFirestore } from "firebase-admin/firestore";
+import { getFirestore } from "firebase-admin/firestore";
 import { EVENT_CONFIGS } from "../content/events";
+import { applyGrant, GrantError, parseExpiry } from "../lib/auth/grants";
 
 const [email, slug, ...flags] = process.argv.slice(2);
 if (!email || !slug) {
@@ -29,14 +30,13 @@ const app = initializeApp({ credential: cert({ projectId: sa.project_id, clientE
 
 const revoke = flags.includes("--revoke");
 const expiresIdx = flags.indexOf("--expires");
-const expiresAt = expiresIdx !== -1 && flags[expiresIdx + 1] ? Date.parse(`${flags[expiresIdx + 1]}T23:59:59Z`) : undefined;
-
-const user = await getAuth(app).getUserByEmail(email.toLowerCase());
-const ref = getFirestore(app).collection("entitlements").doc(user.uid);
-if (revoke) {
-  await ref.set({ events: { [slug]: FieldValue.delete() } }, { merge: true });
-  console.log(`Revoked ${slug} for ${user.email}`);
-} else {
-  await ref.set({ email: user.email, events: { [slug]: { grantedAt: Date.now(), grantedBy: "script", source: "manual", ...(expiresAt ? { expiresAt } : {}) } } }, { merge: true });
-  console.log(`Granted ${slug} to ${user.email}${expiresAt ? ` until ${new Date(expiresAt).toISOString().slice(0, 10)}` : ""}`);
+try {
+  const expiresAt = expiresIdx === -1 ? undefined : parseExpiry(flags[expiresIdx + 1] ?? "");
+  const user = await applyGrant(getAuth(app), getFirestore(app), email, slug, "script", { revoke, expiresAt });
+  console.log(
+    revoke ? `Revoked ${slug} for ${user.email}` : `Granted ${slug} to ${user.email}${expiresAt ? ` until ${new Date(expiresAt).toISOString().slice(0, 10)}` : ""}`,
+  );
+} catch (err) {
+  console.error(err instanceof GrantError ? err.message : err);
+  process.exit(1);
 }

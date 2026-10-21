@@ -30,7 +30,17 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Snapshot
-        run: npm run snapshot -- ${{ github.event.inputs.slug || '--scheduled' }}
+        env:
+          SLUG: ${{ github.event.inputs.slug }}
+        run: |
+          if [ -z "$SLUG" ]; then
+            npm run snapshot -- --scheduled
+          elif [[ "$SLUG" =~ ^[a-z0-9-]+$ ]]; then
+            npm run snapshot -- "$SLUG"
+          else
+            echo "Bad slug: use lowercase letters, digits and dashes." >&2
+            exit 1
+          fi
       - name: Commit changes
         run: |
           if [ -n "$(git status --porcelain data/snapshots)" ]; then

@@ -58,8 +58,13 @@ export function withFallback<T>(primary: DataSource<T>, fallback: DataSource<T>)
     try {
       return { value: await primary.load(ctx), label: primary.label, stale: false };
     } catch (err) {
-      const value = await fallback.load(ctx);
-      return { value, label: fallback.label, stale: true, error: err instanceof Error ? err.message : String(err) };
+      const msg = (e: unknown) => (e instanceof Error ? e.message : String(e));
+      try {
+        const value = await fallback.load(ctx);
+        return { value, label: fallback.label, stale: true, error: msg(err) };
+      } catch (fallbackErr) {
+        throw new Error(`${msg(err)} (no saved copy: ${msg(fallbackErr)})`, { cause: err });
+      }
     }
   });
 }

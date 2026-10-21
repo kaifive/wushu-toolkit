@@ -1,4 +1,4 @@
-import { ScrollTable, td, th } from "@/components/ui/table";
+import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import { ExportButtons } from "@/components/export/export-buttons";
 import type { EventResult } from "@/lib/events/views";
 
@@ -20,18 +20,21 @@ export function ResultsByEvent({ results }: { results: EventResult[] }) {
               <ScrollTable caption={r.raw}>
                 <thead className="border-b border-line">
                   <tr>
-                    <th className={th}>#</th>
-                    <th className={th}>Athlete</th>
+                    <th className={`${th} ${stickyCol}`}>Athlete</th>
                     <th className={`${th} text-right`}>Score</th>
                   </tr>
                 </thead>
                 <tbody>
                   {r.rows.map((row) => (
                     <tr key={row.athleteName} data-athlete={row.athleteName} className="border-b border-line last:border-0">
-                      <td className={`${td} w-8 text-ink-muted`}>{row.finalScore == null ? "" : row.place}</td>
-                      <td className={td}>
-                        <p className="font-semibold">{row.athleteName}</p>
-                        {row.club && <p className="text-xs text-ink-muted">{row.club}</p>}
+                      <td className={`${td} ${stickyCol}`}>
+                        <div className="flex items-start gap-2">
+                          <span className="w-6 shrink-0 text-right text-ink-muted">{row.finalScore == null ? "" : row.place}</span>
+                          <div className="min-w-0">
+                            <p className="font-semibold">{row.athleteName}</p>
+                            {row.club && <p className="text-xs text-ink-muted">{row.club}</p>}
+                          </div>
+                        </div>
                       </td>
                       <td className={`${td} text-right font-semibold`}>{row.finalScore == null ? "—" : row.finalScore.toFixed(3)}</td>
                     </tr>

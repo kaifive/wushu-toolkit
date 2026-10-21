@@ -12,9 +12,15 @@ import { useWatchLists } from "@/lib/watchlist/store";
 export function WatchlistHighlighter() {
   const lists = useWatchLists();
   useEffect(() => {
+    // One lookup per distinct name: pages repeat names across tables, and live pages re-render often.
+    const memo = new Map<string, ReturnType<typeof findWatch>>();
+    const lookup = (name: string) => {
+      if (!memo.has(name)) memo.set(name, findWatch(lists, name));
+      return memo.get(name);
+    };
     const apply = () => {
       document.querySelectorAll<HTMLElement>("[data-athlete]").forEach((el) => {
-        const hit = findWatch(lists, el.dataset.athlete ?? "");
+        const hit = lookup(el.dataset.athlete ?? "");
         if (hit) {
           el.dataset.watch = hit.name;
           el.style.setProperty("--watch", hit.color);

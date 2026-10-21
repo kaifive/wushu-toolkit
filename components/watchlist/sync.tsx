@@ -7,6 +7,26 @@ import type { WatchList } from "@/lib/watchlist/match";
 import { readLists, useWatchLists, writeLists } from "@/lib/watchlist/store";
 import { mergeLists, sameLists } from "@/lib/watchlist/sync";
 
+/** Which account this device's lists were last synced with. */
+const OWNER_KEY = "wt:watchlists:owner";
+const readOwner = () => {
+  try {
+    return window.localStorage.getItem(OWNER_KEY);
+  } catch {
+    return null;
+  }
+};
+const writeOwner = (uid: string) => {
+  try {
+    window.localStorage.setItem(OWNER_KEY, uid);
+  } catch {
+    /* storage blocked */
+  }
+};
+
+/** Browsers drop keepalive requests with bodies over 64 KB. */
+const KEEPALIVE_MAX = 60_000;
+
 /** What was last saved to the account, per user, to tell local edits from stale copies. */
 const syncedKey = (uid: string) => `wt:watchlists:synced:${uid}`;
 const readSynced = (uid: string) => {
@@ -49,7 +69,8 @@ function Sync() {
     if (json === lastSaved.current) return;
     setState("saving");
     try {
-      const res = await authedFetch("/api/watchlists", { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify({ lists: next }), keepalive });
+      const body = JSON.stringify({ lists: next });
+      const res = await authedFetch("/api/watchlists", { method: "PUT", headers: { "content-type": "application/json" }, body, keepalive: keepalive && body.length < KEEPALIVE_MAX });
       if (!res.ok) throw new Error(String(res.status));
       lastSaved.current = json;
       writeSynced(uid, next);
@@ -74,7 +95,11 @@ function Sync() {
         const remote = ((await res.json()) as { lists: WatchList[] }).lists;
         if (!alive) return;
         const local = readLists();
-        const merged = mergeLists(local, remote, readSynced(uid) === JSON.stringify(local));
+        // Lists synced with a different account (a shared device) are that account's:
+        // replace them with this account's lists instead of merging them in.
+        const owner = readOwner();
+        const merged = owner && owner !== uid ? remote : mergeLists(local, remote, readSynced(uid) === JSON.stringify(local));
+        writeOwner(uid);
         lastSaved.current = JSON.stringify(remote);
         if (!sameLists(merged, local)) writeLists(merged);
         ready.current = true;

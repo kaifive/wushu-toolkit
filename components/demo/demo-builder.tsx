@@ -193,7 +193,7 @@ function Chips({ items, onRemove, label }: { items: { key: string; text: React.R
       {items.map((it) => (
         <li key={it.key} className="flex min-h-tap items-center gap-1 rounded-card border border-line bg-surface-2 pl-3 text-sm">
           <span>{it.text}</span>
-          <button type="button" onClick={() => onRemove(it.key)} aria-label={`Remove ${it.aria}`} className="flex h-11 w-9 items-center justify-center text-ink-muted hover:text-seal">
+          <button type="button" onClick={() => onRemove(it.key)} aria-label={`Remove ${it.aria}`} className="flex h-11 w-9 items-center justify-center text-ink-muted hover:text-ink">
             ×
           </button>
         </li>
@@ -312,7 +312,7 @@ function ActsView({
                       onPick={(v) => !a.performers.some((p) => sameName(p, v)) && patchAct(a.id, { performers: [...a.performers, v] })}
                     />
                   )}
-                  <button type="button" onClick={() => removeAct(a.id)} className="min-h-tap text-sm font-semibold text-seal">
+                  <button type="button" onClick={() => removeAct(a.id)} className="min-h-tap text-sm font-semibold text-ink-muted hover:text-ink">
                     Delete {a.kind}
                   </button>
                 </div>
@@ -407,7 +407,7 @@ function AthletesView({
                       }}
                     />
                     <SoloForm count={solos.length} onAdd={(name, level) => addAct({ kind: "solo", name, level, performers: [p.name] })} />
-                    <button type="button" onClick={() => removePerson(p.name)} className="min-h-tap text-sm font-semibold text-seal">
+                    <button type="button" onClick={() => removePerson(p.name)} className="min-h-tap text-sm font-semibold text-ink-muted hover:text-ink">
                       Remove {p.name} from the demo
                     </button>
                   </div>
@@ -598,7 +598,7 @@ function OrderView({
             onClick={() => {
               if (window.confirm("Clear the whole demo?")) clear();
             }}
-            className="min-h-tap px-3 text-sm font-semibold text-seal"
+            className="min-h-tap px-3 text-sm font-semibold text-ink-muted hover:text-ink"
           >
             Clear demo
           </button>

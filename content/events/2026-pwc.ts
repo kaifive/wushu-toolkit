@@ -55,7 +55,7 @@ export const PWC_2026: EventConfig = {
   access: "free",
   rulesetId: "pwc-2026",
   views: ["all-around", "schedule"],
-  revalidate: 60,
+  revalidate: 86400, // archived: the sheet is final; re-read daily until a snapshot exists
   data,
   description: "All-around standings (sum of each athlete's top three forms), age-group champions and live ring schedules.",
   highlights: [

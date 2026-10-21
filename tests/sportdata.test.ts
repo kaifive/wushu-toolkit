@@ -87,3 +87,8 @@ test("sportdataScores fetches registration, categories and each scorecard", asyn
   assert.ok(scores.length > 10);
   assert.equal(seen.filter((u) => u.includes("catid=")).length, 2);
 });
+
+test("joinScores leaves waitlisted entries out", () => {
+  const regs = [{ athlete: { id: "a", name: "Amy Lee" }, entries: [{ raw: "CQ", code: "CQ" as const }, { raw: "DS", code: "DS" as const, waitlisted: true }] }];
+  assert.deepEqual(joinScores(regs, new Map()).map((s) => s.raw), ["CQ"]);
+});

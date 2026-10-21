@@ -14,7 +14,7 @@ export function DeductionSearch({ groups }: { groups: DeductionGroup[] }) {
     if (!term) return group.codes;
     return group.codes.filter(
       (c) =>
-        c.code.startsWith(term) ||
+        c.code.toLowerCase().startsWith(term) ||
         c.english.toLowerCase().includes(term) ||
         c.name.toLowerCase().includes(term) ||
         c.category.toLowerCase().includes(term) ||

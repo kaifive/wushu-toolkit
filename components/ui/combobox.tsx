@@ -24,7 +24,8 @@ export function Combobox({
   placeholder?: string;
   suggest: (q: string) => ComboOption[];
   onPick: (value: string) => void;
-  allowTyped?: boolean;
+  /** Offer the typed text as an option; a function decides per query. */
+  allowTyped?: boolean | ((q: string) => boolean);
   typedLabel?: (v: string) => string;
   hideLabel?: boolean;
 }) {
@@ -36,9 +37,13 @@ export function Combobox({
     const t = q.trim();
     if (!t) return [];
     const list: (ComboOption & { typed?: boolean })[] = suggest(t);
-    if (allowTyped && !list.some((o) => o.value.toLowerCase() === t.toLowerCase())) list.push({ value: t, typed: true });
+    const typed = typeof allowTyped === "function" ? allowTyped(t) : allowTyped;
+    if (typed && !list.some((o) => o.value.toLowerCase() === t.toLowerCase())) list.push({ value: t, typed: true });
     return list;
   }, [q, suggest, allowTyped]);
+
+  // Suggestions can shrink while typing (or when data arrives); keep the highlight in range.
+  const current = Math.min(active, Math.max(0, options.length - 1));
 
   const choose = (v: string) => {
     onPick(v);
@@ -50,7 +55,7 @@ export function Combobox({
     if (!options.length) return;
     if (e.key === "ArrowDown") setActive((a) => (a + 1) % options.length);
     else if (e.key === "ArrowUp") setActive((a) => (a - 1 + options.length) % options.length);
-    else if (e.key === "Enter") choose((options[active] ?? options[0]!).value);
+    else if (e.key === "Enter") choose(options[current]!.value);
     else if (e.key === "Escape") setQ("");
     else return;
     e.preventDefault();
@@ -66,7 +71,7 @@ export function Combobox({
         role="combobox"
         aria-expanded={options.length > 0}
         aria-controls={`${id}-list`}
-        aria-activedescendant={options.length ? `${id}-o-${active}` : undefined}
+        aria-activedescendant={options.length ? `${id}-o-${current}` : undefined}
         aria-autocomplete="list"
         autoComplete="off"
         placeholder={placeholder}
@@ -85,11 +90,11 @@ export function Combobox({
               key={`${o.typed ? "t" : "s"}-${o.value}`}
               id={`${id}-o-${i}`}
               role="option"
-              aria-selected={i === active}
+              aria-selected={i === current}
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => choose(o.value)}
               onMouseEnter={() => setActive(i)}
-              className={`flex min-h-tap cursor-pointer flex-col justify-center px-3 py-2 ${i === active ? "bg-primary-soft" : ""}`}
+              className={`flex min-h-tap cursor-pointer flex-col justify-center px-3 py-2 ${i === current ? "bg-primary-soft" : ""}`}
             >
               {o.typed ? (
                 <span>{typedLabel(o.value)}</span>

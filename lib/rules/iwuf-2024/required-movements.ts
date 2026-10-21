@@ -1,3 +1,4 @@
+import { slugify } from "@/lib/domain/names";
 import type { EventCode } from "@/lib/domain/types";
 import type { RuleSource } from "../types";
 
@@ -50,14 +51,7 @@ const kinds = (title: string, labels: string[]): Req => ({
   items: labels.map((label) => ({ id: slug(label), label, open: true })),
 });
 
-function slug(s: string): string {
-  return s
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
+const slug = slugify;
 
 const FIVE_STANCES = named("Five stances", [
   "Gōng Bù (Bow Stance)",

@@ -185,3 +185,11 @@ test("orderToText numbers the routine and uses the athlete's names", () => {
   const text = orderToText(cq, [{ id: "gong-bu-bow-stance" }, { id: "gone" }, { id: "fist-technique-1", name: "Chōng Quán" }, { id: "fist-technique-2" }]);
   assert.equal(text, "1. Gōng Bù (Bow Stance)\n2. Chōng Quán (Fist technique 1)\n3. Fist technique 2");
 });
+
+test("category average ignores events not scored yet", () => {
+  const [c] = buildCandidates([e("Bea", "CQ", 9.2), e("Bea", "DS", 9.1), e("Bea", "GS", null)], {
+    method: "category-average",
+    categories: [{ id: "cq", label: "Changquan", events: ["CQ", "DS", "GS"] }],
+  });
+  assert.equal(c?.average, 9.15);
+});

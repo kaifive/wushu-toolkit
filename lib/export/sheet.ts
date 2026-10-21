@@ -1,3 +1,4 @@
+import { slugify } from "@/lib/domain/names";
 import type { EventResult, ScopeModel, ScorecardRow } from "@/lib/events/views";
 
 /**
@@ -36,16 +37,7 @@ const f = (n: number | null | undefined, d = 3) => (n == null ? "—" : n.toFixe
 
 /** Safe file name: "2025 Adults – Ashton Wu – CQ" -> "2025-adults-ashton-wu-cq". */
 export function fileName(...parts: string[]): string {
-  return (
-    parts
-      .join(" ")
-      .normalize("NFD")
-      .replace(/[̀-ͯ]/g, "")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "")
-      .slice(0, 80) || "wushu-toolkit"
-  );
+  return slugify(parts.join(" ")).slice(0, 80).replace(/-$/, "") || "wushu-toolkit";
 }
 
 export function scorecardSheet(eventName: string, row: ScorecardRow): Sheet {

@@ -206,7 +206,8 @@ export function joinScores(
   cards: Map<string, Map<string, { finalScore: number | null; scorecard: Scorecard; club?: string }>>,
 ): ScoreEntry[] {
   return regs.flatMap((r) =>
-    r.entries.map((e) => {
+    // Waitlisted entries aren't in the competition (same rule as joinRegistrationScores).
+    r.entries.filter((e) => !e.waitlisted).map((e) => {
       const card = cards.get(e.raw)?.get(r.athlete.id);
       return {
         athleteId: r.athlete.id,

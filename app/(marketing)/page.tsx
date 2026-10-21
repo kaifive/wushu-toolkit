@@ -42,18 +42,16 @@ async function sample() {
  * events are added; a sheet-only event counts once it is reachable or snapshotted.
  */
 async function archiveStats() {
-  let events = 0;
+  // Load in parallel; a live-only archive that isn't reachable is skipped.
+  const loaded = await Promise.all(allEvents().map((e) => e.data().load({ revalidate: 3600 }).catch(() => null)));
   const athletes = new Set<string>(); // the same athlete across years counts once
+  let events = 0;
   let routines = 0;
-  for (const e of allEvents()) {
-    try {
-      const d = await e.data().load({ revalidate: 3600 });
-      events++;
-      for (const r of d.registrations) athletes.add(r.athlete.id);
-      routines += d.scores.filter((s) => s.finalScore != null).length;
-    } catch {
-      /* live-only archive not reachable at build */
-    }
+  for (const d of loaded) {
+    if (!d) continue;
+    events++;
+    for (const r of d.registrations) athletes.add(r.athlete.id);
+    routines += d.scores.filter((s) => s.finalScore != null).length;
   }
   return { events, athletes: athletes.size, routines };
 }

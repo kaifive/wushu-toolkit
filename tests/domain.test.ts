@@ -45,3 +45,11 @@ test("eventCodeFromName handles 2024 bowuu names with spaces", () => {
   assert.equal(eventCodeFromName("32 Movements Taijijian "), "TJ");
   assert.equal(eventCodeFromName("3rd Set Taijishan (IWuF)"), "TS");
 });
+
+test("eventCodeFromName reads English taiji names", () => {
+  assert.equal(eventCodeFromName("Female 42 Taiji Sword"), "TJ");
+  assert.equal(eventCodeFromName("Tai Chi Straight Sword"), "TJ");
+  assert.equal(eventCodeFromName("Taiji Fan"), "TS");
+  assert.equal(eventCodeFromName("Tai Chi 24 Form"), "TQ");
+  assert.equal(eventCodeFromName("Taijijian"), "TJ");
+});

@@ -41,6 +41,8 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
   };
 
   if (tabs.length <= 1) return <>{panels[0]}</>;
+  // Live data can drop a tab (e.g. a division with no entries left): show the first one then.
+  const shown = tabs.some((t) => t.id === active) ? active : tabs[0]!.id;
 
   return (
     <div>
@@ -50,13 +52,13 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
             key={t.id}
             role="tab"
             id={`${uid}-tab-${t.id}`}
-            aria-selected={active === t.id}
+            aria-selected={shown === t.id}
             aria-controls={`${uid}-panel-${t.id}`}
-            tabIndex={active === t.id ? 0 : -1}
+            tabIndex={shown === t.id ? 0 : -1}
             onClick={() => select(t.id)}
             onKeyDown={(e) => onKey(e, i)}
             className={`min-h-tap flex-1 whitespace-nowrap border-r border-line px-3 text-[15px] font-semibold last:border-r-0 ${
-              active === t.id ? "bg-primary text-primary-ink" : "text-ink-muted hover:text-ink"
+              shown === t.id ? "bg-primary text-primary-ink" : "text-ink-muted hover:text-ink"
             }`}
           >
             {t.label}
@@ -64,7 +66,7 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
         ))}
       </div>
       {tabs.map((t, i) => (
-        <div key={t.id} role="tabpanel" id={`${uid}-panel-${t.id}`} aria-labelledby={`${uid}-tab-${t.id}`} hidden={active !== t.id}>
+        <div key={t.id} role="tabpanel" id={`${uid}-panel-${t.id}`} aria-labelledby={`${uid}-tab-${t.id}`} hidden={shown !== t.id}>
           {panels[i]}
         </div>
       ))}

@@ -29,7 +29,7 @@ export function redirectHtml(target = SITE.url): string {
 })();
 </script>
 <noscript><meta http-equiv="refresh" content="0; url=${target}/"></noscript>
-<style>body{font-family:system-ui,sans-serif;background:#faf7f2;color:#1b1a17;display:grid;place-items:center;min-height:100vh;margin:0;padding:16px;text-align:center}a{color:#c8321e}</style>
+<style>body{font-family:system-ui,sans-serif;background:#f3f4f7;color:#1f2430;display:grid;place-items:center;min-height:100vh;margin:0;padding:16px;text-align:center}a{color:#5856d6}</style>
 </head>
 <body>
 <p>Wushu Toolkit has moved to <a href="${target}/">${target.replace(/^https?:\/\//, "")}</a>. Taking you there…</p>

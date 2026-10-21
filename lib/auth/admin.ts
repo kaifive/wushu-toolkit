@@ -1,7 +1,8 @@
 import "server-only";
 import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
-import { FieldValue, getFirestore } from "firebase-admin/firestore";
+import { getFirestore } from "firebase-admin/firestore";
+import { applyGrant } from "./grants";
 import type { WatchList } from "@/lib/watchlist/match";
 import { hasEntitlement, isSessionCurrent, parseAdminUids, SESSION_HEADER, type EntitlementsDoc, type SessionDoc } from "./model";
 
@@ -80,18 +81,10 @@ export function requireAdmin(uid: string) {
   if (!parseAdminUids(process.env.ADMIN_UIDS).has(uid)) throw new AuthError("Admins only.", 403, "not-admin");
 }
 
-/** Grant (or revoke) an event pass by email. Used by the admin route and scripts/grant-access.ts. */
+/** Grant (or revoke) an event pass by email. Used by the admin route; the script calls applyGrant directly. */
 export async function setGrant(email: string, slug: string, grantedBy: string, opts: { revoke?: boolean; expiresAt?: number } = {}) {
   const { auth, db } = services();
-  const user = await auth.getUserByEmail(email);
-  const ref = db.collection("entitlements").doc(user.uid);
-  if (opts.revoke) {
-    await ref.set({ events: { [slug]: FieldValue.delete() } }, { merge: true });
-  } else {
-    const grant = { grantedAt: Date.now(), grantedBy, source: "manual" as const, ...(opts.expiresAt ? { expiresAt: opts.expiresAt } : {}) };
-    await ref.set({ email: user.email, events: { [slug]: grant } }, { merge: true });
-  }
-  return { uid: user.uid, email: user.email };
+  return applyGrant(auth, db, email, slug, grantedBy, opts);
 }
 
 /** Watch lists saved to the account (watchlists/{uid}). */

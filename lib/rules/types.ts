@@ -69,7 +69,11 @@ export interface TeamRule {
   id: TeamId;
   /** Roster size per division id ("*" = default). */
   size: Record<string, number>;
-  /** Minimum selection average (total / counted events) to be placed on this team. */
+  /**
+   * Minimum selection average to be placed on this team: the candidate's
+   * `average` (barehand + weapon over 2, a missing half counting 0; or the
+   * category average for category-average scoring).
+   */
   minAverage?: number;
   /** Phase 1 places at most one athlete per discipline/category. */
   onePerDiscipline?: boolean;

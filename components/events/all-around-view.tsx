@@ -64,7 +64,7 @@ export function Champions({ model }: { model: AllAroundModel }) {
   return (
     <div className="space-y-4">
       <section className="rounded-card border border-gold/40 bg-gold/10 p-4">
-        <p className="text-xs font-semibold uppercase tracking-wider text-gold">Grand Champion</p>
+        <h2 className="font-semibold">Grand champion</h2>
         {model.grandChampion ? (
           <p className="mt-1 font-display text-2xl font-bold tracking-wide">
             {model.grandChampion.athleteName} <span className="text-base tabular-nums text-ink-muted">{f(model.grandChampion.total)}</span>

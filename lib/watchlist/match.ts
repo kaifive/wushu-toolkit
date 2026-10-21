@@ -1,3 +1,5 @@
+import { foldAccents } from "@/lib/domain/names";
+
 /**
  * Fuzzy athlete-name matching for watch lists. Sources print names as
  * "Last First", "First Last", "LAST FIRST", "last_first", with or without a
@@ -5,9 +7,7 @@
  */
 
 export function nameTokens(name: string): string[] {
-  return name
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+  return foldAccents(name)
     .toLowerCase()
     .replace(/['’`]/g, "")
     .replace(/[^a-z0-9-]+/g, " ")

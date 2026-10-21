@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Notice } from "@/components/ui/notice";
+import { readJson } from "@/lib/http";
 import { useAuth } from "./auth-provider";
 import { SignInForm } from "./sign-in-form";
 
@@ -20,11 +21,10 @@ export function AccountPanel({ events }: { events: { slug: string; name: string 
   useEffect(() => {
     if (status !== "signed-in") return;
     let alive = true;
-    void authedFetch("/api/me").then(async (res) => {
-      const body = (await res.json()) as Me & { error?: string };
+    void readJson<Me>(authedFetch("/api/me"), "Couldn't load your account.").then((r) => {
       if (!alive) return;
-      if (res.ok) setMe(body);
-      else setError(body.error ?? "Couldn't load your account.");
+      if (r.ok) setMe(r.body);
+      else setError(r.error);
     });
     return () => {
       alive = false;
@@ -47,6 +47,7 @@ export function AccountPanel({ events }: { events: { slug: string; name: string 
       <section className="rounded-card border border-line bg-surface p-5">
         <p className="text-sm text-ink-muted">Signed in as</p>
         <p className="font-semibold">{user.email}</p>
+        {!user.emailVerified && <VerifyEmail />}
         <button type="button" onClick={() => void signOut()} className="mt-3 min-h-tap rounded-card border border-line px-4 font-semibold">
           Sign out
         </button>
@@ -81,13 +82,11 @@ function AdminGrant({ events }: { events: { slug: string; name: string }[] }) {
 
   const send = async (revoke: boolean) => {
     setResult(null);
-    const res = await authedFetch("/api/admin/grant", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email, slug, revoke }),
-    });
-    const body = (await res.json()) as { error?: string };
-    setResult(res.ok ? { tone: "info", text: `${revoke ? "Revoked" : "Granted"} ${slug} for ${email}.` } : { tone: "error", text: body.error ?? "Failed." });
+    const r = await readJson(
+      authedFetch("/api/admin/grant", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email, slug, revoke }) }),
+      "Failed.",
+    );
+    setResult(r.ok ? { tone: "info", text: `${revoke ? "Revoked" : "Granted"} ${slug} for ${email}.` } : { tone: "error", text: r.error });
   };
 
   return (
@@ -111,5 +110,33 @@ function AdminGrant({ events }: { events: { slug: string; name: string }[] }) {
       </div>
       {result && <Notice tone={result.tone}>{result.text}</Notice>}
     </section>
+  );
+}
+
+/** Passes need a verified email; offer to resend the link. */
+function VerifyEmail() {
+  const { user } = useAuth();
+  const [sent, setSent] = useState<"idle" | "sent" | "failed">("idle");
+  const resend = async () => {
+    if (!user) return;
+    try {
+      const { sendEmailVerification } = await import("firebase/auth");
+      await sendEmailVerification(user);
+      setSent("sent");
+    } catch {
+      setSent("failed");
+    }
+  };
+  return (
+    <p className="mt-2 text-sm text-ink-muted">
+      Verify your email to receive event passes.{" "}
+      {sent === "sent" ? (
+        "Link sent; check your inbox."
+      ) : (
+        <button type="button" onClick={() => void resend()} className="min-h-tap font-semibold text-primary">
+          {sent === "failed" ? "Couldn't send. Try again" : "Resend link"}
+        </button>
+      )}
+    </p>
   );
 }

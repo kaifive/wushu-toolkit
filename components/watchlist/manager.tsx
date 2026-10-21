@@ -50,7 +50,15 @@ function ListEditor({
   onRemove: () => void;
   onMove: (d: -1 | 1) => void;
 }) {
-  const [draft, setDraft] = useState(list.athletes.join("\n"));
+  const joined = list.athletes.join("\n");
+  const [draft, setDraft] = useState(joined);
+  // When the list changes from outside (account sync, another tab), refresh the
+  // textarea unless it holds unsaved edits, so a later blur can't write back an old roster.
+  const [base, setBase] = useState(joined);
+  if (joined !== base) {
+    setBase(joined);
+    if (parseRoster(draft).join("\n") === base) setDraft(joined);
+  }
   const [confirming, setConfirming] = useState(false);
   const saved = parseRoster(draft).join("\n") === list.athletes.join("\n");
   const oneWord = list.athletes.filter((a) => nameTokens(a).length < 2);
@@ -149,7 +157,7 @@ function ListEditor({
             type="button"
             onClick={() => (confirming ? onRemove() : setConfirming(true))}
             onBlur={() => setConfirming(false)}
-            className="ml-auto min-h-tap rounded-card px-3 font-semibold text-seal"
+            className="ml-auto min-h-tap rounded-card px-3 font-semibold text-ink-muted hover:text-ink"
           >
             {confirming ? "Tap again to delete" : "Delete list"}
           </button>

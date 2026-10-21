@@ -116,3 +116,9 @@ test("only the element that crosses a cap loses value", () => {
   const r = scoreNandu("changquan", [chains[3]!, chains[0]!, chains[1]!, chains[2]!]);
   assert.deepEqual(r.chains.map((c) => c.techniques[0]!.counted), [0.3, 0.4, 0.4, 0.3]);
 });
+
+test("a step after a landing still gets a (zero) link so the editor lines up", () => {
+  const s = scoreNandu("changquan", [chainFromCode("1+323A+324A")]);
+  assert.deepEqual(s.chains[0]!.links.map((l) => l.code), ["1+323A", "323A+324A"]);
+  assert.equal(s.chains[0]!.links[0]!.value, 0);
+});
