@@ -156,11 +156,12 @@ export function DemoBuilder() {
         <OrderView
           acts={s.acts}
           order={order}
+          rosterOnly={cast.filter((p) => !p.acts.length).map((p) => p.name)}
           generated={s.generated}
           setOrder={(o) => update((st) => ({ ...st, order: o }))}
           patchAct={patchAct}
           generate={() => update((st) => ({ ...st, order: generateOrder(st.acts, (Date.now() ^ Math.floor(Math.random() * 2 ** 31)) >>> 0), generated: true }))}
-          replace={(d) => update(() => ({ ...d, roster: [], generated: true }))}
+          replace={(d, roster) => update(() => ({ ...d, roster, generated: true }))}
           clear={() => update(() => EMPTY)}
         />
       )}
@@ -459,6 +460,7 @@ function SoloForm({ count, onAdd }: { count: number; onAdd: (name: string, level
 function OrderView({
   acts,
   order,
+  rosterOnly,
   generated,
   setOrder,
   patchAct,
@@ -472,7 +474,8 @@ function OrderView({
   setOrder: (o: string[]) => void;
   patchAct: (id: string, p: Partial<Act>) => void;
   generate: () => void;
-  replace: (d: Demo) => void;
+  rosterOnly: string[];
+  replace: (d: Demo, roster: string[]) => void;
   clear: () => void;
 }) {
   const { copied, copy } = useCopy();
@@ -488,7 +491,7 @@ function OrderView({
     const r = fromText(text, newId);
     setSkipped(r.skipped);
     if (r.demo.acts.length) {
-      replace(r.demo);
+      replace(r.demo, r.roster);
       setImporting(false);
       setText("");
     }
@@ -507,7 +510,7 @@ function OrderView({
         <button type="button" disabled={acts.length < 2} onClick={generate} className={primary}>
           {generated ? "Regenerate" : "Generate"}
         </button>
-        <button type="button" disabled={!acts.length} onClick={() => void copy(toText({ acts, order }))} className={btn}>
+        <button type="button" disabled={!acts.length} onClick={() => void copy(toText({ acts, order }, rosterOnly))} className={btn}>
           {copied === "all" ? "Copied" : "Copy"}
         </button>
         <button type="button" aria-expanded={importing} onClick={() => setImporting(!importing)} className={btn}>
@@ -531,7 +534,7 @@ function OrderView({
           />
           {skipped.length > 0 && <p className="text-sm text-seal">Couldn&rsquo;t read: {skipped.join(" / ")}</p>}
           <div className="flex justify-between gap-2">
-            <button type="button" onClick={() => setText(toText({ acts, order }))} className={btn}>
+            <button type="button" onClick={() => setText(toText({ acts, order }, rosterOnly))} className={btn}>
               Load current
             </button>
             <button type="button" disabled={!text.trim()} onClick={doImport} className={primary}>

@@ -41,3 +41,16 @@ test("liveWithSnapshot marks the snapshot stale and rethrows when both fail", as
   assert.match(r.source, /Snapshot X \(live source unavailable\)/);
   await assert.rejects(liveWithSnapshot(fail, fail).load(), /live down \(no saved copy: live down\)/);
 });
+
+test("liveWithSnapshot serves the saved copy when live answers with less", async () => {
+  const withScores = (n: number, label: string) => ({
+    ...emptyEventData(label),
+    registrations: [{ athlete: { id: "a", name: "A" }, entries: [] }],
+    scores: Array.from({ length: 3 }, (_, i) => ({ athleteId: `a${i}`, athleteName: "A", raw: "CQ", finalScore: i < n ? 9 : null })),
+  });
+  const cleared = await liveWithSnapshot(constant("live", withScores(0, "Live")), constant("snap", withScores(3, "Saved"))).load();
+  assert.equal(cleared.stale, true);
+  assert.match(cleared.source, /Saved \(live source has less: 0 scored routines vs 3/);
+  const better = await liveWithSnapshot(constant("live", withScores(3, "Live")), constant("snap", withScores(2, "Saved"))).load();
+  assert.equal(better.source, "Live");
+});

@@ -1,4 +1,4 @@
-import { nameTokens, type WatchList } from "./match";
+import { personKey, type WatchList } from "./match";
 
 /** Limits for lists saved to an account (checked server-side). */
 export const SYNC_LIMITS = { lists: 50, athletes: 500, text: 120, bytes: 900_000 } as const;
@@ -10,7 +10,18 @@ const str = (v: unknown, max: number) => (typeof v === "string" ? tidyText(v).sl
 
 /** Clean untrusted input into watch lists, or null if it isn't a list array at all. */
 export function sanitizeLists(input: unknown): WatchList[] | null {
+  return sanitizeReport(input)?.lists ?? null;
+}
+
+/**
+ * sanitizeLists plus whether anything was cut to fit the limits (lists,
+ * names or text), as opposed to only tidied. The device adopts the stored
+ * copy only when `cut` is true, so tidying never rewrites a name being typed.
+ */
+export function sanitizeReport(input: unknown): { lists: WatchList[]; cut: boolean } | null {
   if (!Array.isArray(input)) return null;
+  let cut = input.length > SYNC_LIMITS.lists;
+  const fits = (v: unknown) => typeof v !== "string" || tidyText(v).length <= SYNC_LIMITS.text;
   const seen = new Set<string>();
   const out: WatchList[] = [];
   for (const raw of input.slice(0, SYNC_LIMITS.lists)) {
@@ -19,7 +30,9 @@ export function sanitizeLists(input: unknown): WatchList[] | null {
     const id = str(r.id, 40);
     if (!id || seen.has(id)) continue;
     seen.add(id);
-    const athletes = Array.isArray(r.athletes) ? r.athletes.map((a) => str(a, SYNC_LIMITS.text)).filter(Boolean).slice(0, SYNC_LIMITS.athletes) : [];
+    const rawAthletes = Array.isArray(r.athletes) ? r.athletes : [];
+    const athletes = rawAthletes.map((a) => str(a, SYNC_LIMITS.text)).filter(Boolean).slice(0, SYNC_LIMITS.athletes);
+    if (!fits(r.name) || !rawAthletes.every(fits) || rawAthletes.filter((a) => str(a, SYNC_LIMITS.text)).length > SYNC_LIMITS.athletes) cut = true;
     out.push({
       id,
       name: str(r.name, SYNC_LIMITS.text) || "Watch list",
@@ -28,11 +41,9 @@ export function sanitizeLists(input: unknown): WatchList[] | null {
       enabled: r.enabled !== false,
     });
   }
-  return out;
+  return { lists: out, cut };
 }
 
-/** Same person for merging: the roster editor's rule (words in any order, punctuation ignored). */
-const personKey = (name: string) => nameTokens(name).sort().join(" ");
 /** Compare lists independent of key order (Firestore returns map keys sorted). */
 const canon = (l: WatchList) => JSON.stringify([l.id, l.name, l.color, [...l.athletes], l.enabled]);
 const same = (a?: WatchList, b?: WatchList) => !!a && !!b && canon(a) === canon(b);

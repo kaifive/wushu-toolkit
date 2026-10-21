@@ -91,11 +91,12 @@ function AdminGrant({ events }: { events: { slug: string; name: string }[] }) {
 
   const send = async (revoke: boolean) => {
     setResult(null);
+    const sent = { email, slug }; // the message names what was sent, even if the form changes meanwhile
     const r = await readJson(
-      authedFetch("/api/admin/grant", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email, slug, revoke }) }),
+      authedFetch("/api/admin/grant", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ...sent, revoke }) }),
       "Failed.",
     );
-    setResult(r.ok ? { tone: "info", text: `${revoke ? "Revoked" : "Granted"} ${slug} for ${email}.` } : { tone: "error", text: r.error });
+    setResult(r.ok ? { tone: "info", text: `${revoke ? "Revoked" : "Granted"} ${sent.slug} for ${sent.email}.` } : { tone: "error", text: r.error });
   };
 
   return (
@@ -126,6 +127,15 @@ function AdminGrant({ events }: { events: { slug: string; name: string }[] }) {
 function VerifyEmail() {
   const { user } = useAuth();
   const [sent, setSent] = useState<"idle" | "sent" | "failed">("idle");
+  const [verified, setVerified] = useState(false);
+  // The cached user doesn't learn about a link opened elsewhere: reload on mount and on return to the tab.
+  useEffect(() => {
+    if (!user) return;
+    const check = () => void user.reload().then(() => user.emailVerified && setVerified(true)).catch(() => {});
+    check();
+    window.addEventListener("focus", check);
+    return () => window.removeEventListener("focus", check);
+  }, [user]);
   const resend = async () => {
     if (!user) return;
     try {
@@ -136,6 +146,7 @@ function VerifyEmail() {
       setSent("failed");
     }
   };
+  if (verified) return null;
   return (
     <p className="mt-2 text-sm text-ink-muted">
       Verify your email to receive event passes.{" "}

@@ -7,7 +7,7 @@ import { authConfigured } from "@/lib/auth/client";
 import type { WatchList } from "@/lib/watchlist/match";
 import { readLists, useWatchLists, writeLists } from "@/lib/watchlist/store";
 import { storageGet, storageJson, storageSet } from "@/lib/storage";
-import { mergeLists, sameLists, sanitizeLists, SYNC_LIMITS, tidyText } from "@/lib/watchlist/sync";
+import { mergeLists, sameLists, sanitizeLists, SYNC_LIMITS } from "@/lib/watchlist/sync";
 
 /**
  * Account sync for watch lists (ADR-009). <WatchlistSync/> runs once per page
@@ -24,20 +24,6 @@ const syncedKey = (uid: string) => `wt:watchlists:synced:${uid}`;
 const KEEPALIVE_MAX = 60_000;
 
 type State = "loading" | "saving" | "saved" | "trimmed" | "error" | "too-big" | "refused";
-
-/**
- * True when the server cut something (lists, names, length limits), not just
- * tidied whitespace, so the device should adopt its copy. Whitespace-only
- * differences are left alone: they may be a name still being typed.
- */
-const tidy = tidyText;
-/** What the server would store if it only tidied whitespace (no cuts). */
-const tidied = (lists: WatchList[]) =>
-  lists.map((l) => ({ ...l, name: tidy(l.name) || "Watch list", athletes: l.athletes.map(tidy).filter(Boolean) }));
-const wasTrimmed = (stored: WatchList[], sent: WatchList[]) => {
-  const expected = tidied(sent);
-  return stored.length !== expected.length || stored.some((l, i) => l.name !== expected[i]!.name || JSON.stringify(l.athletes) !== JSON.stringify(expected[i]!.athletes));
-};
 
 // ------------------------------------------------------------------ shared status
 
@@ -80,8 +66,10 @@ function Sync() {
     fetchRef.current = authedFetch;
   }, [authedFetch]);
 
-  /** One save at a time; edits made meanwhile are sent next, newest wins. */
-  /** sent: last stored; rejected: refused as too big; failed: last attempt that hit a network/server error. */
+  /**
+   * One save at a time; edits made meanwhile are sent next, newest wins.
+   * sent: last stored; rejected: refused as too big; failed: last attempt that hit a network/server error.
+   */
   const saver = useRef<{ busy: boolean; next: WatchList[] | null; sent: string; rejected: string; failed: string }>({
     busy: false,
     next: null,
@@ -135,10 +123,10 @@ function Sync() {
           s.next ??= next; // network or server trouble: retried when online or on the next change
           break;
         }
-        // The server trims over-long lists; adopt its copy only when it really cut something
+        // The server says whether it cut anything to fit the limits; only then adopt its copy
         // (its whitespace tidying must not rewrite a name still being typed).
-        const stored = ((await res.json().catch(() => null)) as { lists?: WatchList[] } | null)?.lists ?? next;
-        const kept = wasTrimmed(stored, next) ? stored : next;
+        const reply = (await res.json().catch(() => null)) as { lists?: WatchList[]; trimmed?: boolean } | null;
+        const kept = reply?.trimmed && reply.lists ? reply.lists : next;
         s.sent = JSON.stringify(kept);
         storageSet(syncedKey(forUid), s.sent);
         if (kept !== next && !s.next) {
@@ -182,12 +170,14 @@ function Sync() {
         if (!alive) return;
         if (remote) {
           const local = readLists();
-          // Lists synced with a different account (a shared device) are that
-          // account's: take this account's lists instead of merging them in.
           const owner = storageGet(OWNER_KEY);
           const synced = storageGet(syncedKey(uid));
           const base = sanitizeLists(storageJson(syncedKey(uid)));
-          const merged = owner && owner !== uid ? remote : mergeLists(local, remote, synced === JSON.stringify(local), base);
+          // Lists synced with a different account (shared device) are that account's and are
+          // replaced; lists made or changed here since then are kept and combined.
+          const prevAccount = owner && owner !== uid ? (sanitizeLists(storageJson(syncedKey(owner))) ?? []) : null;
+          const ownHere = prevAccount ? local.filter((l) => !prevAccount.some((p) => sameLists([p], [l]))) : local;
+          const merged = prevAccount ? mergeLists(ownHere, remote, !ownHere.length) : mergeLists(local, remote, synced === JSON.stringify(local), base);
           storageSet(OWNER_KEY, uid);
           s.sent = JSON.stringify(remote);
           setReady(true);

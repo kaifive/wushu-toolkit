@@ -11,9 +11,9 @@ export function formatAsOf(iso: string, timeZone = "America/Chicago"): string {
 }
 
 /** v1's "Standings as of …" info bar. */
-export function DataStatus({ data, timeZone }: { data: EventData; timeZone?: string }) {
+export function DataStatus({ data, timeZone, byGender = true }: { data: EventData; timeZone?: string; byGender?: boolean }) {
   // Tables split by gender; an entry the source didn't give one can't be shown, so say so.
-  const noGender = data.scores.filter((s) => !s.gender).length;
+  const noGender = byGender ? data.scores.filter((s) => !s.gender).length : 0;
   return (
     <div className="mb-4 space-y-2">
       {data.stale ? (

@@ -15,7 +15,7 @@ export interface AthleteIndex {
 
 const clubKey = (c: string) => c.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
-/** Prefer the "First Last" spelling seen most often; sources disagree on order and case. */
+/** Pick the spelling seen most often, preferring mixed case over ALL CAPS (sources disagree on word order, so no order is preferred). */
 function bestSpelling(spellings: Map<string, number>): string {
   const score = (s: string) => (spellings.get(s) ?? 0) * 2 + (s === s.toUpperCase() ? 0 : 1);
   return [...spellings.keys()].sort((a, b) => score(b) - score(a) || a.localeCompare(b))[0]!;

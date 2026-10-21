@@ -1,5 +1,5 @@
 import { authErrorResponse, getWatchlists, setWatchlists, verifySession } from "@/lib/auth/admin";
-import { fitsInAccount, sanitizeLists } from "@/lib/watchlist/sync";
+import { fitsInAccount, sanitizeReport } from "@/lib/watchlist/sync";
 
 const noStore = { "cache-control": "private, no-store" };
 
@@ -26,12 +26,13 @@ export async function PUT(req: Request) {
     } catch {
       /* fall through to 400 */
     }
-    const lists = sanitizeLists(body?.lists);
-    if (!lists) return Response.json({ error: "Expected { lists: [...] }." }, { status: 400 });
+    const report = sanitizeReport(body?.lists);
+    if (!report) return Response.json({ error: "Expected { lists: [...] }." }, { status: 400 });
+    const { lists, cut } = report;
     if (!fitsInAccount(lists)) return Response.json({ error: "These watch lists are too big to save to an account." }, { status: 413 });
     const updatedAt = await setWatchlists(uid, lists);
     // Send back what was stored (trimmed to the limits) so the device can adopt it.
-    return Response.json({ ok: true, updatedAt, lists }, { headers: noStore });
+    return Response.json({ ok: true, updatedAt, lists, trimmed: cut }, { headers: noStore });
   } catch (err) {
     return authErrorResponse(err);
   }

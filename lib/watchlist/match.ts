@@ -91,12 +91,27 @@ export function findWatch(lists: WatchList[], athleteName: string): WatchList | 
  * name once (pages repeat names, and lists can hold thousands of entries).
  */
 export function compileWatch(lists: WatchList[]): (athleteName: string) => WatchList | undefined {
-  const entries = lists.filter((l) => l.enabled).map((l) => ({ list: l, names: l.athletes.map(prepareName) }));
+  // Every match shares a word or (split/joined names) the same letters, so index
+  // entries by both and only test those candidates.
+  const byKey = new Map<string, { order: number; list: WatchList; name: PreparedName }[]>();
+  let order = 0;
+  for (const list of lists) {
+    if (!list.enabled) continue;
+    for (const athlete of list.athletes) {
+      const entry = { order: order++, list, name: prepareName(athlete) };
+      for (const k of [...entry.name.set, `#${entry.name.letters}`]) {
+        const bucket = byKey.get(k);
+        if (bucket) bucket.push(entry);
+        else byKey.set(k, [entry]);
+      }
+    }
+  }
   const memo = new Map<string, WatchList | undefined>();
   return (name) => {
     if (!memo.has(name)) {
       const p = prepareName(name);
-      memo.set(name, entries.find((e) => e.names.some((n) => matchPrepared(n, p)))?.list);
+      const candidates = [...p.set, `#${p.letters}`].flatMap((k) => byKey.get(k) ?? []).sort((a, b) => a.order - b.order);
+      memo.set(name, candidates.find((c) => matchPrepared(c.name, p))?.list); // earlier lists win
     }
     return memo.get(name);
   };
@@ -106,6 +121,9 @@ export function compileWatch(lists: WatchList[]): (athleteName: string) => Watch
  * Parse a pasted roster: one name per line, or ";" separated, or ","
  * separated when every part is a full name. "Wu, Ashton" stays one name.
  */
+/** Same person for dedupe and merging: words in any order, punctuation ignored. */
+export const personKey = (name: string) => nameTokens(name).sort().join(" ");
+
 export function parseRoster(text: string): string[] {
   const lines = text.split(/\r?\n|;/).flatMap((line) => {
     const parts = line.split(",");
@@ -115,7 +133,7 @@ export function parseRoster(text: string): string[] {
   const out: string[] = [];
   for (const raw of lines) {
     const name = raw.replace(/\s+/g, " ").trim();
-    const key = nameTokens(name).sort().join(" ");
+    const key = personKey(name);
     if (name && key && !seen.has(key)) {
       seen.add(key);
       out.push(name);

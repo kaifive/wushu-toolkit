@@ -17,13 +17,12 @@ export async function EventBody({
   children,
 }: {
   slug: string;
-  view: EventView | "overview";
+  view: EventView;
   children: (loaded: Ok, data: EventData) => React.ReactNode;
 }) {
   const loaded = await loadEvent(slug);
-  if (!loaded || (view !== "overview" && !loaded.event.views.includes(view))) notFound();
+  if (!loaded || !loaded.event.views.includes(view)) notFound();
   if (loaded.state === "gated") {
-    if (view === "overview") return null;
     const e = loaded.event;
     return <GatedEventView slug={e.slug} view={view} eventName={e.name} rulesetId={e.rulesetId} highlights={e.highlights} refreshSeconds={e.revalidate ?? 60} timeZone={e.timeZone} />;
   }
@@ -32,8 +31,9 @@ export async function EventBody({
   return (
     <ExportProvider slug={e.slug} eventName={e.name} rulesetId={e.rulesetId}>
       {loaded.event.status === "live" && <LiveRefresh seconds={loaded.event.revalidate ?? 60} />}
-      {view !== "overview" && <DataStatus data={loaded.data} timeZone={loaded.event.timeZone} />}
-      {view !== "overview" && <WatchLegend />}
+      {/* Schedule and all-around don't split by gender, so a missing gender hides nothing there. */}
+      <DataStatus data={loaded.data} timeZone={loaded.event.timeZone} byGender={view !== "schedule" && view !== "all-around"} />
+      <WatchLegend />
       {children(loaded, loaded.data)}
     </ExportProvider>
   );

@@ -117,3 +117,13 @@ test("a group named 'Solo …' stays a group through copy and import", () => {
   const { demo } = fromText(toText({ acts, order: ["g", "s"] }), () => `id${n++}`);
   assert.deepEqual(demo.acts.map((a) => [a.kind, a.name]), [["group", "Solo Stars"], ["solo", ""]]);
 });
+
+test("athletes without acts survive copy and import", () => {
+  let n = 0;
+  const text = toText({ acts: [act("g", 3, ["Ben Ho"], { name: "Fan" })], order: ["g"] }, ["Amy Lee", "Cy Do"]);
+  assert.match(text, /\nAlso in the demo: Amy Lee, Cy Do$/);
+  const r = fromText(text, () => `id${n++}`);
+  assert.deepEqual(r.roster, ["Amy Lee", "Cy Do"]);
+  assert.equal(r.demo.acts.length, 1);
+  assert.deepEqual(r.skipped, []);
+});

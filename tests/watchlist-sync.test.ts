@@ -82,3 +82,10 @@ test("mergeLists: a reorder made only here is kept", () => {
 test("mergeLists: same person despite punctuation", () => {
   assert.deepEqual(mergeLists([list("a", ["O'Brien Sean"])], [list("a", ["OBrien Sean"])], false)[0]!.athletes, ["O'Brien Sean"]);
 });
+
+test("sanitizeReport says when it had to cut, not when it only tidied", async () => {
+  const { sanitizeReport } = await import("@/lib/watchlist/sync");
+  assert.equal(sanitizeReport([{ id: "a", name: " Nova  ", athletes: ["Amy  Lee "] }])!.cut, false);
+  assert.equal(sanitizeReport([{ id: "a", name: "x".repeat(200), athletes: [] }])!.cut, true);
+  assert.equal(sanitizeReport([{ id: "a", name: "A", athletes: Array.from({ length: 600 }, (_, i) => `Kid ${i}`) }])!.cut, true);
+});

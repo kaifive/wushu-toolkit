@@ -228,8 +228,9 @@ export function reconcile(demo: Demo): string[] {
  *   2. Solo: Jianshu (L4) — Amy Lee [first]
  *   3. Solo (L3) — Bob Tran [with previous]
  * Flags: first, last, pinned (stays at this number), with previous (linked).
+ * Athletes with no act yet go on a last line: "Also in the demo: Amy Lee, …".
  */
-export function toText(demo: Demo): string {
+export function toText(demo: Demo, roster: string[] = []): string {
   const byId = new Map(demo.acts.map((a) => [a.id, a]));
   const list = reconcile(demo).map((id) => byId.get(id)!);
   return list
@@ -242,17 +243,25 @@ export function toText(demo: Demo): string {
       const who = a.performers.length ? ` — ${a.performers.join(", ")}` : "";
       return `${i + 1}. ${title} (L${a.level})${who}${flags.length ? ` [${flags.join(", ")}]` : ""}`;
     })
+    .concat(roster.length ? [`${ALSO} ${roster.join(", ")}`] : [])
     .join("\n");
 }
+
+const ALSO = "Also in the demo:";
 
 const LINE = /^\s*(?:\d+[.)]\s*)?(.+?)\s*\(L([1-5])\)\s*(?:[—–-]+\s*(.*?))?\s*(?:\[([^\]]*)\])?\s*$/i;
 
 /** Parse text from toText (or typed by hand). Unreadable lines are returned so the UI can show them. */
-export function fromText(text: string, newId: () => string): { demo: Demo; skipped: string[] } {
+export function fromText(text: string, newId: () => string): { demo: Demo; roster: string[]; skipped: string[] } {
   const acts: Act[] = [];
   const skipped: string[] = [];
+  const roster: string[] = [];
   for (const raw of text.split(/\r?\n/)) {
     if (!raw.trim() || /^\s*#/.test(raw)) continue;
+    if (raw.trim().toLowerCase().startsWith(ALSO.toLowerCase())) {
+      roster.push(...raw.trim().slice(ALSO.length).split(",").map((p) => p.replace(/\s+/g, " ").trim()).filter(Boolean));
+      continue;
+    }
     const m = raw.match(LINE);
     if (!m) {
       skipped.push(raw.trim());
@@ -276,7 +285,7 @@ export function fromText(text: string, newId: () => string): { demo: Demo; skipp
     if (prev && flags.includes("with previous")) act.follows = prev.id;
     acts.push(act);
   }
-  return { demo: { acts, order: acts.map((a) => a.id) }, skipped };
+  return { demo: { acts, order: acts.map((a) => a.id) }, roster, skipped };
 }
 
 // ---------------------------------------------------------------- people

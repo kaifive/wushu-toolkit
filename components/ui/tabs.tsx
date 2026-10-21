@@ -18,17 +18,19 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
   const [active, setActive] = useState(tabs[0]?.id ?? "");
   const uid = useId();
 
+  // Callers pass a fresh tabs array each render; key the effect on the ids instead.
+  const ids = tabs.map((t) => t.id).join("\n");
   useEffect(() => {
     // Follow the URL: on mount (deep links) and when another Tabs bound to the
     // same param changes it (e.g. the division tabs under each gender panel).
     const sync = () => {
       const fromUrl = new URLSearchParams(window.location.search).get(param);
-      if (fromUrl && tabs.some((t) => t.id === fromUrl)) setActive(fromUrl);
+      if (fromUrl && ids.split("\n").includes(fromUrl)) setActive(fromUrl);
     };
     sync();
     window.addEventListener(TABS_EVENT, sync);
     return () => window.removeEventListener(TABS_EVENT, sync);
-  }, [param, tabs]);
+  }, [param, ids]);
 
   const select = (id: string) => {
     setActive(id);

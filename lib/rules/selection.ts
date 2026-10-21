@@ -185,7 +185,6 @@ export function runSelection(scores: ScoreEntry[], rules: SelectionRules, divisi
   return { teams, ranked: ranked.map((c, i) => ({ ...c, team: teamOf.get(c), rank: i + 1 })) };
 }
 
-/** Assign each entry its division from the ruleset's name matchers (keeps an existing division). */
 /**
  * Division from the event name: the division with the most matching words
  * wins (first on a tie), so "Junior Team Trials Children Elementary …" is
@@ -200,6 +199,7 @@ export function divisionOf(raw: string, ruleset: Ruleset): string | undefined {
   return best?.id;
 }
 
+/** Assign each entry its division from the ruleset's name matchers (keeps an existing division). */
 export function withDivisions(scores: ScoreEntry[], ruleset: Ruleset): ScoreEntry[] {
   return scores.map((s) => (s.division ? s : { ...s, division: divisionOf(s.raw, ruleset) }));
 }
