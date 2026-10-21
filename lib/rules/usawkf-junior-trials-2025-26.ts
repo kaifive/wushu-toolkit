@@ -43,7 +43,7 @@ export const USAWKF_JUNIOR_TRIALS_2025_26: Ruleset = {
       label: "Junior (B)",
       born: { from: "2012-01-01", to: "2014-12-31" },
       routines: "1st Set of International Wushu Competition Routines (Taijiquan and Taijijian: 42 Movements)",
-      matchers: [/\bjunior\b/i, /1st set/i],
+      matchers: [/\bjunior\b(?!\s+(taolu\s+)?team\s+trials)/i, /1st set/i],
       events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"],
     },
     {

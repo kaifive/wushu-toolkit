@@ -155,7 +155,12 @@ function ListEditor({
           </button>
           <button
             type="button"
-            onClick={() => (confirming ? onRemove() : setConfirming(true))}
+            onClick={() => {
+              if (confirming) return onRemove();
+              setConfirming(true);
+              // iOS Safari doesn't blur buttons, so the second tap must come soon.
+              window.setTimeout(() => setConfirming(false), 4000);
+            }}
             onBlur={() => setConfirming(false)}
             className="ml-auto min-h-tap rounded-card px-3 font-semibold text-ink-muted hover:text-ink"
           >

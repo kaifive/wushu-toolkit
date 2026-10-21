@@ -1,3 +1,4 @@
+import { athleteKey } from "@/lib/domain/names";
 import type { WatchList } from "./match";
 
 /** Limits for lists saved to an account (checked server-side). */
@@ -30,24 +31,49 @@ export function sanitizeLists(input: unknown): WatchList[] | null {
 }
 
 /**
- * Lists to keep when this device signs in. If nothing changed here since the
- * last sync, the account wins (so deletions made elsewhere stick). Otherwise
- * lists are merged by id: account lists first, this device's edits win on
- * name, colour and on/off, and athletes are combined.
+ * Lists to keep when this device signs in, as a three-way merge against
+ * `base` (what this device and the account last agreed on):
+ * - nothing changed here since then: the account wins (deletions elsewhere stick);
+ * - a list deleted here, or elsewhere, stays deleted unless the other side
+ *   changed it meanwhile;
+ * - athletes added or removed on either side are applied, matched by name
+ *   regardless of word order; this device's name, colour and on/off win.
+ * Without a base (never synced) the two sides are combined.
  */
-export function mergeLists(local: WatchList[], remote: WatchList[], localUnchanged: boolean): WatchList[] {
-  if (localUnchanged || !local.length) return remote;
-  if (!remote.length) return local;
-  const byId = new Map(local.map((l) => [l.id, l]));
-  const merged = remote.map((r) => {
-    const l = byId.get(r.id);
-    if (!l) return r;
-    byId.delete(r.id);
-    const athletes = [...l.athletes];
-    for (const a of r.athletes) if (!athletes.some((x) => x.toLowerCase() === a.toLowerCase())) athletes.push(a);
-    return { ...l, athletes };
-  });
-  return [...merged, ...byId.values()];
+export function mergeLists(local: WatchList[], remote: WatchList[], localUnchanged: boolean, base: WatchList[] | null = null): WatchList[] {
+  if (localUnchanged) return remote;
+  const baseBy = new Map((base ?? []).map((l) => [l.id, l]));
+  const localBy = new Map(local.map((l) => [l.id, l]));
+  const remoteIds = new Set(remote.map((l) => l.id));
+  const same = (a?: WatchList, b?: WatchList) => !!a && !!b && JSON.stringify(a) === JSON.stringify(b);
+  const out: WatchList[] = [];
+  for (const r of remote) {
+    const l = localBy.get(r.id);
+    const b = baseBy.get(r.id);
+    if (!l) {
+      // Missing here: deleted here (it was in the base) unless changed elsewhere since.
+      if (!b || !same(b, r)) out.push(r);
+      continue;
+    }
+    out.push({ ...l, athletes: mergeAthletes(b?.athletes ?? null, l.athletes, r.athletes) });
+  }
+  for (const l of local) {
+    if (remoteIds.has(l.id)) continue;
+    const b = baseBy.get(l.id);
+    // Only here: new here (keep), or deleted elsewhere (drop unless changed here since).
+    if (!b || !same(b, l)) out.push(l);
+  }
+  return out;
+}
+
+/** Athlete names merged three ways; same person = same name key (word order ignored). */
+function mergeAthletes(base: string[] | null, local: string[], remote: string[]): string[] {
+  const key = athleteKey;
+  const has = (list: string[], name: string) => list.some((x) => key(x) === key(name));
+  if (!base) return [...local, ...remote.filter((r) => !has(local, r))];
+  const addedThere = remote.filter((r) => !has(base, r) && !has(local, r));
+  const removedThere = base.filter((b) => !has(remote, b));
+  return [...local.filter((l) => !has(removedThere, l)), ...addedThere];
 }
 
 export const sameLists = (a: WatchList[], b: WatchList[]) => JSON.stringify(a) === JSON.stringify(b);

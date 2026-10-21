@@ -6,8 +6,8 @@ import { SIGNED_IN_EVENT, SIGNED_IN_KEY, useAuth } from "@/components/auth/auth-
 import { authConfigured } from "@/lib/auth/client";
 import type { WatchList } from "@/lib/watchlist/match";
 import { readLists, useWatchLists, writeLists } from "@/lib/watchlist/store";
-import { storageGet, storageSet } from "@/lib/storage";
-import { mergeLists, sameLists, SYNC_LIMITS } from "@/lib/watchlist/sync";
+import { storageGet, storageJson, storageSet } from "@/lib/storage";
+import { mergeLists, sameLists, sanitizeLists, SYNC_LIMITS } from "@/lib/watchlist/sync";
 
 /**
  * Account sync for watch lists (ADR-009). <WatchlistSync/> runs once per page
@@ -25,8 +25,19 @@ const KEEPALIVE_MAX = 60_000;
 
 type State = "loading" | "saving" | "saved" | "trimmed" | "error" | "too-big" | "refused";
 
-const wasTrimmed = (stored: WatchList[], sent: WatchList[]) =>
-  stored.length !== sent.length || stored.some((l, i) => l.athletes.length !== sent[i]?.athletes.length);
+/**
+ * True when the server cut something (lists, names, length limits), not just
+ * tidied whitespace, so the device should adopt its copy. Whitespace-only
+ * differences are left alone: they may be a name still being typed.
+ */
+const tidy = (t: string) => t.replace(/\s+/g, " ").trim();
+/** What the server would store if it only tidied whitespace (no cuts). */
+const tidied = (lists: WatchList[]) =>
+  lists.map((l) => ({ ...l, name: tidy(l.name) || "Watch list", athletes: l.athletes.map(tidy).filter(Boolean) }));
+const wasTrimmed = (stored: WatchList[], sent: WatchList[]) => {
+  const expected = tidied(sent);
+  return stored.length !== expected.length || stored.some((l, i) => l.name !== expected[i]!.name || JSON.stringify(l.athletes) !== JSON.stringify(expected[i]!.athletes));
+};
 
 // ------------------------------------------------------------------ shared status
 
@@ -173,7 +184,9 @@ function Sync() {
           // Lists synced with a different account (a shared device) are that
           // account's: take this account's lists instead of merging them in.
           const owner = storageGet(OWNER_KEY);
-          const merged = owner && owner !== uid ? remote : mergeLists(local, remote, storageGet(syncedKey(uid)) === JSON.stringify(local));
+          const synced = storageGet(syncedKey(uid));
+          const base = sanitizeLists(storageJson(syncedKey(uid)));
+          const merged = owner && owner !== uid ? remote : mergeLists(local, remote, synced === JSON.stringify(local), base);
           storageSet(OWNER_KEY, uid);
           s.sent = JSON.stringify(remote);
           setReady(true);

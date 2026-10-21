@@ -8,7 +8,7 @@ import type { Division, Ruleset } from "./types";
 
 const JUNIOR_DIVISIONS: Division[] = [
   { id: "A", label: "Group A (Youth)", matchers: [/\byouth\b/i, /3rd set/i], events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ", "TS"] },
-  { id: "B", label: "Group B (Junior)", matchers: [/\bjunior\b/i, /1st set/i], events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"] },
+  { id: "B", label: "Group B (Junior)", matchers: [/\bjunior\b(?!\s+(taolu\s+)?team\s+trials)/i, /1st set/i], events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"] },
   { id: "C", label: "Group C (Children)", matchers: [/\bchild(ren)?\b/i, /elementary/i], events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"] },
 ];
 

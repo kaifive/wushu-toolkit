@@ -37,3 +37,22 @@ test("parseExpiry accepts only YYYY-MM-DD", async () => {
   assert.throws(() => parseExpiry(""), /Bad expiry/);
   assert.throws(() => parseExpiry("2027-02-31"), /Bad expiry/, "no roll-over to March");
 });
+
+test("mergeLists three-way: deletions on this device stick, changes elsewhere come in", () => {
+  const base = [list("a", ["Amy Lee", "Old Kid"]), list("b", ["Ben Ho"])];
+  // Here: deleted list b, removed Old Kid, added Zed Q. Elsewhere: added Cara Wu to a.
+  const local = [list("a", ["Amy Lee", "Zed Q"])];
+  const remote = [list("a", ["Amy Lee", "Old Kid", "Cara Wu"]), list("b", ["Ben Ho"])];
+  assert.deepEqual(mergeLists(local, remote, false, base), [list("a", ["Amy Lee", "Zed Q", "Cara Wu"])]);
+});
+
+test("mergeLists three-way: a list deleted elsewhere stays deleted unless changed here", () => {
+  const base = [list("a", ["Amy Lee"]), list("c", ["Cy Do"])];
+  const remote = [list("a", ["Amy Lee"])];
+  assert.deepEqual(mergeLists([list("a", ["Amy Lee", "New Kid"]), list("c", ["Cy Do"])], remote, false, base), [list("a", ["Amy Lee", "New Kid"])]);
+  assert.deepEqual(mergeLists([list("a", ["Amy Lee"]), list("c", ["Cy Do", "Edited"])], remote, false, base).map((l) => l.id), ["a", "c"]);
+});
+
+test("mergeLists matches athletes regardless of word order", () => {
+  assert.deepEqual(mergeLists([list("a", ["Chen Ada"])], [list("a", ["Ada Chen"])], false).map((l) => l.athletes), [["Chen Ada"]]);
+});

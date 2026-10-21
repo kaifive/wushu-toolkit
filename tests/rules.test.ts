@@ -227,4 +227,5 @@ test("division from the event name: most matching words wins", async () => {
   assert.equal(divisionOf("Junior Team Trials Children Male Elementary Changquan", r), "C");
   assert.equal(divisionOf("Taolu Junior Male 1st Set Changquan", r), "B");
   assert.equal(divisionOf("Taolu Youth Female 3rd Set Daoshu", r), "A");
+  assert.equal(divisionOf("Junior Team Trials Children Male Taijiquan 24", r), "C", "the title's 'Junior' isn't the division");
 });
