@@ -1,0 +1,63 @@
+name: Snapshot event data
+
+# Pre-scrapes live sources (Sportdata registration, organizer sheets) for events
+# whose config sets snapshot.until (ADR-008), and commits changes to
+# data/snapshots/. The next Vercel deploy serves them as the fallback copy.
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Event slug to snapshot now (blank = all scheduled)"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Snapshot
+        id: snapshot
+        # Keep going so snapshots that did succeed are still committed; the job fails at the end.
+        continue-on-error: true
+        env:
+          SLUG: ${{ github.event.inputs.slug }}
+        run: |
+          if [ -z "$SLUG" ]; then
+            npm run snapshot -- --scheduled
+          elif [[ "$SLUG" =~ ^[a-z0-9-]+$ ]]; then
+            npm run snapshot -- "$SLUG"
+          else
+            echo "Bad slug: use lowercase letters, digits and dashes." >&2
+            exit 1
+          fi
+      - name: Commit changes
+        run: |
+          if [ -n "$(git status --porcelain data/snapshots)" ]; then
+            git config user.name "wushu-toolkit-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add data/snapshots
+            git commit -m "Update event snapshots"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          else
+            echo "No changes"
+          fi
+      - name: Fail if any event failed
+        if: steps.snapshot.outcome == 'failure'
+        run: |
+          echo "At least one event failed to snapshot; see the Snapshot step." >&2
+          exit 1

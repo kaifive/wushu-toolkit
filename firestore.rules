@@ -1,0 +1,22 @@
+rules_version = '2';
+// Wushu Toolkit (ADR-005). Clients may READ their own session and entitlement
+// docs. Only the Admin SDK (server routes and scripts) writes them.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /sessions/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+    match /entitlements/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+    // Watch lists are read and written through /api/watchlists only.
+    match /watchlists/{uid} {
+      allow read, write: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
