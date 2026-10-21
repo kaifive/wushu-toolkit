@@ -6,6 +6,7 @@ import { DataStatus, LoadError } from "./data-status";
 import { GatedEventView } from "./gated-event-view";
 import { WatchLegend } from "@/components/watchlist/legend";
 import { LiveRefresh } from "./live-refresh";
+import { ExportProvider } from "@/components/export/export-buttons";
 
 type Ok = Extract<LoadedEvent, { state: "ok" }>;
 
@@ -27,13 +28,14 @@ export async function EventBody({
     return <GatedEventView slug={e.slug} view={view} eventName={e.name} rulesetId={e.rulesetId} highlights={e.highlights} refreshSeconds={e.revalidate ?? 60} />;
   }
   if (loaded.state === "error") return <LoadError error={loaded.error} />;
+  const e = loaded.event;
   return (
-    <>
+    <ExportProvider slug={e.slug} eventName={e.name} rulesetId={e.rulesetId}>
       {loaded.event.status === "live" && <LiveRefresh seconds={loaded.event.revalidate ?? 60} />}
       {view !== "overview" && <DataStatus data={loaded.data} />}
       {view !== "overview" && <WatchLegend />}
       {children(loaded, loaded.data)}
-    </>
+    </ExportProvider>
   );
 }
 

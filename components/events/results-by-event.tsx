@@ -1,4 +1,5 @@
 import { ScrollTable, td, th } from "@/components/ui/table";
+import { ExportButtons } from "@/components/export/export-buttons";
 import type { EventResult } from "@/lib/events/views";
 
 export function ResultsByEvent({ results }: { results: EventResult[] }) {
@@ -37,6 +38,7 @@ export function ResultsByEvent({ results }: { results: EventResult[] }) {
                   ))}
                 </tbody>
               </ScrollTable>
+              <ExportButtons target={{ kind: "result", raw: r.raw }} className="mt-3" />
             </div>
           </details>
         );

@@ -1,3 +1,4 @@
+import { ExportButtons } from "@/components/export/export-buttons";
 import type { ScorecardRow } from "@/lib/events/views";
 
 const f = (n: number | null | undefined, d = 3) => (n == null ? "—" : n.toFixed(d));
@@ -62,6 +63,7 @@ export function ScorecardCard({ row }: { row: ScorecardRow }) {
           </div>
         ) : null}
       </dl>
+      <ExportButtons target={{ kind: "scorecard", athleteName: row.athleteName, raw: row.raw }} className="border-t border-line px-4 py-2" />
     </details>
   );
 }

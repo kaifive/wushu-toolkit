@@ -11,6 +11,7 @@ import { getRuleset, type RulesetId } from "@/lib/rules";
 import { WatchLegend } from "@/components/watchlist/legend";
 import { DataStatus } from "./data-status";
 import { VIEW_BODY } from "./view-bodies";
+import { ExportProvider } from "@/components/export/export-buttons";
 
 interface Props {
   slug: string;
@@ -78,10 +79,10 @@ function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds }:
   if (!data) return <p className="text-ink-muted">Loading scores…</p>;
   const Body = VIEW_BODY[view];
   return (
-    <>
+    <ExportProvider slug={slug} eventName={eventName} rulesetId={rulesetId} data={data}>
       <DataStatus data={data} />
       <WatchLegend />
       <Body ruleset={getRuleset(rulesetId)} data={data} highlights={highlights} />
-    </>
+    </ExportProvider>
   );
 }

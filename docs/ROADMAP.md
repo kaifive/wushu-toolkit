@@ -42,7 +42,7 @@ Resume from the first unchecked item. One commit per item.
 
 ## Phase 5d — More tools (requested 2026-10-21)
 - [x] Demo order generator (groups and solos, levels 1–5, rest gaps, locks and links, regenerate, copy, import)
-- [ ] PNG/PDF export of scorecards and results with a "Powered by Wushu Toolkit" footer
+- [x] PNG/PDF export of scorecards, results by event and overall standings ("Powered by Wushu Toolkit" footer; canvas + built-in PDF writer, no libraries)
 - [ ] AI code review loop over the whole PR until no new findings
 
 ## Phase 5b — Watch lists

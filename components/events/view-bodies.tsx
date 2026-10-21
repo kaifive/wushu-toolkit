@@ -4,6 +4,7 @@ import type { EventData } from "@/lib/domain/types";
 import type { AthleteHighlight, EventView } from "@/lib/events/types";
 import { allAroundModel, GENDERS, highlightMap, resultsByEvent, scorecards, selectionModel } from "@/lib/events/views";
 import type { Ruleset } from "@/lib/rules";
+import { ExportButtons } from "@/components/export/export-buttons";
 import { AllAroundTable, Champions } from "./all-around-view";
 import { OverallTable } from "./overall-table";
 import { ResultsByEvent } from "./results-by-event";
@@ -54,6 +55,7 @@ export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
                       {m.scored}/{m.total} routines scored
                     </p>
                     <OverallTable model={m} highlights={hl} />
+                    <ExportButtons target={{ kind: "overall", gender: m.gender, division: m.division.id }} className="mt-3" />
                   </section>
                 ))}
               />
