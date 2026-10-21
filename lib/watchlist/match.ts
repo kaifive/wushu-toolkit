@@ -110,20 +110,20 @@ export function compileWatch(lists: WatchList[]): (athleteName: string) => Watch
   return (name) => {
     if (!memo.has(name)) {
       const p = prepareName(name);
-      const candidates = [...p.set, `#${p.letters}`].flatMap((k) => byKey.get(k) ?? []).sort((a, b) => a.order - b.order);
+      const candidates = [...new Set([...p.set, `#${p.letters}`].flatMap((k) => byKey.get(k) ?? []))].sort((a, b) => a.order - b.order);
       memo.set(name, candidates.find((c) => matchPrepared(c.name, p))?.list); // earlier lists win
     }
     return memo.get(name);
   };
 }
 
+/** Same person for dedupe and merging: words in any order, punctuation ignored. */
+export const personKey = (name: string) => nameTokens(name).sort().join(" ");
+
 /**
  * Parse a pasted roster: one name per line, or ";" separated, or ","
  * separated when every part is a full name. "Wu, Ashton" stays one name.
  */
-/** Same person for dedupe and merging: words in any order, punctuation ignored. */
-export const personKey = (name: string) => nameTokens(name).sort().join(" ");
-
 export function parseRoster(text: string): string[] {
   const lines = text.split(/\r?\n|;/).flatMap((line) => {
     const parts = line.split(",");

@@ -130,12 +130,12 @@ function VerifyEmail() {
   const [verified, setVerified] = useState(false);
   // The cached user doesn't learn about a link opened elsewhere: reload on mount and on return to the tab.
   useEffect(() => {
-    if (!user) return;
+    if (!user || verified) return;
     const check = () => void user.reload().then(() => user.emailVerified && setVerified(true)).catch(() => {});
     check();
     window.addEventListener("focus", check);
     return () => window.removeEventListener("focus", check);
-  }, [user]);
+  }, [user, verified]);
   const resend = async () => {
     if (!user) return;
     try {

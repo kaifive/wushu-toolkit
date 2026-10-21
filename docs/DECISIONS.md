@@ -192,3 +192,14 @@ its own claim (`sessionVerdict` in `lib/auth/model.ts`, unit-tested). A
 claim still in flight counts as pending (other tabs wait) and expires after
 30s. Sign-in state is one shared store per page, so every component sees
 the same status.
+
+## ADR-012 — Snapshot fallback lives in `liveWithSnapshot`
+
+**Status:** accepted (2026-10-22). Replaces the `withFallback` helper named in ADR-002.
+
+Events read live with a saved copy behind them. Pages get the saved copy
+(marked stale) when the live source fails **or has lost more than half of
+its scored routines** (a cleared or rearranged sheet); a corrected or
+removed score stays live. The snapshot script reads live only
+(`liveOnly`) and refuses any drop in scored routines unless run with
+`--force`. The generic `withFallback` had no other user and was removed.

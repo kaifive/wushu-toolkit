@@ -4,7 +4,7 @@ import { personKey, type WatchList } from "./match";
 export const SYNC_LIMITS = { lists: 50, athletes: 500, text: 120, bytes: 900_000 } as const;
 
 const HEX = /^#[0-9a-f]{6}$/i;
-/** Whitespace tidying the server applies to every name (the client mirrors it). */
+/** Whitespace tidying applied to every stored name. */
 export const tidyText = (t: string) => t.replace(/\s+/g, " ").trim();
 const str = (v: unknown, max: number) => (typeof v === "string" ? tidyText(v).slice(0, max) : "");
 
@@ -31,8 +31,9 @@ export function sanitizeReport(input: unknown): { lists: WatchList[]; cut: boole
     if (!id || seen.has(id)) continue;
     seen.add(id);
     const rawAthletes = Array.isArray(r.athletes) ? r.athletes : [];
-    const athletes = rawAthletes.map((a) => str(a, SYNC_LIMITS.text)).filter(Boolean).slice(0, SYNC_LIMITS.athletes);
-    if (!fits(r.name) || !rawAthletes.every(fits) || rawAthletes.filter((a) => str(a, SYNC_LIMITS.text)).length > SYNC_LIMITS.athletes) cut = true;
+    const named = rawAthletes.map((a) => str(a, SYNC_LIMITS.text)).filter(Boolean);
+    const athletes = named.slice(0, SYNC_LIMITS.athletes);
+    if (!fits(r.name) || !rawAthletes.every(fits) || named.length > SYNC_LIMITS.athletes) cut = true;
     out.push({
       id,
       name: str(r.name, SYNC_LIMITS.text) || "Watch list",

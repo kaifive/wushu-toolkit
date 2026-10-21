@@ -12,7 +12,7 @@ Resume from the first unchecked item. One commit per item.
 
 ## Phase 2 — Data layer
 - [x] Domain types (`lib/domain`)
-- [x] `DataSource` interface + `withFallback`
+- [x] `DataSource` interface + snapshot fallback (`liveWithSnapshot`, ADR-012)
 - [x] Google Sheets adapter (gviz JSON + CSV)
 - [x] Published Google Doc adapter (JSON body and Sportdata scorecard HTML)
 - [x] JSON API adapter (bowuu)

@@ -10,6 +10,8 @@ export interface LoadContext {
   signal?: AbortSignal;
   /** Next.js ISR revalidate seconds for fetches made by this load. */
   revalidate?: number;
+  /** Read the live source only, never a saved copy (the snapshot script). */
+  liveOnly?: boolean;
 }
 
 export interface DataSource<T> {
@@ -42,32 +44,6 @@ export function all<T extends readonly DataSource<unknown>[]>(
   });
 }
 
-export interface Fallback<T> {
-  value: T;
-  label: string;
-  stale: boolean;
-  error?: string;
-}
-
-/**
- * Try `primary`; on any error serve `fallback` and report it as stale.
- * This is what the 2024 page did by hand with its bundled snapshot.
- */
-export function withFallback<T>(primary: DataSource<T>, fallback: DataSource<T>): DataSource<Fallback<T>> {
-  return source(`${primary.label} (fallback: ${fallback.label})`, async (ctx) => {
-    try {
-      return { value: await primary.load(ctx), label: primary.label, stale: false };
-    } catch (err) {
-      const msg = (e: unknown) => (e instanceof Error ? e.message : String(e));
-      try {
-        const value = await fallback.load(ctx);
-        return { value, label: fallback.label, stale: true, error: msg(err) };
-      } catch (fallbackErr) {
-        throw new Error(`${msg(err)} (no saved copy: ${msg(fallbackErr)})`, { cause: err });
-      }
-    }
-  });
-}
 
 export class SourceError extends Error {
   constructor(

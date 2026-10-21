@@ -45,14 +45,22 @@ export function emptyEventData(sourceLabel: string, asOf = new Date().toISOStrin
 }
 
 /**
- * Why a fresh scrape must not replace the saved copy, or null if it may.
+ * Why a fresh scrape must not replace the saved copy, or null if it may
+ * (`keep`: share of the saved copy's scored routines the scrape must keep).
  * A source that answers but lost data (cleared sheet, moved columns, an HTML
  * error page) must never wipe the archive.
  */
-export function snapshotRegression(prev: EventData | null, next: EventData): string | null {
+export function snapshotRegression(prev: EventData | null, next: EventData, keep = 1): string | null {
   if (!next.registrations.length && !next.scores.length) return "the live source returned no entries";
   if (!prev) return null;
   const scored = (d: EventData) => d.scores.filter((s) => s.finalScore != null).length;
-  if (scored(next) < scored(prev)) return `${scored(next)} scored routines vs ${scored(prev)} in the saved copy`;
+  if (scored(next) < scored(prev) * keep) return `${scored(next)} scored routines vs ${scored(prev)} in the saved copy`;
   return null;
 }
+
+/**
+ * For pages: a live source counts as broken only when it lost most of its
+ * scores (a corrected or removed score is normal); the snapshot script uses
+ * the strict check above.
+ */
+export const liveLostData = (saved: EventData, live: EventData) => snapshotRegression(saved, live, 0.5);

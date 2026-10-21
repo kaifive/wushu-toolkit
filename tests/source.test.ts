@@ -1,21 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { all, constant, map, source, withFallback, fetchText } from "@/lib/data/source";
-
-test("withFallback serves primary when it works", async () => {
-  const r = await withFallback(constant("live", 1), constant("snap", 2)).load();
-  assert.deepEqual(r, { value: 1, label: "live", stale: false });
-});
-
-test("withFallback serves fallback and marks stale on error", async () => {
-  const broken = source<number>("live", async () => {
-    throw new Error("boom");
-  });
-  const r = await withFallback(broken, constant("snap", 2)).load();
-  assert.equal(r.value, 2);
-  assert.equal(r.stale, true);
-  assert.equal(r.error, "boom");
-});
+import { all, constant, map, source, fetchText } from "@/lib/data/source";
 
 test("map and all compose sources", async () => {
   const doubled = map(constant("a", 21), (n) => n * 2);
@@ -49,6 +34,11 @@ test("liveWithSnapshot serves the saved copy when live answers with less", async
     scores: Array.from({ length: 3 }, (_, i) => ({ athleteId: `a${i}`, athleteName: "A", raw: "CQ", finalScore: i < n ? 9 : null })),
   });
   const cleared = await liveWithSnapshot(constant("live", withScores(0, "Live")), constant("snap", withScores(3, "Saved"))).load();
+  // A single corrected score is normal and stays live.
+  const corrected = await liveWithSnapshot(constant("live", withScores(2, "Live")), constant("snap", withScores(3, "Saved"))).load();
+  assert.equal(corrected.source, "Live");
+  // The snapshot script reads live only.
+  assert.equal((await liveWithSnapshot(constant("live", withScores(0, "Live")), constant("snap", withScores(3, "Saved"))).load({ liveOnly: true })).source, "Live");
   assert.equal(cleared.stale, true);
   assert.match(cleared.source, /Saved \(live source has less: 0 scored routines vs 3/);
   const better = await liveWithSnapshot(constant("live", withScores(3, "Live")), constant("snap", withScores(2, "Saved"))).load();

@@ -32,7 +32,8 @@ const fingerprint = (d: EventData) => JSON.stringify({ ...d, asOf: undefined, so
 let failures = 0;
 for (const event of targets) {
   try {
-    const data = await event.data().load();
+    // Live source only: the pages' snapshot fallback must not feed the snapshot back in.
+    const data = await event.data().load({ liveOnly: true });
     if (data.stale) throw new Error("live source unavailable (got the saved copy)");
     const dir = join(process.cwd(), "data/snapshots", event.slug);
     mkdirSync(dir, { recursive: true });

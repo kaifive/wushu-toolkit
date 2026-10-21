@@ -175,9 +175,12 @@ function Sync() {
           const base = sanitizeLists(storageJson(syncedKey(uid)));
           // Lists synced with a different account (shared device) are that account's and are
           // replaced; lists made or changed here since then are kept and combined.
+          // Compare in the server's canonical form (tidied names), like the base and remote.
+          const localC = sanitizeLists(local) ?? [];
+          // A list with an id the previous account had is theirs, edited or not: never copy it in.
           const prevAccount = owner && owner !== uid ? (sanitizeLists(storageJson(syncedKey(owner))) ?? []) : null;
-          const ownHere = prevAccount ? local.filter((l) => !prevAccount.some((p) => sameLists([p], [l]))) : local;
-          const merged = prevAccount ? mergeLists(ownHere, remote, !ownHere.length) : mergeLists(local, remote, synced === JSON.stringify(local), base);
+          const ownHere = prevAccount ? localC.filter((l) => !prevAccount.some((p) => p.id === l.id)) : localC;
+          const merged = prevAccount ? mergeLists(ownHere, remote, !ownHere.length) : mergeLists(localC, remote, synced === JSON.stringify(local), base);
           storageSet(OWNER_KEY, uid);
           s.sent = JSON.stringify(remote);
           setReady(true);
@@ -243,7 +246,7 @@ const MESSAGE: Record<State, string> = {
   loading: "Syncing with your account…",
   saving: "Saving…",
   saved: "Saved to your account.",
-  trimmed: `Saved to your account, trimmed to ${SYNC_LIMITS.lists} lists of ${SYNC_LIMITS.athletes} names.`,
+  trimmed: `Saved to your account, shortened to fit (at most ${SYNC_LIMITS.lists} lists, ${SYNC_LIMITS.athletes} names each, ${SYNC_LIMITS.text} characters per name).`,
   error: "Couldn't reach your account. Changes are kept on this device and will sync when it's back.",
   "too-big": "These watch lists are too big to save to an account. They're kept on this device.",
   refused: "Your account didn't accept the sync. Sign in again to keep lists on all your devices.",
