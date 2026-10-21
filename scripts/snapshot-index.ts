@@ -2,6 +2,7 @@
  * Regenerate data/snapshots/index.ts: one lazy import per event, pointing at
  * that event's newest snapshot file. Run after adding snapshots.
  */
+import { pathToFileURL } from "node:url";
 import { readdirSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { latestSnapshot } from "../lib/data/snapshot";
@@ -19,6 +20,6 @@ export function writeSnapshotIndex(root = join(process.cwd(), "data/snapshots"))
   return slugs;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   console.log("Indexed:", writeSnapshotIndex().join(", ") || "(none)");
 }

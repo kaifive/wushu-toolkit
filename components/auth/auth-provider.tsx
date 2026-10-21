@@ -1,7 +1,7 @@
 "use client";
 
 import type { User } from "firebase/auth";
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { authConfigured, firebase } from "@/lib/auth/client";
 import { newSessionId, SESSION_HEADER, SESSION_STORAGE_KEY, type SessionDoc } from "@/lib/auth/model";
 
@@ -46,8 +46,7 @@ const writeSession = (id: string | null) => {
 
 /**
  * Claim the account for this device: new session id, registered server-side.
- * The id is stored locally first, so the session listener never sees the new
- * server id next to a stale local one and kicks this device.
+ * Runs while `claiming` is set, so the session listener ignores the old id.
  */
 async function claimSession(user: User) {
   const sessionId = newSessionId();
@@ -76,6 +75,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<Status>(authConfigured() ? "loading" : "off");
   const [user, setUser] = useState<User | null>(null);
   const [kicked, setKicked] = useState<string | null>(null);
+  /**
+   * True while this tab signs in and claims the session. Until the claim is
+   * stored server-side, session snapshots still show the previous id (which
+   * would look like another device) and authed requests would be refused, so
+   * the listener waits and status stays "loading".
+   */
+  const claiming = useRef(false);
 
   useEffect(() => {
     if (!authConfigured()) return;
@@ -88,10 +94,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       unsubAuth = onAuthStateChanged(auth, (u) => {
         unsubSession();
         setUser(u);
-        setStatus(u ? "signed-in" : "signed-out");
+        setStatus(!u ? "signed-out" : claiming.current ? "loading" : "signed-in");
         if (!u) return;
         // Single-device lock: when another device claims the account, sign this one out.
         unsubSession = onSnapshot(doc(db, "sessions", u.uid), (snap) => {
+          if (claiming.current) return;
           const data = snap.data() as SessionDoc | undefined;
           const mine = readSession();
           if (data && mine && data.sessionId !== mine) {
@@ -112,18 +119,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signIn = useCallback(async (email: string, password: string) => {
     const { auth } = await firebase();
     const { signInWithEmailAndPassword } = await import("firebase/auth");
-    const cred = await signInWithEmailAndPassword(auth, email, password);
-    await claimOrSignOut(cred.user);
+    claiming.current = true;
+    try {
+      const cred = await signInWithEmailAndPassword(auth, email, password);
+      await claimOrSignOut(cred.user);
+    } finally {
+      claiming.current = false;
+    }
     setKicked(null);
+    if (auth.currentUser) setStatus("signed-in");
   }, []);
 
   const signUp = useCallback(async (email: string, password: string) => {
     const { auth } = await firebase();
     const { createUserWithEmailAndPassword, sendEmailVerification } = await import("firebase/auth");
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
-    // Passes go only to verified emails (lib/auth/grants.ts).
-    await sendEmailVerification(cred.user).catch(() => {});
-    await claimOrSignOut(cred.user);
+    claiming.current = true;
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      // Passes go only to verified emails (lib/auth/grants.ts).
+      await sendEmailVerification(cred.user).catch(() => {});
+      await claimOrSignOut(cred.user);
+    } finally {
+      claiming.current = false;
+    }
+    if (auth.currentUser) setStatus("signed-in");
   }, []);
 
   const resetPassword = useCallback(async (email: string) => {

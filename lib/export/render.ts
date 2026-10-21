@@ -256,11 +256,11 @@ function drawFooter(g: CanvasRenderingContext2D, y: number, f: Fonts, W: number)
 }
 
 /** Render to one canvas per page. `pageHeight` = Infinity gives a single image. */
-export async function renderSheet(sheet: Sheet, pageHeight = Infinity, scale = 2): Promise<HTMLCanvasElement[]> {
+export async function renderSheet(sheet: Sheet, pageHeight = Infinity, scale = 2, width?: number): Promise<HTMLCanvasElement[]> {
   const f = fonts();
   await ensureFonts(f);
   const measure = document.createElement("canvas").getContext("2d")!;
-  const W = sheetWidth(measure, sheet, f);
+  const W = width ?? sheetWidth(measure, sheet, f);
   const body: Unit[] = sheet.blocks.flatMap((b, i) => {
     const gap: Unit = { h: i ? 24 : 8, draw: () => {} };
     return [gap, ...(b.kind === "table" ? tableUnits(measure, b, f, W) : fieldUnits(measure, b, f, W))];
@@ -320,7 +320,7 @@ export async function sheetToPdf(sheet: Sheet): Promise<Blob> {
   const width = sheetWidth(document.createElement("canvas").getContext("2d")!, sheet, f);
   const landscape = width > BASE_W * 1.2;
   const page = landscape ? { w: 841.89, h: 595.28 } : { w: 595.28, h: 841.89 };
-  const pages = await renderSheet(sheet, Math.round((width * page.h) / page.w));
+  const pages = await renderSheet(sheet, Math.round((width * page.h) / page.w), 2, width);
   const images = await Promise.all(
     pages.map(async (cv) => ({ jpeg: new Uint8Array(await (await toBlob(cv, "image/jpeg", 0.92)).arrayBuffer()), width: cv.width, height: cv.height })),
   );

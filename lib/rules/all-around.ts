@@ -1,5 +1,6 @@
 import type { Gender, ScoreEntry } from "@/lib/domain/types";
 import type { AllAroundRules } from "./types";
+import { groupByAthlete, round3 } from "./score";
 
 export interface AllAroundAthlete {
   athleteId: string;
@@ -19,13 +20,9 @@ export interface AthleteInfo {
   optedIn?: boolean;
 }
 
-const round3 = (n: number) => Math.round(n * 1000) / 1000;
-
 /** Sum each athlete's top N scored forms. `info` joins age / opt-in from a reference source. */
 export function allAround(scores: ScoreEntry[], rules: AllAroundRules, info: Map<string, AthleteInfo> = new Map()): AllAroundAthlete[] {
-  const by = new Map<string, ScoreEntry[]>();
-  for (const s of scores) by.set(s.athleteId, [...(by.get(s.athleteId) ?? []), s]);
-  return [...by.entries()].map(([id, forms]) => {
+  return [...groupByAthlete(scores).entries()].map(([id, forms]) => {
     const extra = info.get(id) ?? {};
     const top = [...forms].filter((f) => f.finalScore != null).sort((a, b) => b.finalScore! - a.finalScore!).slice(0, rules.topN);
     return {
@@ -42,7 +39,8 @@ export function allAround(scores: ScoreEntry[], rules: AllAroundRules, info: Map
   });
 }
 
-export const isEligible = (a: AllAroundAthlete, rules: AllAroundRules) => a.optedIn && a.forms.length >= rules.minForms;
+/** Opted in and has at least `minForms` scored forms (entered-but-unscored forms don't count). */
+export const isEligible = (a: AllAroundAthlete, rules: AllAroundRules) => a.optedIn && a.forms.filter((f) => f.finalScore != null).length >= rules.minForms;
 
 export function standings(athletes: AllAroundAthlete[], gender: Gender): AllAroundAthlete[] {
   return athletes.filter((a) => a.optedIn && a.gender === gender).sort((a, b) => b.total - a.total || a.athleteName.localeCompare(b.athleteName));

@@ -3,6 +3,7 @@ import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 import { applyGrant } from "./grants";
+import { parseServiceAccount } from "./service-account";
 import type { WatchList } from "@/lib/watchlist/match";
 import { hasEntitlement, isSessionCurrent, parseAdminUids, SESSION_HEADER, type EntitlementsDoc, type SessionDoc } from "./model";
 
@@ -15,8 +16,7 @@ function app(): App | null {
   if (getApps()[0]) return getApps()[0]!;
   const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
   if (!raw) return null;
-  const json = JSON.parse(Buffer.from(raw, "base64").toString("utf8")) as { project_id: string; client_email: string; private_key: string };
-  return initializeApp({ credential: cert({ projectId: json.project_id, clientEmail: json.client_email, privateKey: json.private_key }) });
+  return initializeApp({ credential: cert(parseServiceAccount(raw)) });
 }
 
 export const adminConfigured = () => !!process.env.FIREBASE_SERVICE_ACCOUNT;

@@ -10,7 +10,7 @@ export function ScheduleView({ schedule, highlights }: { schedule: Schedule; hig
     <div className="space-y-3">
       {blocks.map((b, i) =>
         b.type === "break" ? (
-          <p key={i} className="rounded-lg bg-line/40 px-4 py-2 text-center text-sm font-semibold text-ink-muted">
+          <p key={i} className="rounded-card bg-line/40 px-4 py-2 text-center text-sm font-semibold text-ink-muted">
             {b.label}
           </p>
         ) : (

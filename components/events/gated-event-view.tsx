@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AuthProvider, useAuth } from "@/components/auth/auth-provider";
 import { LockIcon } from "@/components/ui/icons";
 import { Notice } from "@/components/ui/notice";
@@ -33,20 +33,26 @@ export function GatedEventView(props: Props) {
 }
 
 function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds }: Props) {
-  const { status, authedFetch, kicked } = useAuth();
+  const { status, user, authedFetch, kicked } = useAuth();
   const [data, setData] = useState<EventData | null>(null);
-  const hasData = useRef(false);
   const [problem, setProblem] = useState<{ code?: string; error: string } | null>(null);
 
   const load = useCallback(async () => {
     const r = await readJson<EventData>(authedFetch(`/api/events/${slug}/data`), "Couldn't load scores.");
     if (r.ok) {
-      hasData.current = true;
       setData(r.body);
       setProblem(null);
-    } else if (!hasData.current || r.code) setProblem({ code: r.code, error: r.error });
-    // A failed poll (network, 5xx) with scores on screen keeps showing them.
+    } else setProblem({ code: r.code, error: r.error });
   }, [authedFetch, slug]);
+
+  // A different (or no) account must never see the previous account's paid data.
+  const uid = user?.uid ?? null;
+  const [shownFor, setShownFor] = useState(uid);
+  if (shownFor !== uid) {
+    setShownFor(uid);
+    setData(null);
+    setProblem(null);
+  }
 
   useEffect(() => {
     if (status !== "signed-in") return;
@@ -78,7 +84,8 @@ function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds }:
       </div>
     );
   }
-  if (problem) return <Notice tone="error" title="Couldn't load scores">{problem.error}</Notice>;
+  // A failed poll (network, 5xx) with scores on screen keeps showing them.
+  if (problem && (!data || problem.code)) return <Notice tone="error" title="Couldn't load scores">{problem.error}</Notice>;
   if (!data) return <p className="text-ink-muted">Loading scores…</p>;
   const Body = VIEW_BODY[view];
   return (

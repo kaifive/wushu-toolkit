@@ -23,7 +23,15 @@ function stepLabel(family: Family, code: string): string {
 function load(): { event: EventCode; chains: Chain[] } {
   try {
     const raw = window.localStorage.getItem(KEY);
-    if (raw) return JSON.parse(raw) as { event: EventCode; chains: Chain[] };
+    const s = raw ? (JSON.parse(raw) as { event?: unknown; chains?: unknown }) : null;
+    // Old or hand-edited values: keep only well-formed chains.
+    if (s && typeof s === "object") {
+      const event = EVENT_CODES.includes(s.event as EventCode) ? (s.event as EventCode) : "CQ";
+      const chains = Array.isArray(s.chains)
+        ? s.chains.filter((c): c is Chain => !!c && Array.isArray((c as Chain).steps) && (c as Chain).steps.every((x) => typeof x === "string"))
+        : [];
+      return { event, chains };
+    }
   } catch {
     /* storage blocked */
   }

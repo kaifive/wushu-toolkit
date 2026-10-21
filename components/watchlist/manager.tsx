@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { nameTokens, parseRoster, WATCH_COLORS, type WatchList } from "@/lib/watchlist/match";
 import { newId, useWatchLists, writeLists } from "@/lib/watchlist/store";
+import { moveItem } from "@/components/ui/use-copy";
 import { AthletePicker } from "./athlete-picker";
 
 const input = "min-h-tap w-full rounded-card border border-line bg-surface px-3";
@@ -12,15 +13,13 @@ export function WatchlistManager() {
   const lists = useWatchLists();
   const update = (id: string, patch: Partial<WatchList>) => writeLists(lists.map((l) => (l.id === id ? { ...l, ...patch } : l)));
   const remove = (id: string) => writeLists(lists.filter((l) => l.id !== id));
-  const move = (i: number, d: -1 | 1) => {
-    const j = i + d;
-    if (j < 0 || j >= lists.length) return;
-    const next = [...lists];
-    [next[i], next[j]] = [next[j]!, next[i]!];
-    writeLists(next);
+  const move = (i: number, d: -1 | 1) => writeLists(moveItem(lists, i, d));
+  const add = () => {
+    // First "List N" not already taken, so names stay distinct after deletes.
+    let n = lists.length + 1;
+    while (lists.some((l) => l.name === `List ${n}`)) n++;
+    writeLists([...lists, { id: newId(), name: `List ${n}`, color: WATCH_COLORS[lists.length % WATCH_COLORS.length]!, athletes: [], enabled: true }]);
   };
-  const add = () =>
-    writeLists([...lists, { id: newId(), name: `List ${lists.length + 1}`, color: WATCH_COLORS[lists.length % WATCH_COLORS.length]!, athletes: [], enabled: true }]);
 
   return (
     <div className="space-y-4">

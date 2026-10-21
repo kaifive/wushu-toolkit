@@ -1,6 +1,7 @@
 import type { Discipline, Gender, ScoreEntry } from "@/lib/domain/types";
 import { EVENTS } from "./events";
 import { DISCIPLINES, type Ruleset, type SelectionRules, type SelectionScoring, type TeamId, type TieBreak } from "./types";
+import { groupByAthlete, round3 } from "./score";
 
 /** One athlete's selection line: what counts, the total, and where it projects. */
 export interface Candidate {
@@ -36,7 +37,6 @@ export interface SelectionResult {
   teams: Team[];
 }
 
-const round3 = (n: number) => Math.round(n * 1000) / 1000;
 const scoreOf = (e?: ScoreEntry) => e?.finalScore ?? 0;
 
 function best(entries: ScoreEntry[]): ScoreEntry | undefined {
@@ -49,12 +49,6 @@ function isClean(e: ScoreEntry): boolean {
   if (!c) return false;
   if (c.made.length > 0 && c.made.every(Boolean)) return true;
   return (c.score ?? 0) >= 2;
-}
-
-function groupByAthlete(scores: ScoreEntry[]): Map<string, ScoreEntry[]> {
-  const m = new Map<string, ScoreEntry[]>();
-  for (const s of scores) m.set(s.athleteId, [...(m.get(s.athleteId) ?? []), s]);
-  return m;
 }
 
 function baseOf(entries: ScoreEntry[]) {

@@ -27,6 +27,8 @@ test("does not over-match", () => {
   assert.equal(namesMatch("Joshua Le", "Benjamin Le"), false);
   assert.equal(namesMatch("Le Joshua", "Joshua Lee"), false);
   assert.equal(namesMatch("", "Ada"), false);
+  assert.equal(namesMatch("Kim Lee", "Mike Le"), false, "anagram");
+  assert.equal(namesMatch("Dana Ho", "Noah Ad"), false, "anagram");
 });
 
 test("findWatch uses the first enabled list", () => {

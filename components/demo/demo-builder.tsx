@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { athleteKey } from "@/lib/domain/names";
 import { nameTokens } from "@/lib/watchlist/match";
-import { suggestAthletes, type AthleteIndex } from "@/lib/watchlist/suggest";
+import { prefixMatch, suggestAthletes, type AthleteIndex } from "@/lib/watchlist/suggest";
 import {
   LEVELS,
   actTitle,
@@ -38,7 +38,15 @@ const field = "min-h-tap w-full rounded-card border border-line bg-surface px-3"
 function load(): State {
   try {
     const raw = window.localStorage.getItem(KEY);
-    if (raw) return { ...EMPTY, ...(JSON.parse(raw) as Partial<State>) };
+    const s = raw ? (JSON.parse(raw) as Partial<State>) : null;
+    // Old or hand-edited values: keep only well-formed acts.
+    if (s && typeof s === "object") {
+      const acts = (Array.isArray(s.acts) ? s.acts : []).filter(
+        (a): a is Act => !!a && typeof a.id === "string" && LEVELS.includes(a.level) && Array.isArray(a.performers) && (a.kind === "group" || a.kind === "solo"),
+      );
+      const strings = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : []);
+      return { acts, order: strings(s.order), roster: strings(s.roster), generated: !!s.generated };
+    }
   } catch {
     /* storage blocked */
   }
@@ -91,7 +99,7 @@ export function DemoBuilder() {
     (q: string, exclude: string[] = []): ComboOption[] => {
       const qt = nameTokens(q);
       const local = cast
-        .filter((p) => !exclude.some((e) => sameName(e, p.name)) && qt.every((t) => nameTokens(p.name).some((w) => w.startsWith(t))))
+        .filter((p) => !exclude.some((e) => sameName(e, p.name)) && prefixMatch(qt, nameTokens(p.name)))
         .slice(0, 5)
         .map((p) => ({ value: p.name, detail: p.acts.length ? `In this demo · ${p.acts.length} act${p.acts.length > 1 ? "s" : ""}` : "In this demo" }));
       const past = index
@@ -138,7 +146,10 @@ export function DemoBuilder() {
             update((st) => ({
               ...st,
               roster: st.roster.filter((n) => !sameName(n, name)),
-              acts: st.acts.map((a) => ({ ...a, performers: a.performers.filter((p) => !sameName(p, name)) })),
+              // Their solos go with them; groups just lose a performer.
+              acts: st.acts
+                .filter((a) => !(a.kind === "solo" && a.performers.some((p) => sameName(p, name))))
+                .map((a) => ({ ...a, performers: a.performers.filter((p) => !sameName(p, name)) })),
             }))
           }
         />

@@ -1,4 +1,5 @@
 import type { RuleSource } from "../types";
+import { round3 } from "../score";
 
 /**
  * Degree of difficulty (nandu, Judging Group C) from the IWUF Wushu Taolu
@@ -281,7 +282,7 @@ export function familyOfEvent(code: string): { family: Family; weapon: boolean }
   return { family: "changquan", weapon: code !== "CQ" };
 }
 
-const r3 = (n: number) => Math.round(n * 1000) / 1000;
+const r3 = round3;
 
 /** Chain from a code string: "353B+323C+1" -> ["353B", "323C", "1"]. */
 export function chainFromCode(code: string): Chain {

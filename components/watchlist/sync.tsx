@@ -122,10 +122,15 @@ function Sync() {
   useEffect(() => {
     if (!ready.current) return;
     const t = window.setTimeout(() => void save(lists), 800);
+    // "hidden" fires while the page is still alive (tab switch, app switch on phones),
+    // so the token refresh in authedFetch can finish; pagehide is the last chance.
     const flush = () => void save(lists, true);
+    const onVisibility = () => document.visibilityState === "hidden" && flush();
+    document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("pagehide", flush);
     return () => {
       window.clearTimeout(t);
+      document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pagehide", flush);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

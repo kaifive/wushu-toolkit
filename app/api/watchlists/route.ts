@@ -1,5 +1,5 @@
 import { authErrorResponse, getWatchlists, setWatchlists, verifySession } from "@/lib/auth/admin";
-import { sanitizeLists } from "@/lib/watchlist/sync";
+import { fitsInAccount, sanitizeLists } from "@/lib/watchlist/sync";
 
 const noStore = { "cache-control": "private, no-store" };
 
@@ -18,10 +18,17 @@ export async function GET(req: Request) {
 export async function PUT(req: Request) {
   try {
     const { uid } = await verifySession(req);
-    if (Number(req.headers.get("content-length") ?? 0) > 512_000) return Response.json({ error: "Too much data." }, { status: 413 });
-    const body = (await req.json().catch(() => null)) as { lists?: unknown } | null;
+    const text = await req.text();
+    if (text.length > 2_000_000) return Response.json({ error: "Too much data." }, { status: 413 });
+    let body: { lists?: unknown } | null = null;
+    try {
+      body = JSON.parse(text) as { lists?: unknown };
+    } catch {
+      /* fall through to 400 */
+    }
     const lists = sanitizeLists(body?.lists);
     if (!lists) return Response.json({ error: "Expected { lists: [...] }." }, { status: 400 });
+    if (!fitsInAccount(lists)) return Response.json({ error: "These watch lists are too big to save to an account." }, { status: 413 });
     const updatedAt = await setWatchlists(uid, lists);
     return Response.json({ ok: true, updatedAt }, { headers: noStore });
   } catch (err) {

@@ -12,7 +12,7 @@ import type { Sheet } from "@/lib/export/sheet";
  */
 export type ExportTarget =
   | { kind: "scorecard"; athleteName: string; raw: string }
-  | { kind: "result"; raw: string }
+  | { kind: "result"; raw: string; gender?: Gender }
   | { kind: "overall"; gender: Gender; division: string };
 
 interface Ctx {
@@ -52,7 +52,7 @@ async function build(ctx: Ctx, t: ExportTarget): Promise<{ sheet: Sheet; name: s
       return row ? { sheet: sheets.scorecardSheet(ctx.eventName, row), name: fileName(ctx.eventName, row.athleteName, row.raw) } : null;
     }
     case "result": {
-      const r = views.resultsByEvent(data, ruleset).find((x) => x.raw === t.raw);
+      const r = views.resultsByEvent(data, ruleset).find((x) => x.raw === t.raw && x.gender === t.gender);
       return r ? { sheet: sheets.resultSheet(ctx.eventName, r), name: fileName(ctx.eventName, r.raw) } : null;
     }
     case "overall": {

@@ -29,8 +29,9 @@ export async function applyGrant(
   grantedBy: string,
   opts: { revoke?: boolean; expiresAt?: number } = {},
 ) {
-  const user = await auth.getUserByEmail(email.trim().toLowerCase()).catch(() => {
-    throw new GrantError("No account with that email. Ask them to sign up first.", "no-user");
+  const user = await auth.getUserByEmail(email.trim().toLowerCase()).catch((err: { code?: string }) => {
+    if (err?.code === "auth/user-not-found") throw new GrantError("No account with that email. Ask them to sign up first.", "no-user");
+    throw err; // permissions, quota, network: report as a real failure
   });
   const ref = db.collection("entitlements").doc(user.uid);
   if (opts.revoke) {

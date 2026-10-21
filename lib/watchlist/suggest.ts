@@ -43,7 +43,7 @@ export function buildAthleteIndex(events: { label: string; data: EventData }[]):
 }
 
 /** Every query word must start some word of the name, in any order: "tan ab" finds "Abram Tang". */
-function prefixMatch(query: string[], words: string[]): boolean {
+export function prefixMatch(query: string[], words: string[]): boolean {
   return query.every((q) => words.some((w) => w.startsWith(q)));
 }
 

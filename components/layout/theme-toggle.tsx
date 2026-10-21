@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 const KEY = "wt:theme";
+const EVENT = "wt:theme";
 type Theme = "light" | "dark";
 
 /** Inline script for <head>: applies a saved choice before paint. */
@@ -25,7 +26,12 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const onChange = () => setTheme(current());
     mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+    // Other toggles on the page (sidebar and phone header) flip together.
+    window.addEventListener(EVENT, onChange);
+    return () => {
+      mq.removeEventListener("change", onChange);
+      window.removeEventListener(EVENT, onChange);
+    };
   }, []);
 
   const flip = () => {
@@ -37,6 +43,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       /* storage blocked: applies until reload */
     }
     setTheme(next);
+    window.dispatchEvent(new Event(EVENT));
   };
 
   const dark = theme === "dark";

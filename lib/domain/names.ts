@@ -38,7 +38,11 @@ export function toNumber(value: unknown): number | null {
   if (typeof value === "number") return Number.isFinite(value) ? value : null;
   const s = clean(value);
   if (!s) return null;
-  const n = Number.parseFloat(s.replace(/[^0-9.\-]/g, ""));
+  // Exactly one number in the cell: "9.266", "9.266*", "$9.27". Cells with more
+  // ("8.95 (2)", "1:30") are ambiguous, so they read as no value rather than a wrong one.
+  const nums = s.match(/-?\d+(?:\.\d+)?/g);
+  if (nums?.length !== 1) return null;
+  const n = Number.parseFloat(nums[0]!);
   return Number.isFinite(n) ? n : null;
 }
 

@@ -193,3 +193,25 @@ test("category average ignores events not scored yet", () => {
   });
   assert.equal(c?.average, 9.15);
 });
+
+test("all-around minimum forms counts scored forms only", () => {
+  const rules = RULESETS["pwc-2026"].allAround!;
+  const scores = [e("Dee", "CQ", 9), e("Dee", "JS", null), e("Dee", "QS", null)];
+  const aa = allAround(scores, rules, new Map([["dee", { age: 12, optedIn: true }]]));
+  assert.equal(grandChampion(aa, rules), null);
+});
+
+test("results by event split men and women when the event name has no gender", async () => {
+  const { resultsByEvent } = await import("@/lib/events/views");
+  const raw = "Elementary Long Fist (IWuF)";
+  const scores = [
+    { ...e("Amy", "CQ", 9.1), raw, gender: "female" as const },
+    { ...e("Ben", "CQ", 9.3), raw, gender: "male" as const },
+    { ...e("Cai", "CQ", 8.9), raw, gender: "female" as const },
+  ];
+  const r = resultsByEvent({ registrations: [], scores, schedules: [], asOf: "", source: "" }, RULESETS["pwc-2026"]);
+  assert.deepEqual(r.map((x) => [x.gender, x.rows.map((row) => `${row.place} ${row.athleteName}`)]), [
+    ["female", ["1 Amy", "2 Cai"]],
+    ["male", ["1 Ben"]],
+  ]);
+});

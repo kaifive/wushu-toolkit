@@ -4,6 +4,7 @@ import { DISCIPLINE_LABEL, EVENTS, type Ruleset, type TeamId } from "@/lib/rules
 import type { Discipline } from "@/lib/domain/types";
 import { ageGroupChampions, allAround, grandChampion, standings as aaStandings, type AllAroundAthlete } from "@/lib/rules/all-around";
 import { runSelection, withDivisions, type Candidate, type Team } from "@/lib/rules/selection";
+import { groupByAthlete } from "@/lib/rules/score";
 import type { AthleteHighlight } from "./types";
 
 /**
@@ -100,8 +101,7 @@ export function selectionModel(data: EventData, ruleset: Ruleset): ScopeModel[] 
       const pool = scores.filter((s) => inScope(s, g, div.id));
       if (!pool.length) continue;
       const result = runSelection(pool, ruleset.selection, div.id);
-      const byAthlete = new Map<string, ScoreEntry[]>();
-      for (const s of pool) byAthlete.set(s.athleteId, [...(byAthlete.get(s.athleteId) ?? []), s]);
+      const byAthlete = groupByAthlete(pool);
       out.push({
         gender: g,
         division: div,
@@ -129,11 +129,20 @@ export interface EventResult {
   rows: { place: number; athleteName: string; club?: string; finalScore: number | null; hasScorecard: boolean }[];
 }
 
-/** Results grouped by event as printed by the source, ranked by final score. */
+/**
+ * Results grouped by event as printed by the source and by gender (some
+ * sources, e.g. 2024 juniors, don't put the gender in the event name), ranked
+ * by final score.
+ */
 export function resultsByEvent(data: EventData, ruleset: Ruleset): EventResult[] {
   const scores = withDivisions(data.scores, ruleset);
   const groups = new Map<string, ScoreEntry[]>();
-  for (const s of scores) groups.set(s.raw, [...(groups.get(s.raw) ?? []), s]);
+  for (const s of scores) {
+    const key = `${s.raw}\u0000${s.gender ?? ""}`;
+    const list = groups.get(key);
+    if (list) list.push(s);
+    else groups.set(key, [s]);
+  }
   return [...groups.entries()]
     .map(([raw, list]) => {
       const sorted = [...list].sort((a, b) => (b.finalScore ?? -1) - (a.finalScore ?? -1) || a.athleteName.localeCompare(b.athleteName));
@@ -146,7 +155,7 @@ export function resultsByEvent(data: EventData, ruleset: Ruleset): EventResult[]
       });
       return { raw, code: list[0]?.code, gender: list[0]?.gender, division: list[0]?.division, rows };
     })
-    .sort((a, b) => a.raw.localeCompare(b.raw));
+    .sort((a, b) => a.raw.localeCompare(b.raw) || (a.gender ?? "").localeCompare(b.gender ?? ""));
 }
 
 export interface ScorecardRow {

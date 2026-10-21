@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { stickyCol } from "@/components/ui/table";
 import { EventRow } from "@/components/events/event-card";
 import { TeamBadge } from "@/components/ui/badge";
 import { Card, StatTile } from "@/components/ui/card";
@@ -80,12 +81,17 @@ export default async function HomePage() {
           {ex && (
             <div className="text-ink">
               <Card title="Team projection" context={`${ex.event.shortName} · Men`} bodyClassName="" action={<Link href={`/events/${ex.event.slug}/team`} className="text-sm font-semibold text-primary">Open</Link>}>
-                <table className="w-full text-[15px] tnum">
+                {/* Scrolls inside the card at 375px, first column pinned (CLAUDE.md mobile checklist). */}
+                <div className="overflow-x-auto">
+                <table className="w-full min-w-max text-[15px] tnum [&_tr:nth-child(odd)_td]:bg-surface-2">
+                  <caption className="sr-only">{`Team projection, ${ex.event.shortName}, men`}</caption>
                   <tbody>
                     {ex.rows.map((r) => (
-                      <tr key={`${r.athleteId}-${r.discipline}`} data-athlete={r.athleteName} className="border-b border-line last:border-0 odd:bg-surface-2">
-                        <td className="w-8 px-3 py-2 text-ink-muted">{r.rank}</td>
-                        <td className="py-2 pr-2 font-semibold">{r.athleteName}</td>
+                      <tr key={`${r.athleteId}-${r.discipline}`} data-athlete={r.athleteName} className="border-b border-line last:border-0">
+                        <td className={`${stickyCol} py-2 pl-3 pr-2`}>
+                          <span className="mr-2 inline-block w-5 text-right text-ink-muted">{r.rank}</span>
+                          <span className="font-semibold">{r.athleteName}</span>
+                        </td>
                         <td className="px-2 py-2">
                           <TeamBadge team={r.team} />
                         </td>
@@ -94,6 +100,7 @@ export default async function HomePage() {
                     ))}
                   </tbody>
                 </table>
+                </div>
               </Card>
               <p className="mt-2 text-sm text-chrome-muted">Real results from the archive.</p>
             </div>

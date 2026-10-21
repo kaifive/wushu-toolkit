@@ -1,7 +1,7 @@
 import type { WatchList } from "./match";
 
 /** Limits for lists saved to an account (checked server-side). */
-export const SYNC_LIMITS = { lists: 50, athletes: 500, text: 120 } as const;
+export const SYNC_LIMITS = { lists: 50, athletes: 500, text: 120, bytes: 900_000 } as const;
 
 const HEX = /^#[0-9a-f]{6}$/i;
 const str = (v: unknown, max: number) => (typeof v === "string" ? v.replace(/\s+/g, " ").trim().slice(0, max) : "");
@@ -51,3 +51,6 @@ export function mergeLists(local: WatchList[], remote: WatchList[], localUnchang
 }
 
 export const sameLists = (a: WatchList[], b: WatchList[]) => JSON.stringify(a) === JSON.stringify(b);
+
+/** Firestore documents max out at 1 MiB; keep a margin. */
+export const fitsInAccount = (lists: WatchList[]) => new TextEncoder().encode(JSON.stringify(lists)).length <= SYNC_LIMITS.bytes;

@@ -11,7 +11,14 @@ type Saved = { set: string; orders: Record<string, PlacedItem[]> };
 function load(fallback: string): Saved {
   try {
     const raw = window.localStorage.getItem(KEY);
-    if (raw) return JSON.parse(raw) as Saved;
+    const s = raw ? (JSON.parse(raw) as Partial<Saved>) : null;
+    // Old or hand-edited values: keep only what has the right shape.
+    if (s && typeof s === "object") {
+      const orders: Saved["orders"] = {};
+      for (const [k, v] of Object.entries(s.orders ?? {}))
+        if (Array.isArray(v)) orders[k] = v.filter((p): p is PlacedItem => !!p && typeof (p as PlacedItem).id === "string");
+      return { set: typeof s.set === "string" ? s.set : fallback, orders };
+    }
   } catch {
     /* storage blocked */
   }

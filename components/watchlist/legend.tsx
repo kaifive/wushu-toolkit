@@ -13,7 +13,7 @@ export function WatchLegend() {
     const count = () => {
       const seen: Record<string, Set<string>> = {};
       document.querySelectorAll<HTMLElement>("[data-watch]").forEach((el) => {
-        const list = el.dataset.watch!;
+        const list = el.dataset.watch!; // list id
         (seen[list] ??= new Set()).add((el.dataset.athlete ?? "").toLowerCase());
       });
       setCounts(Object.fromEntries(Object.entries(seen).map(([k, v]) => [k, v.size])));
@@ -23,7 +23,7 @@ export function WatchLegend() {
     return () => window.removeEventListener("wt:watch-applied", count);
   }, []);
 
-  const active = lists.filter((l) => l.enabled && counts[l.name]);
+  const active = lists.filter((l) => l.enabled && counts[l.id]);
   if (!active.length) return null;
   return (
     <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
@@ -31,7 +31,7 @@ export function WatchLegend() {
       {active.map((l) => (
         <span key={l.id} className="inline-flex items-center gap-1.5 rounded border border-line bg-surface px-2 py-1 font-semibold">
           <span className="h-3 w-3 rounded-sm" style={{ background: l.color }} aria-hidden />
-          {l.name} <span className="font-normal text-ink-muted">({counts[l.name]})</span>
+          {l.name} <span className="font-normal text-ink-muted">({counts[l.id]})</span>
         </span>
       ))}
       <Link href="/watchlists" className="font-semibold text-primary">

@@ -15,7 +15,18 @@ export function nameTokens(name: string): string[] {
     .filter(Boolean);
 }
 
-const letters = (tokens: string[]) => tokens.join("").replace(/-/g, "").split("").sort().join("");
+/** Every way of writing the name's words run together, in any word order ("lan","hong","huang" -> "lanhonghuang", ...). */
+function joinings(tokens: string[]): Set<string> {
+  const parts = tokens.map((t) => t.replace(/-/g, ""));
+  const out = new Set<string>();
+  if (parts.length > 5) return out; // 120 orders at most
+  const walk = (left: string[], acc: string) => {
+    if (!left.length) out.add(acc);
+    left.forEach((p, i) => walk([...left.slice(0, i), ...left.slice(i + 1)], acc + p));
+  };
+  walk(parts, "");
+  return out;
+}
 
 /**
  * True when two names refer to the same person:
@@ -36,9 +47,12 @@ export function namesMatch(a: string, b: string): boolean {
   if (ta.length < 2 || tb.length < 2) return false;
   const [small, big] = sa.size <= sb.size ? [sa, sb] : [sb, sa];
   if ([...small].every((t) => big.has(t))) return true;
-  // Split or joined given names, hyphen differences.
-  const la = letters(ta);
-  return la.length >= 6 && la === letters(tb);
+  // Split or joined given names, hyphen differences: same letters in the same
+  // order once the words are run together (anagrams like "Kim Lee"/"Mike Le" don't count).
+  const ja = joinings(ta);
+  if (([...ja][0]?.length ?? 0) < 6) return false;
+  for (const j of joinings(tb)) if (ja.has(j)) return true;
+  return false;
 }
 
 export interface WatchList {
@@ -76,4 +90,4 @@ export function parseRoster(text: string): string[] {
   return out;
 }
 
-export const WATCH_COLORS = ["#5856d6", "#d4371f", "#1b8a5a", "#b7791f", "#0e7490", "#be185d", "#6d28d9", "#475569"];
+export const WATCH_COLORS = ["#5856d6", "#c2410c", "#1b8a5a", "#b7791f", "#0e7490", "#be185d", "#6d28d9", "#475569"];

@@ -22,7 +22,7 @@ export function WatchlistHighlighter() {
       document.querySelectorAll<HTMLElement>("[data-athlete]").forEach((el) => {
         const hit = lookup(el.dataset.athlete ?? "");
         if (hit) {
-          el.dataset.watch = hit.name;
+          el.dataset.watch = hit.id;
           el.style.setProperty("--watch", hit.color);
           el.title = `${hit.name} watch list`;
         } else if (el.dataset.watch !== undefined) {
@@ -35,15 +35,16 @@ export function WatchlistHighlighter() {
     };
     apply();
     let queued = false;
+    // New rows, and rows React reused for a different athlete (data-athlete changed).
     const obs = new MutationObserver((records) => {
-      if (queued || !records.some((r) => r.addedNodes.length)) return;
+      if (queued || !records.some((r) => r.addedNodes.length || r.type === "attributes")) return;
       queued = true;
       requestAnimationFrame(() => {
         queued = false;
         apply();
       });
     });
-    obs.observe(document.body, { childList: true, subtree: true });
+    obs.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["data-athlete"] });
     return () => obs.disconnect();
   }, [lists]);
   return null;

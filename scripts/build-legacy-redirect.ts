@@ -5,6 +5,7 @@
  *
  *   npm run legacy-redirect
  */
+import { pathToFileURL } from "node:url";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { LEGACY_ROUTES, resolveLegacy } from "../lib/legacy-routes";
@@ -38,7 +39,7 @@ export function redirectHtml(target = SITE.url): string {
 `;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const dir = join(process.cwd(), "legacy-redirect");
   mkdirSync(dir, { recursive: true });
   const html = redirectHtml();

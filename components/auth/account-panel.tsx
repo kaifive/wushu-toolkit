@@ -18,13 +18,22 @@ export function AccountPanel({ events }: { events: { slug: string; name: string 
   const [me, setMe] = useState<Me | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Forget the previous account's passes (and admin panel) when the user changes.
+  const uid = user?.uid ?? null;
+  const [shownFor, setShownFor] = useState(uid);
+  if (shownFor !== uid) {
+    setShownFor(uid);
+    setMe(null);
+    setError(null);
+  }
+
   useEffect(() => {
     if (status !== "signed-in") return;
     let alive = true;
     void readJson<Me>(authedFetch("/api/me"), "Couldn't load your account.").then((r) => {
       if (!alive) return;
-      if (r.ok) setMe(r.body);
-      else setError(r.error);
+      setMe(r.ok ? r.body : null);
+      setError(r.ok ? null : r.error);
     });
     return () => {
       alive = false;
