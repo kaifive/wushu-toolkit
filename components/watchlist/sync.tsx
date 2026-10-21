@@ -70,7 +70,14 @@ function Sync() {
   }, [authedFetch]);
 
   /** One save at a time; edits made meanwhile are sent next, newest wins. */
-  const saver = useRef<{ busy: boolean; next: WatchList[] | null; sent: string; rejected: string }>({ busy: false, next: null, sent: "", rejected: "" });
+  /** sent: last stored; rejected: refused as too big; failed: last attempt that hit a network/server error. */
+  const saver = useRef<{ busy: boolean; next: WatchList[] | null; sent: string; rejected: string; failed: string }>({
+    busy: false,
+    next: null,
+    sent: "",
+    rejected: "",
+    failed: "",
+  });
   // State (not a ref) so the change listeners below start once the first pull is done.
   const [ready, setReady] = useState(false);
 
@@ -81,6 +88,7 @@ function Sync() {
     return fetchRef.current("/api/watchlists", { method: "PUT", headers: { "content-type": "application/json" }, body, keepalive: keepalive && small }).catch(() => null);
   }, []);
 
+  const saveLoopRef = useRef<((uid: string) => Promise<void>) | null>(null);
   const saveLoop = useCallback(async (forUid: string, keepalive = false) => {
     const s = saver.current;
     if (s.busy) {
@@ -100,6 +108,7 @@ function Sync() {
         }
         if (json === s.rejected) continue; // already refused as too big; wait for a real change
         publish("saving");
+        s.failed = "";
         const res = await put(next, keepalive);
         if (res?.status === 413) {
           s.rejected = json;
@@ -111,6 +120,7 @@ function Sync() {
           break;
         }
         if (!res?.ok) {
+          s.failed = json;
           publish("error");
           s.next ??= next; // network or server trouble: retried when online or on the next change
           break;
@@ -129,7 +139,15 @@ function Sync() {
     } finally {
       s.busy = false;
     }
+    // Lists queued while that save ran (and differ from what was refused) go out now.
+    // (Never the same lists that just failed: those wait for "online", hide or the next edit.)
+    const s2 = saver.current;
+    const pending = s2.next && JSON.stringify(s2.next);
+    if (pending && pending !== s2.rejected && pending !== s2.sent && pending !== s2.failed) void saveLoopRef.current?.(forUid);
   }, [put]);
+  useEffect(() => {
+    saveLoopRef.current = saveLoop;
+  }, [saveLoop]);
 
   // On sign-in: pull the account's lists (retrying until it works) and merge.
   useEffect(() => {
@@ -148,8 +166,8 @@ function Sync() {
       for (let attempt = 0; alive; attempt++) {
         const res = await fetchRef.current("/api/watchlists").catch(() => null);
         if (!alive) return;
-        if (res && [401, 403, 503].includes(res.status)) {
-          // Not a passing blip (signed out elsewhere, no access, accounts off on the server): stop.
+        if (res && (res.status === 401 || res.status === 403)) {
+          // Not a passing blip (signed out elsewhere, no access): stop.
           publish("refused");
           return;
         }

@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { DEDUCTION_GROUPS, DEDUCTIONS_SOURCE } from "@/lib/rules/iwuf-2024/deductions";
-import { CONNECTIONS, TECHNIQUES, chainFromCode, declaredValue, nextOptions, parseNandu, parseNanduList, scoreNandu } from "@/lib/rules/iwuf-2024/nandu";
+import { CONNECTIONS, TECHNIQUES, chainFromCode, nextOptions, scoreNandu } from "@/lib/rules/iwuf-2024/nandu";
 
 test("deduction groups cover every taolu event exactly once", () => {
   const events = DEDUCTION_GROUPS.flatMap((g) => g.events);
@@ -21,26 +21,6 @@ test("deduction codes are well formed and unique within a group", () => {
       assert.ok(c.content.length > 0, `${g.id} ${c.code} has content`);
     }
   }
-});
-
-test("parseNandu splits movements and connections", () => {
-  assert.deepEqual(parseNandu("353B+323C+1"), {
-    raw: "353B+323C+1",
-    movements: [
-      { code: "353B", number: "353", level: "B" },
-      { code: "323C", number: "323", level: "C" },
-    ],
-    connections: ["1"],
-  });
-  assert.equal(parseNandu("355B")?.movements.length, 1);
-  assert.equal(parseNandu("hello"), null);
-});
-
-test("parseNanduList keeps unknown entries", () => {
-  const r = parseNanduList(["312A+335A", "??", "324B+1"]);
-  assert.equal(r.elements.length, 2);
-  assert.deepEqual(r.unknown, ["??"]);
-  assert.equal(declaredValue(r.elements), 1); // 0.2+0.2+B 0.15, 0.3+B 0.15
 });
 
 test("scoreNandu: a full 2.0 Daoshu set from the 2025 Phoenix scorecards", () => {

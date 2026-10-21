@@ -4,7 +4,7 @@ import { storageJson, storageSet } from "@/lib/storage";
 import { useEffect, useMemo, useState } from "react";
 import {
   CONN_CAP, CONN_VALUE, CONNECTION_ONLY, LANDINGS, NANDU_MAX, TECH_CAP, TECH_VALUE, TECHNIQUES,
-  chainCounted, chainFromCode, chainToCode, familyOfEvent, nextOptions, scoreNandu, technique, type Chain, type Family,
+  chainCounted, chainFromCode, isLanding, chainToCode, familyOfEvent, nextOptions, scoreNandu, technique, type Chain, type Family,
 } from "@/lib/rules/iwuf-2024/nandu";
 import { EVENTS } from "@/lib/rules";
 import { moveItem, useCopy } from "@/components/ui/use-copy";
@@ -17,7 +17,7 @@ const fmt = (n: number) => n.toFixed(2).replace(/0$/, "");
 const field = "min-h-tap w-full rounded-card border border-line bg-surface px-3";
 
 function stepLabel(family: Family, code: string): string {
-  if (/^\d{1,2}$/.test(code)) return LANDINGS[code]?.english ?? `+${code}`;
+  if (isLanding(code)) return LANDINGS[code]?.english ?? `+${code}`;
   return technique(family, code)?.english ?? CONNECTION_ONLY[code] ?? code;
 }
 
@@ -285,7 +285,7 @@ function ChainEditor({
   onChange: (c: Chain | null) => void;
 }) {
   const last = chain.steps[chain.steps.length - 1]!;
-  const ended = /^\d{1,2}$/.test(last);
+  const ended = isLanding(last);
   const options = ended ? [] : nextOptions(family, last).filter((o) => weapon || !o.code.endsWith("+9")); // throw and catch needs a weapon
   const value = chainCounted(scored);
   let li = 0;
@@ -323,8 +323,8 @@ function ChainEditor({
       </div>
       <ol className="space-y-2 p-4">
         {chain.steps.map((s, i) => {
-          const isLanding = /^\d{1,2}$/.test(s);
-          const tech = isLanding ? undefined : scored?.techniques.find((t, k) => k === chain.steps.slice(0, i + 1).filter((x) => !/^\d{1,2}$/.test(x)).length - 1);
+          const landing = isLanding(s);
+          const tech = landing ? undefined : scored?.techniques.find((t, k) => k === chain.steps.slice(0, i + 1).filter((x) => !isLanding(x)).length - 1);
           const link = i > 0 ? scored?.links[li++] : undefined;
           return (
             <li key={i} className="space-y-1">
@@ -337,8 +337,8 @@ function ChainEditor({
                 </p>
               )}
               <p className="flex items-center justify-between gap-3">
-                <span className="font-semibold">{isLanding ? `Land in ${stepLabel(family, s).toLowerCase()}` : stepLabel(family, s)}</span>
-                {!isLanding && <span className="shrink-0 tnum text-sm text-ink-muted">{tech?.grade ? <>{tech.grade} · <Value value={tech.value} counted={tech.counted} /></> : "0"}</span>}
+                <span className="font-semibold">{landing ? `Land in ${stepLabel(family, s).toLowerCase()}` : stepLabel(family, s)}</span>
+                {!landing && <span className="shrink-0 tnum text-sm text-ink-muted">{tech?.grade ? <>{tech.grade} · <Value value={tech.value} counted={tech.counted} /></> : "0"}</span>}
               </p>
             </li>
           );
@@ -355,10 +355,10 @@ function ChainEditor({
             <option value="">Then… (connection)</option>
             {options.map((o) => {
               const next = o.code.slice(last.length + 1);
-              const isLanding = /^\d{1,2}$/.test(next);
+              const landing = isLanding(next);
               return (
                 <option key={o.code} value={next}>
-                  {isLanding ? `Land in ${stepLabel(family, next).toLowerCase()}` : `Into ${stepLabel(family, next)}`} · {o.grade} +{fmt(CONN_VALUE[o.grade])}
+                  {landing ? `Land in ${stepLabel(family, next).toLowerCase()}` : `Into ${stepLabel(family, next)}`} · {o.grade} +{fmt(CONN_VALUE[o.grade])}
                   {o.steps ? ` (≤${o.steps} steps)` : ""}
                 </option>
               );

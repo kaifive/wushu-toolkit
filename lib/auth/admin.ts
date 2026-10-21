@@ -78,6 +78,18 @@ export async function getEntitlements(uid: string): Promise<EntitlementsDoc> {
   return (snap.data() as EntitlementsDoc | undefined) ?? { events: {} };
 }
 
+/** verifySession + requireEntitlement, with the session and pass reads in parallel (paid-data polls). */
+export async function verifySessionWithPass(req: Request, slug: string) {
+  const user = await verifyUser(req);
+  const { db } = services();
+  const [session, ents] = await Promise.all([db.collection("sessions").doc(user.uid).get(), getEntitlements(user.uid)]);
+  if (!isSessionCurrent(session.data() as SessionDoc | undefined, req.headers.get(SESSION_HEADER))) {
+    throw new AuthError("Your account was signed in on another device.", 401, "other-device");
+  }
+  if (!hasEntitlement(ents, slug)) throw new AuthError("This account doesn't have a pass for this event.", 403, "no-pass");
+  return user;
+}
+
 export async function requireEntitlement(uid: string, slug: string) {
   if (!hasEntitlement(await getEntitlements(uid), slug)) throw new AuthError("This account doesn't have a pass for this event.", 403, "no-pass");
 }

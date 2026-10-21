@@ -1,4 +1,4 @@
-import { authErrorResponse, requireEntitlement, verifySession } from "@/lib/auth/admin";
+import { authErrorResponse, verifySessionWithPass } from "@/lib/auth/admin";
 import { getEvent, requiresEntitlement } from "@/lib/events/registry";
 
 /** Data for paid live events. Requires a valid token, the current device, and a pass. */
@@ -9,8 +9,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
   if (requiresEntitlement(event)) {
     // Auth failures (and auth-service outages) answer like every other account route.
     try {
-      const { uid } = await verifySession(req);
-      await requireEntitlement(uid, slug);
+      await verifySessionWithPass(req, slug);
     } catch (err) {
       return authErrorResponse(err);
     }

@@ -1,5 +1,5 @@
 import { slugify } from "@/lib/domain/names";
-import type { EventResult, ScopeModel, ScorecardRow } from "@/lib/events/views";
+import { GENDER_LABEL, type EventResult, type ScopeModel, type ScorecardRow } from "@/lib/events/views";
 
 /**
  * A printable sheet: what an exported PNG or PDF shows. Builders here are
@@ -75,7 +75,6 @@ export function resultSheet(eventName: string, r: EventResult): Sheet {
   };
 }
 
-const GENDER = { male: "Male", female: "Female" } as const;
 
 export function overallSheet(eventName: string, m: ScopeModel): Sheet {
   // Athletes listed once per discipline get the discipline after their name.
@@ -83,7 +82,7 @@ export function overallSheet(eventName: string, m: ScopeModel): Sheet {
   const dup = new Set<string>();
   for (const r of m.rows) (seen.has(r.athleteId) ? dup : seen).add(r.athleteId);
   return {
-    title: `Overall · ${GENDER[m.gender]} · ${m.division.label}`,
+    title: `Overall · ${GENDER_LABEL[m.gender]} · ${m.division.label}`,
     subtitle: `${eventName} · ${m.scored}/${m.total} routines scored`,
     blocks: [
       {

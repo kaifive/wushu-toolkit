@@ -1,7 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { highlightStyle, type HighlightFor, type ScopeModel } from "@/lib/events/views";
-
-const G = { male: "Male", female: "Female" } as const;
+import { GENDER_LABEL, highlightStyle, type HighlightFor, type ScopeModel } from "@/lib/events/views";
 
 export function TeamProjection({ model, highlights }: { model: ScopeModel; highlights?: HighlightFor }) {
   return (
@@ -10,7 +8,7 @@ export function TeamProjection({ model, highlights }: { model: ScopeModel; highl
         <Card
           key={t.id}
           title={`${t.id} Team`}
-          context={`${G[model.gender]} · ${t.members.length}/${t.size}${t.minAverage !== undefined ? ` · min ${t.minAverage.toFixed(1)}` : ""}`}
+          context={`${GENDER_LABEL[model.gender]} · ${t.members.length}/${t.size}${t.minAverage !== undefined ? ` · min ${t.minAverage.toFixed(1)}` : ""}`}
           bodyClassName=""
         >
           {t.members.length === 0 ? (

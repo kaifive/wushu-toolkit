@@ -107,10 +107,11 @@ function tableUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind:
     xs.push({ x, w });
     x += w;
   });
-  const cellX = (i: number, text: string) => {
+  // Measured on the drawing context `g`, in the font the text is drawn with.
+  const cellX = (g: CanvasRenderingContext2D, i: number, text: string) => {
     const col = block.columns[i]!;
     const { x: cx, w } = xs[i]!;
-    return col.align === "right" ? cx + w - 12 - ctx.measureText(text).width : cx + 12;
+    return col.align === "right" ? cx + w - 12 - g.measureText(text).width : cx + 12;
   };
 
   const header: Unit = {
@@ -123,7 +124,7 @@ function tableUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind:
       g.textBaseline = "middle";
       block.columns.forEach((col, i) => {
         const t = fit(g, col.label, xs[i]!.w - 24);
-        g.fillText(t, cellX(i, t), y + 24);
+        g.fillText(t, cellX(g, i, t), y + 24);
       });
       g.fillStyle = C.line;
       g.fillRect(PAD, y + 47, inner, 1);
@@ -148,7 +149,7 @@ function tableUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind:
           g.font = s.font;
           g.fillStyle = s.color;
           const t = fit(g, cell.text, xs[i]!.w - 24);
-          const tx = cellX(i, t);
+          const tx = cellX(g, i, t);
           g.fillText(t, tx, y + 26);
           if (cell.strike || cell.miss) strikeThrough(g, tx, y + 27, g.measureText(t).width, s.color);
         });

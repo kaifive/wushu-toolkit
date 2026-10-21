@@ -67,7 +67,9 @@ let token: string | null = null;
 async function serverSaysKicked(res: Response) {
   if (res.status !== 401) return;
   const body = (await res.clone().json().catch(() => null)) as { code?: string } | null;
-  if (body?.code !== "other-device" || claiming || readLocal()?.claimedAt === null) return;
+  // No local id means this device just signed out (or is mid sign-in): not a takeover.
+  const local = readLocal();
+  if (body?.code !== "other-device" || claiming || !local || local.claimedAt === null) return;
   const device = lastDoc?.device || "another device";
   storageSet(KICKED_KEY, device);
   writeLocal(null);
@@ -121,8 +123,10 @@ function start() {
       void u?.getIdToken().then((t) => (token = t));
     });
     let unsubSession = () => {};
+    let relisten: number | undefined;
     onAuthStateChanged(auth, (u) => {
       unsubSession();
+      window.clearTimeout(relisten);
       lastDoc = undefined;
       set({ user: u });
       if (!u) {
@@ -140,7 +144,10 @@ function start() {
             lastDoc = s.data() as SessionDoc | undefined;
             settle();
           },
-          () => window.setTimeout(() => snap.user?.uid === u.uid && listen(), 5000),
+          () => {
+            window.clearTimeout(relisten);
+            relisten = window.setTimeout(() => snap.user?.uid === u.uid && listen(), 5000);
+          },
         );
       };
       listen();

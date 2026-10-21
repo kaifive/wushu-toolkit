@@ -1,5 +1,5 @@
 import { EVENT_CONFIGS } from "@/content/events";
-import type { EventConfig, EventStatus } from "./types";
+import type { EventConfig } from "./types";
 
 const BY_SLUG = new Map(EVENT_CONFIGS.map((e) => [e.slug, e]));
 
@@ -9,10 +9,6 @@ export function getEvent(slug: string): EventConfig | undefined {
 
 export function allEvents(): EventConfig[] {
   return [...EVENT_CONFIGS].sort((a, b) => b.dates.start.localeCompare(a.dates.start));
-}
-
-export function eventsByStatus(status: EventStatus): EventConfig[] {
-  return allEvents().filter((e) => e.status === status);
 }
 
 /** Archived events are always free, whatever the config says. */

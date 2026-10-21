@@ -12,6 +12,8 @@ import { namesMatch } from "@/lib/watchlist/match";
  * Used by server pages and, for paid events, by the client after it fetches data.
  */
 
+export const GENDER_LABEL: Record<Gender, string> = { male: "Male", female: "Female" };
+
 export const GENDERS: { id: Gender; label: string }[] = [
   { id: "male", label: "Male" },
   { id: "female", label: "Female" },

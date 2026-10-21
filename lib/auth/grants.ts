@@ -1,5 +1,5 @@
 import type { Auth } from "firebase-admin/auth";
-import { FieldValue, type Firestore } from "firebase-admin/firestore";
+import { FieldPath, FieldValue, type Firestore } from "firebase-admin/firestore";
 
 /**
  * Grant or revoke an event pass by email. Shared by the admin route and
@@ -40,7 +40,9 @@ export async function applyGrant(
     // Sign-up doesn't prove the address, so only a verified email can receive a pass.
     if (!user.emailVerified) throw new GrantError("That account hasn't verified its email yet. Ask them to open the verification link first.", "not-verified");
     const grant = { grantedAt: Date.now(), grantedBy, source: "manual" as const, ...(opts.expiresAt ? { expiresAt: opts.expiresAt } : {}) };
-    await ref.set({ email: user.email, events: { [slug]: grant } }, { merge: true });
+    // update() with a field path replaces this event's grant whole: a merge would keep an old expiresAt.
+    await ref.set({ email: user.email }, { merge: true });
+    await ref.update(new FieldPath("events", slug), grant);
   }
   return { uid: user.uid, email: user.email };
 }

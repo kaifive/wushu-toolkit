@@ -137,12 +137,12 @@ export default function RulesPage() {
         <h2 className="mb-3 font-display text-xl font-bold">Judging</h2>
         <div className="space-y-2 text-sm">
           <p>
-            Deductions: <Link href="/tools/deductions" className="text-primary underline">deduction code lookup</Link>.
+            Deductions: <Link href="/tools/deductions" className="inline-flex min-h-tap items-center text-primary underline">deduction code lookup</Link>.
           </p>
           <p className="text-ink-muted">
             Difficulty (nandu): techniques A/B/C are worth 0.2/0.3/0.4 (up to 1.4) and listed connections A/B/C/D are worth
             0.1/0.15/0.2/0.25 (up to 0.6), for 2.0 in total. Build yours in the{" "}
-            <Link href="/tools/nandu" className="text-primary underline">
+            <Link href="/tools/nandu" className="inline-flex min-h-tap items-center text-primary underline">
               nandu calculator
             </Link>{" "}
             ({NANDU_SOURCE.revision} tables).
@@ -153,7 +153,7 @@ export default function RulesPage() {
         <SourceNote>
           Minimum averages, team sizes and tie-breaks not yet confirmed against the official document.{" "}
           {r.source.url && (
-            <a href={r.source.url} className="underline" target="_blank" rel="noopener noreferrer">
+            <a href={r.source.url} className="inline-flex min-h-tap items-center underline" target="_blank" rel="noopener noreferrer">
               Official document
             </a>
           )}

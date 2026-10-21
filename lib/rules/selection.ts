@@ -190,9 +190,3 @@ export function withDivisions(scores: ScoreEntry[], ruleset: Ruleset): ScoreEntr
   return scores.map((s) => (s.division ? s : { ...s, division: ruleset.divisions.find((d) => d.matchers.some((m) => m.test(s.raw)))?.id }));
 }
 
-/** What an athlete needs in their remaining event to reach a target total (the "score beater"). */
-export function scoreNeeded(target: number, have: number, maxScore = 10): number | null {
-  const need = round3(target - have);
-  if (need > maxScore) return null;
-  return Math.max(0, need);
-}

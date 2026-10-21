@@ -195,46 +195,6 @@ export function nextOptions(family: Family, from: string): Connection[] {
 
 // ---------- Parsing declared codes (Sportdata registrations, scorecards) ----------
 
-export interface NanduMovement {
-  code: string;
-  number: string;
-  level: string;
-}
-
-export interface NanduElement {
-  raw: string;
-  movements: NanduMovement[];
-  connections: string[];
-}
-
-const MOVEMENT = /^(\d{3})([A-Z])$/i;
-
-/** "353B+323C+1" -> movements 353B, 323C and landing code 1. */
-export function parseNandu(raw: string): NanduElement | null {
-  const parts = raw.replace(/\s+/g, "").split("+").filter(Boolean);
-  if (!parts.length) return null;
-  const movements: NanduMovement[] = [];
-  const connections: string[] = [];
-  for (const p of parts) {
-    const m = p.match(MOVEMENT);
-    if (m) movements.push({ code: `${m[1]}${m[2]!.toUpperCase()}`, number: m[1]!, level: m[2]!.toUpperCase() });
-    else if (/^\d{1,2}$/.test(p)) connections.push(p);
-    else return null;
-  }
-  return movements.length ? { raw, movements, connections } : null;
-}
-
-export function parseNanduList(list: string[]): { elements: NanduElement[]; unknown: string[] } {
-  const elements: NanduElement[] = [];
-  const unknown: string[] = [];
-  for (const raw of list) {
-    const el = parseNandu(raw);
-    if (el) elements.push(el);
-    else unknown.push(raw);
-  }
-  return { elements, unknown };
-}
-
 // ---------- Scoring a routine ----------
 
 /** One registered element: a chain of techniques, optionally ending in a landing code. */
@@ -284,6 +244,9 @@ export function familyOfEvent(code: string): { family: Family; weapon: boolean }
 
 const r3 = round3;
 
+/** A landing code ("1", "6", "9"…) rather than a technique. */
+export const isLanding = (step: string) => /^\d{1,2}$/.test(step);
+
 /** Chain from a code string: "353B+323C+1" -> ["353B", "323C", "1"]. */
 export function chainFromCode(code: string): Chain {
   return { steps: code.replace(/\s+/g, "").split("+").filter(Boolean).map((s) => s.toUpperCase()) };
@@ -303,15 +266,15 @@ export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions =
     const techniques: ScoredChain["techniques"] = [];
     const links: ScoredLink[] = [];
     ch.steps.forEach((s, i) => {
-      const isLanding = /^\d{1,2}$/.test(s);
-      if (!isLanding) {
+      const landing = isLanding(s);
+      if (!landing) {
         const tech = technique(family, s);
         techniques.push({ code: s, grade: tech?.grade, value: tech ? TECH_VALUE[tech.grade] : 0, counted: 0, known: !!tech || s in CONNECTION_ONLY });
         if (!tech && !(s in CONNECTION_ONLY)) warnings.push(`${s} is not a ${FAMILY_LABEL[family].split(",")[0]} difficulty technique.`);
       }
       if (i > 0) {
         const prev = ch.steps[i - 1]!;
-        if (/^\d{1,2}$/.test(prev)) {
+        if (isLanding(prev)) {
           // Keep one link per step (the editor lines links up by index); it earns nothing.
           links.push({ code: `${prev}+${s}`, value: 0, counted: 0, listed: false });
           warnings.push(`Nothing can follow a landing (${chainToCode(ch)}).`);
@@ -370,9 +333,4 @@ export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions =
 export function chainCounted(c: ScoredChain | undefined): number {
   if (!c) return 0;
   return r3(c.techniques.reduce((s, t) => s + t.counted, 0) + c.links.reduce((s, l) => s + l.counted, 0));
-}
-
-/** Sum of declared technique values (legacy helper used by scorecards). */
-export function declaredValue(elements: NanduElement[], family: Family = "changquan"): number {
-  return scoreNandu(family, elements.map((e) => ({ steps: [...e.movements.map((m) => m.code), ...e.connections] }))).total;
 }

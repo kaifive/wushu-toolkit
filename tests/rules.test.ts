@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { EventCode, ScoreEntry } from "@/lib/domain/types";
 import { RULESETS, formatDuration } from "@/lib/rules";
-import { buildCandidates, rankCandidates, runSelection, scoreNeeded, selectTeams, withDivisions } from "@/lib/rules/selection";
+import { buildCandidates, rankCandidates, runSelection, selectTeams, withDivisions } from "@/lib/rules/selection";
 import { ageGroupChampions, allAround, grandChampion, standings } from "@/lib/rules/all-around";
 
 let n = 0;
@@ -149,9 +149,6 @@ test("PWC all-around: top 3 sum, opt-in, age-group champions", () => {
 });
 
 test("helpers", () => {
-  assert.equal(scoreNeeded(18.5, 9.2), 9.3);
-  assert.equal(scoreNeeded(18.5, 7), null);
-  assert.equal(scoreNeeded(10, 12), 0);
   assert.equal(formatDuration(70), "1:10");
   assert.equal(formatDuration(undefined), "—");
 });
