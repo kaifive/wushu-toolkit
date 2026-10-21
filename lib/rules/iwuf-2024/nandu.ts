@@ -245,13 +245,16 @@ export interface ScoredLink {
   code: string;
   grade?: ConnGrade;
   value: number;
+  /** What actually counts after the 0.6 cap; less than value only for the element that crosses it. */
+  counted: number;
   listed: boolean;
   steps?: number;
   note?: string;
 }
 
 export interface ScoredChain {
-  techniques: { code: string; grade?: TechGrade; value: number; known: boolean }[];
+  /** counted: value after the 1.4 cap, in registration order. */
+  techniques: { code: string; grade?: TechGrade; value: number; counted: number; known: boolean }[];
   links: ScoredLink[];
 }
 
@@ -302,7 +305,7 @@ export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions =
       const isLanding = /^\d{1,2}$/.test(s);
       if (!isLanding) {
         const tech = technique(family, s);
-        techniques.push({ code: s, grade: tech?.grade, value: tech ? TECH_VALUE[tech.grade] : 0, known: !!tech || s in CONNECTION_ONLY });
+        techniques.push({ code: s, grade: tech?.grade, value: tech ? TECH_VALUE[tech.grade] : 0, counted: 0, known: !!tech || s in CONNECTION_ONLY });
         if (!tech && !(s in CONNECTION_ONLY)) warnings.push(`${s} is not a ${FAMILY_LABEL[family].split(",")[0]} difficulty technique.`);
       }
       if (i > 0) {
@@ -312,7 +315,7 @@ export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions =
           return;
         }
         const conn = connection(family, prev, s);
-        links.push({ code: `${prev}+${s}`, grade: conn?.grade, value: conn ? CONN_VALUE[conn.grade] : 0, listed: !!conn, steps: conn?.steps, note: conn?.note });
+        links.push({ code: `${prev}+${s}`, grade: conn?.grade, value: conn ? CONN_VALUE[conn.grade] : 0, counted: 0, listed: !!conn, steps: conn?.steps, note: conn?.note });
         if (!conn) warnings.push(`${prev}+${s} is not a listed connection, so it earns no connection value.`);
       }
     });
@@ -336,6 +339,14 @@ export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions =
   if (throws > 1) warnings.push("Only one throw-and-catch connection is allowed per weapon routine.");
   if (throws > 0 && opts.weapon === false) warnings.push("Throw-and-catch connections are for weapon routines.");
 
+  // Over a cap, only the last registered technique/connection loses value (Art. 22),
+  // so fill the caps in registration order.
+  let techLeft = TECH_CAP;
+  let connLeft = CONN_CAP;
+  for (const c of scored) {
+    for (const t of c.techniques) techLeft = r3(techLeft - (t.counted = r3(Math.min(t.value, techLeft))));
+    for (const l of c.links) connLeft = r3(connLeft - (l.counted = r3(Math.min(l.value, connLeft))));
+  }
 
   const techniqueRaw = r3(scored.flatMap((c) => c.techniques).reduce((s, x) => s + x.value, 0));
   const connectionRaw = r3(scored.flatMap((c) => c.links).reduce((s, x) => s + x.value, 0));
@@ -350,6 +361,12 @@ export function scoreNandu(family: Family, chains: Chain[], opts: ScoreOptions =
     total: r3(tech + conn),
     warnings: [...new Set(warnings)],
   };
+}
+
+/** Value a scored element actually earns after the caps. */
+export function chainCounted(c: ScoredChain | undefined): number {
+  if (!c) return 0;
+  return r3(c.techniques.reduce((s, t) => s + t.counted, 0) + c.links.reduce((s, l) => s + l.counted, 0));
 }
 
 /** Sum of declared technique values (legacy helper used by scorecards). */

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   CONN_CAP, CONN_VALUE, CONNECTION_ONLY, LANDINGS, NANDU_MAX, TECH_CAP, TECH_VALUE, TECHNIQUES,
-  chainFromCode, chainToCode, familyOfEvent, nextOptions, scoreNandu, technique, type Chain, type Family,
+  chainCounted, chainFromCode, chainToCode, familyOfEvent, nextOptions, scoreNandu, technique, type Chain, type Family,
 } from "@/lib/rules/iwuf-2024/nandu";
 import { EVENTS } from "@/lib/rules";
 import type { EventCode } from "@/lib/domain/types";
@@ -184,7 +184,7 @@ function RegistrationCodes({ chains, score }: { chains: Chain[]; score: ReturnTy
       <ol className="divide-y divide-line">
         {codes.map((code, i) => {
           const sc = score.chains[i];
-          const v = (sc?.techniques.reduce((a, t) => a + t.value, 0) ?? 0) + (sc?.links.reduce((a, l) => a + l.value, 0) ?? 0);
+          const v = chainCounted(sc);
           return (
             <li key={i} className="flex items-center gap-3 px-4 py-2">
               <span className="w-5 text-ink-muted tnum">{i + 1}</span>
@@ -201,6 +201,16 @@ function RegistrationCodes({ chains, score }: { chains: Chain[]; score: ReturnTy
         {copied === "select" ? "Copy is blocked here; press and hold a code to select it." : `Total ${score.total.toFixed(2)}`}
       </p>
     </section>
+  );
+}
+
+/** A value, with the cut shown when the cap reduces it. */
+function Value({ value, counted, prefix = "" }: { value: number; counted: number; prefix?: string }) {
+  if (counted >= value) return <>{prefix + fmt(value)}</>;
+  return (
+    <span title="Over the cap: only this last element loses value">
+      <s>{prefix + fmt(value)}</s> <span className="font-semibold text-ink">{counted > 0 ? prefix + fmt(counted) : "0"} over cap</span>
+    </span>
   );
 }
 
@@ -285,7 +295,7 @@ function ChainEditor({
   const last = chain.steps[chain.steps.length - 1]!;
   const ended = /^\d{1,2}$/.test(last);
   const options = ended ? [] : nextOptions(family, last).filter((o) => weapon || !o.code.endsWith("+9")); // throw and catch needs a weapon
-  const value = (scored?.techniques.reduce((s, t) => s + t.value, 0) ?? 0) + (scored?.links.reduce((s, l) => s + l.value, 0) ?? 0);
+  const value = chainCounted(scored);
   let li = 0;
 
   return (
@@ -329,14 +339,14 @@ function ChainEditor({
               {link && (
                 <p className={`text-sm ${link.listed ? "text-ink-muted" : "text-seal"}`}>
                   {link.listed
-                    ? `Connection ${link.grade} · +${fmt(link.value)}${link.steps ? ` · within ${link.steps} step${link.steps > 1 ? "s" : ""}` : ""}`
+                    ? <>Connection {link.grade} · <Value value={link.value} counted={link.counted} prefix="+" />{link.steps ? ` · within ${link.steps} step${link.steps > 1 ? "s" : ""}` : ""}</>
                     : "Not a listed connection · +0"}
                   {link.note ? ` · ${link.note}` : ""}
                 </p>
               )}
               <p className="flex items-center justify-between gap-3">
                 <span className="font-semibold">{isLanding ? `Land in ${stepLabel(family, s).toLowerCase()}` : stepLabel(family, s)}</span>
-                {!isLanding && <span className="shrink-0 tnum text-sm text-ink-muted">{tech?.grade ? `${tech.grade} · ${fmt(tech.value)}` : "0"}</span>}
+                {!isLanding && <span className="shrink-0 tnum text-sm text-ink-muted">{tech?.grade ? <>{tech.grade} · <Value value={tech.value} counted={tech.counted} /></> : "0"}</span>}
               </p>
             </li>
           );

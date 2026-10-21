@@ -105,3 +105,14 @@ test("familyOfEvent", () => {
   assert.deepEqual(familyOfEvent("NQ"), { family: "nanquan", weapon: false });
   assert.deepEqual(familyOfEvent("TS"), { family: "taiji", weapon: true });
 });
+
+test("only the element that crosses a cap loses value", () => {
+  // 3 × C + 1 × B = 1.5 raw: the fourth counts 0.2.
+  const chains = ["353C", "324C", "323C", "133B"].map(chainFromCode);
+  const s = scoreNandu("changquan", chains);
+  assert.equal(s.technique, 1.4);
+  assert.deepEqual(s.chains.map((c) => c.techniques[0]!.counted), [0.4, 0.4, 0.4, 0.2]);
+  // Moving the cut element earlier moves the cut to the new last one.
+  const r = scoreNandu("changquan", [chains[3]!, chains[0]!, chains[1]!, chains[2]!]);
+  assert.deepEqual(r.chains.map((c) => c.techniques[0]!.counted), [0.3, 0.4, 0.4, 0.3]);
+});

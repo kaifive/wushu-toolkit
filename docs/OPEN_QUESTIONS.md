@@ -123,6 +123,6 @@ deduction codes were re-entered from the same PDF (Tables 10-1-1 to 10-1-6,
 | 8 | Deploy | Khai installs the Claude GitHub App, then imports into Vercel | Push + PR once the app is installed |
 | Redirect | gh-pages | **After the new site is live**, with Khai's OK | — |
 | Deductions | Update to IWUF 2024 | **Yes** | Done |
-| Nandu cap | Mark the cut element | **Yes** | Show which element loses value over the cap |
+| Nandu cap | Mark the cut element | **Yes** | Done |
 | 11 | Exact archive dates | Month/year is fine | Closed |
 | Extras | Next features | **Watch-list sync to account, light/dark toggle** | Queue after the above |
