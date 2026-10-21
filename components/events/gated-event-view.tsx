@@ -38,8 +38,11 @@ function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds, t
   const [data, setData] = useState<EventData | null>(null);
   const [problem, setProblem] = useState<{ code?: string; error: string } | null>(null);
 
-  const load = useCallback(async () => {
+  // `current()` is false once the account (or event) changed: a late reply
+  // for the previous account is dropped instead of shown.
+  const load = useCallback(async (current: () => boolean) => {
     const r = await readJson<EventData>(authedFetch(`/api/events/${slug}/data`), "Couldn't load scores.");
+    if (!current()) return;
     if (r.ok) {
       setData(r.body);
       setProblem(null);
@@ -58,10 +61,15 @@ function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds, t
   useEffect(() => {
     if (status !== "signed-in") return;
     // Fetch on sign-in, then poll while the tab is visible.
+    let alive = true;
+    const current = () => alive;
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    void load();
-    const id = window.setInterval(() => document.visibilityState === "visible" && void load(), refreshSeconds * 1000);
-    return () => window.clearInterval(id);
+    void load(current);
+    const id = window.setInterval(() => document.visibilityState === "visible" && void load(current), refreshSeconds * 1000);
+    return () => {
+      alive = false;
+      window.clearInterval(id);
+    };
   }, [status, load, refreshSeconds]);
 
   if (status === "loading") return <p className="text-ink-muted">Loading…</p>;

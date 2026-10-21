@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Container, PageHeader } from "@/components/ui/page-header";
 import { WatchlistManager } from "@/components/watchlist/manager";
-import { WatchlistSync } from "@/components/watchlist/sync";
+import { WatchlistSyncStatus } from "@/components/watchlist/sync";
 
 export const metadata: Metadata = { title: "Watch lists", description: "Highlight your athletes on every competition page." };
 
@@ -11,7 +11,7 @@ export default function WatchlistsPage() {
       <PageHeader title="Watch lists" />
       <WatchlistManager />
       <div className="mt-4">
-        <WatchlistSync />
+        <WatchlistSyncStatus />
       </div>
     </Container>
   );

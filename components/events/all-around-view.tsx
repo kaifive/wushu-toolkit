@@ -42,7 +42,7 @@ export function AllAroundTable({ athletes, topN, highlights }: { athletes: AllAr
                   <td key={k} className={`${td} text-right`} title={form?.raw}>
                     {form ? (
                       <>
-                        <span className="font-semibold">{form.finalScore?.toFixed(2)}</span>
+                        <span className="font-semibold">{form.finalScore?.toFixed(3)}</span>
                         <span className="block text-xs text-ink-muted">{form.code ?? ""}</span>
                       </>
                     ) : (

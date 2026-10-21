@@ -32,13 +32,15 @@ export function ExportProvider({ slug, eventName, rulesetId, data, children }: {
       if (data) return Promise.resolve(data);
       const hit = cache.current;
       if (hit && hit.key === slug && Date.now() - hit.at < 30_000) return hit.data;
-      const req = fetch(`/api/events/${slug}/data`).then((r) => {
-        if (!r.ok) {
-          cache.current = null;
-          throw new Error(`HTTP ${r.status}`);
-        }
-        return r.json() as Promise<EventData>;
-      });
+      const req = fetch(`/api/events/${slug}/data`)
+        .then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.json() as Promise<EventData>;
+        })
+        .catch((err: unknown) => {
+          cache.current = null; // network or bad response: the next tap retries
+          throw err;
+        });
       cache.current = { key: slug, at: Date.now(), data: req };
       return req;
     };

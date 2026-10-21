@@ -2,6 +2,7 @@ import { Sidebar, type SidebarGroup } from "@/components/layout/sidebar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { WatchlistHighlighter } from "@/components/watchlist/highlighter";
+import { WatchlistSync } from "@/components/watchlist/sync";
 import { allEvents } from "@/lib/events/registry";
 
 function navGroups(): SidebarGroup[] {
@@ -39,6 +40,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <SiteFooter />
       </div>
       <WatchlistHighlighter />
+      <WatchlistSync />
     </>
   );
 }

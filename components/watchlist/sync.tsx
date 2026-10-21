@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { AuthProvider, useAuth } from "@/components/auth/auth-provider";
 import type { WatchList } from "@/lib/watchlist/match";
 import { readLists, useWatchLists, writeLists } from "@/lib/watchlist/store";
@@ -23,7 +23,27 @@ const writeSynced = (uid: string, lists: WatchList[]) => storageSet(syncedKey(ui
 
 type State = "idle" | "loading" | "saving" | "saved" | "trimmed" | "error";
 
-/** Keeps this device's watch lists in step with the signed-in account. */
+const wasTrimmed = (stored: WatchList[], sent: WatchList[]) =>
+  stored.length !== sent.length || stored.some((l, i) => l.athletes.length !== sent[i]?.athletes.length);
+
+/**
+ * Sync runs once per page (app layout); the status line on /watchlists reads
+ * it from here.
+ */
+type Shown = { auth: "off" | "loading" | "signed-out" | "signed-in"; state: State };
+let shown: Shown = { auth: "loading", state: "idle" };
+const SHOWN_EVENT = "wt:watchlist-sync";
+function publish(next: Shown) {
+  if (next.auth === shown.auth && next.state === shown.state) return;
+  shown = next;
+  window.dispatchEvent(new Event(SHOWN_EVENT));
+}
+const subscribeShown = (cb: () => void) => {
+  window.addEventListener(SHOWN_EVENT, cb);
+  return () => window.removeEventListener(SHOWN_EVENT, cb);
+};
+
+/** Keeps this device's watch lists in step with the signed-in account. Mounted once in the app layout. */
 export function WatchlistSync() {
   return (
     <AuthProvider>
@@ -54,7 +74,9 @@ function Sync() {
       const stored = ((await res.json().catch(() => null)) as { lists?: WatchList[] } | null)?.lists ?? next;
       lastSaved.current = JSON.stringify(stored);
       writeSynced(uid, stored);
-      if (!sameLists(stored, next)) {
+      // Adopt the stored copy only when the server actually cut lists or names;
+      // its whitespace tidying must not rewrite a name that is still being typed.
+      if (wasTrimmed(stored, next)) {
         writeLists(stored);
         setState("trimmed");
       } else setState("saved");
@@ -119,11 +141,18 @@ function Sync() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lists]);
 
-  if (status === "off" || status === "loading") return null;
-  if (status === "signed-out")
+  useEffect(() => publish({ auth: status, state }), [status, state]);
+  return null;
+}
+
+/** "Saved to your account" / "Sign in to keep lists…" line for /watchlists. */
+export function WatchlistSyncStatus() {
+  const { auth, state } = useSyncExternalStore(subscribeShown, () => shown, () => shown);
+  if (auth === "off" || auth === "loading") return null;
+  if (auth === "signed-out")
     return (
       <p className="text-sm text-ink-muted">
-        <Link href="/account" className="font-semibold text-primary">
+        <Link href="/account" className="inline-flex min-h-tap items-center font-semibold text-primary">
           Sign in
         </Link>{" "}
         to keep watch lists on all your devices.
@@ -131,7 +160,11 @@ function Sync() {
     );
   return (
     <p className="text-sm text-ink-muted" aria-live="polite">
-      {state === "loading" ? "Syncing with your account…" : state === "saving" ? "Saving…" : state === "error"
+      {state === "loading"
+        ? "Syncing with your account…"
+        : state === "saving"
+          ? "Saving…"
+          : state === "error"
             ? "Couldn't sync with your account. Changes are kept on this device."
             : state === "trimmed"
               ? `Saved to your account, trimmed to ${SYNC_LIMITS.lists} lists of ${SYNC_LIMITS.athletes} names.`

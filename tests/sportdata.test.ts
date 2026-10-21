@@ -98,5 +98,8 @@ test("joinRegistrationScores keeps the scored copy of a duplicated row", async (
   const row = { athleteId: "amy lee", athleteName: "Amy Lee", raw: "CQ", code: "CQ" as const };
   const scores = [{ ...row, finalScore: 8.9 }, { ...row, finalScore: null }];
   const joined = joinRegistrationScores(registrationsFromScores(scores), scores);
-  assert.ok(joined.every((s) => s.finalScore === 8.9));
+  assert.deepEqual(joined.map((s) => s.finalScore), [8.9], "one entry, scored");
+  // A corrected re-entry below the first row wins.
+  const fixed = [{ ...row, finalScore: 8.7 }, { ...row, finalScore: 8.95 }];
+  assert.deepEqual(joinRegistrationScores(registrationsFromScores(fixed), fixed).map((s) => s.finalScore), [8.95]);
 });

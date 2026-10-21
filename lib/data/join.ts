@@ -11,10 +11,11 @@ const eventKey = (raw: string) => clean(raw).toLowerCase();
 export function joinRegistrationScores(regs: Registration[], scores: ScoreEntry[]): ScoreEntry[] {
   const byKey = new Map<string, ScoreEntry>();
   for (const s of scores) {
-    // A duplicated row (re-run, copied line) must not blank out a real score.
+    // Duplicated rows (re-run, copied line, corrected re-entry): the last
+    // scored row wins, and a blank copy never hides a real score.
     const key = `${s.athleteId}|${eventKey(s.raw)}`;
     const prev = byKey.get(key);
-    if (!prev || (prev.finalScore == null && s.finalScore != null)) byKey.set(key, s);
+    if (!prev || s.finalScore != null) byKey.set(key, s);
   }
   return regs.flatMap((r) =>
     r.entries
@@ -44,7 +45,9 @@ export function registrationsFromScores(scores: ScoreEntry[]): Registration[] {
   for (const s of scores) {
     const id = s.athleteId || athleteKey(s.athleteName);
     const reg = m.get(id) ?? { athlete: { id, name: s.athleteName, gender: s.gender, club: s.club, division: s.division }, entries: [] };
-    reg.entries.push({ raw: s.raw, code: s.code, gender: s.gender, division: s.division, nandu: s.nandu });
+    // One entry per event: a duplicated row must not become a second form.
+    if (!reg.entries.some((e) => eventKey(e.raw) === eventKey(s.raw)))
+      reg.entries.push({ raw: s.raw, code: s.code, gender: s.gender, division: s.division, nandu: s.nandu });
     m.set(id, reg);
   }
   return [...m.values()];

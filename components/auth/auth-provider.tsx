@@ -151,6 +151,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       claiming.current = false;
     }
+    setKicked(null);
     if (auth.currentUser) setStatus("signed-in");
   }, []);
 

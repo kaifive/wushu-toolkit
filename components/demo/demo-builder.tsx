@@ -202,7 +202,7 @@ function Chips({ items, onRemove, label }: { items: { key: string; text: React.R
       {items.map((it) => (
         <li key={it.key} className="flex min-h-tap items-center gap-1 rounded-card border border-line bg-surface-2 pl-3 text-sm">
           <span>{it.text}</span>
-          <button type="button" onClick={() => onRemove(it.key)} aria-label={`Remove ${it.aria}`} className="flex h-11 w-9 items-center justify-center text-ink-muted hover:text-ink">
+          <button type="button" onClick={() => onRemove(it.key)} aria-label={`Remove ${it.aria}`} className="flex h-11 w-11 items-center justify-center text-ink-muted hover:text-ink">
             ×
           </button>
         </li>

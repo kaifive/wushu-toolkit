@@ -143,10 +143,12 @@ body {
   opacity: 1;
 }
 
-p,
-li {
+p {
   text-wrap: pretty;
   max-width: 62ch; /* ~75 characters in the system font */
+}
+li {
+  text-wrap: pretty;
 }
 
 /* Watch-list highlight (components/watchlist/highlighter.tsx sets --watch). */
