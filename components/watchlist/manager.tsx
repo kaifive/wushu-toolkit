@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { nameTokens, parseRoster, WATCH_COLORS, type WatchList } from "@/lib/watchlist/match";
 import { newId, useWatchLists, writeLists } from "@/lib/watchlist/store";
@@ -59,6 +59,7 @@ function ListEditor({
     if (parseRoster(draft).join("\n") === base) setDraft(joined);
   }
   const [confirming, setConfirming] = useState(false);
+  const confirmTimer = useRef<number | undefined>(undefined);
   const roster = useMemo(() => parseRoster(draft), [draft]);
   const saved = parseRoster(draft).join("\n") === list.athletes.join("\n");
   const oneWord = list.athletes.filter((a) => nameTokens(a).length < 2);
@@ -159,9 +160,13 @@ function ListEditor({
               if (confirming) return onRemove();
               setConfirming(true);
               // iOS Safari doesn't blur buttons, so the second tap must come soon.
-              window.setTimeout(() => setConfirming(false), 4000);
+              window.clearTimeout(confirmTimer.current);
+              confirmTimer.current = window.setTimeout(() => setConfirming(false), 4000);
             }}
-            onBlur={() => setConfirming(false)}
+            onBlur={() => {
+              window.clearTimeout(confirmTimer.current);
+              setConfirming(false);
+            }}
             className="ml-auto min-h-tap rounded-card px-3 font-semibold text-ink-muted hover:text-ink"
           >
             {confirming ? "Tap again to delete" : "Delete list"}

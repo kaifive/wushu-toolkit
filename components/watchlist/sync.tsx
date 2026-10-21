@@ -7,7 +7,7 @@ import { authConfigured } from "@/lib/auth/client";
 import type { WatchList } from "@/lib/watchlist/match";
 import { readLists, useWatchLists, writeLists } from "@/lib/watchlist/store";
 import { storageGet, storageJson, storageSet } from "@/lib/storage";
-import { mergeLists, sameLists, sanitizeLists, SYNC_LIMITS } from "@/lib/watchlist/sync";
+import { mergeLists, sameLists, sanitizeLists, SYNC_LIMITS, tidyText } from "@/lib/watchlist/sync";
 
 /**
  * Account sync for watch lists (ADR-009). <WatchlistSync/> runs once per page
@@ -30,7 +30,7 @@ type State = "loading" | "saving" | "saved" | "trimmed" | "error" | "too-big" | 
  * tidied whitespace, so the device should adopt its copy. Whitespace-only
  * differences are left alone: they may be a name still being typed.
  */
-const tidy = (t: string) => t.replace(/\s+/g, " ").trim();
+const tidy = tidyText;
 /** What the server would store if it only tidied whitespace (no cuts). */
 const tidied = (lists: WatchList[]) =>
   lists.map((l) => ({ ...l, name: tidy(l.name) || "Watch list", athletes: l.athletes.map(tidy).filter(Boolean) }));
@@ -177,7 +177,8 @@ function Sync() {
           publish("refused");
           return;
         }
-        const remote = res?.ok ? (((await res.json().catch(() => null)) as { lists?: WatchList[] } | null)?.lists ?? null) : null;
+        // Canonical form (same keys and order as the base), whatever order the store returned.
+        const remote = res?.ok ? sanitizeLists(((await res.json().catch(() => null)) as { lists?: unknown } | null)?.lists) : null;
         if (!alive) return;
         if (remote) {
           const local = readLists();

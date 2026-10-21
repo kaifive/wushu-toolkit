@@ -1,11 +1,12 @@
-import { athleteKey } from "@/lib/domain/names";
-import type { WatchList } from "./match";
+import { nameTokens, type WatchList } from "./match";
 
 /** Limits for lists saved to an account (checked server-side). */
 export const SYNC_LIMITS = { lists: 50, athletes: 500, text: 120, bytes: 900_000 } as const;
 
 const HEX = /^#[0-9a-f]{6}$/i;
-const str = (v: unknown, max: number) => (typeof v === "string" ? v.replace(/\s+/g, " ").trim().slice(0, max) : "");
+/** Whitespace tidying the server applies to every name (the client mirrors it). */
+export const tidyText = (t: string) => t.replace(/\s+/g, " ").trim();
+const str = (v: unknown, max: number) => (typeof v === "string" ? tidyText(v).slice(0, max) : "");
 
 /** Clean untrusted input into watch lists, or null if it isn't a list array at all. */
 export function sanitizeLists(input: unknown): WatchList[] | null {
@@ -30,14 +31,23 @@ export function sanitizeLists(input: unknown): WatchList[] | null {
   return out;
 }
 
+/** Same person for merging: the roster editor's rule (words in any order, punctuation ignored). */
+const personKey = (name: string) => nameTokens(name).sort().join(" ");
+/** Compare lists independent of key order (Firestore returns map keys sorted). */
+const canon = (l: WatchList) => JSON.stringify([l.id, l.name, l.color, [...l.athletes], l.enabled]);
+const same = (a?: WatchList, b?: WatchList) => !!a && !!b && canon(a) === canon(b);
+/** Three-way pick for one field: whichever side changed it since the base; this device wins a clash. */
+const pick = <T,>(b: T | undefined, l: T, r: T) => (b !== undefined && l === b ? r : l);
+
 /**
  * Lists to keep when this device signs in, as a three-way merge against
  * `base` (what this device and the account last agreed on):
  * - nothing changed here since then: the account wins (deletions elsewhere stick);
- * - a list deleted here, or elsewhere, stays deleted unless the other side
- *   changed it meanwhile;
+ * - a list deleted on one side stays deleted unless the other side changed it meanwhile;
+ * - name, colour and on/off: whichever side changed them (this device on a clash);
  * - athletes added or removed on either side are applied, matched by name
- *   regardless of word order; this device's name, colour and on/off win.
+ *   regardless of word order or punctuation;
+ * - a reorder made only here is kept.
  * Without a base (never synced) the two sides are combined.
  */
 export function mergeLists(local: WatchList[], remote: WatchList[], localUnchanged: boolean, base: WatchList[] | null = null): WatchList[] {
@@ -45,35 +55,47 @@ export function mergeLists(local: WatchList[], remote: WatchList[], localUnchang
   const baseBy = new Map((base ?? []).map((l) => [l.id, l]));
   const localBy = new Map(local.map((l) => [l.id, l]));
   const remoteIds = new Set(remote.map((l) => l.id));
-  const same = (a?: WatchList, b?: WatchList) => !!a && !!b && JSON.stringify(a) === JSON.stringify(b);
-  const out: WatchList[] = [];
+  const merged = new Map<string, WatchList>();
   for (const r of remote) {
     const l = localBy.get(r.id);
     const b = baseBy.get(r.id);
     if (!l) {
       // Missing here: deleted here (it was in the base) unless changed elsewhere since.
-      if (!b || !same(b, r)) out.push(r);
+      if (!b || !same(b, r)) merged.set(r.id, r);
       continue;
     }
-    out.push({ ...l, athletes: mergeAthletes(b?.athletes ?? null, l.athletes, r.athletes) });
+    merged.set(r.id, {
+      ...l,
+      name: pick(b?.name, l.name, r.name),
+      color: pick(b?.color, l.color, r.color),
+      enabled: pick(b?.enabled, l.enabled, r.enabled),
+      athletes: mergeAthletes(b?.athletes ?? null, l.athletes, r.athletes),
+    });
   }
   for (const l of local) {
     if (remoteIds.has(l.id)) continue;
     const b = baseBy.get(l.id);
     // Only here: new here (keep), or deleted elsewhere (drop unless changed here since).
-    if (!b || !same(b, l)) out.push(l);
+    if (!b || !same(b, l)) merged.set(l.id, l);
   }
-  return out;
+  // Order: this device's, if only this device reordered; otherwise the account's.
+  const ids = (lists: WatchList[]) => lists.map((l) => l.id).filter((id) => merged.has(id)).join("\n");
+  const reorderedHere = !!base && ids(remote) === ids(base) && ids(local) !== ids(base);
+  const first = reorderedHere ? local : remote;
+  const order = [...first.map((l) => l.id), ...[...merged.keys()]].filter((id, i, a) => merged.has(id) && a.indexOf(id) === i);
+  return order.map((id) => merged.get(id)!);
 }
 
-/** Athlete names merged three ways; same person = same name key (word order ignored). */
+/** Athlete names merged three ways; same person = personKey. Linear: keys are built once. */
 function mergeAthletes(base: string[] | null, local: string[], remote: string[]): string[] {
-  const key = athleteKey;
-  const has = (list: string[], name: string) => list.some((x) => key(x) === key(name));
-  if (!base) return [...local, ...remote.filter((r) => !has(local, r))];
-  const addedThere = remote.filter((r) => !has(base, r) && !has(local, r));
-  const removedThere = base.filter((b) => !has(remote, b));
-  return [...local.filter((l) => !has(removedThere, l)), ...addedThere];
+  const keys = (list: string[]) => new Set(list.map(personKey));
+  const localKeys = keys(local);
+  if (!base) return [...local, ...remote.filter((r) => !localKeys.has(personKey(r)))];
+  const baseKeys = keys(base);
+  const remoteKeys = keys(remote);
+  const addedThere = remote.filter((r) => !baseKeys.has(personKey(r)) && !localKeys.has(personKey(r)));
+  const removedThere = new Set([...baseKeys].filter((k) => !remoteKeys.has(k)));
+  return [...local.filter((l) => !removedThere.has(personKey(l))), ...addedThere];
 }
 
 export const sameLists = (a: WatchList[], b: WatchList[]) => JSON.stringify(a) === JSON.stringify(b);

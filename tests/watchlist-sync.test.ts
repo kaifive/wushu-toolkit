@@ -56,3 +56,29 @@ test("mergeLists three-way: a list deleted elsewhere stays deleted unless change
 test("mergeLists matches athletes regardless of word order", () => {
   assert.deepEqual(mergeLists([list("a", ["Chen Ada"])], [list("a", ["Ada Chen"])], false).map((l) => l.athletes), [["Chen Ada"]]);
 });
+
+test("mergeLists: key order from the store doesn't matter", () => {
+  const base = [list("x", ["Amy Lee"]), list("y", ["Ben Ho"])];
+  // Firestore-style sorted keys on the account copy.
+  const sorted = (l: WatchList) => ({ athletes: l.athletes, color: l.color, enabled: l.enabled, id: l.id, name: l.name }) as WatchList;
+  const remote = base.map(sorted);
+  const local = [list("y", ["Ben Ho", "New Kid"])]; // x deleted here, y edited
+  assert.deepEqual(mergeLists(local, remote, false, base).map((l) => l.id), ["y"]);
+});
+
+test("mergeLists: a rename elsewhere survives an unrelated edit here", () => {
+  const base = [list("y", ["Amy Lee"], { name: "Nova" }), list("z", [])];
+  const remote = [list("y", ["Amy Lee"], { name: "Nova Wushu" }), list("z", [])];
+  const local = [list("y", ["Amy Lee"], { name: "Nova" }), list("z", ["Added Here"])];
+  assert.equal(mergeLists(local, remote, false, base)[0]!.name, "Nova Wushu");
+});
+
+test("mergeLists: a reorder made only here is kept", () => {
+  const base = [list("y", []), list("z", [])];
+  const local = [list("z", ["Kid One"]), list("y", [])];
+  assert.deepEqual(mergeLists(local, base, false, base).map((l) => l.id), ["z", "y"]);
+});
+
+test("mergeLists: same person despite punctuation", () => {
+  assert.deepEqual(mergeLists([list("a", ["O'Brien Sean"])], [list("a", ["OBrien Sean"])], false)[0]!.athletes, ["O'Brien Sean"]);
+});
