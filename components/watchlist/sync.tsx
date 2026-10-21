@@ -113,6 +113,7 @@ function Sync() {
           continue;
         }
         if (json === s.rejected) continue; // already refused as too big; wait for a real change
+        if (saver.current !== s) return; // the account changed: these lists belong to the previous one
         publish("saving");
         s.failed = "";
         const res = await put(next, keepalive);
@@ -123,6 +124,7 @@ function Sync() {
         }
         if (res && (res.status === 401 || res.status === 403)) {
           publish("refused"); // signed out or not allowed; auth handles the rest
+          s.next ??= next; // kept for a retry if the account comes back
           break;
         }
         if (!res?.ok) {
@@ -155,10 +157,12 @@ function Sync() {
 
   // On sign-in: pull the account's lists (retrying until it works) and merge.
   useEffect(() => {
+    // A fresh queue per account: a save still running for the previous account
+    // notices the swap (saver.current changed) and stops before sending again.
+    saver.current = { busy: false, next: null, sent: "", rejected: "", failed: "", cutHere: false };
     const s = saver.current;
     // Starting over for this account (state reset is the effect's job here).
     setReady(false);
-    s.sent = "";
     if (!uid) return;
     let alive = true;
     let wake: () => void = () => {};

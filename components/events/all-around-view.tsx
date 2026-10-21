@@ -22,11 +22,13 @@ export function AllAroundTable({ athletes, topN, highlights }: { athletes: AllAr
       <tbody>
         {athletes.map((a, i) => {
           const hl = highlights(a.athleteName);
+          // Equal totals share a place ("=" like the overall standings).
+          const tied = i > 0 && athletes[i - 1]!.total === a.total;
           return (
             <tr key={a.athleteId} data-athlete={a.athleteName} className="border-b border-line last:border-0">
               <td className={`${td} ${stickyCol} max-w-[11rem]`} style={highlightStyle(hl)}>
                 <div className="flex gap-2">
-                  <span className="w-6 shrink-0 text-right text-ink-muted">{i + 1}</span>
+                  <span className="w-6 shrink-0 text-right text-ink-muted">{tied ? "=" : i + 1}</span>
                   <div className="min-w-0">
                     <p className="truncate font-semibold">{a.athleteName}</p>
                     <p className="truncate text-xs text-ink-muted">

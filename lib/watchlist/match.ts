@@ -10,7 +10,8 @@ export function nameTokens(name: string): string[] {
   return foldAccents(name)
     .toLowerCase()
     .replace(/['’`]/g, "")
-    .replace(/[^a-z0-9-]+/g, " ")
+    // Letters of any script stay (王小明 is a name too); punctuation becomes a space.
+    .replace(/[^\p{L}\p{N}-]+/gu, " ")
     .split(" ")
     .filter(Boolean);
 }

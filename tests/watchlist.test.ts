@@ -82,3 +82,9 @@ test("suggestAthletes matches word prefixes in any order and skips listed athlet
   assert.deepEqual(suggestAthletes(index, "ada").map((a) => a.name), ["Ada Chen"]);
   assert.deepEqual(suggestAthletes(index, "ada", ["chen_ada"]), []);
 });
+
+test("names with Đ, ø and non-Latin scripts", () => {
+  assert.ok(namesMatch("Nguyễn Đức", "Duc Nguyen"));
+  assert.ok(namesMatch("Søren Berg", "Soren Berg"));
+  assert.deepEqual(parseRoster("王小明\nAda Chen"), ["王小明", "Ada Chen"]);
+});

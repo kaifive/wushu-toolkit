@@ -115,6 +115,13 @@ it does not meet a 9.0 minimum, and averages are shown cut to thousandths
 (8.999) so the display agrees. If USAWKF rounds averages to thousandths first, that
 athlete qualifies; one line in `lib/rules/selection.ts` changes it.
 
+### 14. What counts as "clean nandu" for the 2025 adult A team?
+
+The A team needs a routine with clean difficulty. **Default:** clean = every
+declared element was made, or a C score of 2.0. The "more full nandu"
+tie-break counts only C = 2.0. If the rule means full 2.0 difficulty,
+`isClean` in `lib/rules/selection.ts` is a one-line change.
+
 ---
 
 ## Answers (2026-10-21)

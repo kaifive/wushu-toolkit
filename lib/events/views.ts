@@ -5,7 +5,7 @@ import { ageGroupChampions, allAround, grandChampion, standings as aaStandings, 
 import { runSelection, withDivisions, type Candidate, type Team } from "@/lib/rules/selection";
 import { floor3, groupByAthlete } from "@/lib/rules/score";
 import type { AthleteHighlight } from "./types";
-import { namesMatch } from "@/lib/watchlist/match";
+import { compileWatch } from "@/lib/watchlist/match";
 
 /**
  * View models: plain serializable data computed from EventData + ruleset.
@@ -211,13 +211,11 @@ export type HighlightFor = (athleteName: string) => Highlight | undefined;
  * lists ("Huang LanHong" finds "Lan Hong Huang"). Results are memoized per name.
  */
 export function highlighter(highlights: AthleteHighlight[] = []): HighlightFor {
-  const memo = new Map<string, Highlight | undefined>();
+  // Same lookup as watch lists: entries tokenized once, earliest group wins.
+  const lookup = compileWatch(highlights.map((h, i) => ({ id: String(i), name: h.name, color: h.color, enabled: true, athletes: h.athletes })));
   return (name) => {
-    if (!memo.has(name)) {
-      const h = highlights.find((x) => x.athletes.some((a) => namesMatch(a, name)));
-      memo.set(name, h ? { color: h.color, group: h.name } : undefined);
-    }
-    return memo.get(name);
+    const hit = lookup(name);
+    return hit ? { color: hit.color, group: hit.name } : undefined;
   };
 }
 

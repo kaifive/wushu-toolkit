@@ -19,13 +19,13 @@ export function ScorecardCard({ row, highlights }: { row: ScorecardRow; highligh
       <dl className="grid grid-cols-1 gap-3 px-4 pb-4 text-sm sm:grid-cols-2">
         {a && (
           <div>
-            <dt className="text-xs font-semibold uppercase text-ink-muted">A · Quality {f(a.score, 2)}</dt>
+            <dt className="text-sm font-semibold text-ink-muted">A · Quality {f(a.score, 2)}</dt>
             <dd className="mt-1">{a.deductions.length ? `Deduction codes: ${a.deductions.join(", ")}` : "No deductions"}</dd>
           </div>
         )}
         {b && (
           <div>
-            <dt className="text-xs font-semibold uppercase text-ink-muted">B · Performance {f(b.score)}</dt>
+            <dt className="text-sm font-semibold text-ink-muted">B · Performance {f(b.score)}</dt>
             <dd className="mt-1 flex flex-wrap gap-1.5 tabular-nums">
               {b.marks.length
                 ? b.marks.map((m, i) => (
@@ -39,7 +39,7 @@ export function ScorecardCard({ row, highlights }: { row: ScorecardRow; highligh
         )}
         {c && (
           <div>
-            <dt className="text-xs font-semibold uppercase text-ink-muted">C · Difficulty {f(c.score, 2)}</dt>
+            <dt className="text-sm font-semibold text-ink-muted">C · Difficulty {f(c.score, 2)}</dt>
             <dd className="mt-1 flex flex-wrap gap-1.5">
               {c.elements.length
                 ? c.elements.map((el, i) => (
@@ -53,13 +53,13 @@ export function ScorecardCard({ row, highlights }: { row: ScorecardRow; highligh
         )}
         {adjustment !== undefined && adjustment !== 0 && (
           <div>
-            <dt className="text-xs font-semibold uppercase text-ink-muted">Head judge adjustment</dt>
+            <dt className="text-sm font-semibold text-ink-muted">Head judge adjustment</dt>
             <dd className="mt-1 tabular-nums">{adjustment.toFixed(3)}</dd>
           </div>
         )}
         {row.nandu?.length ? (
           <div className="sm:col-span-2">
-            <dt className="text-xs font-semibold uppercase text-ink-muted">Declared nandu</dt>
+            <dt className="text-sm font-semibold text-ink-muted">Declared nandu</dt>
             <dd className="mt-1 font-mono text-xs">{row.nandu.join(" · ")}</dd>
           </div>
         ) : null}

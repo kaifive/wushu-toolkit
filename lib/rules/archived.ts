@@ -1,4 +1,5 @@
 import type { Division, Ruleset } from "./types";
+import { CHILDREN_MATCHERS, JUNIOR_MATCHERS, YOUTH_MATCHERS } from "./divisions";
 
 /**
  * Rulesets for archived events, reconstructed from how the legacy app
@@ -7,9 +8,9 @@ import type { Division, Ruleset } from "./types";
  */
 
 const JUNIOR_DIVISIONS: Division[] = [
-  { id: "A", label: "Group A (Youth)", matchers: [/\byouth\b/i, /3rd set/i], events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ", "TS"] },
-  { id: "B", label: "Group B (Junior)", matchers: [/\bjunior\b(?!\s+(taolu\s+)?team\s+trials)/i, /1st set/i], events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"] },
-  { id: "C", label: "Group C (Children)", matchers: [/\bchild(ren)?\b/i, /elementary/i], events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"] },
+  { id: "A", label: "Group A (Youth)", matchers: YOUTH_MATCHERS, events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ", "TS"] },
+  { id: "B", label: "Group B (Junior)", matchers: JUNIOR_MATCHERS, events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"] },
+  { id: "C", label: "Group C (Children)", matchers: CHILDREN_MATCHERS, events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"] },
 ];
 
 /** 2024 Junior Team Trials: best barehand + best weapon (any discipline); top 9 (A) / 6 (B, C) split into teams. */

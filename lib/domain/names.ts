@@ -1,7 +1,14 @@
 import type { EventCode, Gender } from "./types";
 
 /** Strip accents and tone marks: "Gōng Bù" -> "Gong Bu". */
-export const foldAccents = (s: string): string => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+/** Letters NFD can't split into base + mark (Vietnamese Đ, Nordic Ø, Polish Ł…). */
+const NO_DECOMPOSITION: Record<string, string> = { đ: "d", Đ: "D", ø: "o", Ø: "O", ł: "l", Ł: "L", ß: "ss", æ: "ae", Æ: "AE", œ: "oe", Œ: "OE", þ: "th", Þ: "Th", ı: "i" };
+
+export const foldAccents = (s: string): string =>
+  s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[đĐøØłŁßæÆœŒþÞı]/g, (c) => NO_DECOMPOSITION[c] ?? c);
 
 /** URL- and file-safe slug: "Gōng Bù (Bow Stance)" -> "gong-bu-bow-stance". */
 export const slugify = (s: string): string =>
@@ -40,7 +47,7 @@ export function toNumber(value: unknown): number | null {
   if (!s) return null;
   // Exactly one number in the cell: "9.266", "9.266*", "$9.27". Cells with more
   // ("8.95 (2)", "1:30") are ambiguous, so they read as no value rather than a wrong one.
-  const nums = s.match(/-?\d+(?:\.\d+)?/g);
+  const nums = s.match(/-?(?:\d+(?:\.\d+)?|\.\d+)/g);
   if (nums?.length !== 1) return null;
   const n = Number.parseFloat(nums[0]!);
   return Number.isFinite(n) ? n : null;

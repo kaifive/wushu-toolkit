@@ -64,12 +64,12 @@ export async function verifyUser(req: Request) {
   }
 }
 
-/** Verify token AND that this request comes from the account's current device. */
 /** The single-device check every account route uses. */
 function assertCurrentDevice(doc: SessionDoc | undefined, req: Request) {
   if (!isSessionCurrent(doc, req.headers.get(SESSION_HEADER))) throw new AuthError("Your account was signed in on another device.", 401, "other-device");
 }
 
+/** Verify token AND that this request comes from the account's current device. */
 export async function verifySession(req: Request) {
   const user = await verifyUser(req);
   const { db } = services();

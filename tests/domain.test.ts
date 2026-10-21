@@ -36,6 +36,8 @@ test("titleCaseName and toNumber", () => {
   assert.equal(toNumber("9.266*"), 9.266);
   assert.equal(toNumber("8.95 (2)"), null);
   assert.equal(toNumber("1:30"), null);
+  assert.equal(toNumber(".95"), 0.95);
+  assert.equal(toNumber("-.1"), -0.1);
 });
 
 test("eventCodeFromName handles 2024 bowuu names with spaces", () => {

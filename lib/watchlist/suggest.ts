@@ -1,6 +1,6 @@
 import { athleteKey } from "@/lib/domain/names";
 import type { EventData } from "@/lib/domain/types";
-import { nameTokens, namesMatch } from "./match";
+import { compileWatch, nameTokens } from "./match";
 
 /** One athlete seen in past competitions, for watch-list type-ahead. */
 export interface KnownAthlete {
@@ -50,8 +50,10 @@ export function prefixMatch(query: string[], words: string[]): boolean {
 export function suggestAthletes(index: AthleteIndex, query: string, exclude: string[] = [], limit = 8): KnownAthlete[] {
   const q = nameTokens(query);
   if (!q.length || q.join("").length < 2) return [];
+  // Excluded names (already on the list) are tokenized once per query, not per candidate.
+  const excluded = compileWatch([{ id: "x", name: "", color: "", enabled: true, athletes: exclude }]);
   return index.athletes
-    .filter((a) => prefixMatch(q, nameTokens(a.name)) && !exclude.some((e) => namesMatch(e, a.name)))
+    .filter((a) => prefixMatch(q, nameTokens(a.name)) && !excluded(a.name))
     .sort((a, b) => b.events.length - a.events.length || a.name.localeCompare(b.name))
     .slice(0, limit);
 }

@@ -61,7 +61,7 @@ function ListEditor({
   const [confirming, setConfirming] = useState(false);
   const confirmTimer = useRef<number | undefined>(undefined);
   const roster = useMemo(() => parseRoster(draft), [draft]);
-  const saved = parseRoster(draft).join("\n") === list.athletes.join("\n");
+  const saved = roster.join("\n") === list.athletes.join("\n");
   const oneWord = list.athletes.filter((a) => nameTokens(a).length < 2);
 
   return (

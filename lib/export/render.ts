@@ -198,7 +198,7 @@ function fieldUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind:
         g.textBaseline = "alphabetic";
         g.font = `600 20px ${f.sans}`;
         g.fillStyle = C.muted;
-        g.fillText(item.label.toUpperCase(), PAD, y + 28);
+        g.fillText(item.label, PAD, y + 28);
         lines.forEach((line, li) => {
           for (const { cell, x: lx } of line) {
             const s = cellStyle(cell, f, 26);

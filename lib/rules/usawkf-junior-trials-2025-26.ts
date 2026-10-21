@@ -1,4 +1,5 @@
 import type { Ruleset } from "./types";
+import { CHILDREN_MATCHERS, JUNIOR_MATCHERS, YOUTH_MATCHERS } from "./divisions";
 
 /**
  * USAWKF 2025–2026 National Junior Taolu Team Trials (r15).
@@ -35,7 +36,7 @@ export const USAWKF_JUNIOR_TRIALS_2025_26: Ruleset = {
       label: "Youth (A)",
       born: { from: "2008-11-14", to: "2011-12-31" },
       routines: "3rd Set of International Wushu Competition Routines",
-      matchers: [/\byouth\b/i, /3rd set/i],
+      matchers: YOUTH_MATCHERS,
       events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ", "TS"],
     },
     {
@@ -43,7 +44,7 @@ export const USAWKF_JUNIOR_TRIALS_2025_26: Ruleset = {
       label: "Junior (B)",
       born: { from: "2012-01-01", to: "2014-12-31" },
       routines: "1st Set of International Wushu Competition Routines (Taijiquan and Taijijian: 42 Movements)",
-      matchers: [/\bjunior\b(?!\s+(taolu\s+)?team\s+trials)/i, /1st set/i],
+      matchers: JUNIOR_MATCHERS,
       events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"],
     },
     {
@@ -51,7 +52,7 @@ export const USAWKF_JUNIOR_TRIALS_2025_26: Ruleset = {
       label: "Children (C)",
       born: { from: "2015-01-01" },
       routines: "No. 3 Elementary Routines (Changquan and weapons); Elementary Routines (Nanquan, Nandao, Nangun); Taijiquan 24, Taijijian 32",
-      matchers: [/\bchild(ren)?\b/i, /elementary/i],
+      matchers: CHILDREN_MATCHERS,
       events: ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ"],
     },
   ],
