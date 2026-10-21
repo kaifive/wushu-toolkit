@@ -91,7 +91,7 @@ export function GatedEventView({ slug, view, eventName, rulesetId, highlights, r
   const Body = VIEW_BODY[view];
   return (
     <ExportProvider slug={slug} eventName={eventName} rulesetId={rulesetId} data={data}>
-      <DataStatus data={data} timeZone={timeZone} byGender={view !== "schedule"} />
+      <DataStatus data={data} timeZone={timeZone} genderGap={view === "schedule" ? "none" : view === "all-around" ? "athletes" : "entries"} />
       <WatchLegend />
       <Body ruleset={getRuleset(rulesetId)} data={data} highlights={highlights} />
     </ExportProvider>

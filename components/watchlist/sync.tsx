@@ -7,7 +7,7 @@ import { authConfigured } from "@/lib/auth/client";
 import type { WatchList } from "@/lib/watchlist/match";
 import { readLists, useWatchLists, writeLists } from "@/lib/watchlist/store";
 import { storageGet, storageJson, storageSet } from "@/lib/storage";
-import { mergeLists, sameLists, sanitizeLists, SYNC_LIMITS } from "@/lib/watchlist/sync";
+import { mergeLists, sameLists, sanitizeLists, sanitizeReport, SYNC_LIMITS } from "@/lib/watchlist/sync";
 
 /**
  * Account sync for watch lists (ADR-009). <WatchlistSync/> runs once per page
@@ -70,12 +70,13 @@ function Sync() {
    * One save at a time; edits made meanwhile are sent next, newest wins.
    * sent: last stored; rejected: refused as too big; failed: last attempt that hit a network/server error.
    */
-  const saver = useRef<{ busy: boolean; next: WatchList[] | null; sent: string; rejected: string; failed: string }>({
+  const saver = useRef<{ busy: boolean; next: WatchList[] | null; sent: string; rejected: string; failed: string; cutHere: boolean }>({
     busy: false,
     next: null,
     sent: "",
     rejected: "",
     failed: "",
+    cutHere: false,
   });
   // State (not a ref) so the change listeners below start once the first pull is done.
   const [ready, setReady] = useState(false);
@@ -101,7 +102,7 @@ function Sync() {
         s.next = null;
         const json = JSON.stringify(next);
         if (json === s.sent) {
-          publish("saved"); // back in step (e.g. an edit was undone)
+          if (state === "error") publish("saved"); // back in step (e.g. an edit was undone); keep a "shortened" note
           continue;
         }
         if (json === s.rejected) continue; // already refused as too big; wait for a real change
@@ -132,7 +133,8 @@ function Sync() {
         if (kept !== next && !s.next) {
           writeLists(kept);
           publish("trimmed");
-        } else publish("saved");
+        } else publish(s.cutHere ? "trimmed" : "saved");
+        s.cutHere = false;
       }
     } finally {
       s.busy = false;
@@ -176,18 +178,23 @@ function Sync() {
           // Lists synced with a different account (shared device) are that account's and are
           // replaced; lists made or changed here since then are kept and combined.
           // Compare in the server's canonical form (tidied names), like the base and remote.
-          const localC = sanitizeLists(local) ?? [];
+          const localReport = sanitizeReport(local);
+          const localC = localReport?.lists ?? [];
           // A list with an id the previous account had is theirs, edited or not: never copy it in.
           const prevAccount = owner && owner !== uid ? (sanitizeLists(storageJson(syncedKey(owner))) ?? []) : null;
           const ownHere = prevAccount ? localC.filter((l) => !prevAccount.some((p) => p.id === l.id)) : localC;
           const merged = prevAccount ? mergeLists(ownHere, remote, !ownHere.length) : mergeLists(localC, remote, synced === JSON.stringify(local), base);
+          // Record the account's copy now (owner + base), before any save: if the save
+          // fails, the next account on this device still knows these lists aren't its own.
           storageSet(OWNER_KEY, uid);
           s.sent = JSON.stringify(remote);
+          storageSet(syncedKey(uid), s.sent);
           setReady(true);
           if (!sameLists(merged, local)) writeLists(merged);
+          // This device's lists were over the account limits and got shortened: say so.
+          s.cutHere = !!localReport?.cut;
           if (sameLists(merged, remote)) {
-            storageSet(syncedKey(uid), s.sent);
-            publish("saved");
+            publish(s.cutHere ? "trimmed" : "saved");
           } else {
             s.next = merged;
             void saveLoop(uid);

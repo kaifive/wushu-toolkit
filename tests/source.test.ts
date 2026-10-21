@@ -37,6 +37,17 @@ test("liveWithSnapshot serves the saved copy when live answers with less", async
   // A single corrected score is normal and stays live.
   const corrected = await liveWithSnapshot(constant("live", withScores(2, "Live")), constant("snap", withScores(3, "Saved"))).load();
   assert.equal(corrected.source, "Live");
+  // One event losing all its scores (a cleared ring tab) also falls back.
+  const twoEvents = (dsScored: number) => ({
+    ...emptyEventData("x"),
+    registrations: [{ athlete: { id: "a", name: "A" }, entries: [] }],
+    scores: [
+      ...Array.from({ length: 4 }, (_, i) => ({ athleteId: `c${i}`, athleteName: "C", raw: "CQ", finalScore: 9 })),
+      ...Array.from({ length: 2 }, (_, i) => ({ athleteId: `d${i}`, athleteName: "D", raw: "DS", finalScore: i < dsScored ? 9 : null })),
+    ],
+  });
+  const ring = await liveWithSnapshot(constant("live", { ...twoEvents(0), source: "Live" }), constant("snap", { ...twoEvents(2), source: "Saved" })).load();
+  assert.match(ring.source, /"DS" has no scores live/);
   // The snapshot script reads live only.
   assert.equal((await liveWithSnapshot(constant("live", withScores(0, "Live")), constant("snap", withScores(3, "Saved"))).load({ liveOnly: true })).source, "Live");
   assert.equal(cleared.stale, true);

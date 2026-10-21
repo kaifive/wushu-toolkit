@@ -59,8 +59,20 @@ export function snapshotRegression(prev: EventData | null, next: EventData, keep
 }
 
 /**
- * For pages: a live source counts as broken only when it lost most of its
- * scores (a corrected or removed score is normal); the snapshot script uses
- * the strict check above.
+ * For pages: a live source counts as broken when it lost most of its scores,
+ * or every score of an event that had several (one ring tab cleared or its
+ * columns moved). A corrected or removed score is normal. The snapshot
+ * script uses the strict check above.
  */
-export const liveLostData = (saved: EventData, live: EventData) => snapshotRegression(saved, live, 0.5);
+export function liveLostData(saved: EventData, live: EventData): string | null {
+  const overall = snapshotRegression(saved, live, 0.5);
+  if (overall) return overall;
+  const scoredBy = (d: EventData) => {
+    const m = new Map<string, number>();
+    for (const s of d.scores) if (s.finalScore != null) m.set(s.raw, (m.get(s.raw) ?? 0) + 1);
+    return m;
+  };
+  const now = scoredBy(live);
+  for (const [raw, n] of scoredBy(saved)) if (n >= 2 && !now.get(raw)) return `"${raw}" has no scores live (${n} saved)`;
+  return null;
+}

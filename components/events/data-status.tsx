@@ -11,9 +11,20 @@ export function formatAsOf(iso: string, timeZone = "America/Chicago"): string {
 }
 
 /** v1's "Standings as of …" info bar. */
-export function DataStatus({ data, timeZone, byGender = true }: { data: EventData; timeZone?: string; byGender?: boolean }) {
+/**
+ * `genderGap`: "entries" for views split by gender per entry, "athletes" for
+ * per-athlete views (all-around, which takes the gender from any entry),
+ * "none" where nothing is split (schedule).
+ */
+export function DataStatus({ data, timeZone, genderGap = "entries" }: { data: EventData; timeZone?: string; genderGap?: "entries" | "athletes" | "none" }) {
   // Tables split by gender; an entry the source didn't give one can't be shown, so say so.
-  const noGender = byGender ? data.scores.filter((s) => !s.gender).length : 0;
+  const noGender =
+    genderGap === "entries"
+      ? data.scores.filter((s) => !s.gender).length
+      : genderGap === "athletes"
+        ? new Set(data.scores.map((s) => s.athleteId)).size - new Set(data.scores.filter((s) => s.gender).map((s) => s.athleteId)).size
+        : 0;
+  const unit = genderGap === "athletes" ? ["athlete has", "athletes have"] : ["entry has", "entries have"];
   return (
     <div className="mb-4 space-y-2">
       {data.stale ? (
@@ -25,7 +36,7 @@ export function DataStatus({ data, timeZone, byGender = true }: { data: EventDat
       )}
       {noGender > 0 && (
         <Notice tone="warn">
-          {noGender} {noGender === 1 ? "entry has" : "entries have"} no gender in the source, so {noGender === 1 ? "it isn't" : "they aren't"} in the tables below.
+          {noGender} {noGender === 1 ? unit[0] : unit[1]} no gender in the source, so {noGender === 1 ? "it isn't" : "they aren't"} in the tables below.
         </Notice>
       )}
     </div>

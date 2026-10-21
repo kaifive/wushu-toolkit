@@ -227,7 +227,9 @@ export function reconcile(demo: Demo): string[] {
  *   1. Beginner Fan (L2) — Amy Lee, Bob Tran
  *   2. Solo: Jianshu (L4) — Amy Lee [first]
  *   3. Solo (L3) — Bob Tran [with previous]
- * Flags: first, last, pinned (stays at this number), with previous (linked).
+ * Flags: first, last, pinned #N (locked at spot N), with previous / after #N
+ * (linked to the act above, or to the act on line N). Performers are
+ * separated by ", " (or "; " when a name itself has a comma: "Wu, Ashton").
  * Athletes with no act yet go on a last line: "Also in the demo: Amy Lee, …".
  */
 export function toText(demo: Demo, roster: string[] = []): string {
@@ -237,17 +239,29 @@ export function toText(demo: Demo, roster: string[] = []): string {
     .map((a, i) => {
       const flags: string[] = [];
       if (a.pin === "first" || a.pin === "last") flags.push(a.pin);
-      else if (typeof a.pin === "number") flags.push("pinned");
-      if (a.follows && list[i - 1]?.id === a.follows) flags.push("with previous");
+      else if (typeof a.pin === "number") flags.push(`pinned #${a.pin}`);
+      if (a.follows) {
+        const lead = list.findIndex((x) => x.id === a.follows);
+        if (lead === i - 1) flags.push("with previous");
+        else if (lead >= 0) flags.push(`after #${lead + 1}`);
+      }
       const title = a.kind === "solo" ? `Solo${a.name ? `: ${a.name}` : ""}` : a.name || "Untitled group";
-      const who = a.performers.length ? ` — ${a.performers.join(", ")}` : "";
+      const sep = a.performers.some((p) => p.includes(",")) ? "; " : ", ";
+      const who = a.performers.length ? ` — ${a.performers.join(sep)}` : "";
       return `${i + 1}. ${title} (L${a.level})${who}${flags.length ? ` [${flags.join(", ")}]` : ""}`;
     })
-    .concat(roster.length ? [`${ALSO} ${roster.join(", ")}`] : [])
+    .concat(roster.length ? [`${ALSO} ${roster.join(roster.some((p) => p.includes(",")) ? "; " : ", ")}`] : [])
     .join("\n");
 }
 
 const ALSO = "Also in the demo:";
+
+/** Names from a line: ";" separates when present, else ",". */
+const splitNames = (text: string) =>
+  text
+    .split(text.includes(";") ? ";" : ",")
+    .map((p) => p.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
 
 const LINE = /^\s*(?:\d+[.)]\s*)?(.+?)\s*\(L([1-5])\)\s*(?:[—–-]+\s*(.*?))?\s*(?:\[([^\]]*)\])?\s*$/i;
 
@@ -256,10 +270,11 @@ export function fromText(text: string, newId: () => string): { demo: Demo; roste
   const acts: Act[] = [];
   const skipped: string[] = [];
   const roster: string[] = [];
+  const links: [number, number][] = [];
   for (const raw of text.split(/\r?\n/)) {
     if (!raw.trim() || /^\s*#/.test(raw)) continue;
     if (raw.trim().toLowerCase().startsWith(ALSO.toLowerCase())) {
-      roster.push(...raw.trim().slice(ALSO.length).split(",").map((p) => p.replace(/\s+/g, " ").trim()).filter(Boolean));
+      roster.push(...splitNames(raw.trim().slice(ALSO.length)));
       continue;
     }
     const m = raw.match(LINE);
@@ -276,15 +291,22 @@ export function fromText(text: string, newId: () => string): { demo: Demo; roste
       kind: solo ? "solo" : "group",
       name: solo ? title.replace(/^solo\s*:?\s*/i, "").trim() : title.trim(),
       level: Number(level) as Level,
-      performers: who.split(",").map((p) => p.replace(/\s+/g, " ").trim()).filter(Boolean),
+      performers: splitNames(who),
     };
     if (flags.includes("first")) act.pin = "first";
     else if (flags.includes("last")) act.pin = "last";
-    else if (flags.includes("pinned")) act.pin = acts.length + 1;
+    else {
+      const pin = flags.find((f) => f.startsWith("pinned"));
+      if (pin) act.pin = Number(pin.match(/#(\d+)/)?.[1]) || acts.length + 1;
+    }
     const prev = acts[acts.length - 1];
     if (prev && flags.includes("with previous")) act.follows = prev.id;
+    const after = flags.map((f) => f.match(/^after #(\d+)$/)?.[1]).find(Boolean);
+    if (after) links.push([acts.length, Number(after) - 1]);
     acts.push(act);
   }
+  // "after #N" may point at a later line, so resolve links once every act exists.
+  for (const [i, lead] of links) if (acts[lead] && lead !== i) acts[i]!.follows = acts[lead]!.id;
   return { demo: { acts, order: acts.map((a) => a.id) }, roster, skipped };
 }
 

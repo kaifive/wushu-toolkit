@@ -490,7 +490,7 @@ function OrderView({
   const doImport = () => {
     const r = fromText(text, newId);
     setSkipped(r.skipped);
-    if (r.demo.acts.length) {
+    if (r.demo.acts.length || r.roster.length) {
       replace(r.demo, r.roster);
       setImporting(false);
       setText("");
@@ -510,7 +510,7 @@ function OrderView({
         <button type="button" disabled={acts.length < 2} onClick={generate} className={primary}>
           {generated ? "Regenerate" : "Generate"}
         </button>
-        <button type="button" disabled={!acts.length} onClick={() => void copy(toText({ acts, order }, rosterOnly))} className={btn}>
+        <button type="button" disabled={!acts.length && !rosterOnly.length} onClick={() => void copy(toText({ acts, order }, rosterOnly))} className={btn}>
           {copied === "all" ? "Copied" : "Copy"}
         </button>
         <button type="button" aria-expanded={importing} onClick={() => setImporting(!importing)} className={btn}>

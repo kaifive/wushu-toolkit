@@ -32,7 +32,7 @@ export async function EventBody({
     <ExportProvider slug={e.slug} eventName={e.name} rulesetId={e.rulesetId}>
       {loaded.event.status === "live" && <LiveRefresh seconds={loaded.event.revalidate ?? 60} />}
       {/* The schedule doesn't split by gender, so a missing gender hides nothing there. */}
-      <DataStatus data={loaded.data} timeZone={loaded.event.timeZone} byGender={view !== "schedule"} />
+      <DataStatus data={loaded.data} timeZone={loaded.event.timeZone} genderGap={view === "schedule" ? "none" : view === "all-around" ? "athletes" : "entries"} />
       <WatchLegend />
       {children(loaded, loaded.data)}
     </ExportProvider>

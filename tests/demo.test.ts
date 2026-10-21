@@ -97,7 +97,7 @@ test("text export round-trips through import", () => {
   const text = toText({ acts, order: ["fan", "solo", "solo2", "lion"] });
   assert.equal(
     text,
-    ["1. Beginner Fan (L2) — Amy Lee, Dan Ng [first]", "2. Solo: Jianshu (L4) — Amy Lee [with previous]", "3. Solo (L3) — Bob Tran [pinned]", "4. Lion Dance (L5) [last]"].join("\n"),
+    ["1. Beginner Fan (L2) — Amy Lee, Dan Ng [first]", "2. Solo: Jianshu (L4) — Amy Lee [with previous]", "3. Solo (L3) — Bob Tran [pinned #3]", "4. Lion Dance (L5) [last]"].join("\n"),
   );
   let n = 0;
   const { demo, skipped } = fromText(`${text}\nnot an act`, () => `id${n++}`);
@@ -126,4 +126,21 @@ test("athletes without acts survive copy and import", () => {
   assert.deepEqual(r.roster, ["Amy Lee", "Cy Do"]);
   assert.equal(r.demo.acts.length, 1);
   assert.deepEqual(r.skipped, []);
+});
+
+test("copy/import keeps unmet pins and links and names with commas", () => {
+  const acts = [
+    act("a", 3, ["Wu, Ashton", "Bob Tran"], { name: "Fan" }),
+    act("b", 3, ["Cy Do"], { name: "Staff", pin: 1 }),
+    act("c", 2, ["Dee Ng"], { name: "Spear", follows: "a" }),
+  ];
+  const text = toText({ acts, order: ["a", "b", "c"] });
+  assert.match(text, /Fan \(L3\) — Wu, Ashton; Bob Tran/);
+  assert.match(text, /Staff \(L3\) — Cy Do \[pinned #1\]/);
+  assert.match(text, /Spear \(L2\) — Dee Ng \[after #1\]/);
+  let n = 0;
+  const { demo } = fromText(text, () => `id${n++}`);
+  assert.deepEqual(demo.acts[0]!.performers, ["Wu, Ashton", "Bob Tran"]);
+  assert.equal(demo.acts[1]!.pin, 1);
+  assert.equal(demo.acts[2]!.follows, demo.acts[0]!.id);
 });
