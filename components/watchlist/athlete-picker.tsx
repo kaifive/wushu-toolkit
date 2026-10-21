@@ -3,11 +3,7 @@
 import { useEffect, useId, useMemo, useState } from "react";
 import { suggestAthletes, type AthleteIndex } from "@/lib/watchlist/suggest";
 
-let indexPromise: Promise<AthleteIndex> | null = null;
-const loadIndex = () =>
-  (indexPromise ??= fetch("/api/athletes")
-    .then((r) => (r.ok ? (r.json() as Promise<AthleteIndex>) : { athletes: [] }))
-    .catch(() => ({ athletes: [] })));
+import { loadAthleteIndex as loadIndex } from "./athlete-index";
 
 type Option = { kind: "athlete"; name: string; detail: string } | { kind: "typed"; name: string };
 

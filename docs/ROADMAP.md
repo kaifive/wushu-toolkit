@@ -41,7 +41,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] Rules page for the current ruleset
 
 ## Phase 5d — More tools (requested 2026-10-21)
-- [ ] Demo order generator (groups and solos, levels 1–5, rest gaps, locks and links, regenerate, copy, import)
+- [x] Demo order generator (groups and solos, levels 1–5, rest gaps, locks and links, regenerate, copy, import)
 - [ ] PNG/PDF export of scorecards and results with a "Powered by Wushu Toolkit" footer
 - [ ] AI code review loop over the whole PR until no new findings
 

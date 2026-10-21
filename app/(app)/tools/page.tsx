@@ -11,6 +11,7 @@ const TOOLS = [
   { href: "/tools/required-movements", title: "Required movements", body: "Order compulsory content and copy it for registration." },
   { href: "/tools/nandu", title: "Nandu calculator", body: "Build your difficulty and see how close you are to 2.0." },
   { href: "/tools/score-calculator", title: "Score calculator", body: "The lowest score you need to beat an average." },
+  { href: "/tools/demo-order", title: "Demo order", body: "Running order for a school demo: no back-to-back kids, levels mixed." },
   { href: "/watchlists", title: "Watch lists", body: "Highlight your school's athletes on every competition page." },
   { href: "/rules", title: "Rules", body: "Age groups, events, time limits, music and team selection." },
 ];
