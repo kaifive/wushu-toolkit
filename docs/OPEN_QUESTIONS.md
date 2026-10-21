@@ -21,7 +21,7 @@ documents are entered as `verified: false`:
 
 - Selection math uses the rules in the brief (best barehand + best weapon,
   discipline spots, minimum averages 9.0/8.9/8.8).
-- Deduction codes are migrated from the old app.
+- Deduction codes: resolved, re-entered from the IWUF 2024 PDF (see #12).
 - Nandu data: resolved, from the IWUF 2024 PDF Khai supplied (see #12).
 
 Partial data was recovered from search-engine extracts of r15: age groups
@@ -105,8 +105,8 @@ A/B/C = 0.2/0.3/0.4 (cap 1.4), listed connections A/B/C/D =
 0.1/0.15/0.2/0.25 (cap 0.6). "Landing" is the connection code after "+"
 (Table 10-3-3). Separate tables per event family. Built; checked against
 181 completed routines in the 2025 snapshots (all match). Panel A
-deduction codes in the same PDF are still to be compared with the migrated
-list.
+deduction codes were re-entered from the same PDF (Tables 10-1-1 to 10-1-6,
+10-4-1); they differed a lot from the v1 list.
 
 ---
 
@@ -122,7 +122,7 @@ list.
 | 5 | Domain | **vercel.app for now** | — |
 | 8 | Deploy | Khai installs the Claude GitHub App, then imports into Vercel | Push + PR once the app is installed |
 | Redirect | gh-pages | **After the new site is live**, with Khai's OK | — |
-| Deductions | Update to IWUF 2024 | **Yes** | Compare codes against the 2024 PDF |
+| Deductions | Update to IWUF 2024 | **Yes** | Done |
 | Nandu cap | Mark the cut element | **Yes** | Show which element loses value over the cap |
 | 11 | Exact archive dates | Month/year is fine | Closed |
 | Extras | Next features | **Watch-list sync to account, light/dark toggle** | Queue after the above |

@@ -7,14 +7,17 @@ test("deduction groups cover every taolu event exactly once", () => {
   const events = DEDUCTION_GROUPS.flatMap((g) => g.events);
   assert.equal(new Set(events).size, events.length);
   for (const code of ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ", "TS"]) assert.ok(events.includes(code as never), code);
-  assert.equal(DEDUCTIONS_SOURCE.verified, false);
+  assert.equal(DEDUCTIONS_SOURCE.verified, true);
 });
 
 test("deduction codes are well formed and unique within a group", () => {
   for (const g of DEDUCTION_GROUPS) {
     assert.ok(g.codes.length > 5, g.id);
+    const seen = new Set<string>();
     for (const c of g.codes) {
-      assert.match(c.code, /^\d{2}$/, `${g.id} ${c.code}`);
+      assert.match(c.code, /^\d{2}[AB]?$/, `${g.id} ${c.code}`);
+      assert.ok(!seen.has(c.code), `${g.id} ${c.code} is unique`);
+      seen.add(c.code);
       assert.ok(c.content.length > 0, `${g.id} ${c.code} has content`);
     }
   }

@@ -23,7 +23,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] `lib/rules` types + registry
 - [x] USAWKF 2025–26 Junior Trials (r15): age groups, events, time limits, music, selection math
 - [x] Legacy rulesets for archived events (2024 juniors, 2025 adults, 2025 juniors, PWC)
-- [x] IWUF 2024 deduction codes (migrated, pending verification)
+- [x] IWUF 2024 deduction codes: Tables 10-1-1 to 10-1-6 and 10-4-1 from the official PDF
 - [x] IWUF 2024 nandu data: technique and connection tables (10-3-3 to 10-3-9) from the official PDF
 
 ## Phase 4 — Event engine
