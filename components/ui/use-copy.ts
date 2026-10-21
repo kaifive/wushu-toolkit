@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 /**
  * Copy text to the clipboard. `copied` holds the label of what was just copied
@@ -8,6 +8,7 @@ import { useState } from "react";
  */
 export function useCopy() {
   const [copied, setCopied] = useState<string | null>(null);
+  const timer = useRef<number | undefined>(undefined);
   const copy = async (text: string, label = "all") => {
     try {
       await navigator.clipboard.writeText(text);
@@ -15,7 +16,9 @@ export function useCopy() {
     } catch {
       setCopied("blocked");
     }
-    window.setTimeout(() => setCopied(null), 2000);
+    // A new copy restarts the 2s label instead of an older timer clearing it early.
+    window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => setCopied(null), 2000);
   };
   return { copied, copy };
 }

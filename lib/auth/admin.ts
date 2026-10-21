@@ -46,8 +46,11 @@ export async function verifyUser(req: Request) {
     // checkRevoked: disabled accounts and revoked sessions lose access at once.
     const decoded = await auth.verifyIdToken(token, true);
     return { uid: decoded.uid, email: decoded.email };
-  } catch {
-    throw new AuthError("Your sign-in expired. Sign in again.", 401, "bad-token");
+  } catch (err) {
+    // Only token problems mean "sign in again"; outages stay server errors.
+    const code = (err as { code?: string })?.code ?? "";
+    if (code.startsWith("auth/")) throw new AuthError("Your sign-in expired. Sign in again.", 401, "bad-token");
+    throw err;
   }
 }
 

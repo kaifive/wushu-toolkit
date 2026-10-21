@@ -28,6 +28,8 @@ test("does not over-match", () => {
   assert.equal(namesMatch("Le Joshua", "Joshua Lee"), false);
   assert.equal(namesMatch("", "Ada"), false);
   assert.equal(namesMatch("Kim Lee", "Mike Le"), false, "anagram");
+  assert.equal(namesMatch("Lee Lee", "Lee Wei"), false, "repeated word");
+  assert.ok(namesMatch("Lee Lee", "LEE LEE"));
   assert.equal(namesMatch("Dana Ho", "Noah Ad"), false, "anagram");
 });
 

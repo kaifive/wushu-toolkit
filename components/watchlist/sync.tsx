@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { AuthProvider, useAuth } from "@/components/auth/auth-provider";
+import { SIGNED_IN_EVENT, SIGNED_IN_KEY, useAuth } from "@/components/auth/auth-provider";
 import type { WatchList } from "@/lib/watchlist/match";
 import { readLists, useWatchLists, writeLists } from "@/lib/watchlist/store";
 import { storageGet, storageSet } from "@/lib/storage";
@@ -43,13 +43,24 @@ const subscribeShown = (cb: () => void) => {
   return () => window.removeEventListener(SHOWN_EVENT, cb);
 };
 
-/** Keeps this device's watch lists in step with the signed-in account. Mounted once in the app layout. */
+const signedInHere = () => storageGet(SIGNED_IN_KEY) === "1";
+const subscribeSignedIn = (cb: () => void) => {
+  window.addEventListener(SIGNED_IN_EVENT, cb);
+  window.addEventListener("storage", cb);
+  return () => {
+    window.removeEventListener(SIGNED_IN_EVENT, cb);
+    window.removeEventListener("storage", cb);
+  };
+};
+
+/**
+ * Keeps this device's watch lists in step with the signed-in account.
+ * Mounted once in the app layout; it starts accounts (and loads Firebase)
+ * only on devices that have signed in, so anonymous visitors download nothing.
+ */
 export function WatchlistSync() {
-  return (
-    <AuthProvider>
-      <Sync />
-    </AuthProvider>
-  );
+  const active = useSyncExternalStore(subscribeSignedIn, signedInHere, () => false);
+  return active ? <Sync /> : null;
 }
 
 function Sync() {
@@ -72,11 +83,13 @@ function Sync() {
       if (!res.ok) throw new Error(String(res.status));
       // The server trims over-long lists; keep this device in step with what it stored.
       const stored = ((await res.json().catch(() => null)) as { lists?: WatchList[] } | null)?.lists ?? next;
-      lastSaved.current = JSON.stringify(stored);
-      writeSynced(uid, stored);
       // Adopt the stored copy only when the server actually cut lists or names;
       // its whitespace tidying must not rewrite a name that is still being typed.
-      if (wasTrimmed(stored, next)) {
+      // Otherwise remember what this device sent, so later comparisons match.
+      const kept = wasTrimmed(stored, next) ? stored : next;
+      lastSaved.current = JSON.stringify(kept);
+      writeSynced(uid, kept);
+      if (kept === stored && stored !== next) {
         writeLists(stored);
         setState("trimmed");
       } else setState("saved");
@@ -95,9 +108,18 @@ function Sync() {
     setState("loading");
     void (async () => {
       try {
-        const res = await authedFetch("/api/watchlists");
-        if (!res.ok) throw new Error(String(res.status));
-        const remote = ((await res.json()) as { lists: WatchList[] }).lists;
+        // A sign-in in another tab may still be reaching the server: retry a few times.
+        let remote: WatchList[] | null = null;
+        for (const wait of [0, 2000, 5000, 10000]) {
+          if (wait) await new Promise((r) => window.setTimeout(r, wait));
+          if (!alive) return;
+          const res = await authedFetch("/api/watchlists").catch(() => null);
+          if (res?.ok) {
+            remote = ((await res.json()) as { lists: WatchList[] }).lists;
+            break;
+          }
+        }
+        if (!remote) throw new Error("watch lists unavailable");
         if (!alive) return;
         const local = readLists();
         // Lists synced with a different account (a shared device) are that account's:

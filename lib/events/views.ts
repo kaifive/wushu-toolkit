@@ -144,7 +144,8 @@ export function resultsByEvent(data: EventData, ruleset: Ruleset): EventResult[]
     else groups.set(key, [s]);
   }
   return [...groups.entries()]
-    .map(([raw, list]) => {
+    .map(([, list]) => {
+      const raw = list[0]!.raw; // the map key also carries the gender
       const sorted = [...list].sort((a, b) => (b.finalScore ?? -1) - (a.finalScore ?? -1) || a.athleteName.localeCompare(b.athleteName));
       let place = 0;
       let prev: number | null | undefined;

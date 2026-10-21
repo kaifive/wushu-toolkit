@@ -217,6 +217,7 @@ test("results by event split men and women when the event name has no gender", a
     { ...e("Cai", "CQ", 8.9), raw, gender: "female" as const },
   ];
   const r = resultsByEvent({ registrations: [], scores, schedules: [], asOf: "", source: "" }, RULESETS["pwc-2026"]);
+  assert.ok(r.every((x) => x.raw === raw), "raw is the event name, without the gender key");
   assert.deepEqual(r.map((x) => [x.gender, x.rows.map((row) => `${row.place} ${row.athleteName}`)]), [
     ["female", ["1 Amy", "2 Cai"]],
     ["male", ["1 Ben"]],

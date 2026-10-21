@@ -44,7 +44,8 @@ export function namesMatch(a: string, b: string): boolean {
   const sa = new Set(ta);
   const sb = new Set(tb);
   if (sa.size === sb.size && [...sa].every((t) => sb.has(t))) return true;
-  if (ta.length < 2 || tb.length < 2) return false;
+  // Distinct words: "Lee Lee" is one word for this rule, so it can't match every Lee.
+  if (sa.size < 2 || sb.size < 2) return false;
   const [small, big] = sa.size <= sb.size ? [sa, sb] : [sb, sa];
   if ([...small].every((t) => big.has(t))) return true;
   // Split or joined given names, hyphen differences: same letters in the same
