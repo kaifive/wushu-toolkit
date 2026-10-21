@@ -29,7 +29,6 @@ export default async function EventOverview({ params }: { params: Promise<{ slug
   const ruleset = getRuleset(event.rulesetId);
   return (
     <div className="space-y-6">
-      {event.description && <p className="max-w-2xl text-ink-muted">{event.description}</p>}
       {requiresEntitlement(event) && <Notice title="Event pass">Live data for this event needs an event pass on your account.</Notice>}
       <Card title="Views" bodyClassName="divide-y divide-line">
         {event.views.map((v) => (
