@@ -107,3 +107,22 @@ A/B/C = 0.2/0.3/0.4 (cap 1.4), listed connections A/B/C/D =
 181 completed routines in the 2025 snapshots (all match). Panel A
 deduction codes in the same PDF are still to be compared with the migrated
 list.
+
+---
+
+## Answers (2026-10-21)
+
+| # | Question | Answer | Next step |
+|---|----------|--------|-----------|
+| Logo | A / B / C | None of them. Keep the "toolkit for wushu" idea | New concepts in that direction |
+| 2 | r15 or r19 | **r19**; Khai uploads the PDF | Verify the ruleset against r19 when it arrives |
+| 7 | Minimum averages | Khai checks the PDF; keep 9.0/8.9/8.8 until then | Fix from r19 |
+| 10 | First paid event | **Everything free for now** | No paid configs; payments stay parked |
+| 6 | Accounts | **Turn on now**, reuse the existing Firebase project | Khai adds Firebase keys in Vercel |
+| 5 | Domain | **vercel.app for now** | — |
+| 8 | Deploy | Khai installs the Claude GitHub App, then imports into Vercel | Push + PR once the app is installed |
+| Redirect | gh-pages | **After the new site is live**, with Khai's OK | — |
+| Deductions | Update to IWUF 2024 | **Yes** | Compare codes against the 2024 PDF |
+| Nandu cap | Mark the cut element | **Yes** | Show which element loses value over the cap |
+| 11 | Exact archive dates | Month/year is fine | Closed |
+| Extras | Next features | **Watch-list sync to account, light/dark toggle** | Queue after the above |
