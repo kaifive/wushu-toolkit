@@ -102,7 +102,7 @@ function Sync() {
         s.next = null;
         const json = JSON.stringify(next);
         if (json === s.sent) {
-          if (state === "error") publish("saved"); // back in step (e.g. an edit was undone); keep a "shortened" note
+          if (state !== "trimmed") publish("saved"); // back in step (e.g. an edit was undone); keep a "shortened" note
           continue;
         }
         if (json === s.rejected) continue; // already refused as too big; wait for a real change
@@ -178,11 +178,13 @@ function Sync() {
           // Lists synced with a different account (shared device) are that account's and are
           // replaced; lists made or changed here since then are kept and combined.
           // Compare in the server's canonical form (tidied names), like the base and remote.
-          const localReport = sanitizeReport(local);
-          const localC = localReport?.lists ?? [];
+          const localC = sanitizeLists(local) ?? [];
           // A list with an id the previous account had is theirs, edited or not: never copy it in.
           const prevAccount = owner && owner !== uid ? (sanitizeLists(storageJson(syncedKey(owner))) ?? []) : null;
           const ownHere = prevAccount ? localC.filter((l) => !prevAccount.some((p) => p.id === l.id)) : localC;
+          // Whether lists that stay with this account had to be shortened (not the previous account's).
+          const keptIds = new Set(ownHere.map((l) => l.id));
+          const localReport = sanitizeReport(local.filter((l) => !prevAccount || keptIds.has(l.id)));
           const merged = prevAccount ? mergeLists(ownHere, remote, !ownHere.length) : mergeLists(localC, remote, synced === JSON.stringify(local), base);
           // Record the account's copy now (owner + base), before any save: if the save
           // fails, the next account on this device still knows these lists aren't its own.

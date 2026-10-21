@@ -245,7 +245,9 @@ export function toText(demo: Demo, roster: string[] = []): string {
         if (lead === i - 1) flags.push("with previous");
         else if (lead >= 0) flags.push(`after #${lead + 1}`);
       }
-      const title = a.kind === "solo" ? `Solo${a.name ? `: ${a.name}` : ""}` : a.name || "Untitled group";
+      const groupName = a.name || "Untitled group";
+      // A group called "Solo" or "Solo: …" would read back as a solo, so mark it.
+      const title = a.kind === "solo" ? `Solo${a.name ? `: ${a.name}` : ""}` : SOLO_TITLE.test(groupName) ? `Group: ${groupName}` : groupName;
       const sep = a.performers.some((p) => p.includes(",")) ? "; " : ", ";
       const who = a.performers.length ? ` — ${a.performers.join(sep)}` : "";
       return `${i + 1}. ${title} (L${a.level})${who}${flags.length ? ` [${flags.join(", ")}]` : ""}`;
@@ -255,6 +257,7 @@ export function toText(demo: Demo, roster: string[] = []): string {
 }
 
 const ALSO = "Also in the demo:";
+const SOLO_TITLE = /^solo\s*(:|$)/i;
 
 /** Names from a line: ";" separates when present, else ",". */
 const splitNames = (text: string) =>
@@ -263,7 +266,7 @@ const splitNames = (text: string) =>
     .map((p) => p.replace(/\s+/g, " ").trim())
     .filter(Boolean);
 
-const LINE = /^\s*(?:\d+[.)]\s*)?(.+?)\s*\(L([1-5])\)\s*(?:[—–-]+\s*(.*?))?\s*(?:\[([^\]]*)\])?\s*$/i;
+const LINE = /^\s*(?:(\d+)[.)]\s*)?(.+?)\s*\(L([1-5])\)\s*(?:[—–-]+\s*(.*?))?\s*(?:\[([^\]]*)\])?\s*$/i;
 
 /** Parse text from toText (or typed by hand). Unreadable lines are returned so the UI can show them. */
 export function fromText(text: string, newId: () => string): { demo: Demo; roster: string[]; skipped: string[] } {
@@ -271,6 +274,7 @@ export function fromText(text: string, newId: () => string): { demo: Demo; roste
   const skipped: string[] = [];
   const roster: string[] = [];
   const links: [number, number][] = [];
+  const numbered = new Map<number, number>(); // printed line number -> act index
   for (const raw of text.split(/\r?\n/)) {
     if (!raw.trim() || /^\s*#/.test(raw)) continue;
     if (raw.trim().toLowerCase().startsWith(ALSO.toLowerCase())) {
@@ -282,14 +286,15 @@ export function fromText(text: string, newId: () => string): { demo: Demo; roste
       skipped.push(raw.trim());
       continue;
     }
-    const [, title = "", level, who = "", flagText = ""] = m;
+    const [, printed, title = "", level, who = "", flagText = ""] = m;
     const flags = flagText.split(",").map((f) => f.trim().toLowerCase()).filter(Boolean);
-    // "Solo" or "Solo: Jianshu" is a solo; a group may be called "Solo Stars".
-    const solo = /^solo\s*(:|$)/i.exec(title.trim());
+    // "Solo" or "Solo: Jianshu" is a solo; "Group: Solo" is a group named Solo; "Solo Stars" is a group.
+    const grouped = /^group:\s*/i.test(title.trim());
+    const solo = !grouped && SOLO_TITLE.test(title.trim());
     const act: Act = {
       id: newId(),
       kind: solo ? "solo" : "group",
-      name: solo ? title.replace(/^solo\s*:?\s*/i, "").trim() : title.trim(),
+      name: solo ? title.replace(/^solo\s*:?\s*/i, "").trim() : title.trim().replace(/^group:\s*/i, ""),
       level: Number(level) as Level,
       performers: splitNames(who),
     };
@@ -302,11 +307,16 @@ export function fromText(text: string, newId: () => string): { demo: Demo; roste
     const prev = acts[acts.length - 1];
     if (prev && flags.includes("with previous")) act.follows = prev.id;
     const after = flags.map((f) => f.match(/^after #(\d+)$/)?.[1]).find(Boolean);
-    if (after) links.push([acts.length, Number(after) - 1]);
+    if (after) links.push([acts.length, Number(after)]);
+    numbered.set(Number(printed ?? acts.length + 1), acts.length);
     acts.push(act);
   }
-  // "after #N" may point at a later line, so resolve links once every act exists.
-  for (const [i, lead] of links) if (acts[lead] && lead !== i) acts[i]!.follows = acts[lead]!.id;
+  // "after #N" names the line numbered N (lines may have been moved or skipped),
+  // and may point at a later line, so resolve once every act exists.
+  for (const [i, n] of links) {
+    const lead = numbered.get(n);
+    if (lead !== undefined && lead !== i) acts[i]!.follows = acts[lead]!.id;
+  }
   return { demo: { acts, order: acts.map((a) => a.id) }, roster, skipped };
 }
 

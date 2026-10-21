@@ -3,8 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { withCurrentCompetitor } from "@/lib/domain/schedule";
 import type { Schedule } from "@/lib/domain/types";
 
-export function ScheduleView({ schedule, highlights }: { schedule: Schedule; highlights: HighlightFor }) {
-  const blocks = withCurrentCompetitor(schedule.blocks);
+export function ScheduleView({ schedule, highlights, live = true }: { schedule: Schedule; highlights: HighlightFor; live?: boolean }) {
+  const blocks = withCurrentCompetitor(schedule.blocks, live);
   if (!blocks.length) return <p className="text-sm text-ink-muted">No schedule posted for {schedule.ring} yet.</p>;
   return (
     <div className="space-y-3">

@@ -72,7 +72,11 @@ export function liveLostData(saved: EventData, live: EventData): string | null {
     for (const s of d.scores) if (s.finalScore != null) m.set(s.raw, (m.get(s.raw) ?? 0) + 1);
     return m;
   };
+  // Only when the total dropped too: a renamed event keeps its scores under the new name.
+  const total = (m: Map<string, number>) => [...m.values()].reduce((a, b) => a + b, 0);
+  const was = scoredBy(saved);
   const now = scoredBy(live);
-  for (const [raw, n] of scoredBy(saved)) if (n >= 2 && !now.get(raw)) return `"${raw}" has no scores live (${n} saved)`;
+  if (total(now) >= total(was)) return null;
+  for (const [raw, n] of was) if (n >= 2 && !now.get(raw)) return `"${raw}" has no scores live (${n} saved)`;
   return null;
 }

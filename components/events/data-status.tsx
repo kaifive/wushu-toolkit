@@ -11,6 +11,15 @@ export function formatAsOf(iso: string, timeZone = "America/Chicago"): string {
 }
 
 /** v1's "Standings as of …" info bar. */
+/** Athletes with no gender on any entry; when athletes opt in (all-around), only those who did. */
+function athletesWithoutGender(data: EventData): number {
+  const tagged = data.registrations.filter((r) => r.athlete.tags?.includes("all-around")).map((r) => r.athlete.id);
+  const pool = new Set(tagged.length ? tagged : data.scores.map((s) => s.athleteId));
+  const withGender = new Set(data.scores.filter((s) => s.gender).map((s) => s.athleteId));
+  data.registrations.forEach((r) => r.athlete.gender && withGender.add(r.athlete.id));
+  return [...pool].filter((id) => !withGender.has(id)).length;
+}
+
 /**
  * `genderGap`: "entries" for views split by gender per entry, "athletes" for
  * per-athlete views (all-around, which takes the gender from any entry),
@@ -22,7 +31,7 @@ export function DataStatus({ data, timeZone, genderGap = "entries" }: { data: Ev
     genderGap === "entries"
       ? data.scores.filter((s) => !s.gender).length
       : genderGap === "athletes"
-        ? new Set(data.scores.map((s) => s.athleteId)).size - new Set(data.scores.filter((s) => s.gender).map((s) => s.athleteId)).size
+        ? athletesWithoutGender(data)
         : 0;
   const unit = genderGap === "athletes" ? ["athlete has", "athletes have"] : ["entry has", "entries have"];
   return (

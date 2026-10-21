@@ -603,7 +603,7 @@ function OrderView({
         <p className="text-ink-muted">Add groups and solos first, or import a copied order.</p>
       )}
 
-      {list.length > 0 && (
+      {(list.length > 0 || rosterOnly.length > 0) && (
         <div className="flex justify-end">
           <button
             type="button"

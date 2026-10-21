@@ -144,3 +144,12 @@ test("copy/import keeps unmet pins and links and names with commas", () => {
   assert.equal(demo.acts[1]!.pin, 1);
   assert.equal(demo.acts[2]!.follows, demo.acts[0]!.id);
 });
+
+test("import: 'after #N' follows the printed number; a group named Solo stays a group", () => {
+  let n = 0;
+  const text = ["3. Spear (L2) — Dee Ng [after #1]", "1. Fan (L3) — Amy Lee", "2. Group: Solo (L3) — Bo Ho, Cy Do"].join("\n");
+  const { demo } = fromText(text, () => `id${n++}`);
+  assert.equal(demo.acts[0]!.follows, demo.acts[1]!.id);
+  assert.deepEqual([demo.acts[2]!.kind, demo.acts[2]!.name], ["group", "Solo"]);
+  assert.match(toText({ acts: [act("g", 3, ["Bo Ho"], { name: "Solo" })], order: ["g"] }), /^1\. Group: Solo \(L3\)/);
+});

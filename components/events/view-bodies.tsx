@@ -20,6 +20,8 @@ export interface ViewProps {
   ruleset: Ruleset;
   data: EventData;
   highlights?: AthleteHighlight[];
+  /** False for finished competitions (no "On the floor" marker). */
+  live?: boolean;
 }
 
 export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
@@ -121,7 +123,7 @@ export function ScorecardsBody({ data, highlights }: ViewProps) {
 
 const ringId = (ring: string) => ring.toLowerCase().replace(/\s+/g, "-");
 
-export function ScheduleBody({ data, highlights }: ViewProps) {
+export function ScheduleBody({ data, highlights, live }: ViewProps) {
   if (!data.schedules.length) return <p className="text-sm text-ink-muted">No schedule posted yet.</p>;
   const hl = highlighter(highlights);
   return (
@@ -129,7 +131,7 @@ export function ScheduleBody({ data, highlights }: ViewProps) {
       label="Ring"
       param="ring"
       tabs={data.schedules.map((s) => ({ id: ringId(s.ring), label: s.ring }))}
-      panels={data.schedules.map((s) => <ScheduleView key={s.ring} schedule={s} highlights={hl} />)}
+      panels={data.schedules.map((s) => <ScheduleView key={s.ring} schedule={s} highlights={hl} live={live} />)}
     />
   );
 }
