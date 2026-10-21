@@ -65,7 +65,7 @@ export function ScoreCalculator() {
             <span className="block text-sm text-ink-muted">
               Lowest score needed{result.missing > 1 ? ` on each of ${result.missing} routines` : ""}
             </span>
-            <span className={`block font-display text-3xl font-bold tracking-wide tabular-nums ${result.possible ? "" : "text-seal"}`}>{result.each.toFixed(3)}</span>
+            <span className={`block font-display text-3xl font-bold tabular-nums ${result.possible ? "" : "text-seal"}`}>{result.each.toFixed(3)}</span>
             {!result.possible && <span className="text-sm text-seal">That&apos;s above 10, so it can&apos;t be beaten.</span>}
           </span>
         )}

@@ -74,7 +74,7 @@ npm run build    # production build
 
 v1 lineage: cool slate neutrals, dark slate sidebar (desktop) / top bar
 (phone), indigo `primary` for actions, vermilion `seal` only for the logo,
-"Live" and errors. Barlow / Barlow Condensed. Use `Card` (gray header strip)
+"Live" and errors. System font stack, as in v1 (ADR-010). Use `Card` (gray header strip)
 and `StatTile`; radius `rounded-card` (6px). No eyebrow labels, no serif, no
 cream backgrounds, no mock devices on the landing page; show real data.
 Page titles stand alone: no breadcrumb or label above, no descriptive subtitle

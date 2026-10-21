@@ -69,7 +69,7 @@ function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds, t
     return (
       <div className="rounded-card border border-line bg-surface p-6 text-center">
         <LockIcon className="mx-auto h-8 w-8 text-primary" />
-        <h2 className="mt-3 font-display text-xl font-bold tracking-wide">Event pass required</h2>
+        <h2 className="mt-3 font-display text-xl font-bold">Event pass required</h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-ink-muted">
           {kicked
             ? `You were signed out because this account signed in on ${kicked}.`

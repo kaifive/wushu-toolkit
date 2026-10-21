@@ -32,7 +32,7 @@ export default function RulesPage() {
       <PageHeader title={r.name} />
 
       <section className="mb-8">
-        <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Age groups and events</h2>
+        <h2 className="mb-3 font-display text-xl font-bold">Age groups and events</h2>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {r.divisions.map((d) => (
             <div key={d.id} className="rounded-card border border-line bg-surface p-4 text-sm">
@@ -50,7 +50,7 @@ export default function RulesPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Time limits</h2>
+        <h2 className="mb-3 font-display text-xl font-bold">Time limits</h2>
         <ScrollTable caption="Time limits">
           <thead className="border-b border-line">
             <tr>
@@ -77,7 +77,7 @@ export default function RulesPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Music</h2>
+        <h2 className="mb-3 font-display text-xl font-bold">Music</h2>
         <ul className="space-y-2 text-sm">
           {r.music.map((m, i) => (
             <li key={i} className="rounded-card border border-line bg-surface p-3">
@@ -91,7 +91,7 @@ export default function RulesPage() {
 
       {sel && (
         <section className="mb-8">
-          <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Team selection</h2>
+          <h2 className="mb-3 font-display text-xl font-bold">Team selection</h2>
           <div className="space-y-3">
             <p>
               {sel.scoring.method === "barehand-plus-weapon"
@@ -134,7 +134,7 @@ export default function RulesPage() {
       )}
 
       <section className="mb-8">
-        <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Judging</h2>
+        <h2 className="mb-3 font-display text-xl font-bold">Judging</h2>
         <div className="space-y-2 text-sm">
           <p>
             Deductions: <Link href="/tools/deductions" className="text-primary underline">deduction code lookup</Link>.

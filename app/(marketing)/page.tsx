@@ -65,7 +65,7 @@ export default async function HomePage() {
       <section className="bg-chrome text-chrome-ink">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-10 md:px-8 lg:grid-cols-[1fr_1.1fr] lg:py-14">
           <div className="self-center">
-            <h1 className="font-display text-5xl font-bold leading-[0.95] tracking-wide text-white sm:text-6xl">Wushu Toolkit</h1>
+            <h1 className="font-display text-5xl font-bold leading-[0.95] text-white sm:text-6xl">Wushu Toolkit</h1>
             <p className="mt-4 max-w-md text-lg text-chrome-ink/85">
               Live standings, team projections and scorecards for wushu taolu competitions. Made for checking between routines.
             </p>

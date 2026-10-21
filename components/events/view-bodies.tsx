@@ -50,7 +50,7 @@ export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
                 tabs={mine.map((m) => ({ id: m.division.id, label: m.division.label }))}
                 panels={mine.map((m) => (
                   <section key={m.division.id}>
-                    <h2 className="mb-1 font-display text-lg font-bold tracking-wide">Overall · {m.division.label}</h2>
+                    <h2 className="mb-1 font-display text-lg font-bold">Overall · {m.division.label}</h2>
                     <p className="mb-3 text-xs text-ink-muted">
                       {m.scored}/{m.total} routines scored
                     </p>
@@ -61,7 +61,7 @@ export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
               />
             )}
             <section>
-              <h2 className="mb-3 font-display text-lg font-bold tracking-wide">Results by event</h2>
+              <h2 className="mb-3 font-display text-lg font-bold">Results by event</h2>
               <ResultsByEvent results={results.filter((r) => r.gender === g.id)} />
             </section>
           </div>

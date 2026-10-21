@@ -34,7 +34,7 @@ export function Logo({ className = "", showWordmark = true }: { className?: stri
     <span className={`inline-flex items-center gap-2 ${className}`}>
       <LogoMark className="h-8 w-8 shrink-0" aria-hidden={showWordmark ? true : undefined} />
       {showWordmark && (
-        <span className="font-display text-lg font-semibold tracking-tight text-ink">
+        <span className="font-display text-lg font-semibold text-ink">
           Wushu <span className="text-seal">Toolkit</span>
         </span>
       )}

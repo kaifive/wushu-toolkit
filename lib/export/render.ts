@@ -22,9 +22,9 @@ interface Fonts {
 }
 
 function fonts(): Fonts {
-  const root = getComputedStyle(document.documentElement);
-  const sans = root.getPropertyValue("--font-barlow").trim() || getComputedStyle(document.body).fontFamily || "system-ui, sans-serif";
-  const display = root.getPropertyValue("--font-barlow-condensed").trim() || sans;
+  // Same system font stack as the page (v1 lineage).
+  const sans = getComputedStyle(document.body).fontFamily || "system-ui, sans-serif";
+  const display = sans;
   return { sans, display };
 }
 

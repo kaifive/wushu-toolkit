@@ -1,6 +1,6 @@
 /** Page title. No eyebrow, breadcrumb or subtitle (DESIGN_AUDIT). */
 export function PageHeader({ title }: { title: string }) {
-  return <h1 className="mb-5 font-display text-3xl font-bold leading-tight tracking-wide sm:text-4xl">{title}</h1>;
+  return <h1 className="mb-5 font-display text-3xl font-bold leading-tight sm:text-4xl">{title}</h1>;
 }
 
 export function Container({ children, className = "" }: { children: React.ReactNode; className?: string }) {

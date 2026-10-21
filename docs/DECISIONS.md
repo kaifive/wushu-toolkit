@@ -169,3 +169,13 @@ device stick); otherwise lists merge by id, athletes are combined and this
 device's name, colour and on/off win. After that each change is saved,
 debounced. The single-device lock (ADR-005) makes simultaneous edits rare,
 so no finer conflict handling is needed.
+
+## ADR-010 — System font, as in v1
+
+**Status:** accepted (2026-10-22). Replaces the Barlow / Barlow Condensed choice in DESIGN_AUDIT.
+
+Khai found Barlow still read as "AI-made". v1 (CoreUI 5) used the device's
+own font (`system-ui`, San Francisco, Segoe UI, Roboto…), so v2 does too:
+nothing is downloaded, it looks native on every phone, and headings use the
+same family in bold with normal letter-spacing. Exports draw with the same
+stack.

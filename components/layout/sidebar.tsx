@@ -19,7 +19,7 @@ export function Sidebar({ groups }: { groups: SidebarGroup[] }) {
       <div className="flex h-16 shrink-0 items-center border-b border-white/10 pl-5 pr-3">
         <Link href="/" className="flex min-h-tap flex-1 items-center gap-2.5">
           <LogoMark className="h-8 w-8" aria-hidden />
-          <span className="font-display text-xl font-bold tracking-wide">Wushu Toolkit</span>
+          <span className="font-display text-xl font-bold">Wushu Toolkit</span>
         </Link>
         <ThemeToggle />
       </div>

@@ -16,7 +16,7 @@ export function MarketingNav() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-8">
         <Link href="/" className="flex min-h-tap items-center gap-2.5" aria-label="Wushu Toolkit home">
           <LogoMark className="h-8 w-8" aria-hidden />
-          <span className="font-display text-xl font-bold tracking-wide">Wushu Toolkit</span>
+          <span className="font-display text-xl font-bold">Wushu Toolkit</span>
         </Link>
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-1">

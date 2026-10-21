@@ -24,12 +24,12 @@ export default function BrandPage() {
               <Mark className="h-12 w-12" />
               <Mark className="h-8 w-8" />
               <Mark className="h-4 w-4" />
-              <span className="ml-auto font-display text-lg font-bold tracking-wide">
+              <span className="ml-auto font-display text-lg font-bold">
                 Wushu Toolkit
               </span>
             </div>
             <div className="p-4 text-sm">
-              <h2 className="font-display text-lg font-bold tracking-wide">
+              <h2 className="font-display text-lg font-bold">
                 {id}. {name}
               </h2>
               <p className="mt-1 text-ink-muted">{idea}</p>

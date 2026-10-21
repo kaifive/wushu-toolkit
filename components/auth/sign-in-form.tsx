@@ -53,7 +53,7 @@ export function SignInForm() {
           Your account was signed in on {kicked}. An account can be used on one device at a time.
         </Notice>
       )}
-      <h2 className="font-display text-xl font-bold tracking-wide">{mode === "in" ? "Sign in" : "Create an account"}</h2>
+      <h2 className="font-display text-xl font-bold">{mode === "in" ? "Sign in" : "Create an account"}</h2>
       <div>
         <label htmlFor="email" className="mb-1 block text-sm font-semibold">
           Email

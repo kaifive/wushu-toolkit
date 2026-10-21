@@ -1,12 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import { BottomTabs } from "@/components/layout/bottom-tabs";
 import { SITE } from "@/lib/site";
 import { THEME_SCRIPT } from "@/components/layout/theme-toggle";
 
-const barlow = Barlow({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-barlow", display: "swap" });
-const barlowCondensed = Barlow_Condensed({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-barlow-condensed", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -29,7 +26,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${barlow.variable} ${barlowCondensed.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Apply the saved theme before first paint so there is no flash. */}
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />

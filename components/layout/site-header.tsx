@@ -9,7 +9,7 @@ export function SiteHeader() {
       <div className="flex h-14 items-center px-4">
         <Link href="/" className="flex min-h-tap items-center gap-2.5" aria-label="Wushu Toolkit home">
           <LogoMark className="h-7 w-7" aria-hidden />
-          <span className="font-display text-lg font-bold tracking-wide">Wushu Toolkit</span>
+          <span className="font-display text-lg font-bold">Wushu Toolkit</span>
         </Link>
         <ThemeToggle className="-mr-2 ml-auto" />
       </div>

@@ -34,7 +34,7 @@ export function Card({
 export function StatTile({ value, label, progress }: { value: React.ReactNode; label: string; progress?: number }) {
   return (
     <div className="rounded-card border border-line bg-surface p-3 sm:p-4">
-      <p className="font-display text-2xl font-bold tnum sm:text-3xl">{value}</p>
+      <p className="truncate font-display text-xl font-bold tnum sm:text-3xl">{value}</p>
       <p className="text-sm text-ink-muted">{label}</p>
       {progress !== undefined && (
         <div className="mt-2 h-1 overflow-hidden rounded-full bg-line" aria-hidden>
