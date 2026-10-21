@@ -65,13 +65,16 @@ export async function verifyUser(req: Request) {
 }
 
 /** Verify token AND that this request comes from the account's current device. */
+/** The single-device check every account route uses. */
+function assertCurrentDevice(doc: SessionDoc | undefined, req: Request) {
+  if (!isSessionCurrent(doc, req.headers.get(SESSION_HEADER))) throw new AuthError("Your account was signed in on another device.", 401, "other-device");
+}
+
 export async function verifySession(req: Request) {
   const user = await verifyUser(req);
   const { db } = services();
   const snap = await db.collection("sessions").doc(user.uid).get();
-  if (!isSessionCurrent(snap.data() as SessionDoc | undefined, req.headers.get(SESSION_HEADER))) {
-    throw new AuthError("Your account was signed in on another device.", 401, "other-device");
-  }
+  assertCurrentDevice(snap.data() as SessionDoc | undefined, req);
   return user;
 }
 
@@ -93,9 +96,7 @@ export async function verifySessionWithPass(req: Request, slug: string) {
   const user = await verifyUser(req);
   const { db } = services();
   const [session, ents] = await Promise.all([db.collection("sessions").doc(user.uid).get(), getEntitlements(user.uid)]);
-  if (!isSessionCurrent(session.data() as SessionDoc | undefined, req.headers.get(SESSION_HEADER))) {
-    throw new AuthError("Your account was signed in on another device.", 401, "other-device");
-  }
+  assertCurrentDevice(session.data() as SessionDoc | undefined, req);
   if (!hasEntitlement(ents, slug)) throw new AuthError("This account doesn't have a pass for this event.", 403, "no-pass");
   return user;
 }

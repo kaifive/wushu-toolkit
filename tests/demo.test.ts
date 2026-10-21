@@ -153,3 +153,11 @@ test("import: 'after #N' follows the printed number; a group named Solo stays a 
   assert.deepEqual([demo.acts[2]!.kind, demo.acts[2]!.name], ["group", "Solo"]);
   assert.match(toText({ acts: [act("g", 3, ["Bo Ho"], { name: "Solo" })], order: ["g"] }), /^1\. Group: Solo \(L3\)/);
 });
+
+test("demo treats O'Brien and OBrien as one person; 'Group: Seniors' survives", () => {
+  const acts = [act("a", 3, ["Liam O'Brien"]), act("b", 3, ["Liam OBrien"])];
+  assert.deepEqual(problems(acts, ["a", "b"]).map((p) => p.kind), ["back-to-back"]);
+  let n = 0;
+  const text = toText({ acts: [act("g", 3, ["Bo Ho"], { name: "Group: Seniors" })], order: ["g"] });
+  assert.equal(fromText(text, () => `id${n++}`).demo.acts[0]!.name, "Group: Seniors");
+});

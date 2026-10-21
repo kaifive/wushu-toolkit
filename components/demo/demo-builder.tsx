@@ -2,8 +2,7 @@
 
 import { storageJson, storageSet } from "@/lib/storage";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { athleteKey } from "@/lib/domain/names";
-import { nameTokens } from "@/lib/watchlist/match";
+import { nameTokens, personKey } from "@/lib/watchlist/match";
 import { prefixMatch, suggestAthletes, type AthleteIndex } from "@/lib/watchlist/suggest";
 import {
   LEVELS,
@@ -30,7 +29,7 @@ const EMPTY: State = { acts: [], order: [], roster: [], generated: false };
 type View = "acts" | "athletes" | "order";
 
 const newId = () => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `a${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`);
-const sameName = (a: string, b: string) => athleteKey(a) === athleteKey(b);
+const sameName = (a: string, b: string) => personKey(a) === personKey(b);
 const btn = "min-h-tap rounded-card border border-line bg-surface px-3 text-sm font-semibold disabled:opacity-40";
 const primary = "min-h-tap rounded-card bg-primary px-4 font-semibold text-primary-ink disabled:opacity-40";
 const iconBtn = "flex h-11 w-11 shrink-0 items-center justify-center rounded-card border border-line bg-surface text-lg disabled:opacity-30";
@@ -376,7 +375,7 @@ function AthletesView({
             const isOpen = open !== null && sameName(open, p.name);
             const solos = p.acts.filter((a) => a.kind === "solo");
             return (
-              <li key={athleteKey(p.name)} className="rounded-card border border-line bg-surface">
+              <li key={personKey(p.name)} className="rounded-card border border-line bg-surface">
                 <button type="button" aria-expanded={isOpen} onClick={() => setOpen(isOpen ? null : p.name)} className="flex min-h-tap w-full items-center gap-2 px-4 py-2 text-left">
                   <span className="min-w-0 flex-1">
                     <span className="block truncate font-semibold" data-athlete={p.name}>

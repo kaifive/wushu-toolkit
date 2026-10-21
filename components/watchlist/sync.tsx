@@ -20,6 +20,13 @@ import { mergeLists, sameLists, sanitizeLists, sanitizeReport, SYNC_LIMITS } fro
 const OWNER_KEY = "wt:watchlists:owner";
 /** What was last saved to the account, per user, to tell local edits from stale copies. */
 const syncedKey = (uid: string) => `wt:watchlists:synced:${uid}`;
+/** Ids of every list this account had on this device (saved or not), for shared devices. */
+const idsKey = (uid: string) => `wt:watchlists:ids:${uid}`;
+const rememberIds = (uid: string, lists: WatchList[]) => {
+  const known = new Set((storageJson(idsKey(uid)) as string[] | null) ?? []);
+  lists.forEach((l) => known.add(l.id));
+  storageSet(idsKey(uid), JSON.stringify([...known]));
+};
 /** Browsers drop keepalive requests with bodies over 64 KB. */
 const KEEPALIVE_MAX = 60_000;
 
@@ -178,14 +185,15 @@ function Sync() {
           // Lists synced with a different account (shared device) are that account's and are
           // replaced; lists made or changed here since then are kept and combined.
           // Compare in the server's canonical form (tidied names), like the base and remote.
-          const localC = sanitizeLists(local) ?? [];
-          // A list with an id the previous account had is theirs, edited or not: never copy it in.
-          const prevAccount = owner && owner !== uid ? (sanitizeLists(storageJson(syncedKey(owner))) ?? []) : null;
-          const ownHere = prevAccount ? localC.filter((l) => !prevAccount.some((p) => p.id === l.id)) : localC;
-          // Whether lists that stay with this account had to be shortened (not the previous account's).
-          const keptIds = new Set(ownHere.map((l) => l.id));
-          const localReport = sanitizeReport(local.filter((l) => !prevAccount || keptIds.has(l.id)));
-          const merged = prevAccount ? mergeLists(ownHere, remote, !ownHere.length) : mergeLists(localC, remote, synced === JSON.stringify(local), base);
+          // A list the previous account had on this device (saved or not) is theirs, edited or
+          // not: never copy it in. Lists made while nobody was signed in stay with the device.
+          const prevIds = owner && owner !== uid
+            ? new Set([...(sanitizeLists(storageJson(syncedKey(owner))) ?? []).map((l) => l.id), ...((storageJson(idsKey(owner)) as string[] | null) ?? [])])
+            : null;
+          const localReport = sanitizeReport(prevIds ? local.filter((l) => !prevIds.has(l.id)) : local);
+          const localC = localReport?.lists ?? [];
+          const merged = prevIds ? mergeLists(localC, remote, !localC.length) : mergeLists(localC, remote, synced === JSON.stringify(local), base);
+          rememberIds(uid, merged);
           // Record the account's copy now (owner + base), before any save: if the save
           // fails, the next account on this device still knows these lists aren't its own.
           storageSet(OWNER_KEY, uid);
@@ -226,6 +234,7 @@ function Sync() {
     const s = saver.current;
     if (!uid || !ready) return;
     const queue = (keepalive = false) => {
+      rememberIds(uid, lists);
       s.next = lists;
       void saveLoop(uid, keepalive);
     };

@@ -1,5 +1,6 @@
 import { Notice } from "@/components/ui/notice";
 import type { EventData } from "@/lib/domain/types";
+import type { EventView } from "@/lib/events/types";
 
 /** "Aug 4, 2025, 11:02 AM CDT" in the event's own time zone. */
 export function formatAsOf(iso: string, timeZone = "America/Chicago"): string {
@@ -19,6 +20,15 @@ function athletesWithoutGender(data: EventData): number {
   data.registrations.forEach((r) => r.athlete.gender && withGender.add(r.athlete.id));
   return [...pool].filter((id) => !withGender.has(id)).length;
 }
+
+/** How each view splits by gender, for the missing-gender notice. */
+export const GENDER_GAP: Record<EventView, "entries" | "athletes" | "none"> = {
+  standings: "entries",
+  team: "entries",
+  scorecards: "entries",
+  schedule: "none",
+  "all-around": "athletes",
+};
 
 /**
  * `genderGap`: "entries" for views split by gender per entry, "athletes" for

@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { EventData } from "@/lib/domain/types";
 import { loadEvent, type LoadedEvent } from "@/lib/events/load";
 import type { EventView } from "@/lib/events/types";
-import { DataStatus, LoadError } from "./data-status";
+import { DataStatus, GENDER_GAP, LoadError } from "./data-status";
 import { GatedEventView } from "./gated-event-view";
 import { WatchLegend } from "@/components/watchlist/legend";
 import { LiveRefresh } from "./live-refresh";
@@ -32,7 +32,7 @@ export async function EventBody({
     <ExportProvider slug={e.slug} eventName={e.name} rulesetId={e.rulesetId}>
       {loaded.event.status === "live" && <LiveRefresh seconds={loaded.event.revalidate ?? 60} />}
       {/* The schedule doesn't split by gender, so a missing gender hides nothing there. */}
-      <DataStatus data={loaded.data} timeZone={loaded.event.timeZone} genderGap={view === "schedule" ? "none" : view === "all-around" ? "athletes" : "entries"} />
+      <DataStatus data={loaded.data} timeZone={loaded.event.timeZone} genderGap={GENDER_GAP[view]} />
       <WatchLegend />
       {children(loaded, loaded.data)}
     </ExportProvider>

@@ -9,7 +9,7 @@ import type { EventData } from "@/lib/domain/types";
 import type { AthleteHighlight, EventView } from "@/lib/events/types";
 import { getRuleset, type RulesetId } from "@/lib/rules";
 import { WatchLegend } from "@/components/watchlist/legend";
-import { DataStatus } from "./data-status";
+import { DataStatus, GENDER_GAP } from "./data-status";
 import { VIEW_BODY } from "./view-bodies";
 import { readJson } from "@/lib/http";
 import { ExportProvider } from "@/components/export/export-buttons";
@@ -91,9 +91,9 @@ export function GatedEventView({ slug, view, eventName, rulesetId, highlights, r
   const Body = VIEW_BODY[view];
   return (
     <ExportProvider slug={slug} eventName={eventName} rulesetId={rulesetId} data={data}>
-      <DataStatus data={data} timeZone={timeZone} genderGap={view === "schedule" ? "none" : view === "all-around" ? "athletes" : "entries"} />
+      <DataStatus data={data} timeZone={timeZone} genderGap={GENDER_GAP[view]} />
       <WatchLegend />
-      <Body ruleset={getRuleset(rulesetId)} data={data} highlights={highlights} />
+      <Body ruleset={getRuleset(rulesetId)} data={data} highlights={highlights} live />
     </ExportProvider>
   );
 }

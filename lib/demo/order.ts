@@ -1,4 +1,4 @@
-import { athleteKey } from "@/lib/domain/names";
+import { personKey } from "@/lib/watchlist/match";
 
 /**
  * Demo show running order. Acts are groups or solos with a level from 1
@@ -82,7 +82,7 @@ export interface Problem {
   at: number[];
 }
 
-const keysOf = (a: Act) => new Set(a.performers.map(athleteKey).filter(Boolean));
+const keysOf = (a: Act) => new Set(a.performers.map(personKey).filter(Boolean));
 
 function shared(a: Set<string>, b: Set<string>): number {
   let n = 0;
@@ -128,7 +128,7 @@ export function problems(acts: Act[], order: string[]): Problem[] {
     const a = list[i]!;
     const b = list[i + 1]!;
     const bKeys = keysOf(b);
-    const both = a.performers.filter((p) => bKeys.has(athleteKey(p)));
+    const both = a.performers.filter((p) => bKeys.has(personKey(p)));
     if (both.length) out.push({ kind: "back-to-back", at: [i, i + 1], message: `${both.join(", ")} ${both.length > 1 ? "are" : "is"} in #${i + 1} and #${i + 2} back to back.` });
   }
   list.forEach((a, i) => {
@@ -247,7 +247,7 @@ export function toText(demo: Demo, roster: string[] = []): string {
       }
       const groupName = a.name || "Untitled group";
       // A group called "Solo" or "Solo: …" would read back as a solo, so mark it.
-      const title = a.kind === "solo" ? `Solo${a.name ? `: ${a.name}` : ""}` : SOLO_TITLE.test(groupName) ? `Group: ${groupName}` : groupName;
+      const title = a.kind === "solo" ? `Solo${a.name ? `: ${a.name}` : ""}` : SOLO_TITLE.test(groupName) || /^group:/i.test(groupName) ? `Group: ${groupName}` : groupName;
       const sep = a.performers.some((p) => p.includes(",")) ? "; " : ", ";
       const who = a.performers.length ? ` — ${a.performers.join(sep)}` : "";
       return `${i + 1}. ${title} (L${a.level})${who}${flags.length ? ` [${flags.join(", ")}]` : ""}`;
@@ -294,6 +294,7 @@ export function fromText(text: string, newId: () => string): { demo: Demo; roste
     const act: Act = {
       id: newId(),
       kind: solo ? "solo" : "group",
+      // Strip exactly one "Group:" (toText adds it), so a group named "Group: Seniors" survives.
       name: solo ? title.replace(/^solo\s*:?\s*/i, "").trim() : title.trim().replace(/^group:\s*/i, ""),
       level: Number(level) as Level,
       performers: splitNames(who),
@@ -332,7 +333,7 @@ export function people(acts: Act[]): Person[] {
   const map = new Map<string, Person>();
   for (const a of acts)
     for (const p of a.performers) {
-      const k = athleteKey(p);
+      const k = personKey(p);
       if (!k) continue;
       const cur = map.get(k) ?? { name: p, acts: [] };
       if (!cur.acts.includes(a)) cur.acts.push(a);
