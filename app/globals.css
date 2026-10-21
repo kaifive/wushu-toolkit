@@ -5,6 +5,7 @@
  * with vermilion kept for the brand seal and "live" only.
  */
 :root {
+  color-scheme: light;
   --paper: #f3f4f7; /* page background (v1 tertiary bg) */
   --surface: #ffffff;
   --surface-2: #f8f9fb; /* card header strip, table stripes */
@@ -27,8 +28,10 @@
   --gold: #b7791f;
 }
 
+/* Dark: follows the system unless the toggle chose a theme (data-theme on <html>). */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --paper: #181b22;
     --surface: #212631;
     --surface-2: #272c38;
@@ -50,6 +53,30 @@
     --jade: #4cc38a;
     --gold: #e3ac4f;
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #181b22;
+  --surface: #212631;
+  --surface-2: #272c38;
+  --ink: #e8eaef;
+  --ink-muted: #9aa3b5;
+  --line: #343a48;
+  --primary: #7a78e8;
+  --primary-ink: #ffffff;
+  --primary-soft: #2d2c55;
+  --chrome: #13161c;
+  --chrome-ink: #e8eaef;
+  --chrome-muted: #7f889b;
+  --seal: #ef5a42;
+  --seal-soft: #3d1d19;
+  --info: #12324a;
+  --info-ink: #b9defb;
+  --warn: #3a3014;
+  --warn-ink: #f3d98b;
+  --jade: #4cc38a;
+  --gold: #e3ac4f;
 }
 
 @theme inline {

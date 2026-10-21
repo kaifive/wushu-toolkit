@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogoMark } from "@/components/brand/logo";
+import { ThemeToggle } from "./theme-toggle";
 
 export interface SidebarGroup {
   title?: string;
@@ -15,10 +16,13 @@ export function Sidebar({ groups }: { groups: SidebarGroup[] }) {
   const active = (href: string, exact?: boolean) => (href === "/" || exact ? pathname === href : pathname === href || pathname.startsWith(`${href}/`));
   return (
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-chrome text-chrome-ink md:flex">
-      <Link href="/" className="flex h-16 shrink-0 items-center gap-2.5 border-b border-white/10 px-5">
-        <LogoMark className="h-8 w-8" aria-hidden />
-        <span className="font-display text-xl font-bold tracking-wide">Wushu Toolkit</span>
-      </Link>
+      <div className="flex h-16 shrink-0 items-center border-b border-white/10 pl-5 pr-3">
+        <Link href="/" className="flex min-h-tap flex-1 items-center gap-2.5">
+          <LogoMark className="h-8 w-8" aria-hidden />
+          <span className="font-display text-xl font-bold tracking-wide">Wushu Toolkit</span>
+        </Link>
+        <ThemeToggle />
+      </div>
       <nav aria-label="Primary" className="flex-1 overflow-y-auto py-3">
         {groups.map((g, i) => (
           <div key={g.title ?? i} className="mb-2">

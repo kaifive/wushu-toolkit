@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LogoMark } from "@/components/brand/logo";
+import { ThemeToggle } from "./theme-toggle";
 
 /** Phone top bar (dark, like v1's chrome). Desktop uses the sidebar instead. */
 export function SiteHeader() {
@@ -10,6 +11,7 @@ export function SiteHeader() {
           <LogoMark className="h-7 w-7" aria-hidden />
           <span className="font-display text-lg font-bold tracking-wide">Wushu Toolkit</span>
         </Link>
+        <ThemeToggle className="-mr-2 ml-auto" />
       </div>
     </header>
   );

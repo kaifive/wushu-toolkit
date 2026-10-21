@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LogoMark } from "@/components/brand/logo";
+import { ThemeToggle } from "./theme-toggle";
 
 const LINKS = [
   { href: "/events", label: "Competitions" },
@@ -19,6 +20,9 @@ export function MarketingNav() {
         </Link>
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-1">
+            <li>
+              <ThemeToggle />
+            </li>
             {LINKS.map((l) => (
               <li key={l.href}>
                 <Link
@@ -33,6 +37,7 @@ export function MarketingNav() {
             ))}
           </ul>
         </nav>
+        <ThemeToggle className="-mr-2 md:hidden" />
       </div>
     </header>
   );
