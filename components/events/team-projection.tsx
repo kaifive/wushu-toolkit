@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
-import type { ScopeModel } from "@/lib/events/views";
+import { highlightStyle, type HighlightFor, type ScopeModel } from "@/lib/events/views";
 
 const G = { male: "Male", female: "Female" } as const;
 
-export function TeamProjection({ model }: { model: ScopeModel }) {
+export function TeamProjection({ model, highlights }: { model: ScopeModel; highlights?: HighlightFor }) {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
       {model.teams.map((t) => (
@@ -18,7 +18,7 @@ export function TeamProjection({ model }: { model: ScopeModel }) {
           ) : (
             <ol className="divide-y divide-line">
               {t.members.map((m, i) => (
-                <li key={m.athleteName} data-athlete={m.athleteName} className="flex items-center justify-between gap-3 px-4 py-2.5">
+                <li key={`${i}-${m.athleteName}`} data-athlete={m.athleteName} style={highlightStyle(highlights?.(m.athleteName))} className="flex items-center justify-between gap-3 px-4 py-2.5">
                   <div className="min-w-0">
                     <p className="truncate font-semibold">
                       <span className="mr-1.5 text-ink-muted tnum">{i + 1}</span>

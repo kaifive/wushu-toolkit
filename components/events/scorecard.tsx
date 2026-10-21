@@ -1,13 +1,13 @@
 import { ExportButtons } from "@/components/export/export-buttons";
-import type { ScorecardRow } from "@/lib/events/views";
+import { highlightStyle, type HighlightFor, type ScorecardRow } from "@/lib/events/views";
 
 const f = (n: number | null | undefined, d = 3) => (n == null ? "—" : n.toFixed(d));
 
 /** One athlete's judge-panel breakdown. Struck marks and missed nandu are shown crossed out. */
-export function ScorecardCard({ row }: { row: ScorecardRow }) {
+export function ScorecardCard({ row, highlights }: { row: ScorecardRow; highlights?: HighlightFor }) {
   const { a, b, c, adjustment } = row.scorecard;
   return (
-    <details data-athlete={row.athleteName} className="rounded-card border border-line bg-surface">
+    <details data-athlete={row.athleteName} style={highlightStyle(highlights?.(row.athleteName))} className="rounded-card border border-line bg-surface">
       <summary className="flex min-h-tap cursor-pointer list-none items-center justify-between gap-3 px-4 py-2">
         <span className="min-w-0">
           <span className="block truncate font-semibold">{row.athleteName}</span>

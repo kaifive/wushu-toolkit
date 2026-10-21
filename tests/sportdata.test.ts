@@ -92,3 +92,11 @@ test("joinScores leaves waitlisted entries out", () => {
   const regs = [{ athlete: { id: "a", name: "Amy Lee" }, entries: [{ raw: "CQ", code: "CQ" as const }, { raw: "DS", code: "DS" as const, waitlisted: true }] }];
   assert.deepEqual(joinScores(regs, new Map()).map((s) => s.raw), ["CQ"]);
 });
+
+test("joinRegistrationScores keeps the scored copy of a duplicated row", async () => {
+  const { joinRegistrationScores, registrationsFromScores } = await import("@/lib/data/join");
+  const row = { athleteId: "amy lee", athleteName: "Amy Lee", raw: "CQ", code: "CQ" as const };
+  const scores = [{ ...row, finalScore: 8.9 }, { ...row, finalScore: null }];
+  const joined = joinRegistrationScores(registrationsFromScores(scores), scores);
+  assert.ok(joined.every((s) => s.finalScore === 8.9));
+});

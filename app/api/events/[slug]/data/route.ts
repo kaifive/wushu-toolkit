@@ -12,7 +12,9 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
       await requireEntitlement(uid, slug);
     }
     const data = await event.data().load({ revalidate: event.revalidate ?? 60 });
-    return Response.json(data, { headers: { "cache-control": "private, no-store" } });
+    // Free events are public: let the CDN serve repeat requests (export taps).
+    const cache = requiresEntitlement(event) ? "private, no-store" : `public, s-maxage=${event.revalidate ?? 60}, stale-while-revalidate=300`;
+    return Response.json(data, { headers: { "cache-control": cache } });
   } catch (err) {
     if (err instanceof AuthError) return authErrorResponse(err);
     return Response.json({ error: `Couldn't load scores: ${err instanceof Error ? err.message : String(err)}` }, { status: 502 });

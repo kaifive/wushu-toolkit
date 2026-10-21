@@ -1,10 +1,10 @@
 import { TeamBadge } from "@/components/ui/badge";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
-import type { ScopeModel } from "@/lib/events/views";
+import { type ScopeModel, type HighlightFor, highlightStyle } from "@/lib/events/views";
 
 const fmt = (n: number | null | undefined) => (n == null ? "—" : n.toFixed(3));
 
-export function OverallTable({ model, highlights }: { model: ScopeModel; highlights: Record<string, { color: string; group: string }> }) {
+export function OverallTable({ model, highlights }: { model: ScopeModel; highlights: HighlightFor }) {
   return (
     <ScrollTable caption={`Overall standings, ${model.gender}, ${model.division.label}`}>
       <thead className="border-b border-line">
@@ -21,10 +21,10 @@ export function OverallTable({ model, highlights }: { model: ScopeModel; highlig
       </thead>
       <tbody>
         {model.rows.map((r) => {
-          const hl = highlights[r.athleteId];
+          const hl = highlights(r.athleteName);
           return (
             <tr key={`${r.athleteId}-${r.discipline}`} data-athlete={r.athleteName} className="border-b border-line last:border-0">
-              <td className={`${td} ${stickyCol} max-w-[11rem]`} style={hl ? { boxShadow: `inset 3px 0 0 ${hl.color}` } : undefined}>
+              <td className={`${td} ${stickyCol} max-w-[11rem]`} style={highlightStyle(hl)}>
                 <div className="flex items-start gap-2">
                   <span className="w-6 shrink-0 text-right text-ink-muted">{r.tied ? "=" : r.rank}</span>
                   <div className="min-w-0">

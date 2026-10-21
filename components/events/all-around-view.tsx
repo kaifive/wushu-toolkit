@@ -1,10 +1,10 @@
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import type { AllAroundAthlete } from "@/lib/rules/all-around";
-import type { AllAroundModel } from "@/lib/events/views";
+import { type AllAroundModel, type HighlightFor, highlightStyle } from "@/lib/events/views";
 
 const f = (n: number) => n.toFixed(3);
 
-export function AllAroundTable({ athletes, topN, highlights }: { athletes: AllAroundAthlete[]; topN: number; highlights: Record<string, { color: string; group: string }> }) {
+export function AllAroundTable({ athletes, topN, highlights }: { athletes: AllAroundAthlete[]; topN: number; highlights: HighlightFor }) {
   if (!athletes.length) return <p className="text-sm text-ink-muted">No registered all-around athletes yet.</p>;
   return (
     <ScrollTable caption="All-around standings">
@@ -21,10 +21,10 @@ export function AllAroundTable({ athletes, topN, highlights }: { athletes: AllAr
       </thead>
       <tbody>
         {athletes.map((a, i) => {
-          const hl = highlights[a.athleteId];
+          const hl = highlights(a.athleteName);
           return (
             <tr key={a.athleteId} data-athlete={a.athleteName} className="border-b border-line last:border-0">
-              <td className={`${td} ${stickyCol} max-w-[11rem]`} style={hl ? { boxShadow: `inset 3px 0 0 ${hl.color}` } : undefined}>
+              <td className={`${td} ${stickyCol} max-w-[11rem]`} style={highlightStyle(hl)}>
                 <div className="flex gap-2">
                   <span className="w-6 shrink-0 text-right text-ink-muted">{i + 1}</span>
                   <div className="min-w-0">

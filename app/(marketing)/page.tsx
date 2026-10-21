@@ -80,7 +80,7 @@ export default async function HomePage() {
           </div>
           {ex && (
             <div className="text-ink">
-              <Card title="Team projection" context={`${ex.event.shortName} · Men`} bodyClassName="" action={<Link href={`/events/${ex.event.slug}/team`} className="text-sm font-semibold text-primary">Open</Link>}>
+              <Card title="Team projection" context={`${ex.event.shortName} · Men`} bodyClassName="" action={<Link href={`/events/${ex.event.slug}/team`} className="inline-flex min-h-tap items-center text-sm font-semibold text-primary">Open</Link>}>
                 {/* Scrolls inside the card at 375px, first column pinned (CLAUDE.md mobile checklist). */}
                 <div className="overflow-x-auto">
                 <table className="w-full min-w-max text-[15px] tnum [&_tr:nth-child(odd)_td]:bg-surface-2">
@@ -125,7 +125,7 @@ export default async function HomePage() {
             ))}
             <div className="px-4 py-3 text-sm text-ink-muted">
               One device at a time. Passes are granted by hand for now.{" "}
-              <a href={SITE.contactUrl} className="font-semibold text-primary">
+              <a href={SITE.contactUrl} className="inline-flex min-h-tap items-center font-semibold text-primary">
                 Request a pass
               </a>
             </div>
@@ -138,7 +138,7 @@ export default async function HomePage() {
                 </Link>
               ))}
             </Card>
-            <Card title="Competitions" bodyClassName="divide-y divide-line" action={<Link href="/events" className="text-sm font-semibold text-primary">All</Link>}>
+            <Card title="Competitions" bodyClassName="divide-y divide-line" action={<Link href="/events" className="inline-flex min-h-tap items-center text-sm font-semibold text-primary">All</Link>}>
               {events.slice(0, 3).map((e) => (
                 <EventRow key={e.slug} event={e} />
               ))}

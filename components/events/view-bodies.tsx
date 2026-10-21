@@ -2,7 +2,7 @@ import { StatTile } from "@/components/ui/card";
 import { Tabs } from "@/components/ui/tabs";
 import type { EventData } from "@/lib/domain/types";
 import type { AthleteHighlight, EventView } from "@/lib/events/types";
-import { allAroundModel, GENDERS, highlightMap, resultsByEvent, scorecards, selectionModel } from "@/lib/events/views";
+import { allAroundModel, GENDERS, highlighter, resultsByEvent, scorecards, selectionModel } from "@/lib/events/views";
 import type { Ruleset } from "@/lib/rules";
 import { ExportButtons } from "@/components/export/export-buttons";
 import { AllAroundTable, Champions } from "./all-around-view";
@@ -25,7 +25,7 @@ export interface ViewProps {
 export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
   const models = selectionModel(data, ruleset);
   const results = resultsByEvent(data, ruleset);
-  const hl = highlightMap(highlights);
+  const hl = highlighter(highlights);
   const scored = data.scores.filter((s) => s.finalScore != null);
   const avg = scored.length ? scored.reduce((t, s) => t + (s.finalScore ?? 0), 0) / scored.length : 0;
   return (
@@ -72,8 +72,9 @@ export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
   );
 }
 
-export function TeamBody({ ruleset, data }: ViewProps) {
+export function TeamBody({ ruleset, data, highlights }: ViewProps) {
   const models = selectionModel(data, ruleset);
+  const hl = highlighter(highlights);
   return (
     <>
       <Tabs
@@ -89,7 +90,7 @@ export function TeamBody({ ruleset, data }: ViewProps) {
               label="Division"
               param="division"
               tabs={mine.map((m) => ({ id: m.division.id, label: m.division.label }))}
-              panels={mine.map((m) => <TeamProjection key={m.division.id} model={m} />)}
+              panels={mine.map((m) => <TeamProjection key={m.division.id} model={m} highlights={hl} />)}
             />
           );
         })}
@@ -98,8 +99,9 @@ export function TeamBody({ ruleset, data }: ViewProps) {
   );
 }
 
-export function ScorecardsBody({ data }: ViewProps) {
+export function ScorecardsBody({ data, highlights }: ViewProps) {
   const rows = scorecards(data);
+  const hl = highlighter(highlights);
   return (
     <Tabs
       label="Gender"
@@ -109,7 +111,7 @@ export function ScorecardsBody({ data }: ViewProps) {
         const mine = rows.filter((r) => r.gender === g.id);
         return (
           <div key={g.id} className="space-y-2">
-            {mine.length ? mine.map((r) => <ScorecardCard key={`${r.athleteName}-${r.raw}`} row={r} />) : <p className="text-sm text-ink-muted">No scorecards.</p>}
+            {mine.length ? mine.map((r, i) => <ScorecardCard key={`${i}-${r.athleteName}-${r.raw}`} row={r} highlights={hl} />) : <p className="text-sm text-ink-muted">No scorecards.</p>}
           </div>
         );
       })}
@@ -121,7 +123,7 @@ const ringId = (ring: string) => ring.toLowerCase().replace(/\s+/g, "-");
 
 export function ScheduleBody({ data, highlights }: ViewProps) {
   if (!data.schedules.length) return <p className="text-sm text-ink-muted">No schedule posted yet.</p>;
-  const hl = highlightMap(highlights);
+  const hl = highlighter(highlights);
   return (
     <Tabs
       label="Ring"
@@ -135,7 +137,7 @@ export function ScheduleBody({ data, highlights }: ViewProps) {
 export function AllAroundBody({ ruleset, data, highlights }: ViewProps) {
   const model = allAroundModel(data, ruleset);
   if (!model) return <p className="text-sm text-ink-muted">This event has no all-around award.</p>;
-  const hl = highlightMap(highlights);
+  const hl = highlighter(highlights);
   return (
     <Tabs
       label="View"

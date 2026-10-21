@@ -191,7 +191,14 @@ test("category average ignores events not scored yet", () => {
     method: "category-average",
     categories: [{ id: "cq", label: "Changquan", events: ["CQ", "DS", "GS"] }],
   });
-  assert.equal(c?.average, 9.15);
+  assert.equal(c?.score, 9.15);
+  assert.ok(Math.abs(c!.average - 9.15) < 1e-9);
+});
+
+test("averages are not rounded up to meet a minimum", () => {
+  const [c] = buildCandidates([e("Eli", "CQ", 9.0), e("Eli", "DS", 8.999)], { method: "barehand-plus-weapon", pairing: "same-discipline" });
+  assert.equal(c?.score, 17.999);
+  assert.ok(c!.average < 9.0);
 });
 
 test("all-around minimum forms counts scored forms only", () => {

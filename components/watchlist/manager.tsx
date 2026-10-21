@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { nameTokens, parseRoster, WATCH_COLORS, type WatchList } from "@/lib/watchlist/match";
 import { newId, useWatchLists, writeLists } from "@/lib/watchlist/store";
@@ -59,6 +59,7 @@ function ListEditor({
     if (parseRoster(draft).join("\n") === base) setDraft(joined);
   }
   const [confirming, setConfirming] = useState(false);
+  const roster = useMemo(() => parseRoster(draft), [draft]);
   const saved = parseRoster(draft).join("\n") === list.athletes.join("\n");
   const oneWord = list.athletes.filter((a) => nameTokens(a).length < 2);
 
@@ -106,7 +107,7 @@ function ListEditor({
           </div>
         </fieldset>
         <AthletePicker
-          exclude={parseRoster(draft)}
+          exclude={roster}
           onAdd={(names) => {
             const next = parseRoster([...parseRoster(draft), ...names].join("\n"));
             setDraft(next.join("\n"));

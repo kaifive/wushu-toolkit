@@ -108,6 +108,13 @@ A/B/C = 0.2/0.3/0.4 (cap 1.4), listed connections A/B/C/D =
 deduction codes were re-entered from the same PDF (Tables 10-1-1 to 10-1-6,
 10-4-1); they differed a lot from the v1 list.
 
+### 13. Are selection averages rounded before the minimum check?
+
+Barehand 9.000 + weapon 8.999 averages 8.9995. **Default:** not rounded, so
+it does not meet a 9.0 minimum, and averages are shown cut to thousandths
+(8.999) so the display agrees. If USAWKF rounds averages to thousandths first, that
+athlete qualifies; one line in `lib/rules/selection.ts` changes it.
+
 ---
 
 ## Answers (2026-10-21)

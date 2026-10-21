@@ -1,5 +1,6 @@
 "use client";
 
+import { storageJson, storageSet } from "@/lib/storage";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { athleteKey } from "@/lib/domain/names";
 import { nameTokens } from "@/lib/watchlist/match";
@@ -35,20 +36,21 @@ const primary = "min-h-tap rounded-card bg-primary px-4 font-semibold text-prima
 const iconBtn = "flex h-11 w-11 shrink-0 items-center justify-center rounded-card border border-line bg-surface text-lg disabled:opacity-30";
 const field = "min-h-tap w-full rounded-card border border-line bg-surface px-3";
 
+/** Remove acts and unlink anything that followed them. */
+function dropActs(acts: Act[], drop: (a: Act) => boolean): Act[] {
+  const gone = new Set(acts.filter(drop).map((a) => a.id));
+  return acts.filter((a) => !gone.has(a.id)).map((a) => (a.follows && gone.has(a.follows) ? { ...a, follows: undefined } : a));
+}
+
 function load(): State {
-  try {
-    const raw = window.localStorage.getItem(KEY);
-    const s = raw ? (JSON.parse(raw) as Partial<State>) : null;
-    // Old or hand-edited values: keep only well-formed acts.
-    if (s && typeof s === "object") {
-      const acts = (Array.isArray(s.acts) ? s.acts : []).filter(
-        (a): a is Act => !!a && typeof a.id === "string" && LEVELS.includes(a.level) && Array.isArray(a.performers) && (a.kind === "group" || a.kind === "solo"),
-      );
-      const strings = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : []);
-      return { acts, order: strings(s.order), roster: strings(s.roster), generated: !!s.generated };
-    }
-  } catch {
-    /* storage blocked */
+  const s = storageJson(KEY) as Partial<State> | null;
+  // Old or hand-edited values: keep only well-formed acts.
+  if (s && typeof s === "object") {
+    const acts = (Array.isArray(s.acts) ? s.acts : []).filter(
+      (a): a is Act => !!a && typeof a.id === "string" && LEVELS.includes(a.level) && Array.isArray(a.performers) && (a.kind === "group" || a.kind === "solo"),
+    );
+    const strings = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : []);
+    return { acts, order: strings(s.order), roster: strings(s.roster), generated: !!s.generated };
   }
   return EMPTY;
 }
@@ -69,11 +71,7 @@ export function DemoBuilder() {
   }, []);
   useEffect(() => {
     if (!loaded) return;
-    try {
-      window.localStorage.setItem(KEY, JSON.stringify(s));
-    } catch {
-      /* storage blocked */
-    }
+    storageSet(KEY, JSON.stringify(s));
   }, [s, loaded]);
 
   const order = useMemo(() => reconcile(s), [s]);
@@ -91,8 +89,7 @@ export function DemoBuilder() {
     update((st) => ({ ...st, acts: [...st.acts, act], order: [...reconcile(st), act.id] }));
     return act.id;
   };
-  const removeAct = (id: string) =>
-    setActs((acts) => acts.filter((a) => a.id !== id).map((a) => (a.follows === id ? { ...a, follows: undefined } : a)));
+  const removeAct = (id: string) => setActs((acts) => dropActs(acts, (a) => a.id === id));
 
   /** Performer names: people already in this demo first, then past competitions. */
   const suggestPeople = useCallback(
@@ -146,10 +143,11 @@ export function DemoBuilder() {
             update((st) => ({
               ...st,
               roster: st.roster.filter((n) => !sameName(n, name)),
-              // Their solos go with them; groups just lose a performer.
-              acts: st.acts
-                .filter((a) => !(a.kind === "solo" && a.performers.some((p) => sameName(p, name))))
-                .map((a) => ({ ...a, performers: a.performers.filter((p) => !sameName(p, name)) })),
+              // Their solos go with them (and links to those solos); groups just lose a performer.
+              acts: dropActs(
+                st.acts,
+                (a) => a.kind === "solo" && a.performers.some((p) => sameName(p, name)),
+              ).map((a) => ({ ...a, performers: a.performers.filter((p) => !sameName(p, name)) })),
             }))
           }
         />

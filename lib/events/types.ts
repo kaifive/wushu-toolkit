@@ -24,6 +24,8 @@ export interface EventConfig {
   /** ISO dates (inclusive). */
   dates: { start: string; end: string; approximate?: boolean };
   location?: string;
+  /** IANA zone for "as of" times, e.g. "America/New_York". Defaults to Central. */
+  timeZone?: string;
   organizer?: string;
   status: EventStatus;
   /** "paid" events need an entitlement to load data (ADR-005). Archived events are always free. */

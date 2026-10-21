@@ -9,8 +9,8 @@ export function SiteFooter() {
           {SITE.name} · by {SITE.author}. Not affiliated with USAWKF, IWUF or event organizers.
         </p>
         <p className="flex gap-4">
-          <Link href="/about" className="hover:text-ink">About</Link>
-          <Link href="/rules" className="hover:text-ink">Rules</Link>
+          <Link href="/about" className="inline-flex min-h-tap items-center hover:text-ink">About</Link>
+          <Link href="/rules" className="inline-flex min-h-tap items-center hover:text-ink">Rules</Link>
         </p>
       </div>
     </footer>

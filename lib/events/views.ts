@@ -1,11 +1,11 @@
-import { athleteKey } from "@/lib/domain/names";
 import type { EventCode, EventData, Gender, ScoreEntry } from "@/lib/domain/types";
 import { DISCIPLINE_LABEL, EVENTS, type Ruleset, type TeamId } from "@/lib/rules";
 import type { Discipline } from "@/lib/domain/types";
 import { ageGroupChampions, allAround, grandChampion, standings as aaStandings, type AllAroundAthlete } from "@/lib/rules/all-around";
 import { runSelection, withDivisions, type Candidate, type Team } from "@/lib/rules/selection";
-import { groupByAthlete } from "@/lib/rules/score";
+import { floor3, groupByAthlete } from "@/lib/rules/score";
 import type { AthleteHighlight } from "./types";
+import { namesMatch } from "@/lib/watchlist/match";
 
 /**
  * View models: plain serializable data computed from EventData + ruleset.
@@ -76,7 +76,7 @@ const toRow = (c: Candidate & { rank: number; team?: TeamId }, entries: ScoreEnt
     club: c.club,
     events,
     score: c.score,
-    average: c.average,
+    average: floor3(c.average),
     discipline: c.key,
     team: c.team,
     tied: c.tiedWithAbove,
@@ -111,7 +111,7 @@ export function selectionModel(data: EventData, ruleset: Ruleset): ScopeModel[] 
           ...t,
           members: [...t.members]
             .sort((a, b) => b.score - a.score)
-            .map((m) => ({ athleteName: m.athleteName, club: m.club, score: m.score, average: m.average, discipline: selectionKeyLabel(ruleset, m.key) })),
+            .map((m) => ({ athleteName: m.athleteName, club: m.club, score: m.score, average: floor3(m.average), discipline: selectionKeyLabel(ruleset, m.key) })),
         })),
         scored: pool.filter((s) => s.finalScore != null).length,
         total: pool.length,
@@ -200,9 +200,23 @@ export function allAroundModel(data: EventData, ruleset: Ruleset): AllAroundMode
   };
 }
 
-/** name key -> highlight color, for coloring club athletes. */
-export function highlightMap(highlights: AthleteHighlight[] = []): Record<string, { color: string; group: string }> {
-  const out: Record<string, { color: string; group: string }> = {};
-  for (const h of highlights) for (const a of h.athletes) out[athleteKey(a)] ??= { color: h.color, group: h.name };
-  return out;
+export type Highlight = { color: string; group: string };
+export type HighlightFor = (athleteName: string) => Highlight | undefined;
+
+/**
+ * Club highlight for an athlete name, using the same fuzzy matching as watch
+ * lists ("Huang LanHong" finds "Lan Hong Huang"). Results are memoized per name.
+ */
+export function highlighter(highlights: AthleteHighlight[] = []): HighlightFor {
+  const memo = new Map<string, Highlight | undefined>();
+  return (name) => {
+    if (!memo.has(name)) {
+      const h = highlights.find((x) => x.athletes.some((a) => namesMatch(a, name)));
+      memo.set(name, h ? { color: h.color, group: h.name } : undefined);
+    }
+    return memo.get(name);
+  };
 }
+
+/** Left colour bar for a highlighted row or card. */
+export const highlightStyle = (h: Highlight | undefined) => (h ? { boxShadow: `inset 3px 0 0 ${h.color}` } : undefined);

@@ -1,9 +1,9 @@
+import { highlightStyle, type HighlightFor } from "@/lib/events/views";
 import { Badge } from "@/components/ui/badge";
-import { athleteKey } from "@/lib/domain/names";
 import { withCurrentCompetitor } from "@/lib/domain/schedule";
 import type { Schedule } from "@/lib/domain/types";
 
-export function ScheduleView({ schedule, highlights }: { schedule: Schedule; highlights: Record<string, { color: string; group: string }> }) {
+export function ScheduleView({ schedule, highlights }: { schedule: Schedule; highlights: HighlightFor }) {
   const blocks = withCurrentCompetitor(schedule.blocks);
   if (!blocks.length) return <p className="text-sm text-ink-muted">No schedule posted for {schedule.ring} yet.</p>;
   return (
@@ -24,13 +24,13 @@ export function ScheduleView({ schedule, highlights }: { schedule: Schedule; hig
             </summary>
             <ol className="divide-y divide-line border-t border-line">
               {b.entries.map((e, j) => {
-                const hl = highlights[athleteKey(e.athleteName)];
+                const hl = highlights(e.athleteName);
                 return (
                   <li
                     key={j}
                     data-athlete={e.athleteName}
                     className={`flex items-center justify-between gap-3 px-4 py-2.5 text-sm ${e.isCurrent ? "bg-seal-soft" : ""}`}
-                    style={hl ? { boxShadow: `inset 3px 0 0 ${hl.color}` } : undefined}
+                    style={highlightStyle(hl)}
                     aria-current={e.isCurrent ? "step" : undefined}
                   >
                     <div className="min-w-0">

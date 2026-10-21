@@ -17,7 +17,10 @@ export interface Candidate {
   weapon?: ScoreEntry;
   /** Ranking value: barehand + weapon, or the category average. */
   score: number;
-  /** Per-event average, compared against team minimums. */
+  /**
+   * Per-event average, compared against team minimums. Not rounded: 8.9995
+   * must not pass a 9.0 minimum (OPEN_QUESTIONS #13). Display with toFixed(3).
+   */
   average: number;
   /** At least one counted event had every difficulty element made. */
   cleanNandu: boolean;
@@ -75,7 +78,7 @@ export function buildCandidates(scores: ScoreEntry[], scoring: SelectionScoring)
         const total = round3(scoreOf(barehand) + scoreOf(weapon));
         const counted = [barehand, weapon].filter((e): e is ScoreEntry => !!e);
         const discipline = key === "any" ? (barehand?.code ? EVENTS[barehand.code].discipline : weapon?.code ? EVENTS[weapon.code].discipline : "changquan") : key;
-        const c: Candidate = { ...base, key: discipline, counted, barehand, weapon, score: total, average: round3(total / 2), cleanNandu: counted.some(isClean) };
+        const c: Candidate = { ...base, key: discipline, counted, barehand, weapon, score: total, average: total / 2, cleanNandu: counted.some(isClean) };
         if (!pick || c.score > pick.score) pick = c;
       }
       if (pick) out.push(pick);
@@ -84,9 +87,10 @@ export function buildCandidates(scores: ScoreEntry[], scoring: SelectionScoring)
         // Registered-but-unscored events (live) don't drag the average down.
         const inCat = entries.filter((e) => e.code && cat.events.includes(e.code) && e.finalScore != null);
         if (!inCat.length) continue;
-        const avg = round3(inCat.reduce((s, e) => s + scoreOf(e), 0) / inCat.length);
+        const exact = inCat.reduce((s, e) => s + scoreOf(e), 0) / inCat.length;
+        const avg = round3(exact);
         if (avg <= 0) continue;
-        out.push({ ...base, key: cat.id, counted: inCat, score: avg, average: avg, cleanNandu: inCat.some(isClean) });
+        out.push({ ...base, key: cat.id, counted: inCat, score: avg, average: exact, cleanNandu: inCat.some(isClean) });
       }
     }
   }

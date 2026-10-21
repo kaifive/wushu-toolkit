@@ -1,22 +1,25 @@
 import { Notice } from "@/components/ui/notice";
 import type { EventData } from "@/lib/domain/types";
 
-export function formatAsOf(iso: string): string {
+/** "Aug 4, 2025, 11:02 AM CDT" in the event's own time zone. */
+export function formatAsOf(iso: string, timeZone = "America/Chicago"): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short", timeZone: "America/Chicago" }) + " CT";
+  const date = d.toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short", timeZone });
+  const zone = new Intl.DateTimeFormat("en-US", { timeZone, timeZoneName: "short" }).formatToParts(d).find((p) => p.type === "timeZoneName")?.value;
+  return zone ? `${date} ${zone}` : date;
 }
 
 /** v1's "Standings as of …" info bar. */
-export function DataStatus({ data }: { data: EventData }) {
+export function DataStatus({ data, timeZone }: { data: EventData; timeZone?: string }) {
   return (
     <div className="mb-4">
       {data.stale ? (
         <Notice tone="warn">
-          Live scores unavailable. Showing the saved copy from {formatAsOf(data.asOf)}.
+          Live scores unavailable. Showing the saved copy from {formatAsOf(data.asOf, timeZone)}.
         </Notice>
       ) : (
-        <p className="text-sm text-ink-muted">As of {formatAsOf(data.asOf)}</p>
+        <p className="text-sm text-ink-muted">As of {formatAsOf(data.asOf, timeZone)}</p>
       )}
     </div>
   );

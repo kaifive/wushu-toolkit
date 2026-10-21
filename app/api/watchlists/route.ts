@@ -30,7 +30,8 @@ export async function PUT(req: Request) {
     if (!lists) return Response.json({ error: "Expected { lists: [...] }." }, { status: 400 });
     if (!fitsInAccount(lists)) return Response.json({ error: "These watch lists are too big to save to an account." }, { status: 413 });
     const updatedAt = await setWatchlists(uid, lists);
-    return Response.json({ ok: true, updatedAt }, { headers: noStore });
+    // Send back what was stored (trimmed to the limits) so the device can adopt it.
+    return Response.json({ ok: true, updatedAt, lists }, { headers: noStore });
   } catch (err) {
     return authErrorResponse(err);
   }

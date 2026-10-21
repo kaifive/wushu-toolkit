@@ -5,46 +5,23 @@ import { useEffect, useRef, useState } from "react";
 import { AuthProvider, useAuth } from "@/components/auth/auth-provider";
 import type { WatchList } from "@/lib/watchlist/match";
 import { readLists, useWatchLists, writeLists } from "@/lib/watchlist/store";
-import { mergeLists, sameLists } from "@/lib/watchlist/sync";
+import { storageGet, storageSet } from "@/lib/storage";
+import { mergeLists, sameLists, SYNC_LIMITS } from "@/lib/watchlist/sync";
 
 /** Which account this device's lists were last synced with. */
 const OWNER_KEY = "wt:watchlists:owner";
-const readOwner = () => {
-  try {
-    return window.localStorage.getItem(OWNER_KEY);
-  } catch {
-    return null;
-  }
-};
-const writeOwner = (uid: string) => {
-  try {
-    window.localStorage.setItem(OWNER_KEY, uid);
-  } catch {
-    /* storage blocked */
-  }
-};
+const readOwner = () => storageGet(OWNER_KEY);
+const writeOwner = (uid: string) => storageSet(OWNER_KEY, uid);
 
 /** Browsers drop keepalive requests with bodies over 64 KB. */
 const KEEPALIVE_MAX = 60_000;
 
 /** What was last saved to the account, per user, to tell local edits from stale copies. */
 const syncedKey = (uid: string) => `wt:watchlists:synced:${uid}`;
-const readSynced = (uid: string) => {
-  try {
-    return window.localStorage.getItem(syncedKey(uid));
-  } catch {
-    return null;
-  }
-};
-const writeSynced = (uid: string, lists: WatchList[]) => {
-  try {
-    window.localStorage.setItem(syncedKey(uid), JSON.stringify(lists));
-  } catch {
-    /* storage blocked */
-  }
-};
+const readSynced = (uid: string) => storageGet(syncedKey(uid));
+const writeSynced = (uid: string, lists: WatchList[]) => storageSet(syncedKey(uid), JSON.stringify(lists));
 
-type State = "idle" | "loading" | "saving" | "saved" | "error";
+type State = "idle" | "loading" | "saving" | "saved" | "trimmed" | "error";
 
 /** Keeps this device's watch lists in step with the signed-in account. */
 export function WatchlistSync() {
@@ -70,11 +47,17 @@ function Sync() {
     setState("saving");
     try {
       const body = JSON.stringify({ lists: next });
-      const res = await authedFetch("/api/watchlists", { method: "PUT", headers: { "content-type": "application/json" }, body, keepalive: keepalive && body.length < KEEPALIVE_MAX });
+      const small = new TextEncoder().encode(body).length < KEEPALIVE_MAX;
+      const res = await authedFetch("/api/watchlists", { method: "PUT", headers: { "content-type": "application/json" }, body, keepalive: keepalive && small });
       if (!res.ok) throw new Error(String(res.status));
-      lastSaved.current = json;
-      writeSynced(uid, next);
-      setState("saved");
+      // The server trims over-long lists; keep this device in step with what it stored.
+      const stored = ((await res.json().catch(() => null)) as { lists?: WatchList[] } | null)?.lists ?? next;
+      lastSaved.current = JSON.stringify(stored);
+      writeSynced(uid, stored);
+      if (!sameLists(stored, next)) {
+        writeLists(stored);
+        setState("trimmed");
+      } else setState("saved");
     } catch {
       setState("error");
     }
@@ -148,7 +131,11 @@ function Sync() {
     );
   return (
     <p className="text-sm text-ink-muted" aria-live="polite">
-      {state === "loading" ? "Syncing with your account…" : state === "saving" ? "Saving…" : state === "error" ? "Couldn't sync with your account. Changes are kept on this device." : "Saved to your account."}
+      {state === "loading" ? "Syncing with your account…" : state === "saving" ? "Saving…" : state === "error"
+            ? "Couldn't sync with your account. Changes are kept on this device."
+            : state === "trimmed"
+              ? `Saved to your account, trimmed to ${SYNC_LIMITS.lists} lists of ${SYNC_LIMITS.athletes} names.`
+              : "Saved to your account."}
     </p>
   );
 }

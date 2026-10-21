@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { storageSet } from "@/lib/storage";
 
 const KEY = "wt:theme";
 const EVENT = "wt:theme";
@@ -37,11 +38,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   const flip = () => {
     const next: Theme = current() === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
-    try {
-      window.localStorage.setItem(KEY, next);
-    } catch {
-      /* storage blocked: applies until reload */
-    }
+    storageSet(KEY, next); // if storage is blocked the choice lasts until reload
     setTheme(next);
     window.dispatchEvent(new Event(EVENT));
   };

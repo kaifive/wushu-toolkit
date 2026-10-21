@@ -31,17 +31,6 @@ export default function RulesPage() {
     <Container className="max-w-4xl">
       <PageHeader title={r.name} />
 
-      {!r.source.verified && (
-        <SourceNote>
-          Minimum averages, team sizes and tie-breaks not yet confirmed against the official document.{" "}
-          {r.source.url && (
-            <a href={r.source.url} className="underline" target="_blank" rel="noopener noreferrer">
-              Official document
-            </a>
-          )}
-        </SourceNote>
-      )}
-
       <section className="mb-8">
         <h2 className="mb-3 font-display text-xl font-bold tracking-wide">Age groups and events</h2>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -160,6 +149,16 @@ export default function RulesPage() {
           </p>
         </div>
       </section>
+      {!r.source.verified && (
+        <SourceNote>
+          Minimum averages, team sizes and tie-breaks not yet confirmed against the official document.{" "}
+          {r.source.url && (
+            <a href={r.source.url} className="underline" target="_blank" rel="noopener noreferrer">
+              Official document
+            </a>
+          )}
+        </SourceNote>
+      )}
     </Container>
   );
 }

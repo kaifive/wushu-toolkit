@@ -8,6 +8,7 @@ export const PHOENIX_2025: EventConfig = {
   shortName: "2025 Phoenix",
   dates: { start: "2025-06-01", end: "2025-06-30", approximate: true },
   location: "Phoenix, AZ",
+  timeZone: "America/Phoenix",
   status: "archived",
   access: "free",
   rulesetId: "open-tournament",

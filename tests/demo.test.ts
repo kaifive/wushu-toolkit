@@ -110,3 +110,10 @@ test("reconcile keeps order, appends new acts and drops removed ones", () => {
   const acts = [act("a", 1, []), act("b", 1, []), act("c", 1, [])];
   assert.deepEqual(reconcile({ acts, order: ["c", "gone", "a", "c"] }), ["c", "a", "b"]);
 });
+
+test("a group named 'Solo …' stays a group through copy and import", () => {
+  const acts = [act("g", 3, ["Amy Lee", "Ben Ho"], { name: "Solo Stars" }), { ...act("s", 4, ["Amy Lee"]), kind: "solo" as const, name: "" }];
+  let n = 0;
+  const { demo } = fromText(toText({ acts, order: ["g", "s"] }), () => `id${n++}`);
+  assert.deepEqual(demo.acts.map((a) => [a.kind, a.name]), [["group", "Solo Stars"], ["solo", ""]]);
+});

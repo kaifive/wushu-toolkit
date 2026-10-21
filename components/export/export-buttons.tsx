@@ -25,18 +25,23 @@ const ExportContext = createContext<Ctx | null>(null);
 
 /** Static pages pass `slug` (data is fetched on first export); client-rendered pages pass `data`. */
 export function ExportProvider({ slug, eventName, rulesetId, data, children }: { slug: string; eventName: string; rulesetId: RulesetId; data?: EventData; children: React.ReactNode }) {
+  // Fetched data is reused for 30s: live pages refresh every minute, so exports match the screen.
+  const cache = useRef<{ key: string; at: number; data: Promise<EventData> } | null>(null);
   const value = useMemo<Ctx>(() => {
-    let pending: Promise<EventData> | null = null;
-    const getData = () =>
-      data
-        ? Promise.resolve(data)
-        : (pending ??= fetch(`/api/events/${slug}/data`).then((r) => {
-            if (!r.ok) {
-              pending = null;
-              throw new Error(`HTTP ${r.status}`);
-            }
-            return r.json() as Promise<EventData>;
-          }));
+    const getData = () => {
+      if (data) return Promise.resolve(data);
+      const hit = cache.current;
+      if (hit && hit.key === slug && Date.now() - hit.at < 30_000) return hit.data;
+      const req = fetch(`/api/events/${slug}/data`).then((r) => {
+        if (!r.ok) {
+          cache.current = null;
+          throw new Error(`HTTP ${r.status}`);
+        }
+        return r.json() as Promise<EventData>;
+      });
+      cache.current = { key: slug, at: Date.now(), data: req };
+      return req;
+    };
     return { eventName, rulesetId, getData };
   }, [slug, eventName, rulesetId, data]);
   return <ExportContext.Provider value={value}>{children}</ExportContext.Provider>;

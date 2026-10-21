@@ -4,6 +4,7 @@ import type { User } from "firebase/auth";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { authConfigured, firebase } from "@/lib/auth/client";
 import { newSessionId, SESSION_HEADER, SESSION_STORAGE_KEY, type SessionDoc } from "@/lib/auth/model";
+import { storageGet, storageSet } from "@/lib/storage";
 
 type Status = "off" | "loading" | "signed-out" | "signed-in";
 
@@ -28,21 +29,15 @@ export function useAuth(): AuthState {
   return v;
 }
 
-const readSession = () => {
-  try {
-    return window.localStorage.getItem(SESSION_STORAGE_KEY);
-  } catch {
-    return null;
-  }
-};
-const writeSession = (id: string | null) => {
-  try {
-    if (id) window.localStorage.setItem(SESSION_STORAGE_KEY, id);
-    else window.localStorage.removeItem(SESSION_STORAGE_KEY);
-  } catch {
-    /* storage blocked */
-  }
-};
+/** This device's session id, shared by its tabs. */
+const readSession = () => storageGet(SESSION_STORAGE_KEY);
+const writeSession = (id: string | null) => storageSet(SESSION_STORAGE_KEY, id);
+/**
+ * The id this device held before its latest claim. Until the claim reaches
+ * the server, every tab still sees that old id there; it is ours, not
+ * another device's, so it must not trigger a sign-out.
+ */
+const PREV_KEY = `${SESSION_STORAGE_KEY}:prev`;
 
 /**
  * Claim the account for this device: new session id, registered server-side.
@@ -50,7 +45,10 @@ const writeSession = (id: string | null) => {
  */
 async function claimSession(user: User) {
   const sessionId = newSessionId();
-  writeSession(sessionId);
+  storageSet(PREV_KEY, readSession());
+  if (!writeSession(sessionId) || readSession() !== sessionId) {
+    throw new Error("This browser is blocking site storage, which accounts need. Allow storage for this site and try again.");
+  }
   const res = await fetch("/api/session", {
     method: "POST",
     headers: { "content-type": "application/json", authorization: `Bearer ${await user.getIdToken()}` },
@@ -87,6 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!authConfigured()) return;
     let unsubAuth = () => {};
     let unsubSession = () => {};
+    let noIdTimer: number | undefined;
     let alive = true;
     void firebase().then(async ({ auth, db }) => {
       const [{ onAuthStateChanged, signOut }, { doc, onSnapshot }] = await Promise.all([import("firebase/auth"), import("firebase/firestore")]);
@@ -100,8 +99,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         unsubSession = onSnapshot(doc(db, "sessions", u.uid), (snap) => {
           if (claiming.current) return;
           const data = snap.data() as SessionDoc | undefined;
+          if (!data) return;
           const mine = readSession();
-          if (data && mine && data.sessionId !== mine) {
+          if (!mine) {
+            // No local id while Firebase kept the user: storage was cleared, or
+            // another tab is mid sign-in (it writes the id right after). Give
+            // that tab a moment, then sign in again if it's still missing.
+            window.clearTimeout(noIdTimer);
+            noIdTimer = window.setTimeout(() => !readSession() && !claiming.current && void signOut(auth), 4000);
+            return;
+          }
+          if (data.sessionId !== mine && data.sessionId !== storageGet(PREV_KEY)) {
             writeSession(null);
             setKicked(data.device || "another device");
             void signOut(auth);
@@ -113,6 +121,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       alive = false;
       unsubAuth();
       unsubSession();
+      window.clearTimeout(noIdTimer);
     };
   }, []);
 

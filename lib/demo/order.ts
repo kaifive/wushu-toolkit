@@ -260,7 +260,8 @@ export function fromText(text: string, newId: () => string): { demo: Demo; skipp
     }
     const [, title = "", level, who = "", flagText = ""] = m;
     const flags = flagText.split(",").map((f) => f.trim().toLowerCase()).filter(Boolean);
-    const solo = /^solo\b/i.exec(title);
+    // "Solo" or "Solo: Jianshu" is a solo; a group may be called "Solo Stars".
+    const solo = /^solo\s*(:|$)/i.exec(title.trim());
     const act: Act = {
       id: newId(),
       kind: solo ? "solo" : "group",

@@ -25,8 +25,8 @@ export function ResultsByEvent({ results }: { results: EventResult[] }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {r.rows.map((row) => (
-                    <tr key={row.athleteName} data-athlete={row.athleteName} className="border-b border-line last:border-0">
+                  {r.rows.map((row, i) => (
+                    <tr key={`${i}-${row.athleteName}`} data-athlete={row.athleteName} className="border-b border-line last:border-0">
                       <td className={`${td} ${stickyCol}`}>
                         <div className="flex items-start gap-2">
                           <span className="w-6 shrink-0 text-right text-ink-muted">{row.finalScore == null ? "" : row.place}</span>

@@ -10,7 +10,12 @@ const eventKey = (raw: string) => clean(raw).toLowerCase();
  */
 export function joinRegistrationScores(regs: Registration[], scores: ScoreEntry[]): ScoreEntry[] {
   const byKey = new Map<string, ScoreEntry>();
-  for (const s of scores) byKey.set(`${s.athleteId}|${eventKey(s.raw)}`, s);
+  for (const s of scores) {
+    // A duplicated row (re-run, copied line) must not blank out a real score.
+    const key = `${s.athleteId}|${eventKey(s.raw)}`;
+    const prev = byKey.get(key);
+    if (!prev || (prev.finalScore == null && s.finalScore != null)) byKey.set(key, s);
+  }
   return regs.flatMap((r) =>
     r.entries
       .filter((e) => !e.waitlisted)

@@ -53,7 +53,7 @@ export default async function EventOverview({ params }: { params: Promise<{ slug
           <ul className="mt-2 space-y-1">
             {event.links.map((l) => (
               <li key={l.url}>
-                <a href={l.url} className="text-primary underline" rel="noopener noreferrer" target="_blank">
+                <a href={l.url} className="inline-flex min-h-tap items-center text-primary underline" rel="noopener noreferrer" target="_blank">
                   {l.label}
                 </a>
               </li>

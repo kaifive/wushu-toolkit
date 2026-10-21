@@ -49,4 +49,5 @@ for (const event of targets) {
   }
 }
 writeSnapshotIndex();
-process.exit(failures === targets.length ? 1 : 0);
+// Any failure fails the run, so a source that keeps breaking gets noticed.
+process.exit(failures ? 1 : 0);

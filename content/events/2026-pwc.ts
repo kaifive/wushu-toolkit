@@ -57,6 +57,8 @@ export const PWC_2026: EventConfig = {
   views: ["all-around", "schedule"],
   revalidate: 86400, // archived: the sheet is final; re-read daily until a snapshot exists
   data,
+  // Keep snapshotting until the live sheet has been saved; the archive must not depend on it.
+  snapshot: { until: "2026-12-31" },
   description: "All-around standings (sum of each athlete's top three forms), age-group champions and live ring schedules.",
   highlights: [
     {

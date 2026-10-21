@@ -43,7 +43,8 @@ export async function verifyUser(req: Request) {
   const token = req.headers.get("authorization")?.match(/^Bearer (.+)$/)?.[1];
   if (!token) throw new AuthError("Sign in first.", 401, "no-token");
   try {
-    const decoded = await auth.verifyIdToken(token);
+    // checkRevoked: disabled accounts and revoked sessions lose access at once.
+    const decoded = await auth.verifyIdToken(token, true);
     return { uid: decoded.uid, email: decoded.email };
   } catch {
     throw new AuthError("Your sign-in expired. Sign in again.", 401, "bad-token");

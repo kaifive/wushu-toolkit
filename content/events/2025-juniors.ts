@@ -27,6 +27,7 @@ export const JUNIORS_2025: EventConfig = {
   shortName: "2025 Junior Trials",
   dates: { start: "2025-12-18", end: "2025-12-21" },
   location: "Bethesda North Marriott, Rockville, MD",
+  timeZone: "America/New_York",
   organizer: "USAWKF",
   status: "archived",
   access: "free",
@@ -34,6 +35,8 @@ export const JUNIORS_2025: EventConfig = {
   views: ["standings", "team"],
   revalidate: 3600,
   data,
+  // Keep snapshotting until the live sheet has been saved; the archive must not depend on it.
+  snapshot: { until: "2026-12-31" },
   description:
     "Selection for the 10th World Junior Wushu Championships (Tianjin, March 2026). Team projections use the r15 regulations: best barehand plus best weapon in one discipline, with minimum averages.",
   links: [

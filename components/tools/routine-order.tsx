@@ -1,5 +1,6 @@
 "use client";
 
+import { storageJson, storageSet } from "@/lib/storage";
 import { useEffect, useMemo, useState } from "react";
 import { allItems, orderToText, type PlacedItem, type RequiredMovementSet } from "@/lib/rules/iwuf-2024/required-movements";
 import { moveItem, useCopy } from "@/components/ui/use-copy";
@@ -9,18 +10,13 @@ const KEY = "wt:required-order:v1";
 type Saved = { set: string; orders: Record<string, PlacedItem[]> };
 
 function load(fallback: string): Saved {
-  try {
-    const raw = window.localStorage.getItem(KEY);
-    const s = raw ? (JSON.parse(raw) as Partial<Saved>) : null;
-    // Old or hand-edited values: keep only what has the right shape.
-    if (s && typeof s === "object") {
-      const orders: Saved["orders"] = {};
-      for (const [k, v] of Object.entries(s.orders ?? {}))
-        if (Array.isArray(v)) orders[k] = v.filter((p): p is PlacedItem => !!p && typeof (p as PlacedItem).id === "string");
-      return { set: typeof s.set === "string" ? s.set : fallback, orders };
-    }
-  } catch {
-    /* storage blocked */
+  const s = storageJson(KEY) as Partial<Saved> | null;
+  // Old or hand-edited values: keep only what has the right shape.
+  if (s && typeof s === "object") {
+    const orders: Saved["orders"] = {};
+    for (const [k, v] of Object.entries(s.orders ?? {}))
+      if (Array.isArray(v)) orders[k] = v.filter((p): p is PlacedItem => !!p && typeof (p as PlacedItem).id === "string");
+    return { set: typeof s.set === "string" ? s.set : fallback, orders };
   }
   return { set: fallback, orders: {} };
 }
@@ -47,11 +43,7 @@ export function RoutineOrder({ sets }: { sets: RequiredMovementSet[] }) {
   }, [sets]);
   useEffect(() => {
     if (!loaded) return;
-    try {
-      window.localStorage.setItem(KEY, JSON.stringify({ set: setId, orders } satisfies Saved));
-    } catch {
-      /* storage blocked */
-    }
+    storageSet(KEY, JSON.stringify({ set: setId, orders } satisfies Saved));
   }, [setId, orders, loaded]);
 
   const set = sets.find((s) => s.id === setId) ?? sets[0]!;

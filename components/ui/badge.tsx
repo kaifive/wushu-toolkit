@@ -7,7 +7,7 @@ const TONES = {
 } as const;
 
 export function Badge({ tone = "neutral", children, className = "" }: { tone?: keyof typeof TONES; children: React.ReactNode; className?: string }) {
-  return <span className={`inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-bold uppercase tracking-wide ${TONES[tone]} ${className}`}>{children}</span>;
+  return <span className={`inline-flex items-center rounded-card px-1.5 py-0.5 text-[11px] font-bold uppercase tracking-wide ${TONES[tone]} ${className}`}>{children}</span>;
 }
 
 const TEAM_STYLE = {
@@ -19,5 +19,5 @@ const TEAM_STYLE = {
 /** Square team tag, after v1's bold "A Team" column. */
 export function TeamBadge({ team }: { team?: "A" | "B" | "C" }) {
   if (!team) return null;
-  return <span className={`inline-flex items-center rounded border px-1.5 text-[11px] font-bold uppercase leading-5 tracking-wide ${TEAM_STYLE[team]}`}>{team} team</span>;
+  return <span className={`inline-flex items-center rounded-card border px-1.5 text-[11px] font-bold uppercase leading-5 tracking-wide ${TEAM_STYLE[team]}`}>{team} team</span>;
 }

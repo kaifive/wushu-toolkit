@@ -25,14 +25,14 @@ export async function EventBody({
   if (loaded.state === "gated") {
     if (view === "overview") return null;
     const e = loaded.event;
-    return <GatedEventView slug={e.slug} view={view} eventName={e.name} rulesetId={e.rulesetId} highlights={e.highlights} refreshSeconds={e.revalidate ?? 60} />;
+    return <GatedEventView slug={e.slug} view={view} eventName={e.name} rulesetId={e.rulesetId} highlights={e.highlights} refreshSeconds={e.revalidate ?? 60} timeZone={e.timeZone} />;
   }
   if (loaded.state === "error") return <LoadError error={loaded.error} />;
   const e = loaded.event;
   return (
     <ExportProvider slug={e.slug} eventName={e.name} rulesetId={e.rulesetId}>
       {loaded.event.status === "live" && <LiveRefresh seconds={loaded.event.revalidate ?? 60} />}
-      {view !== "overview" && <DataStatus data={loaded.data} />}
+      {view !== "overview" && <DataStatus data={loaded.data} timeZone={loaded.event.timeZone} />}
       {view !== "overview" && <WatchLegend />}
       {children(loaded, loaded.data)}
     </ExportProvider>

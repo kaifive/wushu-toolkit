@@ -21,6 +21,7 @@ interface Props {
   rulesetId: RulesetId;
   highlights?: AthleteHighlight[];
   refreshSeconds: number;
+  timeZone?: string;
 }
 
 /** Paid live events: data is fetched after sign-in, through the entitlement-checked API (ADR-005). */
@@ -32,7 +33,7 @@ export function GatedEventView(props: Props) {
   );
 }
 
-function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds }: Props) {
+function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds, timeZone }: Props) {
   const { status, user, authedFetch, kicked } = useAuth();
   const [data, setData] = useState<EventData | null>(null);
   const [problem, setProblem] = useState<{ code?: string; error: string } | null>(null);
@@ -90,7 +91,7 @@ function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds }:
   const Body = VIEW_BODY[view];
   return (
     <ExportProvider slug={slug} eventName={eventName} rulesetId={rulesetId} data={data}>
-      <DataStatus data={data} />
+      <DataStatus data={data} timeZone={timeZone} />
       <WatchLegend />
       <Body ruleset={getRuleset(rulesetId)} data={data} highlights={highlights} />
     </ExportProvider>

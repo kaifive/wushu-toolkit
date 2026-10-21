@@ -9,10 +9,10 @@ export default function WatchlistsPage() {
   return (
     <Container className="max-w-2xl">
       <PageHeader title="Watch lists" />
-      <div className="mb-4">
+      <WatchlistManager />
+      <div className="mt-4">
         <WatchlistSync />
       </div>
-      <WatchlistManager />
     </Container>
   );
 }

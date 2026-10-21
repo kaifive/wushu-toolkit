@@ -2,6 +2,8 @@
 
 import { useEffect, useId, useState } from "react";
 
+const TABS_EVENT = "wt:tabs";
+
 export interface TabDef {
   id: string;
   label: string;
@@ -17,10 +19,15 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
   const uid = useId();
 
   useEffect(() => {
-    const fromUrl = new URLSearchParams(window.location.search).get(param);
-    // Sync from the URL once on mount (deep links); the effect only runs client-side.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (fromUrl && tabs.some((t) => t.id === fromUrl)) setActive(fromUrl);
+    // Follow the URL: on mount (deep links) and when another Tabs bound to the
+    // same param changes it (e.g. the division tabs under each gender panel).
+    const sync = () => {
+      const fromUrl = new URLSearchParams(window.location.search).get(param);
+      if (fromUrl && tabs.some((t) => t.id === fromUrl)) setActive(fromUrl);
+    };
+    sync();
+    window.addEventListener(TABS_EVENT, sync);
+    return () => window.removeEventListener(TABS_EVENT, sync);
   }, [param, tabs]);
 
   const select = (id: string) => {
@@ -28,6 +35,7 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
     const url = new URL(window.location.href);
     url.searchParams.set(param, id);
     window.history.replaceState(null, "", url);
+    window.dispatchEvent(new Event(TABS_EVENT));
   };
 
   // WAI-ARIA tabs: arrow keys, Home and End move between tabs.
