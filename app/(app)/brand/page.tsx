@@ -4,12 +4,12 @@ import { Container, PageHeader } from "@/components/ui/page-header";
 
 export const metadata: Metadata = { title: "Logo concepts", robots: { index: false, follow: false } };
 
-/** Internal review page for the three logo directions. Not linked from the nav. */
+/** Internal review page for the logo directions. Not linked from the nav. */
 export default function BrandPage() {
   return (
     <Container>
-      <PageHeader title="Three logo concepts" />
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <PageHeader title="Logo concepts" />
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {CONCEPTS.map(({ id, name, Mark, idea, strengths, risks }) => (
           <section key={id} className="overflow-hidden rounded-card border border-line bg-surface">
             <div className="grid grid-cols-2">

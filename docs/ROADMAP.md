@@ -58,7 +58,8 @@ Resume from the first unchecked item. One commit per item.
 - [ ] Optional: prefill from an athlete's Sportdata registration
 
 ## Phase 6 — Brand + landing
-- [x] Three logo concepts for review (`/brand`, screenshot in docs/logo-concepts.png)
+- [x] Three logo concepts for review (round 1, none picked)
+- [x] Round 2: four "toolkit for wushu" concepts (`/brand`, screenshot in docs/logo-concepts.png)
 - [x] Landing page (+ About page); own top-nav layout, no sidebar
 - [ ] Finalize logo (after Khai picks)
 
