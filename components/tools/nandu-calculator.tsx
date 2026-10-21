@@ -6,6 +6,7 @@ import {
   chainCounted, chainFromCode, chainToCode, familyOfEvent, nextOptions, scoreNandu, technique, type Chain, type Family,
 } from "@/lib/rules/iwuf-2024/nandu";
 import { EVENTS } from "@/lib/rules";
+import { moveItem, useCopy } from "@/components/ui/use-copy";
 import type { EventCode } from "@/lib/domain/types";
 
 const EVENT_CODES: EventCode[] = ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ", "TS"];
@@ -54,13 +55,7 @@ export function NanduCalculator() {
   }, [event, chains, loaded]);
 
   const score = useMemo(() => scoreNandu(family, chains, { weapon }), [family, chains, weapon]);
-  const move = (i: number, d: -1 | 1) => {
-    const j = i + d;
-    if (j < 0 || j >= chains.length) return;
-    const next = [...chains];
-    [next[i], next[j]] = [next[j]!, next[i]!];
-    setChains(next);
-  };
+  const move = (i: number, d: -1 | 1) => setChains(moveItem(chains, i, d));
   const setChain = (i: number, ch: Chain | null) => setChains(ch ? chains.map((c, j) => (j === i ? ch : c)) : chains.filter((_, j) => j !== i));
 
   return (
@@ -162,17 +157,8 @@ export function NanduCalculator() {
 
 /** Codes in routine order, ready to type into a registration form. */
 function RegistrationCodes({ chains, score }: { chains: Chain[]; score: ReturnType<typeof scoreNandu> }) {
-  const [copied, setCopied] = useState<string | null>(null);
+  const { copied, copy } = useCopy();
   const codes = chains.map(chainToCode);
-  const copy = async (text: string, label: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(label);
-    } catch {
-      setCopied("select");
-    }
-    window.setTimeout(() => setCopied(null), 2000);
-  };
   return (
     <section className="overflow-hidden rounded-card border border-line bg-surface">
       <header className="flex min-h-12 items-center justify-between gap-3 border-b border-line bg-surface-2 px-4 py-2">
@@ -198,7 +184,7 @@ function RegistrationCodes({ chains, score }: { chains: Chain[]; score: ReturnTy
         })}
       </ol>
       <p className="border-t border-line px-4 py-2 text-sm text-ink-muted">
-        {copied === "select" ? "Copy is blocked here; press and hold a code to select it." : `Total ${score.total.toFixed(2)}`}
+        {copied === "blocked" ? "Copy is blocked here; press and hold a code to select it." : `Total ${score.total.toFixed(2)}`}
       </p>
     </section>
   );

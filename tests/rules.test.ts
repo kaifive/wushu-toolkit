@@ -157,7 +157,7 @@ test("helpers", () => {
 });
 
 import { scoreToBeat } from "@/lib/rules/calculator";
-import { REQUIRED_MOVEMENTS } from "@/lib/rules/iwuf-2024/required-movements";
+import { REQUIRED_MOVEMENTS, allItems, orderToText } from "@/lib/rules/iwuf-2024/required-movements";
 
 test("scoreToBeat finds the lowest score that strictly beats the average", () => {
   assert.deepEqual(scoreToBeat(9.1, [9.1, 9.1], 3), { kind: "need", each: 9.101, missing: 1, possible: true });
@@ -169,8 +169,19 @@ test("scoreToBeat finds the lowest score that strictly beats the average", () =>
   assert.deepEqual(scoreToBeat(9.0, [], 2), { kind: "need", each: 9.001, missing: 2, possible: true });
 });
 
-test("required movements migrated with event codes", () => {
-  assert.equal(REQUIRED_MOVEMENTS.length, 14);
-  assert.deepEqual(REQUIRED_MOVEMENTS[0]?.events, ["CQ"]);
-  assert.ok(REQUIRED_MOVEMENTS.every((m) => m.requirements.every((r) => r.items.length > 0)));
+test("required movements cover every individual event with unique ids", () => {
+  assert.equal(REQUIRED_MOVEMENTS.length, 15);
+  const events = REQUIRED_MOVEMENTS.flatMap((m) => m.events);
+  for (const code of ["CQ", "DS", "JS", "GS", "QS", "NQ", "ND", "NG", "TQ", "TJ", "TS"]) assert.ok(events.includes(code as never), code);
+  for (const m of REQUIRED_MOVEMENTS) {
+    const ids = allItems(m).map((i) => i.id);
+    assert.equal(new Set(ids).size, ids.length, m.id);
+    assert.ok(m.requirements.every((r) => r.items.length > 0), m.id);
+  }
+});
+
+test("orderToText numbers the routine and uses the athlete's names", () => {
+  const cq = REQUIRED_MOVEMENTS.find((m) => m.id === "changquan")!;
+  const text = orderToText(cq, [{ id: "gong-bu-bow-stance" }, { id: "gone" }, { id: "fist-technique-1", name: "Chōng Quán" }, { id: "fist-technique-2" }]);
+  assert.equal(text, "1. Gōng Bù (Bow Stance)\n2. Chōng Quán (Fist technique 1)\n3. Fist technique 2");
 });

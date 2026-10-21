@@ -126,3 +126,7 @@ deduction codes were re-entered from the same PDF (Tables 10-1-1 to 10-1-6,
 | Nandu cap | Mark the cut element | **Yes** | Done |
 | 11 | Exact archive dates | Month/year is fine | Closed |
 | Extras | Next features | **Watch-list sync to account, light/dark toggle** | Queue after the above |
+| Demo order | Level scale | **Level 1–5** | — |
+| Demo order | Rest gap | **Never back to back; may be unavoidable** | Show where it was broken |
+| Demo order | Flow | **Mixed, strong open and close** | — |
+| Exports | Which first | **Individual scorecard, results/standings** | — |

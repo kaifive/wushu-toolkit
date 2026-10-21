@@ -36,9 +36,14 @@ Resume from the first unchecked item. One commit per item.
 
 ## Phase 5 — Tools
 - [x] Deduction code lookup
-- [x] Required movements checklist
+- [x] Required movements: IWUF 2024 Articles 29–33, put in routine order and copy for registration
 - [x] Average score calculator (now "Score calculator")
 - [x] Rules page for the current ruleset
+
+## Phase 5d — More tools (requested 2026-10-21)
+- [ ] Demo order generator (groups and solos, levels 1–5, rest gaps, locks and links, regenerate, copy, import)
+- [ ] PNG/PDF export of scorecards and results with a "Powered by Wushu Toolkit" footer
+- [ ] AI code review loop over the whole PR until no new findings
 
 ## Phase 5b — Watch lists
 - [x] Local watch lists (multiple, colored, one per school) with fuzzy name matching
