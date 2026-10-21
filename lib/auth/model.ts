@@ -56,3 +56,44 @@ export function deviceLabel(userAgent: string): string {
 export function parseAdminUids(value: string | undefined): Set<string> {
   return new Set((value ?? "").split(",").map((s) => s.trim()).filter(Boolean));
 }
+
+/**
+ * This device's session, kept in localStorage and shared by its tabs.
+ * `claimedAt` is the server's time for the claim (null until /api/session
+ * answers); `startedAt` is when this device began claiming.
+ */
+export interface LocalSession {
+  id: string;
+  claimedAt: number | null;
+  startedAt: number;
+}
+
+/** How long a claim may stay unanswered before it counts as abandoned. */
+export const CLAIM_TTL = 30_000;
+
+export function parseLocalSession(raw: string | null): LocalSession | null {
+  if (!raw) return null;
+  try {
+    const v = JSON.parse(raw) as Partial<LocalSession>;
+    if (typeof v.id === "string" && v.id) return { id: v.id, claimedAt: typeof v.claimedAt === "number" ? v.claimedAt : null, startedAt: Number(v.startedAt) || 0 };
+  } catch {
+    /* older format: the bare id */
+  }
+  return { id: raw, claimedAt: 0, startedAt: 0 };
+}
+
+/**
+ * Single-device lock, decided from server times only, so stale or
+ * out-of-order snapshots can't sign anyone out:
+ * - "ok": the server holds this device's id, or an older claim than ours;
+ * - "pending": our claim is still on its way to the server;
+ * - "kicked": another device claimed the account after we did;
+ * - "lost": this device has no (live) session, e.g. storage was cleared.
+ */
+export function sessionVerdict(doc: SessionDoc | undefined, local: LocalSession | null, now: number): "ok" | "pending" | "kicked" | "lost" {
+  if (!local) return "lost";
+  if (doc?.sessionId === local.id) return "ok";
+  if (local.claimedAt === null) return now - local.startedAt < CLAIM_TTL ? "pending" : "lost";
+  if (doc && doc.updatedAt > local.claimedAt) return "kicked";
+  return "ok";
+}

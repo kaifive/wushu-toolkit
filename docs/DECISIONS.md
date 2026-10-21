@@ -179,3 +179,16 @@ own font (`system-ui`, San Francisco, Segoe UI, Roboto…), so v2 does too:
 nothing is downloaded, it looks native on every phone, and headings use the
 same family in bold with normal letter-spacing. Exports draw with the same
 stack.
+
+## ADR-011 — Single-device lock decided by server claim times
+
+**Status:** accepted (2026-10-22). Refines ADR-005.
+
+Comparing "server session id vs local id" raced with stale snapshots,
+other tabs and sign-ins in progress. Now `/api/session` returns the server
+time of each claim and the device stores it with its session id. A device
+signs out only when the server holds a different session recorded *after*
+its own claim (`sessionVerdict` in `lib/auth/model.ts`, unit-tested). A
+claim still in flight counts as pending (other tabs wait) and expires after
+30s. Sign-in state is one shared store per page, so every component sees
+the same status.

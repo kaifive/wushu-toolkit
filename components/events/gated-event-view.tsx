@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { AuthProvider, useAuth } from "@/components/auth/auth-provider";
+import { useAuth } from "@/components/auth/auth-provider";
 import { LockIcon } from "@/components/ui/icons";
 import { Notice } from "@/components/ui/notice";
 import type { EventData } from "@/lib/domain/types";
@@ -25,15 +25,7 @@ interface Props {
 }
 
 /** Paid live events: data is fetched after sign-in, through the entitlement-checked API (ADR-005). */
-export function GatedEventView(props: Props) {
-  return (
-    <AuthProvider>
-      <Inner {...props} />
-    </AuthProvider>
-  );
-}
-
-function Inner({ slug, view, eventName, rulesetId, highlights, refreshSeconds, timeZone }: Props) {
+export function GatedEventView({ slug, view, eventName, rulesetId, highlights, refreshSeconds, timeZone }: Props) {
   const { status, user, authedFetch, kicked } = useAuth();
   const [data, setData] = useState<EventData | null>(null);
   const [problem, setProblem] = useState<{ code?: string; error: string } | null>(null);

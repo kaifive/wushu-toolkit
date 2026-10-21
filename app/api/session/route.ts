@@ -9,8 +9,9 @@ export async function POST(req: Request) {
     if (typeof body.sessionId !== "string" || body.sessionId.length < 16 || body.sessionId.length > 100) {
       return Response.json({ error: "Bad session id." }, { status: 400 });
     }
-    await startSession(uid, body.sessionId, deviceLabel(req.headers.get("user-agent") ?? ""));
-    return Response.json({ ok: true });
+    // The server's claim time lets devices tell newer claims from stale snapshots.
+    const claimedAt = await startSession(uid, body.sessionId, deviceLabel(req.headers.get("user-agent") ?? ""));
+    return Response.json({ ok: true, claimedAt });
   } catch (err) {
     return authErrorResponse(err);
   }

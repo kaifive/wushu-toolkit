@@ -33,3 +33,19 @@ test("deviceLabel and admin list parsing", () => {
   assert.equal(deviceLabel("Mozilla/5.0 (Linux; Android 14) Chrome/120 Mobile Safari/537.36"), "Chrome on Android");
   assert.deepEqual([...parseAdminUids(" a, b ,,c")], ["a", "b", "c"]);
 });
+
+test("sessionVerdict: only a later claim from another device signs this one out", async () => {
+  const { sessionVerdict, parseLocalSession, CLAIM_TTL } = await import("@/lib/auth/model");
+  const doc = (sessionId: string, updatedAt: number) => ({ sessionId, device: "Chrome on Mac", updatedAt });
+  const mine = { id: "me", claimedAt: 1000, startedAt: 900 };
+  assert.equal(sessionVerdict(doc("me", 1000), mine, 2000), "ok");
+  assert.equal(sessionVerdict(doc("laptop", 500), mine, 2000), "ok", "stale snapshot from before our claim");
+  assert.equal(sessionVerdict(doc("laptop", 1500), mine, 2000), "kicked");
+  const pending = { id: "me", claimedAt: null, startedAt: 1000 };
+  assert.equal(sessionVerdict(doc("laptop", 500), pending, 1500), "pending");
+  assert.equal(sessionVerdict(doc("laptop", 500), pending, 1000 + CLAIM_TTL + 1), "lost", "abandoned claim");
+  assert.equal(sessionVerdict(doc("laptop", 500), null, 2000), "lost");
+  assert.equal(sessionVerdict(undefined, mine, 2000), "ok", "no session doc yet");
+  assert.deepEqual(parseLocalSession("abc123"), { id: "abc123", claimedAt: 0, startedAt: 0 }, "old bare-id format");
+  assert.equal(parseLocalSession(null), null);
+});

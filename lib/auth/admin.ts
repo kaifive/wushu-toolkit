@@ -69,6 +69,7 @@ export async function startSession(uid: string, sessionId: string, device: strin
   const { db } = services();
   const doc: SessionDoc = { sessionId, device, updatedAt: Date.now() };
   await db.collection("sessions").doc(uid).set(doc);
+  return doc.updatedAt;
 }
 
 export async function getEntitlements(uid: string): Promise<EntitlementsDoc> {
