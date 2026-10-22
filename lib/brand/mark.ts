@@ -33,7 +33,41 @@ const GEAR = gearPath(31, 33, 17.5, 13.8, 8, -Math.PI / 4, [0, 4]);
  * Inner SVG (viewBox 0 0 64 64). `seal` and `ink` are colours (or CSS
  * variables in the app, so dark mode can lighten the seal).
  */
-export function markInner(seal: string, ink: string): string {
+/** Tassel styles under the spear head (spear upright; the group is turned 45° after). Drawn behind the shaft. */
+export type TasselStyle = "strands" | "fan" | "windswept" | "knot" | "ribbons" | "flame";
+export const TASSEL_STYLES: { id: TasselStyle; name: string }[] = [
+  { id: "strands", name: "Strands (current)" },
+  { id: "fan", name: "Fan" },
+  { id: "windswept", name: "Windswept" },
+  { id: "knot", name: "Knot and strands" },
+  { id: "ribbons", name: "Ribbons" },
+  { id: "flame", name: "Flame" },
+];
+
+function tassel(style: TasselStyle, seal: string, ink: string): string {
+  const edge = (d: string, w: number) =>
+    `<path d="${d}" stroke="${seal}" stroke-width="${w + 2.4}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>` +
+    `<path d="${d}" stroke="${ink}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
+  const shape = (d: string) => `<path d="${d}" fill="${ink}" stroke="${seal}" stroke-width="2.4" paint-order="stroke" stroke-linejoin="round"/>`;
+  switch (style) {
+    case "strands":
+      return edge(TASSEL, 2);
+    case "fan":
+      return shape("M30.6 18 Q25 25 25.8 31 Q32 33.4 38.2 31 Q39 25 33.4 18 Z");
+    case "windswept":
+      // all strands blown to one side, like the tassel mid-thrust
+      return edge("M31 18.4 Q27 21 22.5 25.2 M31.4 18.8 Q27.6 23.4 24.2 28.6 M32 19 Q29.4 25 27.2 31", 2.1);
+    case "knot":
+      return edge("M31.2 21 Q29 25.5 27.4 29.6 M32 21.6 L32 31 M32.8 21 Q35 25.5 36.6 29.6", 2) + `<circle cx="32" cy="19.8" r="3" fill="${ink}" stroke="${seal}" stroke-width="2.4" paint-order="stroke"/>`;
+    case "ribbons":
+      return edge("M30.6 18.4 C27 22 30.6 25.4 27 29.4 C25 31.8 27 34 25 37", 1.9) + edge("M33.4 18.4 C37 22 33.4 25.4 37 29.4 C39 31.8 37 34 39 37", 1.9);
+    case "flame":
+      // one bold swept shape, like a flame trailing the head
+      return shape("M30.8 18 C26 21 21.5 24 20 30.5 C24.8 30 28.6 27 31.4 23.4 C30.8 27 31.8 30 33 32.5 C34.6 28.5 34.6 22.5 33.2 18 Z");
+  }
+}
+
+export function markInner(seal: string, ink: string, style: TasselStyle = "strands", tasselInk = ink): string {
   const cut = `stroke="${seal}" stroke-width="2.4" paint-order="stroke" stroke-linejoin="round"`;
   return [
     `<rect x="2" y="2" width="60" height="60" rx="13" fill="${seal}"/>`,
@@ -42,8 +76,7 @@ export function markInner(seal: string, ink: string): string {
     // Spear drawn upright, then turned 45° so it runs bottom-left to top-right.
     `<g transform="rotate(45 32 32)">`,
     // tassel behind the shaft: strands splaying back from the neck, with a seal edge so they read over the gear
-    `<path d="${TASSEL}" stroke="${seal}" stroke-width="4.4" stroke-linecap="round" fill="none"/>`,
-    `<path d="${TASSEL}" stroke="${ink}" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+    tassel(style, seal, tasselInk),
     // shaft, one piece from the butt up into the head; outlined where it crosses the gear
     `<rect x="30.3" y="12" width="3.4" height="51" rx="1.7" fill="${ink}" ${cut}/>`,
     // collar and head (outside the gear, so no outline: they join the shaft)
@@ -53,5 +86,5 @@ export function markInner(seal: string, ink: string): string {
   ].join("");
 }
 
-export const markSvg = (seal = "#d4371f", ink = "#ffffff") =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">${markInner(seal, ink)}</svg>`;
+export const markSvg = (seal = "#d4371f", ink = "#ffffff", style: TasselStyle = "strands", tasselInk = ink) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">${markInner(seal, ink, style, tasselInk)}</svg>`;
