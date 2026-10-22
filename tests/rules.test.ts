@@ -49,7 +49,7 @@ test("unscored events count as zero but do not crash", () => {
   assert.equal(c?.weapon, undefined);
 });
 
-test("r15 selection: one per discipline, minimum averages push athletes down", () => {
+test("junior selection (as USAWKF applied it): A takes the best qualifier per discipline then fills by rank; B and C go by rank", () => {
   const rules = RULESETS["usawkf-junior-trials-2025-26"].selection!;
   const scores = [
     e("Cq1", "CQ", 9.5), e("Cq1", "DS", 9.4), // 18.9 avg 9.45
@@ -60,8 +60,8 @@ test("r15 selection: one per discipline, minimum averages push athletes down", (
   ];
   const r = runSelection(scores, rules, "A");
   const names = (id: string) => r.teams.find((t) => t.id === id)!.members.map((m) => m.athleteName);
-  assert.deepEqual(names("A"), ["Cq1", "Tq1"]);
-  assert.deepEqual(names("B"), ["Cq2", "Nq1"]);
+  assert.deepEqual(names("A"), ["Cq1", "Tq1", "Cq2"]);
+  assert.deepEqual(names("B"), ["Nq1"]);
   assert.deepEqual(names("C"), []);
   assert.equal(r.ranked.find((c) => c.athleteName === "Low")?.team, undefined);
   assert.equal(r.ranked[0]?.rank, 1);
@@ -100,9 +100,10 @@ test("2025 adults: category averages, A team needs clean nandu, then fills to si
   const rules = RULESETS["usawkf-adult-trials-2025"].selection!;
   const clean = { scorecard: { c: { score: 2, elements: ["1", "2"], made: [true, true] } } };
   const scores = [
-    e("Dirty", "CQ", 9.6), e("Dirty", "DS", 9.6), // best average, no clean nandu
-    e("Clean", "CQ", 9.0, clean), e("Clean", "DS", 9.0),
-    e("Nan", "NQ", 9.1, clean),
+    e("Dirty", "CQ", 9.6), e("Dirty", "DS", 9.6), e("Dirty", "GS", 9.6), // best average, no clean nandu
+    e("Clean", "CQ", 9.0, clean), e("Clean", "DS", 9.0), e("Clean", "GS", 9.0),
+    e("Half", "CQ", 9.9), // Changquan alone: not in either Changquan category
+    e("Nan", "NQ", 9.1, clean), e("Nan", "ND", 9.1), e("Nan", "NG", 9.1),
     e("Tai", "TQ", 9.2, clean),
   ];
   const ranked = rankCandidates(buildCandidates(scores, rules.scoring), rules.tieBreaks);

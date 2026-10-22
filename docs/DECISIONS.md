@@ -203,3 +203,14 @@ its scored routines** (a cleared or rearranged sheet); a corrected or
 removed score stays live. The snapshot script reads live only
 (`liveOnly`) and refuses any drop in scored routines unless run with
 `--force`. The generic `withFallback` had no other user and was removed.
+
+## ADR-013: Official results beat hand-kept sheets
+
+Date: 2026-10-22. Status: accepted.
+
+When USAWKF publishes results for a competition (usawkf.org/competition-results),
+that page is the primary source and team rules are checked against its
+published teams (docs/DATA_AUDIT.md). Hand-kept sheets are only for live
+scoring before the official page exists. The 2025–26 junior team rule and
+the 2025 adult category rule were corrected to match the official results.
+

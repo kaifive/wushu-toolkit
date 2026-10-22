@@ -72,9 +72,11 @@ export const USAWKF_JUNIOR_TRIALS_2025_26: Ruleset = {
     perDivision: true,
     tieBreaks: ["highest-single-event", "more-full-nandu", "higher-performance", "higher-lowest-discarded"],
     teams: [
-      { id: "A", size: { A: 3, "*": 2 }, minAverage: 9.0, onePerDiscipline: true },
-      { id: "B", size: { A: 3, "*": 2 }, minAverage: 8.9, onePerDiscipline: true },
-      { id: "C", size: { A: 3, "*": 2 }, minAverage: 8.8, onePerDiscipline: true },
+      // Matches USAWKF's published 2025 results in every division (data audit 2026-10-22):
+      // A = the best qualifier in each discipline, rest of the spots by rank; B and C by rank.
+      { id: "A", size: { A: 3, "*": 2 }, minAverage: 9.0, onePerDiscipline: true, fill: true },
+      { id: "B", size: { A: 3, "*": 2 }, minAverage: 8.9 },
+      { id: "C", size: { A: 3, "*": 2 }, minAverage: 8.8 },
     ],
   },
 };

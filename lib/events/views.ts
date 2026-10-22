@@ -3,7 +3,7 @@ import { DISCIPLINE_LABEL, EVENTS, type Ruleset, type TeamId } from "@/lib/rules
 import type { Discipline } from "@/lib/domain/types";
 import { ageGroupChampions, allAround, grandChampion, standings as aaStandings, type AllAroundAthlete } from "@/lib/rules/all-around";
 import { deductionCodes, deductionGroupFor } from "@/lib/rules/iwuf-2024/deductions";
-import { runSelection, withDivisions, type Candidate, type Team } from "@/lib/rules/selection";
+import { runSelection, withDivisions, type Candidate, type SelectionResult, type Team } from "@/lib/rules/selection";
 import { groupByAthlete, round3 } from "@/lib/rules/score";
 import type { AthleteHighlight } from "./types";
 import { compileWatch } from "@/lib/watchlist/match";
@@ -100,6 +100,25 @@ export function selectionKeyLabel(ruleset: Ruleset, key: string): string {
   return DISCIPLINE_LABEL[key as Discipline] ?? key;
 }
 
+/**
+ * Standings list each athlete once, on their best-ranked line (or the line that
+ * made a team), and number places from 1 the way USAWKF's results do. Team
+ * selection still sees every discipline/category line.
+ */
+function onePerAthlete(ranked: SelectionResult["ranked"]): SelectionResult["ranked"] {
+  const pick = new Map<string, SelectionResult["ranked"][number]>();
+  for (const c of ranked) {
+    const prev = pick.get(c.athleteId);
+    if (!prev || (!prev.team && c.team)) pick.set(c.athleteId, c);
+  }
+  const kept = ranked.filter((c) => pick.get(c.athleteId) === c);
+  let place = 0;
+  return kept.map((c, i) => {
+    if (!c.tiedWithAbove || i === 0) place = i + 1;
+    return { ...c, rank: place };
+  });
+}
+
 /** Overall standings and team projection for every gender × division. */
 export function selectionModel(data: EventData, ruleset: Ruleset): ScopeModel[] {
   if (!ruleset.selection) return [];
@@ -115,7 +134,7 @@ export function selectionModel(data: EventData, ruleset: Ruleset): ScopeModel[] 
         gender: g,
         division: div,
         eventCodes: eventColumns(pool),
-        rows: result.ranked.map((c) => ({ ...toRow(c, byAthlete.get(c.athleteId) ?? []), discipline: selectionKeyLabel(ruleset, c.key) })),
+        rows: onePerAthlete(result.ranked).map((c) => ({ ...toRow(c, byAthlete.get(c.athleteId) ?? []), discipline: selectionKeyLabel(ruleset, c.key) })),
         teams: result.teams.map((t) => ({
           ...t,
           members: [...t.members]

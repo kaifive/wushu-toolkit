@@ -49,7 +49,7 @@ export type TeamId = "A" | "B" | "C";
  */
 export type SelectionScoring =
   | { method: "barehand-plus-weapon"; pairing: "any" | "same-discipline" }
-  | { method: "category-average"; categories: { id: string; label: string; events: EventCode[] }[] };
+  | { method: "category-average"; categories: { id: string; label: string; events: EventCode[]; /** Counts only if every event was entered. */ complete?: boolean }[] };
 
 export type TieBreak =
   /** Highest single event score among the counted events. */

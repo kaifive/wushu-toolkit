@@ -43,9 +43,10 @@ export const USAWKF_JUNIOR_TRIALS_2024: Ruleset = {
 };
 
 const ADULT_CATEGORIES = [
-  { id: "CQ_DS_GS", label: "Changquan / Daoshu / Gunshu", events: ["CQ", "DS", "GS"] },
-  { id: "CQ_JS_QS", label: "Changquan / Jianshu / Qiangshu", events: ["CQ", "JS", "QS"] },
-  { id: "NQ_ND_NG", label: "Nanquan / Nandao / Nangun", events: ["NQ", "ND", "NG"] },
+  // The three-event categories count only for athletes who entered all three (USAWKF results).
+  { id: "CQ_DS_GS", label: "Changquan / Daoshu / Gunshu", events: ["CQ", "DS", "GS"], complete: true },
+  { id: "CQ_JS_QS", label: "Changquan / Jianshu / Qiangshu", events: ["CQ", "JS", "QS"], complete: true },
+  { id: "NQ_ND_NG", label: "Nanquan / Nandao / Nangun", events: ["NQ", "ND", "NG"], complete: true },
   { id: "TQ_TJ", label: "Taijiquan / Taijijian", events: ["TQ", "TJ"] },
 ] as const;
 

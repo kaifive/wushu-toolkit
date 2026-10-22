@@ -101,3 +101,21 @@ test("USAWKF order page (saved copy of the 2025 Junior Trials page)", async () =
   const first = s[0]!.blocks[0]!;
   assert.equal(first.type === "session" && first.title, "Friday Morning Session 8:30am · Junior Female 1st Set Changquan");
 });
+
+test("USAWKF official results: overall ranks with teams, per-event scores joined to registrations", async () => {
+  const { readFileSync } = await import("node:fs");
+  const { parseUsawkfResults, joinOfficial } = await import("@/lib/data/usawkf-results");
+  const rows = parseUsawkfResults(readFileSync("tests/fixtures/usawkf/results-excerpt.html", "utf8"));
+  const overall = rows.filter((r) => r.table === "Children Female Athletes Overall Rank");
+  assert.deepEqual([overall[0]!.name, overall[0]!.score, overall[0]!.prize], ["Kolette Kooc", 9.157, "A Team"]);
+  const event = rows.filter((r) => r.table === "Taolu Junior Female 1st Set Changquan");
+  assert.ok(event.length > 5 && event.every((r) => r.score === null || (r.score > 5 && r.score < 10)));
+  const first = event.find((r) => r.place === 1)!;
+  const raw = "Taolu Junior Female 1st Set Changquan";
+  // Registration spells the name surname-first; the join still finds it.
+  const [last, ...given] = first.name.split(" ").reverse();
+  const reg = { athlete: { id: "x", name: `${last} ${given.reverse().join(" ")}` }, entries: [{ raw, code: "CQ" as const }] };
+  const joined = joinOfficial([reg], rows);
+  assert.equal(joined[0]!.finalScore, first.score);
+  assert.ok(joined.length > 1, "official results without a registration are kept");
+});

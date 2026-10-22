@@ -85,6 +85,9 @@ export function buildCandidates(scores: ScoreEntry[], scoring: SelectionScoring)
       if (pick) out.push(pick);
     } else {
       for (const cat of scoring.categories) {
+        // Only a category the athlete entered in full (USAWKF ranks CQ/DS/GS and
+        // CQ/JS/QS separately; a lone Changquan is in neither).
+        if (cat.complete && !cat.events.every((code) => entries.some((e) => e.code === code))) continue;
         // Registered-but-unscored events (live) don't drag the average down.
         const inCat = entries.filter((e) => e.code && cat.events.includes(e.code) && e.finalScore != null);
         if (!inCat.length) continue;
