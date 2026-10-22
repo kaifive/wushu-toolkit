@@ -13,7 +13,9 @@ import type { Sheet } from "@/lib/export/sheet";
 export type ExportTarget =
   | { kind: "scorecard"; athleteName: string; raw: string }
   | { kind: "result"; raw: string; gender?: Gender }
-  | { kind: "overall"; gender: Gender; division: string };
+  | { kind: "overall"; gender: Gender; division: string }
+  | { kind: "stats" }
+  | { kind: "athlete"; athleteName: string };
 
 interface Ctx {
   eventName: string;
@@ -66,6 +68,12 @@ async function build(ctx: Ctx, t: ExportTarget): Promise<{ sheet: Sheet; name: s
       const m = views.selectionModel(data, ruleset).find((x) => x.gender === t.gender && x.division.id === t.division);
       return m ? { sheet: sheets.overallSheet(ctx.eventName, m), name: fileName(ctx.eventName, "overall", m.gender, m.division.label) } : null;
     }
+    case "stats":
+      return { sheet: sheets.statsSheet(ctx.eventName, views.scorecardStats(data)), name: fileName(ctx.eventName, "stats") };
+    case "athlete": {
+      const a = views.athleteProfiles(data, ruleset).find((x) => x.name === t.athleteName);
+      return a ? { sheet: sheets.athleteSheet(ctx.eventName, a), name: fileName(ctx.eventName, a.name) } : null;
+    }
   }
 }
 
@@ -80,7 +88,16 @@ function download(blob: Blob, name: string) {
   window.setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 
-const labelOf = (t: ExportTarget) => (t.kind === "scorecard" ? `${t.athleteName} ${t.raw} scorecard` : t.kind === "result" ? `${t.raw} results` : "overall standings");
+const labelOf = (t: ExportTarget) =>
+  t.kind === "scorecard"
+    ? `${t.athleteName} ${t.raw} scorecard`
+    : t.kind === "result"
+      ? `${t.raw} results`
+      : t.kind === "stats"
+        ? "stats"
+        : t.kind === "athlete"
+          ? `${t.athleteName} results`
+          : "overall standings";
 
 export function ExportButtons({ target, className = "" }: { target: ExportTarget; className?: string }) {
   const label = labelOf(target);

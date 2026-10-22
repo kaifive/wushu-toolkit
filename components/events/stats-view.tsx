@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ExportButtons } from "@/components/export/export-buttons";
 import { Card, StatTile } from "@/components/ui/card";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import type { EventData } from "@/lib/domain/types";
@@ -127,6 +128,7 @@ export function StatsView({ data }: { data: EventData }) {
           </tbody>
         </ScrollTable>
       </section>
+      <ExportButtons target={{ kind: "stats" }} />
     </div>
   );
 }

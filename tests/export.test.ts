@@ -44,3 +44,12 @@ test("PDF writer produces a well-formed file with one page per image", () => {
   const entries = text.slice(xref).split("\n").slice(3, 3 + 8);
   entries.forEach((line, i) => assert.equal(text.slice(Number(line.slice(0, 10)), Number(line.slice(0, 10)) + `${i + 1} 0 obj`.length), `${i + 1} 0 obj`));
 });
+
+test("stats and athlete sheets", async () => {
+  const { statsSheet, athleteSheet } = await import("@/lib/export/sheet");
+  const st = statsSheet("Ev", { deductions: [{ code: "70B", count: 3, eventCode: "CQ" }], byEvent: [{ raw: "CQ", gender: "male", routines: 2, a: 4.9, b: 2.5, c: 2, final: 9.4 }] });
+  assert.equal(st.blocks.length, 2);
+  const at = athleteSheet("Ev", { id: "a", name: "Amy", routines: [{ raw: "CQ", score: 9, place: 1, of: 3, average: 8.5, hasScorecard: false }], overall: [{ scope: "Women", rank: 2, of: 10, discipline: "Changquan", team: "A" }] });
+  assert.equal(at.title, "Amy");
+  assert.equal(at.blocks[0]!.kind, "fields");
+});

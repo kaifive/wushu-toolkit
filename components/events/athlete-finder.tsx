@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { ExportButtons } from "@/components/export/export-buttons";
 import { Badge } from "@/components/ui/badge";
 import { SearchIcon } from "@/components/ui/icons";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
@@ -175,6 +176,7 @@ function Profile({ a, onBack, scorecardsHref }: { a: AthleteProfile; onBack: () 
           })}
         </tbody>
       </ScrollTable>
+      <ExportButtons target={{ kind: "athlete", athleteName: a.name }} />
     </div>
   );
 }

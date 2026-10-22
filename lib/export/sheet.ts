@@ -1,6 +1,8 @@
 import { fmtScore } from "@/lib/rules/score";
 import { slugify } from "@/lib/domain/names";
-import { GENDER_LABEL, type EventResult, type ScopeModel, type ScorecardRow } from "@/lib/events/views";
+import { GENDER_LABEL, type AthleteProfile, type EventResult, type ScopeModel, type ScorecardRow, type ScorecardStats } from "@/lib/events/views";
+import { deductionCodes, findDeduction } from "@/lib/rules/iwuf-2024/deductions";
+import { familyOfEvent, sheetElements } from "@/lib/rules/iwuf-2024/nandu";
 
 /**
  * A printable sheet: what an exported PNG or PDF shows. Builders here are
@@ -44,9 +46,18 @@ export function fileName(...parts: string[]): string {
 export function scorecardSheet(eventName: string, row: ScorecardRow): Sheet {
   const { a, b, c: cp, adjustment } = row.scorecard;
   const items: { label: string; value: Cell[] }[] = [];
-  if (a) items.push({ label: `A · Quality ${f(a.score, 2)}`, value: a.deductions.length ? a.deductions.map((d) => c(d)) : [c("No deductions", { muted: true })] });
+  const codes = a ? deductionCodes(a.deductions) : [];
+  if (a) items.push({ label: `A · Quality ${f(a.score, 2)}`, value: codes.length ? codes.map((d) => c(d)) : [c("No deductions", { muted: true })] });
   if (b) items.push({ label: `B · Performance ${f(b.score)}`, value: b.marks.length ? b.marks.map((m, i) => c(m.toFixed(2), { strike: b.counted[i] === false, muted: b.counted[i] === false })) : [c("—")] });
-  if (cp) items.push({ label: `C · Difficulty ${f(cp.score, 2)}`, value: cp.elements.length ? cp.elements.map((el, i) => c(el, { miss: cp.made[i] === false })) : [c("—")] });
+  if (cp) {
+    // Name each element from the declared nandu when it lines up with the sheet (as on screen).
+    const named = sheetElements(familyOfEvent(row.code ?? "CQ").family, row.nandu ?? []);
+    const lined = named.length === cp.elements.length;
+    items.push({
+      label: `C · Difficulty ${f(cp.score, 2)}`,
+      value: cp.elements.length ? cp.elements.map((el, i) => c(lined ? `${i + 1} ${named[i]!.code}` : el, { miss: cp.made[i] === false })) : [c("—")],
+    });
+  }
   if (adjustment) items.push({ label: "Head judge adjustment", value: [c(adjustment.toFixed(3))] });
   if (row.nandu?.length) items.push({ label: "Declared nandu", value: row.nandu.map((n) => c(n)) });
   return {
@@ -102,6 +113,54 @@ export function overallSheet(eventName: string, m: ScopeModel): Sheet {
           c(r.score.toFixed(3), { bold: true }),
           c(r.average.toFixed(3), { muted: true }),
         ]),
+      },
+    ],
+  };
+}
+
+const genderTag = (raw: string, gender?: string) => (gender && !/\b(fe)?male\b|\b(wo)?men/i.test(raw) ? ` · ${gender === "male" ? "Men" : "Women"}` : "");
+
+export function statsSheet(eventName: string, st: ScorecardStats): Sheet {
+  const panels = st.byEvent.some((e) => e.a != null || e.b != null || e.c != null);
+  const blocks: Block[] = [];
+  if (panels && st.deductions.length)
+    blocks.push({
+      kind: "table",
+      heading: "Top 10 Deductions",
+      columns: [{ label: "Code" }, { label: "Deduction", weight: 3 }, { label: "Count", align: "right" }],
+      rows: st.deductions.slice(0, 10).map((d) => [c(d.code, { bold: true }), c(findDeduction(d.code, d.eventCode)?.english ?? "", { muted: true }), c(String(d.count), { bold: true })]),
+    });
+  blocks.push({
+    kind: "table",
+    heading: "Average Scores by Event",
+    columns: [
+      { label: "Event", weight: 3 },
+      ...(panels ? (["A", "B", "C"] as const).map((l) => ({ label: l, align: "right" as const })) : []),
+      { label: "Final", align: "right" },
+    ],
+    rows: st.byEvent.map((e) => [
+      c(`${e.raw}${genderTag(e.raw, e.gender)} (${e.routines})`, { bold: true }),
+      ...(panels ? [c(f(e.a)), c(f(e.b)), c(f(e.c))] : []),
+      c(f(e.final), { bold: true }),
+    ]),
+  });
+  return { title: "Stats", subtitle: eventName, blocks };
+}
+
+export function athleteSheet(eventName: string, a: AthleteProfile): Sheet {
+  const items = [
+    ...a.overall.map((o) => ({ label: `${o.scope} · ${o.discipline}`, value: [c(`#${o.rank} of ${o.of}`, { bold: true }), ...(o.team ? [c(`${o.team} Team`)] : [])] })),
+    ...(a.allAround ? [{ label: "All-around", value: [c(`#${a.allAround.place} of ${a.allAround.of}`, { bold: true }), c(f(a.allAround.total))] }] : []),
+  ];
+  return {
+    title: a.name,
+    subtitle: [eventName, a.club].filter(Boolean).join(" · "),
+    blocks: [
+      ...(items.length ? [{ kind: "fields" as const, items }] : []),
+      {
+        kind: "table",
+        columns: [{ label: "Event", weight: 3 }, { label: "Score", align: "right" }, { label: "Place", align: "right" }, { label: "Avg", align: "right" }],
+        rows: a.routines.map((r) => [c(r.raw, { bold: true }), c(f(r.score), { bold: true }), c(r.place ? `${r.place}/${r.of}` : "—"), c(f(r.average), { muted: true })]),
       },
     ],
   };
