@@ -1,10 +1,11 @@
-import { liveWithSnapshot } from "@/lib/data/event-data";
+import { liveWithSnapshot, withSchedule } from "@/lib/data/event-data";
 import { joinRegistrationScores } from "@/lib/data/join";
 import { scoresFromRows } from "@/lib/data/parsers/sheet-scores";
 import { csvToLetterRows, publishedCsv } from "@/lib/data/sheets";
 import { snapshotSource } from "@/lib/data/snapshot";
 import { source } from "@/lib/data/source";
 import { usawkfOrder } from "@/lib/data/usawkf-order";
+
 import type { EventConfig } from "@/lib/events/types";
 import { SNAPSHOTS } from "@/data/snapshots";
 
@@ -18,16 +19,12 @@ const SCORE_SHEET =
 function data() {
   const snapshot = snapshotSource(SNAPSHOTS, "2025-juniors");
   const live = source("Google Sheet (manual tracking) + Sportdata registration", async (ctx) => {
-    const [snap, rows, order] = await Promise.all([
-      snapshot.load(ctx),
-      publishedCsv(SCORE_SHEET).load(ctx),
-      // The schedule is extra: keep the saved one if the page is down.
-      usawkfOrder(ORDER_PAGE).load(ctx).catch(() => null),
-    ]);
+    const [snap, rows] = await Promise.all([snapshot.load(ctx), publishedCsv(SCORE_SHEET).load(ctx)]);
     const scores = scoresFromRows(csvToLetterRows(rows, 1), { name: "A", event: "B", score: "C" }, { eventPrefix: "Taolu" });
-    return { ...snap, schedules: order?.length ? order : snap.schedules, scores: joinRegistrationScores(snap.registrations, scores), asOf: new Date().toISOString(), source: "Google Sheet (manual tracking)" };
+    return { ...snap, scores: joinRegistrationScores(snap.registrations, scores), asOf: new Date().toISOString(), source: "Google Sheet (manual tracking)" };
   });
-  return liveWithSnapshot(live, snapshot);
+  // The schedule comes from its own page, so it shows even when the scores can't load.
+  return withSchedule(liveWithSnapshot(live, snapshot), usawkfOrder(ORDER_PAGE));
 }
 
 export const JUNIORS_2025: EventConfig = {

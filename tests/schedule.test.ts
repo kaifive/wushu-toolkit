@@ -50,3 +50,19 @@ test("scorecardStats counts codes and averages panels per event", async () => {
   assert.equal(st.byEvent[0]!.routines, 2);
   assert.ok(Math.abs(st.byEvent[0]!.a! - 4.9) < 1e-9);
 });
+
+test("bowuu ring: events in order, participants by lot order, scores kept", async () => {
+  const { parseBowuuRing } = await import("@/lib/data/bowuu");
+  const s = parseBowuuRing({
+    schedule: {
+      ringName: "Ring8 Sun, B-TJQ",
+      events: [
+        { eventName: "42 Movements  Taijijian", ageGroupName: "B", gender: "M", completeParticipants: [{ name: "Justin Shen (USA)", lotOrder: 2, score: 8.91 }, { name: "Ryan Yin (USA)", lotOrder: 1, score: 7.916 }] },
+      ],
+    },
+  });
+  assert.equal(s.ring, "Ring 8 · Sunday");
+  const b = s.blocks[0]!;
+  assert.equal(b.type === "session" && b.title, "42 Movements Taijijian · Group B · Male");
+  assert.deepEqual(b.type === "session" && b.entries.map((e) => [e.athleteName, e.score]), [["Ryan Yin", "7.916"], ["Justin Shen", "8.910"]]);
+});

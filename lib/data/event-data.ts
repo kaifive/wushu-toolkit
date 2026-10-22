@@ -1,4 +1,5 @@
-import type { EventData } from "@/lib/domain/types";
+import type { EventData, Schedule } from "@/lib/domain/types";
+import { withScores } from "@/lib/domain/schedule";
 import { liveLostData } from "./snapshot";
 import { source, type DataSource } from "./source";
 
@@ -20,5 +21,17 @@ export function liveWithSnapshot(live: DataSource<EventData>, snapshot: DataSour
     }
     if (s.status === "fulfilled") return { ...s.value, stale: true, source: `${s.value.source} (live source unavailable)` };
     throw new Error(`${msg(l.reason)} (no saved copy: ${msg(s.reason)})`, { cause: l.reason });
+  });
+}
+
+/**
+ * Add a schedule from its own source (an order-of-competition page, a ring
+ * feed), with scores filled in. If that source fails, the data's own
+ * schedule (e.g. a saved one) is kept.
+ */
+export function withSchedule(data: DataSource<EventData>, schedule: DataSource<Schedule[]>): DataSource<EventData> {
+  return source(data.label, async (ctx) => {
+    const [d, s] = await Promise.all([data.load(ctx), schedule.load(ctx).catch(() => null)]);
+    return { ...d, schedules: withScores(s?.length ? s : d.schedules, d.scores) };
   });
 }
