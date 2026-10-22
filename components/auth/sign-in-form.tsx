@@ -49,7 +49,7 @@ export function SignInForm() {
   return (
     <form onSubmit={submit} className="space-y-4 rounded-card border border-line bg-surface p-5">
       {kicked && (
-        <Notice tone="warn" title="Signed out">
+        <Notice tone="warn" title="Signed Out">
           Your account was signed in on {kicked}. An account can be used on one device at a time.
         </Notice>
       )}

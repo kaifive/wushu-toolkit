@@ -9,7 +9,7 @@ export const generateStaticParams = () => viewParams("all-around", EVENT_CONFIGS
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const e = getEvent((await params).slug);
-  return { title: e ? `All-around · ${e.shortName}` : "All-around" };
+  return { title: e ? `All-Around · ${e.shortName}` : "All-Around" };
 }
 
 export default async function AllAroundPage({ params }: { params: Promise<{ slug: string }> }) {

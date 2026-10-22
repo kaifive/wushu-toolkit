@@ -3,14 +3,14 @@ import { DemoBuilder } from "@/components/demo/demo-builder";
 import { Container, PageHeader } from "@/components/ui/page-header";
 
 export const metadata: Metadata = {
-  title: "Demo order",
+  title: "Demo Order",
   description: "Build a running order for a wushu demo: no back-to-back performers, mixed levels, a strong open and close.",
 };
 
 export default function DemoOrderPage() {
   return (
     <Container className="max-w-2xl">
-      <PageHeader title="Demo order" />
+      <PageHeader title="Demo Order" />
       <DemoBuilder />
     </Container>
   );

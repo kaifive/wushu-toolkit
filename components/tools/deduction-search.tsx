@@ -85,7 +85,7 @@ export function DeductionSearch({ groups, initialGroup, initialQuery = "" }: { g
         ))}
       </ul>
       <details className="mt-6 rounded-card border border-line bg-surface p-3 text-sm">
-        <summary className="min-h-tap cursor-pointer font-semibold">Deduction standards</summary>
+        <summary className="min-h-tap cursor-pointer font-semibold">Deduction Standards</summary>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-ink-muted">
           {group.standards.map((s) => (
             <li key={s}>{s}</li>

@@ -168,7 +168,7 @@ function RegistrationCodes({ chains, score }: { chains: Chain[]; score: ReturnTy
   return (
     <section className="overflow-hidden rounded-card border border-line bg-surface">
       <header className="flex min-h-12 items-center justify-between gap-3 border-b border-line bg-surface-2 px-4 py-2">
-        <h2 className="text-[15px] font-semibold">Registration codes</h2>
+        <h2 className="text-[15px] font-semibold">Registration Codes</h2>
         <button type="button" onClick={() => void copy(codes.join(", "), "all")} className="min-h-tap rounded-card bg-primary px-4 font-semibold text-primary-ink">
           {copied === "all" ? "Copied" : "Copy all"}
         </button>

@@ -70,7 +70,7 @@ export function GatedEventView({ slug, view, eventName, rulesetId, highlights, r
     return (
       <div className="rounded-card border border-line bg-surface p-6 text-center">
         <LockIcon className="mx-auto h-8 w-8 text-primary" />
-        <h2 className="mt-3 font-display text-xl font-bold">Event pass required</h2>
+        <h2 className="mt-3 font-display text-xl font-bold">Event Pass Required</h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-ink-muted">
           {kicked
             ? `You were signed out because this account signed in on ${kicked}.`
@@ -87,7 +87,7 @@ export function GatedEventView({ slug, view, eventName, rulesetId, highlights, r
     );
   }
   // A failed poll (network, 5xx) with scores on screen keeps showing them.
-  if (problem && (!data || problem.code)) return <Notice tone="error" title="Couldn't load scores">{problem.error}</Notice>;
+  if (problem && (!data || problem.code)) return <Notice tone="error" title="Couldn't Load Scores">{problem.error}</Notice>;
   if (!data) return <p className="text-ink-muted">Loading scores…</p>;
   const Body = VIEW_BODY[view];
   return (

@@ -9,20 +9,20 @@ function navGroups(): SidebarGroup[] {
   const events = allEvents();
   const live = events.filter((e) => e.status !== "archived");
   return [
-    { items: [{ href: "/", label: "Home" }, { href: "/events", label: "All competitions", exact: true }] },
+    { items: [{ href: "/", label: "Home" }, { href: "/events", label: "All Competitions", exact: true }] },
     ...(live.length ? [{ title: "Live", items: live.map((e) => ({ href: `/events/${e.slug}`, label: e.shortName, badge: e.status === "live" ? "Live" : undefined })) }] : []),
     {
-      title: "Athlete toolkit",
+      title: "Athlete Toolkit",
       items: [
-        { href: "/tools/deductions", label: "Deduction codes" },
-        { href: "/tools/required-movements", label: "Required movements" },
-        { href: "/tools/nandu", label: "Nandu calculator" },
-        { href: "/tools/score-calculator", label: "Score calculator" },
-        { href: "/tools/demo-order", label: "Demo order" },
+        { href: "/tools/deductions", label: "Deduction Codes" },
+        { href: "/tools/required-movements", label: "Required Movements" },
+        { href: "/tools/nandu", label: "Nandu Calculator" },
+        { href: "/tools/score-calculator", label: "Score Calculator" },
+        { href: "/tools/demo-order", label: "Demo Order" },
       ],
     },
-    { title: "Past competitions", items: events.filter((e) => e.status === "archived").map((e) => ({ href: `/events/${e.slug}`, label: e.shortName })) },
-    { title: "You", items: [{ href: "/watchlists", label: "Watch lists" }, { href: "/account", label: "Sign in / passes" }] },
+    { title: "Past Competitions", items: events.filter((e) => e.status === "archived").map((e) => ({ href: `/events/${e.slug}`, label: e.shortName })) },
+    { title: "You", items: [{ href: "/watchlists", label: "Watch Lists" }, { href: "/account", label: "Sign In / Passes" }] },
   ];
 }
 

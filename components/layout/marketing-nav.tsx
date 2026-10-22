@@ -5,8 +5,8 @@ import { ThemeToggle } from "./theme-toggle";
 const LINKS = [
   { href: "/events", label: "Competitions" },
   { href: "/tools", label: "Toolkit" },
-  { href: "/watchlists", label: "Watch lists" },
-  { href: "/account", label: "Sign in" },
+  { href: "/watchlists", label: "Watch Lists" },
+  { href: "/account", label: "Sign In" },
 ];
 
 /** Landing page top bar. App pages use the sidebar instead. */

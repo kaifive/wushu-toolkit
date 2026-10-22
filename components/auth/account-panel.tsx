@@ -42,7 +42,7 @@ export function AccountPanel({ events }: { events: { slug: string; name: string 
 
   if (status === "off") {
     return (
-      <Notice title="Accounts are coming soon">
+      <Notice title="Accounts Are Coming Soon">
         Everything on the site is free to use right now. Event passes will need an account.
       </Notice>
     );
@@ -62,7 +62,7 @@ export function AccountPanel({ events }: { events: { slug: string; name: string 
         </button>
       </section>
       <section className="rounded-card border border-line bg-surface p-5">
-        <h2 className="font-display text-lg font-bold">Event passes</h2>
+        <h2 className="font-display text-lg font-bold">Event Passes</h2>
         {error && <Notice tone="error">{error}</Notice>}
         {!me && !error && <p className="text-sm text-ink-muted">Loading…</p>}
         {me && me.passes.length === 0 && <p className="mt-1 text-sm text-ink-muted">No passes yet. Past events are free.</p>}
@@ -101,7 +101,7 @@ function AdminGrant({ events }: { events: { slug: string; name: string }[] }) {
 
   return (
     <section className="space-y-3 rounded-card border border-gold/40 bg-surface p-5">
-      <h2 className="font-display text-lg font-bold">Admin: grant a pass</h2>
+      <h2 className="font-display text-lg font-bold">Admin: Grant a Pass</h2>
       <input type="email" placeholder="athlete@example.com" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email" className="min-h-tap w-full rounded-card border border-line bg-surface px-3" />
       <select value={slug} onChange={(e) => setSlug(e.target.value)} aria-label="Event" className="min-h-tap w-full rounded-card border border-line bg-surface px-3">
         {events.map((e) => (

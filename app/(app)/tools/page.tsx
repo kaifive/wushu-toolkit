@@ -4,21 +4,21 @@ import { Card } from "@/components/ui/card";
 import { ChevronRightIcon } from "@/components/ui/icons";
 import { Container, PageHeader } from "@/components/ui/page-header";
 
-export const metadata: Metadata = { title: "Athlete toolkit", description: "Deduction code lookup, required movements checklist, score calculator." };
+export const metadata: Metadata = { title: "Athlete Toolkit", description: "Deduction code lookup, required movements checklist, score calculator." };
 
 const TOOLS = [
-  { href: "/tools/deductions", title: "Deduction code lookup", body: "Search panel A codes by number or keyword." },
-  { href: "/tools/required-movements", title: "Required movements", body: "Order compulsory content and copy it for registration." },
-  { href: "/tools/nandu", title: "Nandu calculator", body: "Build your difficulty and see how close you are to 2.0." },
-  { href: "/tools/score-calculator", title: "Score calculator", body: "The lowest score you need to beat an average." },
-  { href: "/tools/demo-order", title: "Demo order", body: "Running order for a school demo: no back-to-back kids, levels mixed." },
-  { href: "/watchlists", title: "Watch lists", body: "Highlight your school's athletes on every competition page." },
+  { href: "/tools/deductions", title: "Deduction Code Lookup", body: "Search panel A codes by number or keyword." },
+  { href: "/tools/required-movements", title: "Required Movements", body: "Order compulsory content and copy it for registration." },
+  { href: "/tools/nandu", title: "Nandu Calculator", body: "Build your difficulty and see how close you are to 2.0." },
+  { href: "/tools/score-calculator", title: "Score Calculator", body: "The lowest score you need to beat an average." },
+  { href: "/tools/demo-order", title: "Demo Order", body: "Running order for a school demo: no back-to-back kids, levels mixed." },
+  { href: "/watchlists", title: "Watch Lists", body: "Highlight your school's athletes on every competition page." },
 ];
 
 export default function ToolsPage() {
   return (
     <Container className="max-w-3xl">
-      <PageHeader title="Athlete toolkit" />
+      <PageHeader title="Athlete Toolkit" />
       <Card bodyClassName="divide-y divide-line">
         {TOOLS.map((t) => (
           <Link key={t.href} href={t.href} className="group flex min-h-16 items-center justify-between gap-3 px-4 py-3 hover:bg-surface-2">

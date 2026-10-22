@@ -13,14 +13,14 @@ export default function EventsPage() {
   return (
     <Container className="space-y-5">
       <PageHeader title="Competitions" />
-      <Card title="Live and upcoming" bodyClassName="">
+      <Card title="Live and Upcoming" bodyClassName="">
         {current.length ? (
           <div className="divide-y divide-line">{current.map((e) => <EventRow key={e.slug} event={e} />)}</div>
         ) : (
           <p className="px-4 py-4 text-ink-muted">Nothing live right now. The next competition will show up here.</p>
         )}
       </Card>
-      <Card title="Past competitions" context={`${archived.length} events, free to view`} bodyClassName="divide-y divide-line">
+      <Card title="Past Competitions" context={`${archived.length} events, free to view`} bodyClassName="divide-y divide-line">
         {archived.map((e) => <EventRow key={e.slug} event={e} />)}
       </Card>
     </Container>

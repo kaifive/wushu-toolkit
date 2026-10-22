@@ -65,7 +65,7 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref }: Vie
               />
             )}
             <section>
-              <h2 className="mb-3 font-display text-lg font-bold">Results by event</h2>
+              <h2 className="mb-3 font-display text-lg font-bold">Results by Event</h2>
               <ResultsByEvent results={results.filter((r) => r.gender === g.id)} scorecardsHref={scorecardsHref} />
             </section>
           </div>

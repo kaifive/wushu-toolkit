@@ -79,7 +79,7 @@ export default async function HomePage() {
           </div>
           {ex && (
             <div className="text-ink">
-              <Card title="Team projection" context={`${ex.event.shortName} · Men`} bodyClassName="" action={<Link href={`/events/${ex.event.slug}/team`} className="inline-flex min-h-tap items-center text-sm font-semibold text-primary">Open</Link>}>
+              <Card title="Team Projection" context={`${ex.event.shortName} · Men`} bodyClassName="" action={<Link href={`/events/${ex.event.slug}/team`} className="inline-flex min-h-tap items-center text-sm font-semibold text-primary">Open</Link>}>
                 {/* Scrolls inside the card at 375px, first column pinned (CLAUDE.md mobile checklist). */}
                 <div className="overflow-x-auto">
                 <table className="w-full min-w-max text-[15px] tnum [&_tr:nth-child(odd)_td]:bg-surface-2">
@@ -115,7 +115,7 @@ export default async function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <Card title="With an event pass" context="per competition" bodyClassName="divide-y divide-line">
+          <Card title="With an Event Pass" context="per competition" bodyClassName="divide-y divide-line">
             {AT_EVENT.map(([t, b]) => (
               <div key={t} className="px-4 py-3">
                 <p className="font-semibold">{t}</p>
@@ -130,7 +130,7 @@ export default async function HomePage() {
             </div>
           </Card>
           <div className="min-w-0 space-y-6">
-            <Card title="Free all year" bodyClassName="divide-y divide-line">
+            <Card title="Free All Year" bodyClassName="divide-y divide-line">
               {FREE.map(([href, label]) => (
                 <Link key={href} href={href} className="flex min-h-tap items-center px-4 py-2.5 font-semibold hover:bg-surface-2">
                   {label}

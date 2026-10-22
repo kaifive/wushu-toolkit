@@ -64,7 +64,7 @@ export function DataStatus({ data, timeZone, genderGap = "entries" }: { data: Ev
 
 export function LoadError({ error }: { error: string }) {
   return (
-    <Notice tone="error" title="Couldn't load scores">
+    <Notice tone="error" title="Couldn't Load Scores">
       <p>The data source didn&apos;t respond. Try again in a minute.</p>
       <p className="mt-1 font-mono text-xs">{error}</p>
     </Notice>

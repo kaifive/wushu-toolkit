@@ -26,10 +26,10 @@ export interface DivisionScope {
 
 /** Divisions that actually have entries, in ruleset order. "*" when the ruleset doesn't split. */
 export function scopes(ruleset: Ruleset, scores: ScoreEntry[]): DivisionScope[] {
-  if (ruleset.selection && !ruleset.selection.perDivision) return [{ id: "*", label: "All athletes" }];
+  if (ruleset.selection && !ruleset.selection.perDivision) return [{ id: "*", label: "All Athletes" }];
   const present = new Set(scores.map((s) => s.division));
   const list = ruleset.divisions.filter((d) => present.has(d.id)).map((d) => ({ id: d.id, label: d.label }));
-  return list.length ? list : [{ id: "*", label: "All athletes" }];
+  return list.length ? list : [{ id: "*", label: "All Athletes" }];
 }
 
 const inScope = (s: ScoreEntry, gender: Gender, division: string) => s.gender === gender && (division === "*" || s.division === division);
