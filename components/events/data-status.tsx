@@ -26,6 +26,7 @@ export const GENDER_GAP: Record<EventView, "entries" | "athletes" | "none"> = {
   standings: "entries",
   team: "entries",
   scorecards: "entries",
+  stats: "entries",
   schedule: "none",
   "all-around": "athletes",
 };

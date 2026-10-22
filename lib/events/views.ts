@@ -2,6 +2,7 @@ import type { EventCode, EventData, Gender, ScoreEntry } from "@/lib/domain/type
 import { DISCIPLINE_LABEL, EVENTS, type Ruleset, type TeamId } from "@/lib/rules";
 import type { Discipline } from "@/lib/domain/types";
 import { ageGroupChampions, allAround, grandChampion, standings as aaStandings, type AllAroundAthlete } from "@/lib/rules/all-around";
+import { deductionCodes } from "@/lib/rules/iwuf-2024/deductions";
 import { runSelection, withDivisions, type Candidate, type Team } from "@/lib/rules/selection";
 import { floor3, groupByAthlete } from "@/lib/rules/score";
 import type { AthleteHighlight } from "./types";
@@ -221,3 +222,44 @@ export function highlighter(highlights: AthleteHighlight[] = []): HighlightFor {
 
 /** Left colour bar for a highlighted row or card. */
 export const highlightStyle = (h: Highlight | undefined) => (h ? { boxShadow: `inset 3px 0 0 ${h.color}` } : undefined);
+
+export interface ScorecardStats {
+  /** Most common panel A codes, with how many routines got each. */
+  deductions: { code: string; count: number; eventCode?: EventCode }[];
+  /** Average A, B, C and final per event (scored routines with a scorecard). */
+  byEvent: { raw: string; gender?: Gender; routines: number; a: number | null; b: number | null; c: number | null; final: number | null }[];
+}
+
+const mean = (xs: (number | null | undefined)[]) => {
+  const ok = xs.filter((x): x is number => typeof x === "number" && Number.isFinite(x));
+  return ok.length ? ok.reduce((t, x) => t + x, 0) / ok.length : null;
+};
+
+/** v1's scorecard stats: top deductions and average panel scores by event. */
+export function scorecardStats(data: EventData): ScorecardStats {
+  const counts = new Map<string, { count: number; eventCode?: EventCode }>();
+  const groups = new Map<string, ScoreEntry[]>();
+  for (const s of data.scores) {
+    if (!s.scorecard || s.finalScore == null) continue;
+    for (const code of deductionCodes(s.scorecard.a?.deductions ?? [])) {
+      const c = counts.get(code) ?? { count: 0, eventCode: s.code };
+      c.count++;
+      counts.set(code, c);
+    }
+    const key = `${s.raw}\u0000${s.gender ?? ""}`;
+    groups.set(key, [...(groups.get(key) ?? []), s]);
+  }
+  const deductions = [...counts.entries()].map(([code, c]) => ({ code, ...c })).sort((x, y) => y.count - x.count || x.code.localeCompare(y.code));
+  const byEvent = [...groups.values()]
+    .map((list) => ({
+      raw: list[0]!.raw,
+      gender: list[0]!.gender,
+      routines: list.length,
+      a: mean(list.map((s) => s.scorecard?.a?.score)),
+      b: mean(list.map((s) => s.scorecard?.b?.score)),
+      c: mean(list.map((s) => s.scorecard?.c?.score)),
+      final: mean(list.map((s) => s.finalScore)),
+    }))
+    .sort((x, y) => x.raw.localeCompare(y.raw));
+  return { deductions, byEvent };
+}

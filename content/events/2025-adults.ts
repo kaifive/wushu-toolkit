@@ -13,7 +13,7 @@ export const ADULTS_2025: EventConfig = {
   status: "archived",
   access: "free",
   rulesetId: "usawkf-adult-trials-2025",
-  views: ["standings", "team", "scorecards", "schedule"],
+  views: ["standings", "team", "scorecards", "stats", "schedule"],
   data: () => {
     const snap = snapshotSource(SNAPSHOTS, "2025-adults");
     // The snapshot has no schedule; add the posted order of competition.

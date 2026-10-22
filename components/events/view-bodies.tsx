@@ -10,6 +10,7 @@ import { OverallTable } from "./overall-table";
 import { ResultsByEvent } from "./results-by-event";
 import { ScheduleView } from "./schedule-view";
 import { ScorecardList } from "./scorecard-list";
+import { StatsView } from "./stats-view";
 import { TeamProjection } from "./team-projection";
 
 /**
@@ -149,10 +150,15 @@ export function AllAroundBody({ ruleset, data, highlights }: ViewProps) {
   );
 }
 
+export function StatsBody({ data }: ViewProps) {
+  return <StatsView data={data} />;
+}
+
 export const VIEW_BODY: Record<EventView, (p: ViewProps) => React.ReactNode> = {
   standings: StandingsBody,
   team: TeamBody,
   scorecards: ScorecardsBody,
+  stats: StatsBody,
   schedule: ScheduleBody,
   "all-around": AllAroundBody,
 };

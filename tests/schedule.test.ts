@@ -23,3 +23,30 @@ test("orderSchedule falls back to a unique partial name", async () => {
   const b = s.blocks[0]!;
   assert.equal(b.type === "session" && b.entries[0]!.athleteName, "Yang Chien");
 });
+
+test("USAWKF order page: one schedule per ring, a block per session and category", async () => {
+  const { readFileSync } = await import("node:fs");
+  const { parseUsawkfOrder } = await import("@/lib/data/usawkf-order");
+  const s = parseUsawkfOrder(readFileSync("tests/fixtures/usawkf/order.html", "utf8"));
+  assert.deepEqual(s.map((r) => r.ring), ["Ring 1", "Ring 2"]);
+  const b = s[0]!.blocks;
+  assert.equal(b.length, 2);
+  assert.equal(b[0]!.type === "session" && b[0]!.title, "Friday Morning Dec 19, 2025 · Group A Male Changquan");
+  assert.deepEqual(b[0]!.type === "session" && b[0]!.entries.map((e) => e.athleteName), ["Lee Amy", "Ho Ben"]);
+});
+
+test("scorecardStats counts codes and averages panels per event", async () => {
+  const { scorecardStats } = await import("@/lib/events/views");
+  const card = (a: number, ded: string[]) => ({ a: { score: a, deductions: ded }, b: { score: 2.5, marks: [], counted: [] }, c: { score: 2, elements: [], made: [] } });
+  const st = scorecardStats({
+    registrations: [], schedules: [], asOf: "", source: "",
+    scores: [
+      { athleteId: "a", athleteName: "A", raw: "CQ", code: "CQ", finalScore: 9.5, scorecard: card(5, ["70b", "5.00"]) },
+      { athleteId: "b", athleteName: "B", raw: "CQ", code: "CQ", finalScore: 9.3, scorecard: card(4.8, ["70B", "22"]) },
+      { athleteId: "c", athleteName: "C", raw: "CQ", code: "CQ", finalScore: null, scorecard: card(1, ["99"]) },
+    ],
+  });
+  assert.deepEqual(st.deductions.map((d) => [d.code, d.count]), [["70B", 2], ["22", 1]]);
+  assert.equal(st.byEvent[0]!.routines, 2);
+  assert.ok(Math.abs(st.byEvent[0]!.a! - 4.9) < 1e-9);
+});
