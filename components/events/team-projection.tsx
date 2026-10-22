@@ -1,7 +1,8 @@
+import { AthleteLink } from "./athlete-link";
 import { Card } from "@/components/ui/card";
 import { GENDER_LABEL, highlightStyle, type HighlightFor, type ScopeModel } from "@/lib/events/views";
 
-export function TeamProjection({ model, highlights }: { model: ScopeModel; highlights?: HighlightFor }) {
+export function TeamProjection({ model, highlights, athletesHref }: { model: ScopeModel; highlights?: HighlightFor; athletesHref?: string }) {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
       {model.teams.map((t) => (
@@ -20,7 +21,7 @@ export function TeamProjection({ model, highlights }: { model: ScopeModel; highl
                   <div className="min-w-0">
                     <p className="truncate font-semibold">
                       <span className="mr-1.5 text-ink-muted tnum">{i + 1}</span>
-                      {m.athleteName}
+                      <AthleteLink name={m.athleteName} href={athletesHref} />
                     </p>
                     <p className="truncate text-sm text-ink-muted">
                       {m.discipline}

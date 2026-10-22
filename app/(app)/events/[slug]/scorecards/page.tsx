@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { EventBody, viewParams } from "@/components/events/event-body";
 import { ScorecardsBody } from "@/components/events/view-bodies";
 import { EVENT_CONFIGS } from "@/content/events";
-import { getEvent } from "@/lib/events/registry";
+import { getEvent, viewHrefs } from "@/lib/events/registry";
 
 export const revalidate = 60;
 export const generateStaticParams = () => viewParams("scorecards", EVENT_CONFIGS);
@@ -16,7 +16,7 @@ export default async function ScorecardsPage({ params }: { params: Promise<{ slu
   const { slug } = await params;
   return (
     <EventBody slug={slug} view="scorecards">
-      {({ event, ruleset }, data) => <ScorecardsBody ruleset={ruleset} data={data} highlights={event.highlights} />}
+      {({ event, ruleset }, data) => <ScorecardsBody ruleset={ruleset} data={data} highlights={event.highlights} {...viewHrefs(event)} />}
     </EventBody>
   );
 }

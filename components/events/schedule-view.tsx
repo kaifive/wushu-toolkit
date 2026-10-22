@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AthleteLink } from "./athlete-link";
 import { highlightStyle, type HighlightFor } from "@/lib/events/views";
 import { Badge } from "@/components/ui/badge";
 import { withCurrentCompetitor } from "@/lib/domain/schedule";
@@ -9,12 +10,14 @@ export function ScheduleView({
   highlights,
   live = true,
   scorecardsHref,
+  athletesHref,
 }: {
   schedule: Schedule;
   highlights: HighlightFor;
   live?: boolean;
   /** The event's scorecards page: scores link to the athlete's card. */
   scorecardsHref?: string;
+  athletesHref?: string;
 }) {
   const blocks = withCurrentCompetitor(schedule.blocks, live);
   if (!blocks.length)
@@ -71,7 +74,7 @@ export function ScheduleView({
                       )}
                       <div className="min-w-0">
                         <p className="truncate font-semibold">
-                          {e.athleteName}{" "}
+                          <AthleteLink name={e.athleteName} href={e.score ? athletesHref : undefined} />{" "}
                           {e.isCurrent && (
                             <Badge tone="seal">On the floor</Badge>
                           )}

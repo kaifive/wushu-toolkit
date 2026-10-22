@@ -1,3 +1,4 @@
+import { AthleteLink } from "./athlete-link";
 import { fmtScore } from "@/lib/rules/score";
 import { TeamBadge } from "@/components/ui/badge";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
@@ -5,7 +6,7 @@ import { type ScopeModel, type HighlightFor, highlightStyle } from "@/lib/events
 
 const fmt = fmtScore;
 
-export function OverallTable({ model, highlights }: { model: ScopeModel; highlights: HighlightFor }) {
+export function OverallTable({ model, highlights, athletesHref }: { model: ScopeModel; highlights: HighlightFor; athletesHref?: string }) {
   return (
     <ScrollTable caption={`Overall standings, ${model.gender}, ${model.division.label}`}>
       <thead className="border-b border-line">
@@ -29,7 +30,9 @@ export function OverallTable({ model, highlights }: { model: ScopeModel; highlig
                 <div className="flex items-start gap-2">
                   <span className="w-6 shrink-0 text-right text-ink-muted">{r.tied ? "=" : r.rank}</span>
                   <div className="min-w-0">
-                    <p className="truncate font-semibold">{r.athleteName}</p>
+                    <p className="truncate font-semibold">
+                      <AthleteLink name={r.athleteName} href={athletesHref} />
+                    </p>
                     <p className="truncate text-xs text-ink-muted">
                       {r.discipline}
                       {r.club ? ` · ${r.club}` : ""}

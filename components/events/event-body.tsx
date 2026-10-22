@@ -7,6 +7,7 @@ import { GatedEventView } from "./gated-event-view";
 import { WatchLegend } from "@/components/watchlist/legend";
 import { LiveRefresh } from "./live-refresh";
 import { ExportProvider } from "@/components/export/export-buttons";
+import { viewHrefs } from "@/lib/events/registry";
 
 type Ok = Extract<LoadedEvent, { state: "ok" }>;
 
@@ -24,7 +25,7 @@ export async function EventBody({
   if (!loaded || !loaded.event.views.includes(view)) notFound();
   if (loaded.state === "gated") {
     const e = loaded.event;
-    return <GatedEventView slug={e.slug} view={view} eventName={e.name} rulesetId={e.rulesetId} highlights={e.highlights} refreshSeconds={e.revalidate ?? 60} timeZone={e.timeZone} scorecardsHref={e.views.includes("scorecards") ? `/events/${e.slug}/scorecards` : undefined} />;
+    return <GatedEventView slug={e.slug} view={view} eventName={e.name} rulesetId={e.rulesetId} highlights={e.highlights} refreshSeconds={e.revalidate ?? 60} timeZone={e.timeZone} {...viewHrefs(e)} />;
   }
   if (loaded.state === "error") return <LoadError error={loaded.error} />;
   const e = loaded.event;

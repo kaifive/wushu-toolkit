@@ -26,3 +26,11 @@ export function formatEventDates(e: EventConfig): string {
   }
   return `${month(start)} ${start.getUTCDate()} – ${month(end)} ${end.getUTCDate()}, ${end.getUTCFullYear()}`;
 }
+
+/** Links between an event's views: scores open scorecards, names open the athlete's page. */
+export function viewHrefs(e: EventConfig): { scorecardsHref?: string; athletesHref?: string } {
+  return {
+    scorecardsHref: e.views.includes("scorecards") ? `/events/${e.slug}/scorecards` : undefined,
+    athletesHref: e.views.includes("athletes") ? `/events/${e.slug}/athletes` : undefined,
+  };
+}

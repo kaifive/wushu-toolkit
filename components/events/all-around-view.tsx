@@ -1,10 +1,11 @@
+import { AthleteLink } from "./athlete-link";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import type { AllAroundAthlete } from "@/lib/rules/all-around";
 import { type AllAroundModel, type HighlightFor, highlightStyle } from "@/lib/events/views";
 
 const f = (n: number) => n.toFixed(3);
 
-export function AllAroundTable({ athletes, topN, highlights }: { athletes: AllAroundAthlete[]; topN: number; highlights: HighlightFor }) {
+export function AllAroundTable({ athletes, topN, highlights, athletesHref }: { athletes: AllAroundAthlete[]; topN: number; highlights: HighlightFor; athletesHref?: string }) {
   if (!athletes.length) return <p className="text-sm text-ink-muted">No registered all-around athletes yet.</p>;
   return (
     <ScrollTable caption="All-around standings">
@@ -30,7 +31,9 @@ export function AllAroundTable({ athletes, topN, highlights }: { athletes: AllAr
                 <div className="flex gap-2">
                   <span className="w-6 shrink-0 text-right text-ink-muted">{tied ? "=" : i + 1}</span>
                   <div className="min-w-0">
-                    <p className="truncate font-semibold">{a.athleteName}</p>
+                    <p className="truncate font-semibold">
+                      <AthleteLink name={a.athleteName} href={athletesHref} />
+                    </p>
                     <p className="truncate text-xs text-ink-muted">
                       {a.age !== undefined ? `Age ${a.age}` : ""}
                       {a.forms.length ? ` · ${a.forms.length} forms` : ""}

@@ -26,9 +26,11 @@ export interface ViewProps {
   live?: boolean;
   /** The event's scorecards page, when it has one: standings link each score there. */
   scorecardsHref?: string;
+  /** The event's Athletes page, when it has one: names link there. */
+  athletesHref?: string;
 }
 
-export function StandingsBody({ ruleset, data, highlights, scorecardsHref }: ViewProps) {
+export function StandingsBody({ ruleset, data, highlights, scorecardsHref, athletesHref }: ViewProps) {
   const models = selectionModel(data, ruleset);
   const results = resultsByEvent(data, ruleset);
   const hl = highlighter(highlights);
@@ -60,7 +62,7 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref }: Vie
                     <p className="mb-3 text-xs text-ink-muted">
                       {m.scored}/{m.total} routines scored
                     </p>
-                    <OverallTable model={m} highlights={hl} />
+                    <OverallTable model={m} highlights={hl} athletesHref={athletesHref} />
                     <ExportButtons target={{ kind: "overall", gender: m.gender, division: m.division.id }} className="mt-3" />
                   </section>
                 ))}
@@ -68,7 +70,7 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref }: Vie
             )}
             <section>
               <h2 className="mb-3 font-display text-lg font-bold">Results by Event</h2>
-              <ResultsByEvent results={results.filter((r) => r.gender === g.id)} scorecardsHref={scorecardsHref} />
+              <ResultsByEvent results={results.filter((r) => r.gender === g.id)} scorecardsHref={scorecardsHref} athletesHref={athletesHref} />
             </section>
           </div>
         );
@@ -78,7 +80,7 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref }: Vie
   );
 }
 
-export function TeamBody({ ruleset, data, highlights }: ViewProps) {
+export function TeamBody({ ruleset, data, highlights, athletesHref }: ViewProps) {
   const models = selectionModel(data, ruleset);
   const hl = highlighter(highlights);
   return (
@@ -96,7 +98,7 @@ export function TeamBody({ ruleset, data, highlights }: ViewProps) {
               label="Division"
               param="division"
               tabs={mine.map((m) => ({ id: m.division.id, label: m.division.label }))}
-              panels={mine.map((m) => <TeamProjection key={m.division.id} model={m} highlights={hl} />)}
+              panels={mine.map((m) => <TeamProjection key={m.division.id} model={m} highlights={hl} athletesHref={athletesHref} />)}
             />
           );
         })}
@@ -121,7 +123,7 @@ export function ScorecardsBody({ data, highlights }: ViewProps) {
 
 const ringId = (ring: string) => ring.toLowerCase().replace(/\s+/g, "-");
 
-export function ScheduleBody({ data, highlights, live, scorecardsHref }: ViewProps) {
+export function ScheduleBody({ data, highlights, live, scorecardsHref, athletesHref }: ViewProps) {
   if (!data.schedules.length) return <p className="text-sm text-ink-muted">No schedule posted yet.</p>;
   const hl = highlighter(highlights);
   return (
@@ -129,12 +131,12 @@ export function ScheduleBody({ data, highlights, live, scorecardsHref }: ViewPro
       label="Ring"
       param="ring"
       tabs={data.schedules.map((s) => ({ id: ringId(s.ring), label: s.ring }))}
-      panels={data.schedules.map((s) => <ScheduleView key={s.ring} schedule={s} highlights={hl} live={live} scorecardsHref={scorecardsHref} />)}
+      panels={data.schedules.map((s) => <ScheduleView key={s.ring} schedule={s} highlights={hl} live={live} scorecardsHref={scorecardsHref} athletesHref={athletesHref} />)}
     />
   );
 }
 
-export function AllAroundBody({ ruleset, data, highlights }: ViewProps) {
+export function AllAroundBody({ ruleset, data, highlights, athletesHref }: ViewProps) {
   const model = allAroundModel(data, ruleset);
   if (!model) return <p className="text-sm text-ink-muted">This event has no all-around award.</p>;
   const hl = highlighter(highlights);
@@ -144,7 +146,7 @@ export function AllAroundBody({ ruleset, data, highlights }: ViewProps) {
       param="view"
       tabs={[...GENDERS, { id: "champions", label: "Champions" }]}
       panels={[
-        ...GENDERS.map((g) => <AllAroundTable key={g.id} athletes={model.standings[g.id]} topN={model.topN} highlights={hl} />),
+        ...GENDERS.map((g) => <AllAroundTable key={g.id} athletes={model.standings[g.id]} topN={model.topN} highlights={hl} athletesHref={athletesHref} />),
         <Champions key="champions" model={model} />,
       ]}
     />

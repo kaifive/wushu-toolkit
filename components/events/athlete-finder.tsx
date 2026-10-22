@@ -20,9 +20,14 @@ export function AthleteFinder({ athletes, scorecardsHref }: { athletes: AthleteP
 
   useEffect(() => {
     const name = new URLSearchParams(window.location.search).get("athlete");
-    // Read the deep link once on mount (static page).
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (name) setPicked(athletes.find((a) => a.name === name)?.id ?? null);
+    if (!name) return;
+    const hit = athletes.find((a) => a.name === name);
+    // Read the deep link once on mount (static page). A spelling the results
+    // don't use goes into the search box instead.
+    /* eslint-disable react-hooks/set-state-in-effect */
+    if (hit) setPicked(hit.id);
+    else setQ(name);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [athletes]);
 
   const pick = (a: AthleteProfile | null) => {

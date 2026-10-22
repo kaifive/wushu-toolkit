@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { EventBody, viewParams } from "@/components/events/event-body";
 import { ScheduleBody } from "@/components/events/view-bodies";
 import { EVENT_CONFIGS } from "@/content/events";
-import { getEvent } from "@/lib/events/registry";
+import { getEvent, viewHrefs } from "@/lib/events/registry";
 
 export const revalidate = 60;
 export const generateStaticParams = () => viewParams("schedule", EVENT_CONFIGS);
@@ -16,7 +16,7 @@ export default async function SchedulePage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   return (
     <EventBody slug={slug} view="schedule">
-      {({ event, ruleset }, data) => <ScheduleBody ruleset={ruleset} data={data} highlights={event.highlights} live={event.status === "live"} scorecardsHref={event.views.includes("scorecards") ? `/events/${event.slug}/scorecards` : undefined} />}
+      {({ event, ruleset }, data) => <ScheduleBody ruleset={ruleset} data={data} highlights={event.highlights} live={event.status === "live"} {...viewHrefs(event)} />}
     </EventBody>
   );
 }

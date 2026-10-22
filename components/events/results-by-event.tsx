@@ -1,9 +1,10 @@
+import { AthleteLink } from "./athlete-link";
 import Link from "next/link";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import { ExportButtons } from "@/components/export/export-buttons";
 import type { EventResult } from "@/lib/events/views";
 
-export function ResultsByEvent({ results, scorecardsHref }: { results: EventResult[]; scorecardsHref?: string }) {
+export function ResultsByEvent({ results, scorecardsHref, athletesHref }: { results: EventResult[]; scorecardsHref?: string; athletesHref?: string }) {
   const cardHref = (r: EventResult, athlete: string) =>
     `${scorecardsHref}?${new URLSearchParams({ ...(r.gender ? { gender: r.gender } : {}), athlete, event: r.raw })}`;
   if (!results.length) return <p className="text-sm text-ink-muted">No results yet.</p>;
@@ -34,7 +35,9 @@ export function ResultsByEvent({ results, scorecardsHref }: { results: EventResu
                         <div className="flex items-start gap-2">
                           <span className="w-6 shrink-0 text-right text-ink-muted">{row.finalScore == null ? "" : row.place}</span>
                           <div className="min-w-0">
-                            <p className="font-semibold">{row.athleteName}</p>
+                            <p className="font-semibold">
+                              <AthleteLink name={row.athleteName} href={athletesHref} />
+                            </p>
                             {row.club && <p className="text-xs text-ink-muted">{row.club}</p>}
                           </div>
                         </div>
