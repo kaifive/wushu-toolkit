@@ -134,10 +134,15 @@ function tableUnits(ctx: CanvasRenderingContext2D, block: Extract<Block, { kind:
   const units: Unit[] = [];
   if (block.heading) units.push(headingUnit(block.heading, f));
   units.push(header);
+  // On a new page, a table that carries on repeats its heading (which event) and column row.
+  const contHeading = block.heading ? headingUnit(`${block.heading} (cont.)`, f) : null;
+  const repeat: Unit = contHeading
+    ? { h: contHeading.h + header.h, draw: (g, y) => (contHeading.draw(g, y), header.draw(g, y + contHeading.h)) }
+    : header;
   block.rows.forEach((row, r) => {
     units.push({
       h: 52,
-      header,
+      header: repeat,
       draw: (g, y) => {
         if (r % 2 === 1) {
           g.fillStyle = "#f8f9fb";

@@ -163,3 +163,18 @@ export function athleteSheet(eventName: string, a: AthleteProfile): Sheet {
     ],
   };
 }
+
+/**
+ * Several sheets as one (export all): each sheet's title becomes the heading
+ * of its first block, so a PDF flows event after event with headers repeated
+ * on every page, and a PNG is one long image.
+ */
+export function combineSheets(title: string, subtitle: string, sheets: Sheet[]): Sheet {
+  return {
+    title,
+    subtitle,
+    blocks: sheets.flatMap((s) =>
+      s.blocks.map((b, i) => (i === 0 ? { ...b, heading: [s.title, s.subtitle && s.subtitle !== subtitle ? s.subtitle.replace(`${subtitle} · `, "") : "", b.heading].filter(Boolean).join(" · ") } : b)),
+    ),
+  };
+}

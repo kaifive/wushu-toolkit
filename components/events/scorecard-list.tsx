@@ -6,6 +6,10 @@ import { highlighter, type ScorecardRow } from "@/lib/events/views";
 import type { AthleteHighlight } from "@/lib/events/types";
 import { prepareName } from "@/lib/watchlist/match";
 import { ScorecardCard } from "./scorecard";
+import { ExportButtons } from "@/components/export/export-buttons";
+
+/** Exporting more than this in one file gets slow on phones. */
+const EXPORT_MAX = 120;
 
 /** Show at most this many cards until the list is narrowed down. */
 const PAGE = 40;
@@ -75,9 +79,19 @@ export function ScorecardList({ rows, highlights }: { rows: ScorecardRow[]; high
           ))}
         </select>
       </div>
-      <p className="mb-2 text-xs text-ink-muted" aria-live="polite">
-        {shown.length} of {rows.length} scorecards
-      </p>
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <p className="text-xs text-ink-muted" aria-live="polite">
+          {shown.length} of {rows.length} scorecards
+        </p>
+        {shown.length > 0 && shown.length <= EXPORT_MAX && (
+          <ExportButtons
+            target={{ kind: "scorecards", items: shown.map((r) => ({ athleteName: r.athleteName, raw: r.raw })), label: [q.trim(), event].filter(Boolean).join(" ") || "all" }}
+            text={`All ${shown.length}`}
+            below
+          />
+        )}
+      </div>
+      {shown.length > EXPORT_MAX && <p className="mb-2 text-xs text-ink-muted">Pick an event or athlete to export these scorecards ({EXPORT_MAX} at most).</p>}
       <div className="space-y-2">
         {shown.slice(0, limit).map((r, i) => (
           <ScorecardCard key={`${i}-${r.athleteName}-${r.raw}`} row={r} highlights={hl} open={fromLink && shown.length <= 3} />

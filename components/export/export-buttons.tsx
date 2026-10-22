@@ -17,6 +17,10 @@ export type ExportTarget =
   | { kind: "result"; raw: string; gender?: Gender }
   | { kind: "overall"; gender: Gender; division: string }
   | { kind: "stats" }
+  /** Every event's results in one file (one gender tab; none = the Groups tab). */
+  | { kind: "results"; gender?: Gender }
+  /** The scorecards currently listed (filtered by athlete or event). */
+  | { kind: "scorecards"; items: { athleteName: string; raw: string }[]; label: string }
   | { kind: "athlete"; athleteId: string; athleteName: string };
 
 interface Ctx {
@@ -70,6 +74,24 @@ async function build(ctx: Ctx, t: ExportTarget): Promise<{ sheet: Sheet; name: s
       const m = views.selectionModel(data, ruleset).find((x) => x.gender === t.gender && x.division.id === t.division);
       return m ? { sheet: sheets.overallSheet(ctx.eventName, m), name: fileName(ctx.eventName, "overall", m.gender, m.division.label) } : null;
     }
+    case "results": {
+      const all = views.resultsByEvent(data, ruleset).filter((x) => x.gender === t.gender);
+      if (!all.length) return null;
+      const who = t.gender ? views.GENDER_LABEL[t.gender] : "Groups";
+      return {
+        sheet: sheets.combineSheets(`Results by Event · ${who}`, ctx.eventName, all.map((r) => sheets.resultSheet(ctx.eventName, r))),
+        name: fileName(ctx.eventName, "results", who),
+      };
+    }
+    case "scorecards": {
+      const rows = views.scorecards(data);
+      const picked = t.items.flatMap((it) => rows.filter((r) => r.athleteName === it.athleteName && r.raw === it.raw));
+      if (!picked.length) return null;
+      return {
+        sheet: sheets.combineSheets(`Scorecards · ${t.label}`, ctx.eventName, picked.map((r) => sheets.scorecardSheet(ctx.eventName, r))),
+        name: fileName(ctx.eventName, "scorecards", t.label),
+      };
+    }
     case "stats":
       return { sheet: sheets.statsSheet(ctx.eventName, views.scorecardStats(data)), name: fileName(ctx.eventName, "stats") };
     case "athlete": {
@@ -111,18 +133,26 @@ function download(blob: Blob, name: string) {
   window.setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 
-const labelOf = (t: ExportTarget) =>
-  t.kind === "scorecard"
-    ? `${t.athleteName} ${t.raw} scorecard`
-    : t.kind === "result"
-      ? `${t.raw} results`
-      : t.kind === "stats"
-        ? "stats"
-        : t.kind === "athlete"
-          ? `${t.athleteName} results`
-          : "overall standings";
+const labelOf = (t: ExportTarget) => {
+  switch (t.kind) {
+    case "scorecard":
+      return `${t.athleteName} ${t.raw} scorecard`;
+    case "result":
+      return `${t.raw} results`;
+    case "results":
+      return "all event results";
+    case "scorecards":
+      return `${t.items.length} scorecards`;
+    case "stats":
+      return "stats";
+    case "athlete":
+      return `${t.athleteName} results`;
+    default:
+      return "overall standings";
+  }
+};
 
-export function ExportButtons({ target, className = "" }: { target: ExportTarget; className?: string }) {
+export function ExportButtons({ target, className = "", text, below }: { target: ExportTarget; className?: string; /** Shown beside the icon ("All events"). */ text?: string; /** Open the menu downward (button at the top of a section). */ below?: boolean }) {
   const label = labelOf(target);
   const ctx = useContext(ExportContext);
   const [busy, setBusy] = useState<"png" | "pdf" | null>(null);
@@ -192,12 +222,13 @@ export function ExportButtons({ target, className = "" }: { target: ExportTarget
           aria-haspopup="menu"
           aria-label={`Download ${label}`}
           title="Download"
-          className="flex h-11 w-11 items-center justify-center rounded-card border border-line bg-surface text-ink-muted hover:border-primary hover:text-primary disabled:opacity-50"
+          className={`flex h-11 items-center justify-center gap-2 rounded-card border border-line bg-surface text-ink-muted hover:border-primary hover:text-primary disabled:opacity-50 ${text ? "px-3 text-sm font-semibold" : "w-11"}`}
         >
           {busy ? <span className="text-xs font-semibold">…</span> : <DownloadIcon className="h-5 w-5" />}
+          {text && <span>{text}</span>}
         </button>
         {menu && (
-          <div role="menu" className="absolute bottom-full left-0 z-30 mb-1 w-40 overflow-hidden rounded-card border border-line bg-surface shadow-lg">
+          <div role="menu" className={`absolute z-30 w-40 ${below ? "right-0 top-full mt-1" : "bottom-full left-0 mb-1"} overflow-hidden rounded-card border border-line bg-surface shadow-lg`}>
             {(["png", "pdf"] as const).map((t) => (
               <button
                 key={t}

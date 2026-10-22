@@ -70,7 +70,10 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref, athle
               />
             )}
             <section>
-              <h2 className="mb-3 font-display text-lg font-bold">Results by Event</h2>
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <h2 className="font-display text-lg font-bold">Results by Event</h2>
+                <ExportButtons target={{ kind: "results", gender: g.id }} text="All Events" below />
+              </div>
               <ResultsByEvent results={results.filter((r) => r.gender === g.id)} scorecardsHref={scorecardsHref} athletesHref={athletesHref} />
             </section>
           </div>
@@ -80,7 +83,10 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref, athle
       ...(groups.length
         ? [
             <section key="groups">
-              <h2 className="mb-3 font-display text-lg font-bold">Results by Event</h2>
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <h2 className="font-display text-lg font-bold">Results by Event</h2>
+                <ExportButtons target={{ kind: "results" }} text="All Events" below />
+              </div>
               <ResultsByEvent results={groups} scorecardsHref={scorecardsHref} athletesHref={athletesHref} />
             </section>,
           ]

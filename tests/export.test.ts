@@ -53,3 +53,11 @@ test("stats and athlete sheets", async () => {
   assert.equal(at.title, "Amy");
   assert.equal(at.blocks[0]!.kind, "fields");
 });
+
+test("combineSheets: one sheet per event, each title becomes a heading", async () => {
+  const { combineSheets, resultSheet } = await import("@/lib/export/sheet");
+  const r = (raw: string) => resultSheet("Ev", { raw, rows: [{ place: 1, athleteName: "Amy", finalScore: 9, hasScorecard: false }] });
+  const all = combineSheets("Results by Event · Female", "Ev", [r("CQ"), r("JS")]);
+  assert.equal(all.blocks.length, 2);
+  assert.deepEqual(all.blocks.map((b) => b.heading), ["CQ", "JS"]);
+});
