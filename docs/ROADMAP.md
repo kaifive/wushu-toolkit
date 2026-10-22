@@ -58,6 +58,16 @@ Resume from the first unchecked item. One commit per item.
 - [x] Mark the element cut by the 1.4 / 0.6 cap (only the last registered one loses value)
 - [ ] Optional: prefill from an athlete's Sportdata registration
 
+## Phase 5e — v1 parity (requested 2026-10-22)
+
+- [x] Scorecards laid out like the judges' sheet; named nandu; deduction links; links from standings and schedules
+- [x] Schedules: 2025 Adults (posted order), 2025 Juniors (USAWKF order page), 2024 Juniors (saved bowuu ring feed)
+- [x] Stats view (v1 scorecard stats + 2024 dashboards) on every competition
+- [x] Athletes view (v1 athlete dashboard) on every competition
+- [x] Contact Us page (EmailJS, needs NEXT_PUBLIC_EMAILJS_SERVICE_ID)
+- [x] Rules page and event overview removed
+- [ ] Required movements: registration codes, if official ones exist (asked Khai)
+
 ## Phase 6 — Brand + landing
 - [x] Three logo concepts for review (round 1, none picked)
 - [x] Round 2: four "toolkit for wushu" concepts (`/brand`, screenshot in docs/logo-concepts.png)
