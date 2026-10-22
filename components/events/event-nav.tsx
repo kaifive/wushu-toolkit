@@ -7,7 +7,7 @@ import type { EventView } from "@/lib/events/types";
 
 export function EventNav({ slug, views }: { slug: string; views: EventView[] }) {
   const pathname = usePathname() ?? "";
-  const items = [{ href: `/events/${slug}`, label: "Overview" }, ...views.map((v) => ({ href: `/events/${slug}/${v}`, label: VIEW_LABEL[v] }))];
+  const items = views.map((v) => ({ href: `/events/${slug}/${v}`, label: VIEW_LABEL[v] }));
   return (
     <nav aria-label="Event sections" className="-mx-4 mt-3 overflow-x-auto px-4 md:-mx-8 md:px-8">
       <ul className="flex gap-1">

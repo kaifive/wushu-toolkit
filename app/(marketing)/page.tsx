@@ -22,7 +22,6 @@ const FREE = [
   ["/tools/nandu", "Nandu calculator"],
   ["/tools/required-movements", "Required movements in routine order"],
   ["/tools/score-calculator", "Score calculator"],
-  ["/rules", "2025–26 junior trials rules"],
 ] as const;
 
 /** A real excerpt from the archive, so the page shows the product instead of a mockup. */

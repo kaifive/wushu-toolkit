@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { ChevronRightIcon } from "@/components/ui/icons";
 import { Container, PageHeader } from "@/components/ui/page-header";
 
-export const metadata: Metadata = { title: "Athlete toolkit", description: "Deduction code lookup, required movements checklist, score calculator and the current rules." };
+export const metadata: Metadata = { title: "Athlete toolkit", description: "Deduction code lookup, required movements checklist, score calculator." };
 
 const TOOLS = [
   { href: "/tools/deductions", title: "Deduction code lookup", body: "Search panel A codes by number or keyword." },
@@ -13,7 +13,6 @@ const TOOLS = [
   { href: "/tools/score-calculator", title: "Score calculator", body: "The lowest score you need to beat an average." },
   { href: "/tools/demo-order", title: "Demo order", body: "Running order for a school demo: no back-to-back kids, levels mixed." },
   { href: "/watchlists", title: "Watch lists", body: "Highlight your school's athletes on every competition page." },
-  { href: "/rules", title: "Rules", body: "Age groups, events, time limits, music and team selection." },
 ];
 
 export default function ToolsPage() {

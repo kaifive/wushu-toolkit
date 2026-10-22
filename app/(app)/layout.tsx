@@ -19,7 +19,6 @@ function navGroups(): SidebarGroup[] {
         { href: "/tools/nandu", label: "Nandu calculator" },
         { href: "/tools/score-calculator", label: "Score calculator" },
         { href: "/tools/demo-order", label: "Demo order" },
-        { href: "/rules", label: "Rules" },
       ],
     },
     { title: "Past competitions", items: events.filter((e) => e.status === "archived").map((e) => ({ href: `/events/${e.slug}`, label: e.shortName })) },

@@ -10,7 +10,6 @@ export function SiteFooter() {
         </p>
         <p className="flex gap-4">
           <Link href="/about" className="inline-flex min-h-tap items-center hover:text-ink">About</Link>
-          <Link href="/rules" className="inline-flex min-h-tap items-center hover:text-ink">Rules</Link>
         </p>
       </div>
     </footer>
