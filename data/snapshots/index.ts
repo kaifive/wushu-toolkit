@@ -4,7 +4,7 @@ import type { SnapshotIndex } from "@/lib/data/snapshot";
 export const SNAPSHOTS: SnapshotIndex = {
   "2024-juniors": { file: "2024-07-31T00-00-00-000Z.json", load: () => import("./2024-juniors/2024-07-31T00-00-00-000Z.json") },
   "2025-adults": { file: "2025-08-04T16-02-48-343Z.json", load: () => import("./2025-adults/2025-08-04T16-02-48-343Z.json") },
-  "2025-juniors": { file: "2025-12-17T00-00-00-000Z.json", load: () => import("./2025-juniors/2025-12-17T00-00-00-000Z.json") },
+  "2025-juniors": { file: "2026-10-22T02-32-47-345Z.json", load: () => import("./2025-juniors/2026-10-22T02-32-47-345Z.json") },
   "2025-phoenix": { file: "2025-06-13T20-57-34-230Z.json", load: () => import("./2025-phoenix/2025-06-13T20-57-34-230Z.json") },
   "2026-pwc": { file: "2026-10-22T02-29-33-988Z.json", load: () => import("./2026-pwc/2026-10-22T02-29-33-988Z.json") },
 };
