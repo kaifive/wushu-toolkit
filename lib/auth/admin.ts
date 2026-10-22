@@ -1,5 +1,5 @@
 import "server-only";
-import { parseServiceAccount } from "./service-account";
+import { parseServiceAccount, ServiceAccountError } from "./service-account";
 import type { WatchList } from "@/lib/watchlist/match";
 import { hasEntitlement, isSessionCurrent, parseAdminUids, SESSION_HEADER, type EntitlementsDoc, type SessionDoc } from "./model";
 
@@ -17,19 +17,27 @@ export class AuthError extends Error {
 }
 
 /**
- * Firebase Admin, configured from FIREBASE_SERVICE_ACCOUNT (base64 of the
- * service-account JSON). Loaded on first use, so routes that never touch an
+ * Firebase Admin, configured from FIREBASE_SERVICE_ACCOUNT (the service-account
+ * JSON, base64 or as-is). Loaded on first use, so routes that never touch an
  * account (free event data) don't load firebase-admin at all.
  */
 async function services() {
   const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
   if (!raw) throw new AuthError("Accounts aren't set up on this server.", 503, "not-configured");
-  const [{ cert, getApps, initializeApp }, { getAuth }, { getFirestore }] = await Promise.all([
-    import("firebase-admin/app"),
-    import("firebase-admin/auth"),
-    import("firebase-admin/firestore"),
-  ]);
-  const a = getApps()[0] ?? initializeApp({ credential: cert(parseServiceAccount(raw)) });
+  const mods = await Promise.all([import("firebase-admin/app"), import("firebase-admin/auth"), import("firebase-admin/firestore")]).catch((err: Error) => {
+    console.error("Couldn't load firebase-admin:", err);
+    throw new AuthError(`Accounts aren't available: the server couldn't load Firebase Admin (${err?.message ?? "unknown error"}).`, 503, "not-configured");
+  });
+  const [{ cert, getApps, initializeApp }, { getAuth }, { getFirestore }] = mods;
+  let a;
+  try {
+    a = getApps()[0] ?? initializeApp({ credential: cert(parseServiceAccount(raw)) });
+  } catch (err) {
+    // Say what is wrong with the setting (never its value) instead of a bare 500.
+    const why = err instanceof ServiceAccountError ? err.message : "Firebase couldn't use FIREBASE_SERVICE_ACCOUNT.";
+    console.error("Firebase Admin setup failed:", why, err instanceof ServiceAccountError ? "" : (err as Error)?.message);
+    throw new AuthError(`Accounts aren't set up correctly on this server. ${why}`, 503, "not-configured");
+  }
   return { auth: getAuth(a), db: getFirestore(a) };
 }
 

@@ -89,3 +89,14 @@ test("sanitizeReport says when it had to cut, not when it only tidied", async ()
   assert.equal(sanitizeReport([{ id: "a", name: "x".repeat(200), athletes: [] }])!.cut, true);
   assert.equal(sanitizeReport([{ id: "a", name: "A", athletes: Array.from({ length: 600 }, (_, i) => `Kid ${i}`) }])!.cut, true);
 });
+
+test("service account parses base64 or raw JSON, and errors never echo the value", async () => {
+  const { parseServiceAccount, ServiceAccountError } = await import("@/lib/auth/service-account");
+  const json = JSON.stringify({ project_id: "p", client_email: "e@x", private_key: "-----BEGIN PRIVATE KEY-----\\nabc\\n-----END PRIVATE KEY-----\\n" });
+  const fromB64 = parseServiceAccount(Buffer.from(json).toString("base64"));
+  assert.equal(fromB64.projectId, "p");
+  assert.ok(fromB64.privateKey.includes("\n"));
+  assert.equal(parseServiceAccount(`'${json}'`).clientEmail, "e@x");
+  assert.throws(() => parseServiceAccount("secret-not-json"), (e: Error) => e instanceof ServiceAccountError && !e.message.includes("secret"));
+  assert.throws(() => parseServiceAccount(JSON.stringify({ project_id: "p" })), /missing client_email, private_key/);
+});
