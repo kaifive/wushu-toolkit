@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AthleteLink } from "./athlete-link";
 import { fmtScore } from "@/lib/rules/score";
 import { TeamBadge } from "@/components/ui/badge";
@@ -6,7 +7,7 @@ import { type ScopeModel, type HighlightFor, highlightStyle } from "@/lib/events
 
 const fmt = fmtScore;
 
-export function OverallTable({ model, highlights, athletesHref }: { model: ScopeModel; highlights: HighlightFor; athletesHref?: string }) {
+export function OverallTable({ model, highlights, athletesHref, scorecardsHref }: { model: ScopeModel; highlights: HighlightFor; athletesHref?: string; scorecardsHref?: string }) {
   return (
     <ScrollTable caption={`Overall standings, ${model.gender}, ${model.division.label}`}>
       <thead className="border-b border-line">
@@ -47,7 +48,19 @@ export function OverallTable({ model, highlights, athletesHref }: { model: Scope
               </td>
               {model.eventCodes.map((c) => (
                 <td key={c} className={`${td} text-right ${r.counted.includes(c) ? "font-semibold text-ink" : "text-ink-muted"}`}>
-                  {c in r.events ? fmt(r.events[c]) : ""}
+                  {!(c in r.events) ? (
+                    ""
+                  ) : scorecardsHref && r.cards[c] ? (
+                    <Link
+                      href={`${scorecardsHref}?${new URLSearchParams({ gender: model.gender, athlete: r.athleteName, event: r.cards[c]! })}`}
+                      className="inline-flex min-h-tap items-center justify-end underline decoration-dotted underline-offset-4 hover:text-primary"
+                      title="Open scorecard"
+                    >
+                      {fmt(r.events[c])}
+                    </Link>
+                  ) : (
+                    fmt(r.events[c])
+                  )}
                 </td>
               ))}
               <td className={`${td} text-right font-semibold`}>{r.score.toFixed(3)}</td>

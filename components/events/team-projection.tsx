@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { AthleteLink } from "./athlete-link";
 import { Card } from "@/components/ui/card";
 import { GENDER_LABEL, highlightStyle, type HighlightFor, type ScopeModel } from "@/lib/events/views";
 
-export function TeamProjection({ model, highlights, athletesHref }: { model: ScopeModel; highlights?: HighlightFor; athletesHref?: string }) {
+export function TeamProjection({ model, highlights, athletesHref, scorecardsHref }: { model: ScopeModel; highlights?: HighlightFor; athletesHref?: string; scorecardsHref?: string }) {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
       {model.teams.map((t) => (
@@ -29,7 +30,19 @@ export function TeamProjection({ model, highlights, athletesHref }: { model: Sco
                     </p>
                   </div>
                   <div className="text-right tnum">
-                    <p className="font-semibold">{m.score.toFixed(3)}</p>
+                    <p className="font-semibold">
+                      {scorecardsHref ? (
+                        <Link
+                          href={`${scorecardsHref}?${new URLSearchParams({ gender: model.gender, athlete: m.athleteName })}`}
+                          className="inline-flex min-h-tap items-center underline decoration-dotted underline-offset-4 hover:text-primary"
+                          title="Open scorecards"
+                        >
+                          {m.score.toFixed(3)}
+                        </Link>
+                      ) : (
+                        m.score.toFixed(3)
+                      )}
+                    </p>
                     <p className="text-xs text-ink-muted">avg {m.average.toFixed(3)}</p>
                   </div>
                 </li>

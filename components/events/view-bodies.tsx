@@ -62,7 +62,7 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref, athle
                     <p className="mb-3 text-xs text-ink-muted">
                       {m.scored}/{m.total} routines scored
                     </p>
-                    <OverallTable model={m} highlights={hl} athletesHref={athletesHref} />
+                    <OverallTable model={m} highlights={hl} athletesHref={athletesHref} scorecardsHref={scorecardsHref} />
                     <ExportButtons target={{ kind: "overall", gender: m.gender, division: m.division.id }} className="mt-3" />
                   </section>
                 ))}
@@ -80,7 +80,7 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref, athle
   );
 }
 
-export function TeamBody({ ruleset, data, highlights, athletesHref }: ViewProps) {
+export function TeamBody({ ruleset, data, highlights, athletesHref, scorecardsHref }: ViewProps) {
   const models = selectionModel(data, ruleset);
   const hl = highlighter(highlights);
   return (
@@ -98,7 +98,7 @@ export function TeamBody({ ruleset, data, highlights, athletesHref }: ViewProps)
               label="Division"
               param="division"
               tabs={mine.map((m) => ({ id: m.division.id, label: m.division.label }))}
-              panels={mine.map((m) => <TeamProjection key={m.division.id} model={m} highlights={hl} athletesHref={athletesHref} />)}
+              panels={mine.map((m) => <TeamProjection key={m.division.id} model={m} highlights={hl} athletesHref={athletesHref} scorecardsHref={scorecardsHref} />)}
             />
           );
         })}

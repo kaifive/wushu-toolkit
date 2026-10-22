@@ -42,6 +42,8 @@ export interface OverallRow {
   club?: string;
   /** Score per event code (best if entered twice); null = entered, not scored. */
   events: Partial<Record<EventCode, number | null>>;
+  /** For each event with a judges' sheet: its name as printed (scorecard links). */
+  cards: Partial<Record<EventCode, string>>;
   score: number;
   average: number;
   discipline: string;
@@ -67,10 +69,13 @@ function eventColumns(scores: ScoreEntry[]): EventCode[] {
 
 const toRow = (c: Candidate & { rank: number; team?: TeamId }, entries: ScoreEntry[]): OverallRow => {
   const events: Partial<Record<EventCode, number | null>> = {};
+  const cards: Partial<Record<EventCode, string>> = {};
   for (const e of entries) {
     if (!e.code) continue;
     const prev = events[e.code];
     events[e.code] = prev == null ? e.finalScore : e.finalScore == null ? prev : Math.max(prev, e.finalScore);
+    // The card shown is the one behind the best score.
+    if (e.scorecard && e.finalScore != null && e.finalScore === events[e.code]) cards[e.code] = e.raw;
   }
   return {
     rank: c.rank,
@@ -78,6 +83,7 @@ const toRow = (c: Candidate & { rank: number; team?: TeamId }, entries: ScoreEnt
     athleteName: c.athleteName,
     club: c.club,
     events,
+    cards,
     score: c.score,
     average: round3(c.average),
     discipline: c.key,
