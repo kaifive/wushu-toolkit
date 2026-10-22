@@ -26,7 +26,7 @@ export function OverallTable({ model, highlights, athletesHref }: { model: Scope
           const hl = highlights(r.athleteName);
           return (
             <tr key={`${r.athleteId}-${r.discipline}`} data-athlete={r.athleteName} className="border-b border-line last:border-0">
-              <td className={`${td} ${stickyCol} max-w-[11rem]`} style={highlightStyle(hl)}>
+              <td data-sort={r.athleteName} className={`${td} ${stickyCol} max-w-[11rem]`} style={highlightStyle(hl)}>
                 <div className="flex items-start gap-2">
                   <span className="w-6 shrink-0 text-right text-ink-muted">{r.tied ? "=" : r.rank}</span>
                   <div className="min-w-0">

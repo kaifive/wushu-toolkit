@@ -71,3 +71,11 @@ export const SearchIcon = (p: IconProps) => (
     <path d="m16 16 4 4" />
   </svg>
 );
+
+export const DownloadIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M12 4v11" />
+    <path d="m7 10 5 5 5-5" />
+    <path d="M5 19.5h14" />
+  </svg>
+);

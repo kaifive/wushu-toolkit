@@ -165,3 +165,16 @@ tr[data-watch] > td:first-child {
 tr[data-watch] {
   box-shadow: none !important;
 }
+
+/* Anything clickable shows the hand cursor (Tailwind v4 leaves buttons on the default arrow). */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  select,
+  label[for],
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+}

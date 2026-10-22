@@ -1,5 +1,6 @@
 "use client";
 
+import { DownloadIcon } from "@/components/ui/icons";
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { EventData, Gender } from "@/lib/domain/types";
 import type { RulesetId } from "@/lib/rules";
@@ -77,6 +78,27 @@ async function build(ctx: Ctx, t: ExportTarget): Promise<{ sheet: Sheet; name: s
   }
 }
 
+/**
+ * Phones (and in-app browsers) often ignore a download link, so use the share
+ * sheet there ("Save Image", "Save to Files"); fall back to a normal download.
+ */
+async function save(file: File): Promise<"done" | "needs-tap"> {
+  const touch = window.matchMedia?.("(pointer: coarse)").matches;
+  if (touch && navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: file.name });
+      return "done";
+    } catch (err) {
+      const name = (err as Error)?.name;
+      if (name === "AbortError") return "done"; // closed the share sheet
+      // Building the file took long enough that the browser no longer counts the tap.
+      if (name === "NotAllowedError") return "needs-tap";
+    }
+  }
+  download(file, file.name);
+  return "done";
+}
+
 function download(blob: Blob, name: string) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -104,6 +126,21 @@ export function ExportButtons({ target, className = "" }: { target: ExportTarget
   const ctx = useContext(ExportContext);
   const [busy, setBusy] = useState<"png" | "pdf" | null>(null);
   const [failed, setFailed] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const [ready, setReady] = useState<File | null>(null);
+  const box = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!menu) return;
+    const close = (e: Event) => {
+      if (e instanceof KeyboardEvent ? e.key === "Escape" : !box.current?.contains(e.target as Node)) setMenu(false);
+    };
+    document.addEventListener("pointerdown", close);
+    document.addEventListener("keydown", close);
+    return () => {
+      document.removeEventListener("pointerdown", close);
+      document.removeEventListener("keydown", close);
+    };
+  }, [menu]);
   // Inside a closed <details>, wait until it opens: keeps long pages light.
   const probe = useRef<HTMLSpanElement>(null);
   const [shown, setShown] = useState(false);
@@ -125,11 +162,14 @@ export function ExportButtons({ target, className = "" }: { target: ExportTarget
   const run = async (type: "png" | "pdf") => {
     setBusy(type);
     setFailed(false);
+    setReady(null);
     try {
       const built = await build(ctx, target);
       if (!built) throw new Error("not found");
       const { sheetToPdf, sheetToPng } = await import("@/lib/export/render");
-      download(type === "png" ? await sheetToPng(built.sheet) : await sheetToPdf(built.sheet), `${built.name}.${type}`);
+      const blob = type === "png" ? await sheetToPng(built.sheet) : await sheetToPdf(built.sheet);
+      const file = new File([blob], `${built.name}.${type}`, { type: blob.type });
+      if ((await save(file)) === "needs-tap") setReady(file);
     } catch {
       setFailed(true);
     } finally {
@@ -139,18 +179,52 @@ export function ExportButtons({ target, className = "" }: { target: ExportTarget
 
   return (
     <div className={`flex flex-wrap items-center gap-2 ${className}`}>
-      {(["png", "pdf"] as const).map((t) => (
+      <div ref={box} className="relative">
         <button
-          key={t}
           type="button"
           disabled={busy !== null}
-          onClick={() => void run(t)}
-          aria-label={`Download ${label} as ${t.toUpperCase()}`}
-          className="min-h-tap rounded-card border border-line bg-surface px-3 text-sm font-semibold disabled:opacity-50"
+          onClick={() => setMenu((m) => !m)}
+          aria-expanded={menu}
+          aria-haspopup="menu"
+          aria-label={`Download ${label}`}
+          title="Download"
+          className="flex h-11 w-11 items-center justify-center rounded-card border border-line bg-surface text-ink-muted hover:border-primary hover:text-primary disabled:opacity-50"
         >
-          {busy === t ? "Saving…" : `↓ ${t.toUpperCase()}`}
+          {busy ? <span className="text-xs font-semibold">…</span> : <DownloadIcon className="h-5 w-5" />}
         </button>
-      ))}
+        {menu && (
+          <div role="menu" className="absolute bottom-full left-0 z-30 mb-1 w-40 overflow-hidden rounded-card border border-line bg-surface shadow-lg">
+            {(["png", "pdf"] as const).map((t) => (
+              <button
+                key={t}
+                type="button"
+                role="menuitem"
+                onClick={() => {
+                  setMenu(false);
+                  void run(t);
+                }}
+                className="flex min-h-tap w-full items-center px-3 text-left text-sm font-semibold hover:bg-surface-2"
+              >
+                {t === "png" ? "Image (PNG)" : "PDF"}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+      {busy && <span className="text-sm text-ink-muted">Saving…</span>}
+      {ready && (
+        <button
+          type="button"
+          onClick={() => {
+            const f = ready;
+            setReady(null);
+            void save(f);
+          }}
+          className="min-h-tap rounded-card bg-primary px-3 text-sm font-semibold text-primary-ink"
+        >
+          Save {ready.name.endsWith(".pdf") ? "PDF" : "image"}
+        </button>
+      )}
       {failed && <span className="text-sm text-seal">Export failed. Try again.</span>}
     </div>
   );

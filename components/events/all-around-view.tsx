@@ -27,7 +27,7 @@ export function AllAroundTable({ athletes, topN, highlights, athletesHref }: { a
           const tied = i > 0 && athletes[i - 1]!.total === a.total;
           return (
             <tr key={a.athleteId} data-athlete={a.athleteName} className="border-b border-line last:border-0">
-              <td className={`${td} ${stickyCol} max-w-[11rem]`} style={highlightStyle(hl)}>
+              <td data-sort={a.athleteName} className={`${td} ${stickyCol} max-w-[11rem]`} style={highlightStyle(hl)}>
                 <div className="flex gap-2">
                   <span className="w-6 shrink-0 text-right text-ink-muted">{tied ? "=" : i + 1}</span>
                   <div className="min-w-0">
