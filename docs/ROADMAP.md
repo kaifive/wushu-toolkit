@@ -80,14 +80,15 @@ Resume from the first unchecked item. One commit per item.
 - [x] Entitlements + gated data route
 - [x] Manual grant script + admin page
 - [x] Firestore security rules
-- [ ] (Needs Firebase keys) End-to-end check of sign-in, session lock and granting on a Vercel preview
+- [x] End-to-end check of sign-up, sign-in, session and watch-list sync on production (2026-10-22)
+- [ ] Granting a pass end to end (needs Khai's uid in ADMIN_UIDS)
 
 ## Phase 8 — Ship
 - [x] Snapshot GitHub Action (also runnable by hand from the Actions tab with a slug)
 - [x] CI workflow (check, test, build)
 - [x] Legacy hash-route redirect page (ADR-007): `npm run legacy-redirect` builds it
 - [x] Push branch, open PR
-- [ ] (Ask first) Vercel project + env vars
+- [x] Vercel project + env vars (live at wushu-toolkit.vercel.app)
 - [ ] (Ask first) Publish redirect to `gh-pages`
 
 ## Phase 9 — Payments (blocked)
