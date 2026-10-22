@@ -66,7 +66,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] Athletes view (v1 athlete dashboard) on every competition
 - [x] Contact Us page (EmailJS, needs NEXT_PUBLIC_EMAILJS_SERVICE_ID)
 - [x] Rules page and event overview removed
-- [ ] Required movements: registration codes, if official ones exist (asked Khai)
+- [x] Required movements: no registration codes exist (confirmed by Khai), list by name only
 
 ## Phase 6 — Brand + landing
 - [x] Three logo concepts for review (round 1, none picked)
