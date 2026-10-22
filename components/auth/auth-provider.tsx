@@ -28,6 +28,8 @@ interface Snapshot {
 interface AuthState extends Snapshot {
   signIn(email: string, password: string): Promise<void>;
   signUp(email: string, password: string): Promise<void>;
+  /** Google account (verified email, so it can receive passes right away). */
+  signInWithGoogle(): Promise<void>;
   resetPassword(email: string): Promise<void>;
   signOut(): Promise<void>;
   /** fetch() with the ID token and this device's session id attached. */
@@ -227,6 +229,14 @@ async function signUp(email: string, password: string) {
   });
 }
 
+async function signInWithGoogle() {
+  const { auth } = await firebase();
+  const { GoogleAuthProvider, signInWithPopup } = await import("firebase/auth");
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: "select_account" });
+  await withClaim(async () => (await signInWithPopup(auth, provider)).user);
+}
+
 async function resetPassword(email: string) {
   const { auth } = await firebase();
   const { sendPasswordResetEmail } = await import("firebase/auth");
@@ -261,5 +271,5 @@ export function useAuth(): AuthState {
     },
     [user],
   );
-  return useMemo(() => ({ ...s, signIn, signUp, resetPassword, signOut: signOutFn, authedFetch }), [s, authedFetch]);
+  return useMemo(() => ({ ...s, signIn, signUp, signInWithGoogle, resetPassword, signOut: signOutFn, authedFetch }), [s, authedFetch]);
 }
