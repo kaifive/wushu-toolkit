@@ -1,3 +1,4 @@
+import { markSvg } from "@/lib/brand/mark";
 import { SITE } from "@/lib/site";
 import type { Block, Cell, Sheet } from "./sheet";
 import { imagesToPdf } from "./pdf";
@@ -28,9 +29,24 @@ function fonts(): Fonts {
   return { sans, display };
 }
 
+let markImage: HTMLImageElement | null = null;
+
+/** The logo as an image for the footer (same SVG as the site's icon). */
+async function ensureMark() {
+  if (markImage) return;
+  try {
+    const img = new Image();
+    img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(markSvg())}`;
+    await img.decode();
+    markImage = img;
+  } catch {
+    /* footer falls back to a plain seal square */
+  }
+}
+
 async function ensureFonts(f: Fonts) {
   try {
-    await Promise.all([document.fonts.load(`400 24px ${f.sans}`), document.fonts.load(`600 24px ${f.sans}`), document.fonts.load(`700 44px ${f.display}`)]);
+    await Promise.all([document.fonts.load(`400 24px ${f.sans}`), document.fonts.load(`600 24px ${f.sans}`), document.fonts.load(`700 44px ${f.display}`), ensureMark()]);
   } catch {
     /* fall back to whatever is loaded */
   }
@@ -243,15 +259,15 @@ function titleUnit(sheet: Sheet, f: Fonts, cont: boolean, W: number): Unit {
 function drawFooter(g: CanvasRenderingContext2D, y: number, f: Fonts, W: number) {
   g.fillStyle = C.chrome;
   g.fillRect(0, y, W, FOOTER);
-  // Seal mark: vermilion square with a W.
-  g.fillStyle = C.seal;
-  g.beginPath();
-  g.roundRect(PAD, y + 18, 40, 40, 6);
-  g.fill();
-  g.fillStyle = "#ffffff";
-  g.font = `700 30px ${f.display}`;
+  // The logo mark (loaded once in ensureFonts); a plain seal square if it couldn't load.
+  if (markImage) g.drawImage(markImage, PAD, y + 18, 40, 40);
+  else {
+    g.fillStyle = C.seal;
+    g.beginPath();
+    g.roundRect(PAD, y + 18, 40, 40, 6);
+    g.fill();
+  }
   g.textBaseline = "middle";
-  g.fillText("W", PAD + 20 - g.measureText("W").width / 2, y + 39);
   g.font = `600 24px ${f.sans}`;
   g.fillStyle = C.chromeInk;
   g.fillText("Powered by Wushu Toolkit", PAD + 56, y + 38);
