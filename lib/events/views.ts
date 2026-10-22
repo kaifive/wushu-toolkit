@@ -4,7 +4,7 @@ import type { Discipline } from "@/lib/domain/types";
 import { ageGroupChampions, allAround, grandChampion, standings as aaStandings, type AllAroundAthlete } from "@/lib/rules/all-around";
 import { deductionCodes } from "@/lib/rules/iwuf-2024/deductions";
 import { runSelection, withDivisions, type Candidate, type Team } from "@/lib/rules/selection";
-import { floor3, groupByAthlete } from "@/lib/rules/score";
+import { groupByAthlete, round3 } from "@/lib/rules/score";
 import type { AthleteHighlight } from "./types";
 import { compileWatch } from "@/lib/watchlist/match";
 
@@ -79,7 +79,7 @@ const toRow = (c: Candidate & { rank: number; team?: TeamId }, entries: ScoreEnt
     club: c.club,
     events,
     score: c.score,
-    average: floor3(c.average),
+    average: round3(c.average),
     discipline: c.key,
     team: c.team,
     tied: c.tiedWithAbove,
@@ -114,7 +114,7 @@ export function selectionModel(data: EventData, ruleset: Ruleset): ScopeModel[] 
           ...t,
           members: [...t.members]
             .sort((a, b) => b.score - a.score)
-            .map((m) => ({ athleteName: m.athleteName, club: m.club, score: m.score, average: floor3(m.average), discipline: selectionKeyLabel(ruleset, m.key) })),
+            .map((m) => ({ athleteName: m.athleteName, club: m.club, score: m.score, average: round3(m.average), discipline: selectionKeyLabel(ruleset, m.key) })),
         })),
         scored: pool.filter((s) => s.finalScore != null).length,
         total: pool.length,

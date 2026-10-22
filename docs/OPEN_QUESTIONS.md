@@ -122,6 +122,16 @@ declared element was made, or a C score of 2.0. The "more full nandu"
 tie-break counts only C = 2.0. If the rule means full 2.0 difficulty,
 `isClean` in `lib/rules/selection.ts` is a one-line change.
 
+### 15. Paid events: per-event pass, or any account?
+
+v1: payment happened outside the site, Khai created the account in Firebase
+by hand, and any account could sign in to see the paid pages. v2 lets people
+sign up themselves and gates each paid event on a pass (granted by an admin
+in ADMIN_UIDS, or with `npm run grant`). **Default:** keep per-event passes;
+everything is free for now, so nothing changes until the next paid event.
+If v1's model is wanted, add an `access: "account"` mode (any signed-in
+account) and turn off self sign-up.
+
 ---
 
 ## Answers (2026-10-21)
@@ -144,3 +154,12 @@ tie-break counts only C = 2.0. If the rule means full 2.0 difficulty,
 | Demo order | Rest gap | **Never back to back; may be unavoidable** | Show where it was broken |
 | Demo order | Flow | **Mixed, strong open and close** | — |
 | Exports | Which first | **Individual scorecard, results/standings** | — |
+
+## Answers (2026-10-22)
+
+| # | Question | Answer | Next step |
+|---|----------|--------|-----------|
+| 13 | Averages vs minimums | **Whichever is more inclusive**: exact or rounded to thousandths | Done (`meetsMinimum`) |
+| 14 | Clean nandu (2025 adult A team) | **At least one routine with a 2.0 C score** | Done (`isClean`) |
+| Access | How v1 gated paid events | Payment handled separately; Khai created the account in Firebase by hand, and any account could sign in to view | See question 15 |
+| Reg. codes | Required movement codes | **There aren't any**; list by name | Closed |

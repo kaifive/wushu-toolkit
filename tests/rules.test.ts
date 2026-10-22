@@ -193,10 +193,12 @@ test("category average ignores events not scored yet", () => {
   assert.ok(Math.abs(c!.average - 9.15) < 1e-9);
 });
 
-test("averages are not rounded up to meet a minimum", () => {
+test("minimum averages are checked the inclusive way (rounded or exact)", async () => {
+  const { meetsMinimum } = await import("@/lib/rules/selection");
   const [c] = buildCandidates([e("Eli", "CQ", 9.0), e("Eli", "DS", 8.999)], { method: "barehand-plus-weapon", pairing: "same-discipline" });
   assert.equal(c?.score, 17.999);
-  assert.ok(c!.average < 9.0);
+  assert.ok(meetsMinimum(c!.average, 9.0));
+  assert.ok(!meetsMinimum(8.9994, 9.0));
 });
 
 test("all-around minimum forms counts scored forms only", () => {

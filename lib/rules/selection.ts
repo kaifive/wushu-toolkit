@@ -18,11 +18,12 @@ export interface Candidate {
   /** Ranking value: barehand + weapon, or the category average. */
   score: number;
   /**
-   * Per-event average, compared against team minimums. Not rounded: 8.9995
-   * must not pass a 9.0 minimum (OPEN_QUESTIONS #13). Display with toFixed(3).
+   * Per-event average, compared against team minimums the inclusive way: it
+   * qualifies if either the exact value or the value rounded to thousandths
+   * meets the minimum, so 8.9995 passes a 9.0 minimum (OPEN_QUESTIONS #13).
    */
   average: number;
-  /** At least one counted event had every difficulty element made. */
+  /** At least one counted routine scored the full 2.0 for difficulty (C). */
   cleanNandu: boolean;
   /** Set when every tie-break failed to separate this athlete from the one above. */
   tiedWithAbove?: boolean;
@@ -46,13 +47,13 @@ function best(entries: ScoreEntry[]): ScoreEntry | undefined {
   return entries.reduce<ScoreEntry | undefined>((b, e) => (e.finalScore != null && (!b || scoreOf(e) > scoreOf(b)) ? e : b), undefined);
 }
 
-/** Full difficulty: every declared element made, or the C panel at its 2.0 maximum. */
+/** Clean nandu: the C panel gave the full 2.0 (OPEN_QUESTIONS #14). */
 function isClean(e: ScoreEntry): boolean {
-  const c = e.scorecard?.c;
-  if (!c) return false;
-  if (c.made.length > 0 && c.made.every(Boolean)) return true;
-  return (c.score ?? 0) >= 2;
+  return (e.scorecard?.c?.score ?? 0) >= 2;
 }
+
+/** Inclusive minimum check: exact or rounded to thousandths, whichever passes. */
+export const meetsMinimum = (average: number, min: number) => average >= min || round3(average) >= min;
 
 function baseOf(entries: ScoreEntry[]) {
   const e = entries[0]!;
@@ -144,7 +145,7 @@ export function selectTeams(ranked: Candidate[], rules: SelectionRules, division
     const usedKeys = new Set<string>();
     const ok = (c: Candidate) =>
       !assigned.has(c.athleteId) &&
-      (rule.minAverage === undefined || c.average >= rule.minAverage) &&
+      (rule.minAverage === undefined || meetsMinimum(c.average, rule.minAverage)) &&
       (!rule.requireCleanNandu || c.cleanNandu);
     const add = (c: Candidate) => {
       members.push(c);
