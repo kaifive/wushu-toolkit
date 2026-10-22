@@ -92,6 +92,6 @@ Resume from the first unchecked item. One commit per item.
 - [ ] (Ask first) Publish redirect to `gh-pages`
 
 ## Phase 9 — Payments (blocked)
-- [ ] Choose provider (OPEN_QUESTIONS #3)
+- [x] ~~Choose provider~~ Not needed: payments are taken outside the site and Khai grants passes from the admin box (OPEN_QUESTIONS #15)
 - [ ] **Move off Vercel Hobby first (ADR-006)**
-- [ ] Checkout + webhook → entitlement
+- [x] ~~Checkout + webhook~~ Not needed (same reason)
