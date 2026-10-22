@@ -119,7 +119,7 @@ export function ScorecardsBody({ data, highlights }: ViewProps) {
 
 const ringId = (ring: string) => ring.toLowerCase().replace(/\s+/g, "-");
 
-export function ScheduleBody({ data, highlights, live }: ViewProps) {
+export function ScheduleBody({ data, highlights, live, scorecardsHref }: ViewProps) {
   if (!data.schedules.length) return <p className="text-sm text-ink-muted">No schedule posted yet.</p>;
   const hl = highlighter(highlights);
   return (
@@ -127,7 +127,7 @@ export function ScheduleBody({ data, highlights, live }: ViewProps) {
       label="Ring"
       param="ring"
       tabs={data.schedules.map((s) => ({ id: ringId(s.ring), label: s.ring }))}
-      panels={data.schedules.map((s) => <ScheduleView key={s.ring} schedule={s} highlights={hl} live={live} />)}
+      panels={data.schedules.map((s) => <ScheduleView key={s.ring} schedule={s} highlights={hl} live={live} scorecardsHref={scorecardsHref} />)}
     />
   );
 }

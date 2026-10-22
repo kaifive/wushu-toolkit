@@ -16,7 +16,7 @@ export default async function SchedulePage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   return (
     <EventBody slug={slug} view="schedule">
-      {({ event, ruleset }, data) => <ScheduleBody ruleset={ruleset} data={data} highlights={event.highlights} live={event.status === "live"} />}
+      {({ event, ruleset }, data) => <ScheduleBody ruleset={ruleset} data={data} highlights={event.highlights} live={event.status === "live"} scorecardsHref={event.views.includes("scorecards") ? `/events/${event.slug}/scorecards` : undefined} />}
     </EventBody>
   );
 }

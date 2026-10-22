@@ -56,6 +56,9 @@ export function prepareName(name: string): PreparedName {
   return { tokens, set: new Set(tokens), letters: tokens.join("").replace(/-/g, "").split("").sort().join("") };
 }
 
+/** Same person under two spellings (order, case, accents, split given names). */
+export const sameName = (a: string, b: string) => matchPrepared(prepareName(a), prepareName(b));
+
 function matchPrepared(a: PreparedName, b: PreparedName): boolean {
   if (!a.tokens.length || !b.tokens.length) return false;
   const { set: sa } = a;

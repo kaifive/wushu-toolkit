@@ -67,15 +67,18 @@ export interface ScoreEntry extends EntryRef {
 }
 
 export interface ScheduleEntry {
+  /** Start time; empty when the source only gives the order. */
   time: string;
   athleteName: string;
   event: string;
   experience?: string;
   score?: string;
+  /** Known when the entry was matched to a score (used for scorecard links). */
+  gender?: Gender;
 }
 
 export type ScheduleBlock =
-  | { type: "session"; start: string; end: string; entries: ScheduleEntry[] }
+  | { type: "session"; start: string; end: string; entries: ScheduleEntry[]; /** e.g. the event, for order-only schedules */ title?: string }
   | { type: "break"; label: string };
 
 export interface Schedule {
