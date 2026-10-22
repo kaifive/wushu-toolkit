@@ -162,4 +162,5 @@ account) and turn off self sign-up.
 | 13 | Averages vs minimums | **Whichever is more inclusive**: exact or rounded to thousandths | Done (`meetsMinimum`) |
 | 14 | Clean nandu (2025 adult A team) | **At least one routine with a 2.0 C score** | Done (`isClean`) |
 | Access | How v1 gated paid events | Payment handled separately; Khai created the account in Firebase by hand, and any account could sign in to view | See question 15 |
+| 15 | Paid access model | **Anyone signs up (email or Google); Khai grants per-event passes from the admin box after an outside payment** | Google sign-in added; Khai sets ADMIN_UIDS once |
 | Reg. codes | Required movement codes | **There aren't any**; list by name | Closed |
