@@ -155,7 +155,7 @@ const labelOf = (t: ExportTarget) => {
 export function ExportButtons({ target, className = "", text, below }: { target: ExportTarget; className?: string; /** Shown beside the icon ("All events"). */ text?: string; /** Open the menu downward (button at the top of a section). */ below?: boolean }) {
   const label = labelOf(target);
   const ctx = useContext(ExportContext);
-  const [busy, setBusy] = useState<"png" | "pdf" | null>(null);
+  const [busy, setBusy] = useState<"png" | "pdf" | "csv" | null>(null);
   const [failed, setFailed] = useState(false);
   const [menu, setMenu] = useState(false);
   const [ready, setReady] = useState<File | null>(null);
@@ -190,15 +190,19 @@ export function ExportButtons({ target, className = "", text, below }: { target:
   if (!ctx) return null;
   if (!shown) return <span ref={probe} hidden />;
 
-  const run = async (type: "png" | "pdf") => {
+  const run = async (type: "png" | "pdf" | "csv") => {
     setBusy(type);
     setFailed(false);
     setReady(null);
     try {
       const built = await build(ctx, target);
       if (!built) throw new Error("not found");
-      const { sheetToPdf, sheetToPng } = await import("@/lib/export/render");
-      const blob = type === "png" ? await sheetToPng(built.sheet) : await sheetToPdf(built.sheet);
+      const blob =
+        type === "csv"
+          ? (await import("@/lib/export/csv")).sheetToCsvBlob(built.sheet, target.kind === "results" ? "Event" : "Section")
+          : type === "png"
+            ? await (await import("@/lib/export/render")).sheetToPng(built.sheet)
+            : await (await import("@/lib/export/render")).sheetToPdf(built.sheet);
       const file = new File([blob], `${built.name}.${type}`, { type: blob.type });
       if ((await save(file)) === "needs-tap") setReady(file);
     } catch {
@@ -228,8 +232,8 @@ export function ExportButtons({ target, className = "", text, below }: { target:
           {text && <span>{text}</span>}
         </button>
         {menu && (
-          <div role="menu" className={`absolute z-30 w-40 ${below ? "right-0 top-full mt-1" : "bottom-full left-0 mb-1"} overflow-hidden rounded-card border border-line bg-surface shadow-lg`}>
-            {(["png", "pdf"] as const).map((t) => (
+          <div role="menu" className={`absolute z-30 w-48 ${below ? "right-0 top-full mt-1" : "bottom-full left-0 mb-1"} overflow-hidden rounded-card border border-line bg-surface shadow-lg`}>
+            {(["png", "pdf", "csv"] as const).map((t) => (
               <button
                 key={t}
                 type="button"
@@ -240,7 +244,7 @@ export function ExportButtons({ target, className = "", text, below }: { target:
                 }}
                 className="flex min-h-tap w-full items-center px-3 text-left text-sm font-semibold hover:bg-surface-2"
               >
-                {t === "png" ? "Image (PNG)" : "PDF"}
+                {t === "png" ? "Image (PNG)" : t === "pdf" ? "PDF" : "Spreadsheet (CSV)"}
               </button>
             ))}
           </div>
@@ -257,7 +261,7 @@ export function ExportButtons({ target, className = "", text, below }: { target:
           }}
           className="min-h-tap rounded-card bg-primary px-3 text-sm font-semibold text-primary-ink"
         >
-          Save {ready.name.endsWith(".pdf") ? "PDF" : "image"}
+          Save {ready.name.endsWith(".pdf") ? "PDF" : ready.name.endsWith(".csv") ? "spreadsheet" : "image"}
         </button>
       )}
       {failed && <span className="text-sm text-seal">Export failed. Try again.</span>}

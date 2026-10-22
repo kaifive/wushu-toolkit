@@ -61,3 +61,15 @@ test("combineSheets: one sheet per event, each title becomes a heading", async (
   assert.equal(all.blocks.length, 2);
   assert.deepEqual(all.blocks.map((b) => b.heading), ["CQ", "JS"]);
 });
+
+test("CSV: same-shape tables become one long table; names and clubs split; blanks for no score", async () => {
+  const { combineSheets, resultSheet } = await import("@/lib/export/sheet");
+  const { sheetToCsv } = await import("@/lib/export/csv");
+  const r = (raw: string, club?: string) => resultSheet("Ev", { raw, rows: [{ place: 1, athleteName: "Amy, Jr", club, finalScore: 9, hasScorecard: false }, { place: 2, athleteName: "Ben", finalScore: null, hasScorecard: false }] });
+  const csv = sheetToCsv(combineSheets("All", "Ev", [r("CQ", "Nova Wushu"), r("JS")]), "Event");
+  const lines = csv.replace(/^﻿/, "").split("\r\n");
+  assert.equal(lines[3], "Event,#,Athlete,Club,Score");
+  assert.equal(lines[4], 'CQ,1,"Amy, Jr",Nova Wushu,9.000');
+  assert.equal(lines[5], "CQ,,Ben,,");
+  assert.equal(lines[6], 'JS,1,"Amy, Jr",,9.000');
+});

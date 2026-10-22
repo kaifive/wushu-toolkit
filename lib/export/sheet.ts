@@ -23,6 +23,8 @@ export interface Column {
   align?: "left" | "right";
   /** Columns size to their content; a weight above 1 also takes a share of spare width. */
   weight?: number;
+  /** Spreadsheet export splits "Name · Club" cells into these columns. */
+  split?: string[];
 }
 
 export type Block =
@@ -76,7 +78,7 @@ export function resultSheet(eventName: string, r: EventResult): Sheet {
     blocks: [
       {
         kind: "table",
-        columns: [{ label: "#" }, { label: "Athlete", weight: 3.6 }, { label: "Score", align: "right" }],
+        columns: [{ label: "#" }, { label: "Athlete", weight: 3.6, split: ["Athlete", "Club"] }, { label: "Score", align: "right" }],
         rows: r.rows.map((x) => [
           c(x.finalScore == null ? "" : String(x.place), { muted: true }),
           c(x.club ? `${x.athleteName} · ${x.club}` : x.athleteName, { bold: true }),
@@ -101,14 +103,16 @@ export function overallSheet(eventName: string, m: ScopeModel): Sheet {
         kind: "table",
         columns: [
           { label: "#" },
-          { label: "Athlete", weight: 3 },
+          { label: "Athlete", weight: 3, split: ["Athlete", "Category"] },
+          { label: "Team" },
           ...m.eventCodes.map((code) => ({ label: code, align: "right" as const })),
           { label: "Total", align: "right" },
           { label: "Avg", align: "right" },
         ],
         rows: m.rows.map((r) => [
           c(r.tied ? "=" : String(r.rank), { muted: true }),
-          c(`${r.athleteName}${r.team ? ` (${r.team})` : ""}${dup.has(r.athleteId) ? ` · ${r.discipline}` : ""}`, { bold: true }),
+          c(`${r.athleteName}${dup.has(r.athleteId) ? ` · ${r.discipline}` : ""}`, { bold: true }),
+          c(r.team ?? "", { bold: true }),
           ...m.eventCodes.map((code) => c(code in r.events ? f(r.events[code]) : "", { muted: !r.counted.includes(code), bold: r.counted.includes(code) })),
           c(r.score.toFixed(3), { bold: true }),
           c(r.average.toFixed(3), { muted: true }),
