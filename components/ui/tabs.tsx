@@ -1,5 +1,6 @@
 "use client";
 
+import { haptic } from "@/lib/haptics";
 import { useEffect, useId, useState } from "react";
 
 const TABS_EVENT = "wt:tabs";
@@ -33,6 +34,7 @@ export function Tabs({ tabs, panels, param, label }: { tabs: TabDef[]; panels: R
   }, [param, ids]);
 
   const select = (id: string) => {
+    if (id !== active) haptic();
     setActive(id);
     const url = new URL(window.location.href);
     url.searchParams.set(param, id);

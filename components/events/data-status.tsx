@@ -23,7 +23,7 @@ function athletesWithoutGender(data: EventData): number {
 
 /** How each view splits by gender, for the missing-gender notice. */
 export const GENDER_GAP: Record<EventView, "entries" | "athletes" | "none"> = {
-  standings: "entries",
+  standings: "none", // no-gender entries get a Groups tab
   team: "entries",
   scorecards: "entries",
   stats: "entries",

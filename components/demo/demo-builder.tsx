@@ -1,5 +1,6 @@
 "use client";
 
+import { haptic } from "@/lib/haptics";
 import { storageJson, storageSet } from "@/lib/storage";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { nameTokens, personKey } from "@/lib/watchlist/match";
@@ -159,7 +160,10 @@ export function DemoBuilder() {
           generated={s.generated}
           setOrder={(o) => update((st) => ({ ...st, order: o }))}
           patchAct={patchAct}
-          generate={() => update((st) => ({ ...st, order: generateOrder(st.acts, (Date.now() ^ Math.floor(Math.random() * 2 ** 31)) >>> 0), generated: true }))}
+          generate={() => {
+            haptic("success");
+            update((st) => ({ ...st, order: generateOrder(st.acts, (Date.now() ^ Math.floor(Math.random() * 2 ** 31)) >>> 0), generated: true }));
+          }}
           replace={(d, roster) => update(() => ({ ...d, roster, generated: true }))}
           clear={() => update(() => EMPTY)}
         />

@@ -1,5 +1,6 @@
 "use client";
 
+import { haptic } from "@/lib/haptics";
 import { DownloadIcon } from "@/components/ui/icons";
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { EventData, Gender } from "@/lib/domain/types";
@@ -183,7 +184,10 @@ export function ExportButtons({ target, className = "" }: { target: ExportTarget
         <button
           type="button"
           disabled={busy !== null}
-          onClick={() => setMenu((m) => !m)}
+          onClick={() => {
+            haptic();
+            setMenu((m) => !m);
+          }}
           aria-expanded={menu}
           aria-haspopup="menu"
           aria-label={`Download ${label}`}

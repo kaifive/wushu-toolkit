@@ -1,5 +1,6 @@
 "use client";
 
+import { haptic } from "@/lib/haptics";
 import { useMemo, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { nameTokens, parseRoster, WATCH_COLORS, type WatchList } from "@/lib/watchlist/match";
@@ -75,7 +76,10 @@ function ListEditor({
       context={`${list.athletes.length} athlete${list.athletes.length === 1 ? "" : "s"}${list.enabled ? "" : " · off"}`}
       action={
         <label className="flex min-h-tap cursor-pointer items-center gap-2 text-sm font-semibold">
-          <input type="checkbox" checked={list.enabled} onChange={(e) => onChange({ enabled: e.target.checked })} className="h-5 w-5 accent-[var(--primary)]" />
+          <input type="checkbox" checked={list.enabled} onChange={(e) => {
+              haptic();
+              onChange({ enabled: e.target.checked });
+            }} className="h-5 w-5 accent-[var(--primary)]" />
           On
         </label>
       }

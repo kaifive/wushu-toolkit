@@ -1,5 +1,6 @@
 "use client";
 
+import { haptic } from "@/lib/haptics";
 import { useRef, useState } from "react";
 
 /**
@@ -10,6 +11,7 @@ export function useCopy() {
   const [copied, setCopied] = useState<string | null>(null);
   const timer = useRef<number | undefined>(undefined);
   const copy = async (text: string, label = "all") => {
+    haptic("success"); // during the tap: iOS ignores it after an await
     try {
       await navigator.clipboard.writeText(text);
       setCopied(label);

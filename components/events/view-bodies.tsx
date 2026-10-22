@@ -33,6 +33,7 @@ export interface ViewProps {
 export function StandingsBody({ ruleset, data, highlights, scorecardsHref, athletesHref }: ViewProps) {
   const models = selectionModel(data, ruleset);
   const results = resultsByEvent(data, ruleset);
+  const groups = results.filter((r) => !r.gender);
   const hl = highlighter(highlights);
   const scored = data.scores.filter((s) => s.finalScore != null);
   const avg = scored.length ? scored.reduce((t, s) => t + (s.finalScore ?? 0), 0) / scored.length : 0;
@@ -46,8 +47,8 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref, athle
     <Tabs
       label="Gender"
       param="gender"
-      tabs={GENDERS}
-      panels={GENDERS.map((g) => {
+      tabs={groups.length ? [...GENDERS, { id: "groups", label: "Groups" }] : GENDERS}
+      panels={[...GENDERS.map((g) => {
         const mine = models.filter((m) => m.gender === g.id);
         return (
           <div key={g.id} className="space-y-8">
@@ -74,7 +75,17 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref, athle
             </section>
           </div>
         );
-      })}
+      }),
+      // Entries with no gender (group sets like a taiji group) get their own tab instead of being hidden.
+      ...(groups.length
+        ? [
+            <section key="groups">
+              <h2 className="mb-3 font-display text-lg font-bold">Results by Event</h2>
+              <ResultsByEvent results={groups} scorecardsHref={scorecardsHref} athletesHref={athletesHref} />
+            </section>,
+          ]
+        : []),
+      ]}
     />
     </>
   );

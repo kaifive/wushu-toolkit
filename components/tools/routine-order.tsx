@@ -1,5 +1,6 @@
 "use client";
 
+import { haptic } from "@/lib/haptics";
 import { storageJson, storageSet } from "@/lib/storage";
 import { useEffect, useMemo, useState } from "react";
 import { allItems, orderToText, type PlacedItem, type RequiredMovementSet } from "@/lib/rules/iwuf-2024/required-movements";
@@ -143,7 +144,10 @@ export function RoutineOrder({ sets }: { sets: RequiredMovementSet[] }) {
                   <li key={it.id}>
                     <button
                       type="button"
-                      onClick={() => setOrder([...order, { id: it.id }])}
+                      onClick={() => {
+                        haptic();
+                        setOrder([...order, { id: it.id }]);
+                      }}
                       className="min-h-tap rounded-card border border-line bg-surface px-3 text-left text-sm font-semibold hover:border-primary"
                     >
                       + {it.label}

@@ -1,5 +1,6 @@
 "use client";
 
+import { haptic } from "@/lib/haptics";
 import { Children, cloneElement, Fragment, isValidElement, useState, type ReactElement, type ReactNode } from "react";
 
 /**
@@ -77,6 +78,7 @@ export function SortableTable({ children, className }: Props) {
   const sorted = sortRows();
 
   const click = (col: number) => {
+    haptic();
     const first: 1 | -1 = numeric(col) ? -1 : 1;
     setSort((s) => (!s || s.col !== col ? { col, dir: first } : s.dir === first ? { col, dir: (-first) as 1 | -1 } : null));
   };

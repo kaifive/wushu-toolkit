@@ -77,11 +77,11 @@ export function buildCandidates(scores: ScoreEntry[], scoring: SelectionScoring)
         const weapon = best(list.filter((e) => kindOf(e) === "weapon"));
         if (!barehand && !weapon) continue;
         const total = round3(scoreOf(barehand) + scoreOf(weapon));
-        // Average over the routines actually done: a missing one is "didn't compete", not a 0.
-        // (Ranking still uses the two-routine total, so one routine ranks below a full pair.)
+        // Always over two routines: a missing one shows the athlete still has an event to
+        // do (Khai, 2026-10-22). Event-wide summary averages skip it instead.
         const counted = [barehand, weapon].filter((e): e is ScoreEntry => !!e);
         const discipline = key === "any" ? (barehand?.code ? EVENTS[barehand.code].discipline : weapon?.code ? EVENTS[weapon.code].discipline : "changquan") : key;
-        const c: Candidate = { ...base, key: discipline, counted, barehand, weapon, score: total, average: total / counted.length, cleanNandu: counted.some(isClean) };
+        const c: Candidate = { ...base, key: discipline, counted, barehand, weapon, score: total, average: total / 2, cleanNandu: counted.some(isClean) };
         if (!pick || c.score > pick.score) pick = c;
       }
       if (pick) out.push(pick);

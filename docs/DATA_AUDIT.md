@@ -30,7 +30,7 @@ junior team roster.
    numbered like USAWKF's.
 5. **A 0 means "did not compete"** and is dropped before any average,
    ranking or team projection (`dropZeroScores`). A junior with one routine
-   averages that routine instead of half of it. An adult who skipped a
+   still averages over two (the missing one shows an event left to do). An adult who skipped a
    routine in a category isn't ranked in that category, as in USAWKF's
    2025 results.
 

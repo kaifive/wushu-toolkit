@@ -1,6 +1,7 @@
 import { EVENT_CONFIGS } from "@/content/events";
 import { source } from "@/lib/data/source";
-import type { EventData } from "@/lib/domain/types";
+import type { EventData, Gender } from "@/lib/domain/types";
+import { sameName } from "@/lib/watchlist/match";
 import type { EventConfig } from "./types";
 
 /**
@@ -13,15 +14,27 @@ export function dropZeroScores(d: EventData): EventData {
   return { ...d, scores: d.scores.map((s) => (s.finalScore === 0 ? { ...s, finalScore: null, didNotCompete: true } : s)) };
 }
 
-const withoutZeros = (e: EventConfig): EventConfig => ({
+/** Fill genders the source left blank (EventConfig.genderFixes). */
+export function fixGenders(d: EventData, fixes: Record<string, Gender> = {}): EventData {
+  const names = Object.keys(fixes);
+  if (!names.length) return d;
+  const fixFor = (name: string) => fixes[names.find((n) => sameName(n, name)) ?? ""];
+  return {
+    ...d,
+    scores: d.scores.map((s) => (s.gender ? s : { ...s, gender: fixFor(s.athleteName) ?? s.gender })),
+    registrations: d.registrations.map((r) => (r.athlete.gender || !fixFor(r.athlete.name) ? r : { ...r, athlete: { ...r.athlete, gender: fixFor(r.athlete.name) } })),
+  };
+}
+
+const normalized = (e: EventConfig): EventConfig => ({
   ...e,
   data: () => {
     const inner = e.data();
-    return source(inner.label, async (ctx) => dropZeroScores(await inner.load(ctx)));
+    return source(inner.label, async (ctx) => fixGenders(dropZeroScores(await inner.load(ctx)), e.genderFixes));
   },
 });
 
-const EVENTS = EVENT_CONFIGS.map(withoutZeros);
+const EVENTS = EVENT_CONFIGS.map(normalized);
 const BY_SLUG = new Map(EVENTS.map((e) => [e.slug, e]));
 
 export function getEvent(slug: string): EventConfig | undefined {

@@ -1,5 +1,5 @@
 import type { DataSource } from "@/lib/data/source";
-import type { EventData } from "@/lib/domain/types";
+import type { EventData, Gender } from "@/lib/domain/types";
 import type { RulesetId } from "@/lib/rules";
 
 export type EventView = "standings" | "schedule" | "team" | "scorecards" | "stats" | "athletes" | "all-around";
@@ -39,6 +39,8 @@ export interface EventConfig {
   description?: string;
   links?: { label: string; url: string }[];
   highlights?: AthleteHighlight[];
+  /** Genders the source left blank, by athlete name as the source spells it. */
+  genderFixes?: Record<string, Gender>;
   /**
    * Pre-scrape on a schedule (ADR-008): the snapshot GitHub Action saves this
    * event's live data to data/snapshots/<slug>/ while `until` is in the future.

@@ -60,12 +60,7 @@ export const PWC_2026: EventConfig = {
   // Keep snapshotting until the live sheet has been saved; the archive must not depend on it.
   snapshot: { until: "2026-12-31" },
   description: "All-around standings (sum of each athlete's top three forms), age-group champions and live ring schedules.",
-  highlights: [
-    {
-      name: "Nova Wushu",
-      color: "#6f42c1",
-      athletes: ["Aaron Yang", "Ryan Tran", "Benjamin Le", "Daniel Sinor", "Joshua Le", "Aivy Stone", "Elizabeth Le", "Arya Mohan", "Denisa Bento", "Nanette Hill", "Samson Turner"],
-    },
-  ],
+  // The sheet left these blank. TFCGW and DeQi Taichi Group are group entries (shown under Groups).
+  genderFixes: { "Zakariya Gulam": "male" },
   notes: ["Scores and schedules are read live from the organizer's Google Sheet."],
 };
