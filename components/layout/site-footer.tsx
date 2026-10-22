@@ -8,6 +8,10 @@ export function SiteFooter() {
         {SITE.name} by {SITE.author} ·{" "}
         <Link href="/about" className="inline-flex min-h-tap items-center hover:text-ink">
           About
+        </Link>{" "}
+        ·{" "}
+        <Link href="/contact" className="inline-flex min-h-tap items-center hover:text-ink">
+          Contact
         </Link>
       </p>
     </footer>
