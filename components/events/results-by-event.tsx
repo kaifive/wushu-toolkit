@@ -1,8 +1,11 @@
+import Link from "next/link";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import { ExportButtons } from "@/components/export/export-buttons";
 import type { EventResult } from "@/lib/events/views";
 
-export function ResultsByEvent({ results }: { results: EventResult[] }) {
+export function ResultsByEvent({ results, scorecardsHref }: { results: EventResult[]; scorecardsHref?: string }) {
+  const cardHref = (r: EventResult, athlete: string) =>
+    `${scorecardsHref}?${new URLSearchParams({ ...(r.gender ? { gender: r.gender } : {}), athlete, event: r.raw })}`;
   if (!results.length) return <p className="text-sm text-ink-muted">No results yet.</p>;
   return (
     <div className="space-y-2">
@@ -36,7 +39,17 @@ export function ResultsByEvent({ results }: { results: EventResult[] }) {
                           </div>
                         </div>
                       </td>
-                      <td className={`${td} text-right font-semibold`}>{row.finalScore == null ? "—" : row.finalScore.toFixed(3)}</td>
+                      <td className={`${td} text-right font-semibold`}>
+                        {row.finalScore == null ? (
+                          "—"
+                        ) : scorecardsHref && row.hasScorecard ? (
+                          <Link href={cardHref(r, row.athleteName)} className="inline-flex min-h-tap items-center justify-end text-primary underline decoration-dotted underline-offset-4" title="Open scorecard">
+                            {row.finalScore.toFixed(3)}
+                          </Link>
+                        ) : (
+                          row.finalScore.toFixed(3)
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

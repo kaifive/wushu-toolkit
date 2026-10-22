@@ -24,7 +24,7 @@ export async function EventBody({
   if (!loaded || !loaded.event.views.includes(view)) notFound();
   if (loaded.state === "gated") {
     const e = loaded.event;
-    return <GatedEventView slug={e.slug} view={view} eventName={e.name} rulesetId={e.rulesetId} highlights={e.highlights} refreshSeconds={e.revalidate ?? 60} timeZone={e.timeZone} />;
+    return <GatedEventView slug={e.slug} view={view} eventName={e.name} rulesetId={e.rulesetId} highlights={e.highlights} refreshSeconds={e.revalidate ?? 60} timeZone={e.timeZone} scorecardsHref={e.views.includes("scorecards") ? `/events/${e.slug}/scorecards` : undefined} />;
   }
   if (loaded.state === "error") return <LoadError error={loaded.error} />;
   const e = loaded.event;

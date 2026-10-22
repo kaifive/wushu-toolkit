@@ -334,3 +334,43 @@ export function chainCounted(c: ScoredChain | undefined): number {
   if (!c) return 0;
   return r3(c.techniques.reduce((s, t) => s + t.counted, 0) + c.links.reduce((s, l) => s + l.counted, 0));
 }
+
+// ---------- Reading a judges' sheet ----------
+
+/** One numbered element on a Sportdata panel C row, named from the declared difficulty. */
+export interface SheetElement {
+  kind: "technique" | "connection";
+  /** "324B", or "324B+1" for a connection. */
+  code: string;
+  /** "Jumping lotus kick 360°", or "into horse stance" / "into tornado kick 360°". */
+  label: string;
+  /** Point value, when the code is in the tables. */
+  value?: number;
+}
+
+/**
+ * Sportdata numbers panel C in declared order: each technique, and each "+" as
+ * its own connection element right before what it connects to. So "312A+335A"
+ * is three elements (312A, the connection, 335A) and "324B+1" is two.
+ * (Checked against every 2025 Phoenix scorecard.)
+ */
+export function sheetElements(family: Family, declared: string[]): SheetElement[] {
+  const out: SheetElement[] = [];
+  const name = (code: string) => technique(family, code)?.english ?? CONNECTION_ONLY[code] ?? code;
+  for (const combo of declared) {
+    const steps = chainFromCode(combo).steps;
+    steps.forEach((step, i) => {
+      if (i > 0) {
+        const from = steps[i - 1]!;
+        const conn = connection(family, from, step);
+        const into = isLanding(step) ? LANDINGS[step]?.english.toLowerCase() ?? `landing ${step}` : name(step).toLowerCase();
+        out.push({ kind: "connection", code: `${from}+${step}`, label: `into ${into}`, value: conn ? CONN_VALUE[conn.grade] : undefined });
+      }
+      if (!isLanding(step)) {
+        const tech = technique(family, step);
+        out.push({ kind: "technique", code: step, label: name(step), value: tech ? TECH_VALUE[tech.grade] : undefined });
+      }
+    });
+  }
+  return out;
+}

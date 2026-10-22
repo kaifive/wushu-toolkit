@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { DEDUCTION_GROUPS, DEDUCTIONS_SOURCE } from "@/lib/rules/iwuf-2024/deductions";
-import { CONNECTIONS, TECHNIQUES, chainFromCode, nextOptions, scoreNandu } from "@/lib/rules/iwuf-2024/nandu";
+import { DEDUCTION_GROUPS, DEDUCTIONS_SOURCE, deductionCodes, deductionGroupFor, findDeduction } from "@/lib/rules/iwuf-2024/deductions";
+import { CONNECTIONS, TECHNIQUES, chainFromCode, nextOptions, scoreNandu, sheetElements } from "@/lib/rules/iwuf-2024/nandu";
 
 test("deduction groups cover every taolu event exactly once", () => {
   const events = DEDUCTION_GROUPS.flatMap((g) => g.events);
@@ -101,4 +101,19 @@ test("a step after a landing still gets a (zero) link so the editor lines up", (
   const s = scoreNandu("changquan", [chainFromCode("1+323A+324A")]);
   assert.deepEqual(s.chains[0]!.links.map((l) => l.code), ["1+323A", "323A+324A"]);
   assert.equal(s.chains[0]!.links[0]!.value, 0);
+});
+
+test("sheetElements numbers techniques and connections the way Sportdata does", () => {
+  const els = sheetElements("changquan", ["324B+1", "312A+335A", "335A"]);
+  assert.deepEqual(els.map((e) => e.code), ["324B", "324B+1", "312A", "312A+335A", "335A", "335A"]);
+  assert.equal(els[1]!.label, "into horse stance");
+  assert.equal(els[1]!.value, 0.15);
+  assert.equal(els[0]!.kind, "technique");
+});
+
+test("deduction codes from a scorecard resolve in the event's table", () => {
+  assert.deepEqual(deductionCodes(["70b", "5.00", "0.0", " 22 "]), ["70B", "22"]);
+  assert.ok(findDeduction("70B", "CQ"));
+  assert.equal(deductionGroupFor("NQ").id, "southern");
+  assert.equal(deductionGroupFor(undefined).id, "northern");
 });

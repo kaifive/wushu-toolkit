@@ -22,10 +22,11 @@ interface Props {
   highlights?: AthleteHighlight[];
   refreshSeconds: number;
   timeZone?: string;
+  scorecardsHref?: string;
 }
 
 /** Paid live events: data is fetched after sign-in, through the entitlement-checked API (ADR-005). */
-export function GatedEventView({ slug, view, eventName, rulesetId, highlights, refreshSeconds, timeZone }: Props) {
+export function GatedEventView({ slug, view, eventName, rulesetId, highlights, refreshSeconds, timeZone, scorecardsHref }: Props) {
   const { status, user, authedFetch, kicked } = useAuth();
   const [data, setData] = useState<EventData | null>(null);
   const [problem, setProblem] = useState<{ code?: string; error: string } | null>(null);
@@ -93,7 +94,7 @@ export function GatedEventView({ slug, view, eventName, rulesetId, highlights, r
     <ExportProvider slug={slug} eventName={eventName} rulesetId={rulesetId} data={data}>
       <DataStatus data={data} timeZone={timeZone} genderGap={GENDER_GAP[view]} />
       <WatchLegend />
-      <Body ruleset={getRuleset(rulesetId)} data={data} highlights={highlights} live />
+      <Body ruleset={getRuleset(rulesetId)} data={data} highlights={highlights} live scorecardsHref={scorecardsHref} />
     </ExportProvider>
   );
 }

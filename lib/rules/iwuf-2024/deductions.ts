@@ -253,3 +253,17 @@ export const DEDUCTION_GROUPS: DeductionGroup[] = [
     ],
   },
 ];
+
+/** The deduction table that applies to an event code (CQ, NQ, TJ…); Changquan's by default. */
+export function deductionGroupFor(eventCode?: string): DeductionGroup {
+  return DEDUCTION_GROUPS.find((g) => !!eventCode && (g.events as string[]).includes(eventCode)) ?? DEDUCTION_GROUPS[0]!;
+}
+
+/** A panel A code ("70b") in the event's table, if it is there. */
+export function findDeduction(code: string, eventCode?: string): DeductionCode | undefined {
+  const want = code.trim().toUpperCase();
+  return deductionGroupFor(eventCode).codes.find((c) => c.code.toUpperCase() === want);
+}
+
+/** Panel A tokens as codes: upper-cased, without the score cells Sportdata sometimes mixes in ("5.00", "0.0"). */
+export const deductionCodes = (tokens: string[]) => tokens.map((t) => t.trim().toUpperCase()).filter((t) => t && !t.includes("."));

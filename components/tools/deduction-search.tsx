@@ -1,12 +1,21 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { SearchIcon } from "@/components/ui/icons";
 import type { DeductionGroup } from "@/lib/rules/iwuf-2024/deductions";
 
-export function DeductionSearch({ groups }: { groups: DeductionGroup[] }) {
-  const [groupId, setGroupId] = useState(groups[0]?.id ?? "northern");
-  const [q, setQ] = useState("");
+/** Opens on ?code=70B&group=northern (links from scorecards). Needs a Suspense boundary. */
+export function DeductionSearchFromUrl({ groups }: { groups: DeductionGroup[] }) {
+  const params = useSearchParams();
+  const code = params.get("code")?.trim().toUpperCase() ?? "";
+  const group = groups.find((g) => g.id === params.get("group"))?.id;
+  return <DeductionSearch key={`${group}-${code}`} groups={groups} initialGroup={group} initialQuery={code} />;
+}
+
+export function DeductionSearch({ groups, initialGroup, initialQuery = "" }: { groups: DeductionGroup[]; initialGroup?: DeductionGroup["id"]; initialQuery?: string }) {
+  const [groupId, setGroupId] = useState(initialGroup ?? groups[0]?.id ?? "northern");
+  const [q, setQ] = useState(initialQuery);
   const group = groups.find((g) => g.id === groupId) ?? groups[0]!;
 
   const codes = useMemo(() => {

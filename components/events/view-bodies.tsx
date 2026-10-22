@@ -9,7 +9,7 @@ import { AllAroundTable, Champions } from "./all-around-view";
 import { OverallTable } from "./overall-table";
 import { ResultsByEvent } from "./results-by-event";
 import { ScheduleView } from "./schedule-view";
-import { ScorecardCard } from "./scorecard";
+import { ScorecardList } from "./scorecard-list";
 import { TeamProjection } from "./team-projection";
 
 /**
@@ -22,9 +22,11 @@ export interface ViewProps {
   highlights?: AthleteHighlight[];
   /** False for finished competitions (no "On the floor" marker). */
   live?: boolean;
+  /** The event's scorecards page, when it has one: standings link each score there. */
+  scorecardsHref?: string;
 }
 
-export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
+export function StandingsBody({ ruleset, data, highlights, scorecardsHref }: ViewProps) {
   const models = selectionModel(data, ruleset);
   const results = resultsByEvent(data, ruleset);
   const hl = highlighter(highlights);
@@ -64,7 +66,7 @@ export function StandingsBody({ ruleset, data, highlights }: ViewProps) {
             )}
             <section>
               <h2 className="mb-3 font-display text-lg font-bold">Results by event</h2>
-              <ResultsByEvent results={results.filter((r) => r.gender === g.id)} />
+              <ResultsByEvent results={results.filter((r) => r.gender === g.id)} scorecardsHref={scorecardsHref} />
             </section>
           </div>
         );
@@ -103,19 +105,13 @@ export function TeamBody({ ruleset, data, highlights }: ViewProps) {
 
 export function ScorecardsBody({ data, highlights }: ViewProps) {
   const rows = scorecards(data);
-  const hl = highlighter(highlights);
   return (
     <Tabs
       label="Gender"
       param="gender"
       tabs={GENDERS}
       panels={GENDERS.map((g) => {
-        const mine = rows.filter((r) => r.gender === g.id);
-        return (
-          <div key={g.id} className="space-y-2">
-            {mine.length ? mine.map((r, i) => <ScorecardCard key={`${i}-${r.athleteName}-${r.raw}`} row={r} highlights={hl} />) : <p className="text-sm text-ink-muted">No scorecards.</p>}
-          </div>
-        );
+        return <ScorecardList key={g.id} rows={rows.filter((r) => r.gender === g.id)} highlights={highlights} />;
       })}
     />
   );

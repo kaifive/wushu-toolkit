@@ -16,7 +16,7 @@ export default async function StandingsPage({ params }: { params: Promise<{ slug
   const { slug } = await params;
   return (
     <EventBody slug={slug} view="standings">
-      {({ event, ruleset }, data) => <StandingsBody ruleset={ruleset} data={data} highlights={event.highlights} />}
+      {({ event, ruleset }, data) => <StandingsBody ruleset={ruleset} data={data} highlights={event.highlights} scorecardsHref={event.views.includes("scorecards") ? `/events/${event.slug}/scorecards` : undefined} />}
     </EventBody>
   );
 }
