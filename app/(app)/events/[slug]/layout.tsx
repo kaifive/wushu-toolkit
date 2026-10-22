@@ -20,7 +20,6 @@ export default async function EventLayout({ children, params }: { children: Reac
           <h1 className="font-display text-3xl font-bold leading-tight sm:text-4xl">{event.name}</h1>
           <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-sm text-ink-muted">
             {event.status === "live" && <Badge tone="seal">Live</Badge>}
-            {event.status === "archived" && <Badge>Final</Badge>}
             <span>{formatEventDates(event)}</span>
             {event.location && <span>· {event.location}</span>}
           </p>

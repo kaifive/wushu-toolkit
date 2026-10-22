@@ -4,11 +4,12 @@ import { ChevronRightIcon, LockIcon } from "@/components/ui/icons";
 import { formatEventDates, requiresEntitlement } from "@/lib/events/registry";
 import type { EventConfig } from "@/lib/events/types";
 
-const STATUS = { live: ["seal", "Live"], upcoming: ["gold", "Upcoming"], archived: ["neutral", "Final"] } as const;
+// Only live and upcoming events get a badge; past ones need none.
+const STATUS = { live: ["seal", "Live"], upcoming: ["gold", "Upcoming"], archived: null } as const;
 
 /** One competition as a list row (sits inside a Card list). */
 export function EventRow({ event }: { event: EventConfig }) {
-  const [tone, label] = STATUS[event.status];
+  const status = STATUS[event.status];
   return (
     <Link href={`/events/${event.slug}`} className="group flex min-h-16 items-center gap-3 px-4 py-3 hover:bg-surface-2">
       <div className="min-w-0 flex-1">
@@ -21,7 +22,7 @@ export function EventRow({ event }: { event: EventConfig }) {
           {event.location ? ` · ${event.location}` : ""}
         </p>
       </div>
-      <Badge tone={tone}>{label}</Badge>
+      {status && <Badge tone={status[0]}>{status[1]}</Badge>}
       <ChevronRightIcon className="h-5 w-5 shrink-0 text-ink-muted group-hover:text-primary" />
     </Link>
   );
