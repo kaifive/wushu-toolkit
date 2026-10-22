@@ -1,9 +1,12 @@
 import type { SVGProps } from "react";
 
 /**
- * Round 2 logo directions: "a toolkit for wushu". Each sits on the vermilion
- * seal square so it works as an app icon and favicon. Delete the losers once
- * one is picked and move the winner into logo.tsx.
+ * Round 3 logo directions (2026-10-22): construction tools (gear, wrench)
+ * combined with wushu weapons (jian, spear, broadsword). Each sits on the
+ * vermilion seal square so it works as an app icon and favicon. Shapes are
+ * white with a seal-coloured outline where they overlap, so they stay apart
+ * at small sizes. Delete the losers once one is picked and move the winner
+ * into logo.tsx.
  */
 
 type P = SVGProps<SVGSVGElement>;
@@ -19,104 +22,120 @@ function Seal({ children, label, ...props }: P & { label: string }) {
   );
 }
 
-/** Jian pointing up, centred at (32, 32) before any rotation. */
-function Jian({ fill = INK, length = 1 }: { fill?: string; length?: number }) {
-  const tip = 32 - 25 * length;
+/** Gear outline: `teeth` square-ish teeth between radius r (root) and R (tip). */
+function gearPath(cx: number, cy: number, R: number, r: number, teeth: number) {
+  const pts: string[] = [];
+  const step = (Math.PI * 2) / teeth;
+  for (let i = 0; i < teeth; i++) {
+    const a = i * step - Math.PI / 2;
+    const at = (ang: number, rad: number) => `${(cx + Math.cos(ang) * rad).toFixed(2)} ${(cy + Math.sin(ang) * rad).toFixed(2)}`;
+    pts.push(at(a - step * 0.28, r), at(a - step * 0.18, R), at(a + step * 0.18, R), at(a + step * 0.28, r));
+  }
+  return `M${pts.join(" L")} Z`;
+}
+
+/** A gear with a hole, drawn in white; the hole shows the seal through it. */
+function Gear({ cx, cy, R, r, hole, teeth }: { cx: number; cy: number; R: number; r: number; hole: number; teeth: number }) {
   return (
-    <g fill={fill}>
-      <path d={`M29.8 37 L32 ${tip} L34.2 37 Z`} />
-      <rect x="24.5" y="36.5" width="15" height="4" rx="2" />
-      <rect x="30.4" y="40.5" width="3.2" height="9" rx="1.2" />
-      <circle cx="32" cy="52.5" r="2.8" />
+    <g>
+      <path d={gearPath(cx, cy, R, r, teeth)} fill={INK} />
+      <circle cx={cx} cy={cy} r={hole} fill={SEAL} />
     </g>
   );
 }
 
-/** 1. Crossed weapons: jian over gun, like the crossed-wrench toolkit emblem. */
+/** Outline in the seal colour so overlapping white shapes stay separate. */
+const cut = { stroke: SEAL, strokeWidth: 2.2, paintOrder: "stroke" as const, strokeLinejoin: "round" as const };
+
+/** Vertical jian: tip at `top`, pommel near `bottom`, centred on x = 32. */
+function JianUp({ top, guardY, bottom }: { top: number; guardY: number; bottom: number }) {
+  return (
+    <g fill={INK} {...cut}>
+      <path d={`M29.6 ${guardY} L29.6 ${top + 6} L32 ${top} L34.4 ${top + 6} L34.4 ${guardY} Z`} />
+      <rect x="23.5" y={guardY} width="17" height="4" rx="2" />
+      <rect x="30.3" y={guardY + 4} width="3.4" height={bottom - guardY - 8} rx="1.2" />
+      <circle cx="32" cy={bottom - 2.5} r="2.9" />
+    </g>
+  );
+}
+
+/** 1. Gear and jian: the sword is the axle of the gear. */
+export function ConceptGearJian(props: P) {
+  return (
+    <Seal label="Gear and jian" {...props}>
+      <Gear cx={32} cy={35} R={19} r={15} hole={7} teeth={10} />
+      <JianUp top={5} guardY={41} bottom={60} />
+    </Seal>
+  );
+}
+
+/** Open-end wrench pointing up, centred on x = 32 (rotate the group to place it). */
+function WrenchUp() {
+  return (
+    <g>
+      <g fill={INK} {...cut}>
+        <rect x="29" y="18" width="6" height="40" rx="3" />
+        <circle cx="32" cy="14" r="9" />
+      </g>
+      {/* jaw opening */}
+      <path d="M28.2 2 L28.2 13 L35.8 13 L35.8 2 Z" fill={SEAL} />
+      <circle cx="32" cy="13.4" r="3.8" fill={SEAL} />
+    </g>
+  );
+}
+
+/** 2. Crossed wrench and jian, like the crossed-tools emblem. */
 export function ConceptCrossed(props: P) {
   return (
-    <Seal label="Crossed weapons" {...props}>
-      {/* gun (staff), bottom-right to top-left */}
-      <g transform="rotate(-45 32 32)">
-        <rect x="28.5" y="4" width="7" height="56" rx="3.5" fill={INK} />
-        <rect x="28.5" y="10" width="7" height="2.6" fill={SEAL} />
-        <rect x="28.5" y="51.4" width="7" height="2.6" fill={SEAL} />
+    <Seal label="Crossed wrench and jian" {...props}>
+      <g transform="rotate(42 32 32) translate(32 33) scale(0.94) translate(-32 -32)">
+        <WrenchUp />
       </g>
-      {/* jian on top, with a seal-coloured outline where it crosses the staff */}
-      <g transform="rotate(45 32 32) translate(32 32) scale(1.2) translate(-32 -32)">
-        <g stroke={SEAL} strokeWidth="2.6" strokeLinejoin="round">
-          <Jian />
+      <g transform="rotate(-42 32 32)">
+        <JianUp top={4} guardY={42} bottom={60} />
+      </g>
+    </Seal>
+  );
+}
+
+/** 3. Gear with a spear (qiang) through it, tassel and all. */
+export function ConceptGearSpear(props: P) {
+  return (
+    <Seal label="Gear and spear" {...props}>
+      <Gear cx={31} cy={33} R={17} r={13.5} hole={6} teeth={9} />
+      <g transform="rotate(45 32 32)">
+        <g fill={INK} {...cut}>
+          <rect x="30.4" y="16" width="3.2" height="46" rx="1.6" />
+          <path d="M32 1 L36 13 L32 17 L28 13 Z" />
         </g>
-        <Jian />
+        {/* tassel below the head */}
+        <g stroke={INK} strokeWidth="1.6" strokeLinecap="round">
+          <path d="M31 18 L27.5 25" />
+          <path d="M32 18 L32 26" />
+          <path d="M33 18 L36.5 25" />
+        </g>
       </g>
     </Seal>
   );
 }
 
-/** 2. Toolbox: a kit with a jian standing out of it. */
-export function ConceptToolbox(props: P) {
+/** 4. Tool-sword: a jian whose guard is a gear and whose pommel is a wrench head. */
+export function ConceptToolSword(props: P) {
   return (
-    <Seal label="Toolbox" {...props}>
-      {/* jian rising out of the box at an angle, behind the lid */}
-      <g transform="translate(9 -6) rotate(28 32 32)">
-        <path d="M30.2 34 L32 8 L33.8 34 Z" fill={INK} />
-        <rect x="25.5" y="32" width="13" height="3.6" rx="1.8" fill={INK} />
+    <Seal label="Tool sword" {...props}>
+      <g fill={INK}>
+        {/* blade */}
+        <path d="M29.4 34 L29.4 10 L32 3.5 L34.6 10 L34.6 34 Z" />
+        {/* grip */}
+        <rect x="30" y="38" width="4" height="12" rx="1.4" />
       </g>
-      {/* handle */}
-      <path d="M20 31 V25.5 A3.5 3.5 0 0 1 23.5 22 H29.5 A3.5 3.5 0 0 1 33 25.5 V31" fill="none" stroke={INK} strokeWidth="3.6" />
-      {/* box: lid band, split line, body */}
-      <rect x="10" y="30" width="44" height="23" rx="4" fill={INK} />
-      <rect x="10" y="37" width="44" height="2.4" fill={SEAL} />
-      <rect x="28.5" y="34.5" width="7" height="7" rx="1.5" fill={SEAL} />
-    </Seal>
-  );
-}
-
-/** 3. Multi-tool: a folding knife whose tools are a jian and a fan. */
-export function ConceptMultitool(props: P) {
-  return (
-    <Seal label="Multi-tool" {...props}>
-      {/* fan opening up-left from the pivot (20, 36) */}
-      <path d="M20 36 L2.7 26 A20 20 0 0 1 18.3 16.1 Z" fill={INK} />
-      <g stroke={SEAL} strokeWidth="1.5" strokeLinecap="round">
-        <path d="M20 36 L5.6 22.1" />
-        <path d="M20 36 L9.4 19" />
-        <path d="M20 36 L13.8 17" />
-      </g>
-      {/* jian blade up-right */}
-      <path d="M17.8 36 L20 3 L22.2 36 Z" fill={INK} transform="rotate(40 20 36)" />
-      {/* handle down-right */}
-      <rect x="20" y="30" width="38" height="12" rx="6" fill={INK} transform="rotate(32 20 36)" />
-      <circle cx="20" cy="36" r="3.2" fill={SEAL} />
-    </Seal>
-  );
-}
-
-/** 4. Kit grid: four tiles, one per tool: jian, fan, standings, timer. */
-export function ConceptGrid(props: P) {
-  const tile = (x: number, y: number) => <rect x={x} y={y} width="24" height="24" rx="5" fill={INK} />;
-  return (
-    <Seal label="Kit grid" {...props}>
-      {tile(6, 6)}
-      {tile(34, 6)}
-      {tile(6, 34)}
-      {tile(34, 34)}
-      {/* jian */}
-      <g transform="translate(-14 -14) rotate(45 32 32) translate(32 32) scale(0.38) translate(-32 -32)">
-        <Jian fill={SEAL} />
-      </g>
-      {/* fan */}
-      <path d="M46 26 L37.5 14.5 A13 13 0 0 1 54.5 14.5 Z" fill={SEAL} />
-      {/* standings bars */}
-      <g fill={SEAL}>
-        <rect x="10.5" y="47" width="4.2" height="7" rx="1" />
-        <rect x="15.9" y="41" width="4.2" height="13" rx="1" />
-        <rect x="21.3" y="44" width="4.2" height="10" rx="1" />
-      </g>
-      {/* timer */}
-      <circle cx="46" cy="47.5" r="7.2" fill="none" stroke={SEAL} strokeWidth="2.6" />
-      <rect x="44.5" y="37" width="3" height="3" rx="0.8" fill={SEAL} />
-      <path d="M46 47.5 L49 43.6" stroke={SEAL} strokeWidth="2.2" strokeLinecap="round" />
+      {/* gear guard */}
+      <path d={gearPath(32, 36.5, 9, 6.8, 8)} fill={INK} {...cut} />
+      <circle cx="32" cy="36.5" r="2.6" fill={SEAL} />
+      {/* wrench-head pommel */}
+      <circle cx="32" cy="54" r="6" fill={INK} />
+      <path d="M29.3 61 L29.3 54.5 L34.7 54.5 L34.7 61 Z" fill={SEAL} />
+      <circle cx="32" cy="54.6" r="2.7" fill={SEAL} />
     </Seal>
   );
 }
@@ -124,34 +143,34 @@ export function ConceptGrid(props: P) {
 export const CONCEPTS = [
   {
     id: "1",
-    name: "Crossed weapons",
-    Mark: ConceptCrossed,
-    idea: "A jian crossed over a staff, the way crossed wrenches mean \"tools\". The weapons are the toolkit.",
-    strengths: ["Reads as both martial arts and tools at a glance", "Bold, simple shapes survive at 16px"],
-    risks: ["Crossed weapons can feel like a club crest rather than an app"],
+    name: "Gear and jian",
+    Mark: ConceptGearJian,
+    idea: "A straight sword running through a gear like an axle: the machinery of a toolkit, driven by wushu.",
+    strengths: ["Strong, centred silhouette; reads as a gear even at 16px", "Gear says \"tools\" without words"],
+    risks: ["Gears are common in tech logos; the sword is what makes it ours"],
   },
   {
     id: "2",
-    name: "Toolbox",
-    Mark: ConceptToolbox,
-    idea: "A toolbox with a jian standing out of it: literally a toolkit for wushu.",
-    strengths: ["Says \"toolkit\" most directly", "Friendly; fits a free utility"],
-    risks: ["The blade gets thin at favicon size; the box alone still reads"],
+    name: "Crossed wrench and jian",
+    Mark: ConceptCrossed,
+    idea: "The classic crossed-tools emblem, with one tool swapped for a jian.",
+    strengths: ["Instantly says \"toolkit\"", "Balanced X shape works as a badge and an app icon"],
+    risks: ["Crossed tools can feel like a hardware store or a club crest"],
   },
   {
     id: "3",
-    name: "Multi-tool",
-    Mark: ConceptMultitool,
-    idea: "A pocket multi-tool whose blades are a jian and an opening fan. One thing, many tools.",
-    strengths: ["Most original idea of the set", "Matches the product: many small tools in one app"],
-    risks: ["Most detail; needs the most care at 16px"],
+    name: "Gear and spear",
+    Mark: ConceptGearSpear,
+    idea: "A qiang (spear) with its tassel driving through a gear: motion and mechanics.",
+    strengths: ["The tassel makes it unmistakably wushu", "Diagonal gives energy"],
+    risks: ["Tassel lines get thin at favicon size; the spear head and gear still read"],
   },
   {
     id: "4",
-    name: "Kit grid",
-    Mark: ConceptGrid,
-    idea: "Four tiles like a tool drawer: jian, fan, standings bars and a timer. Shows what's inside.",
-    strengths: ["Explains the product: weapons rules, scores and schedules", "Clean grid fits the slate UI"],
-    risks: ["Generic app-grid shape at small sizes; the glyphs carry the meaning"],
+    name: "Tool sword",
+    Mark: ConceptToolSword,
+    idea: "One object: a jian whose guard is a gear and whose pommel is a wrench head. The weapon is the tool.",
+    strengths: ["Most original; a single object, not two stacked", "Tall, simple shape fits a narrow icon"],
+    risks: ["Small parts (gear teeth, wrench jaw) blur below 24px"],
   },
 ] as const;
