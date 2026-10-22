@@ -56,7 +56,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] Calculator: pick techniques and listed connections, capped 1.4 + 0.6 = 2.0; matches 181/181 completed 2025 scorecards
 - [x] Rule-break warnings
 - [x] Mark the element cut by the 1.4 / 0.6 cap (only the last registered one loses value)
-- [ ] Optional: prefill from an athlete's Sportdata registration
+- [x] Prefill from an athlete's registration ("Load From a Competition", and "Open in Nandu Calculator" on scorecards)
 
 ## Phase 5e — v1 parity (requested 2026-10-22)
 

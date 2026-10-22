@@ -34,6 +34,16 @@ function load(): { event: EventCode; chains: Chain[] } {
   return { event: "CQ", chains: [] };
 }
 
+/** "353B + 323C + 1" is one chain: join around "+", then split on commas, semicolons or spaces. */
+function parseCodes(codes: string): Chain[] {
+  return codes
+    .replace(/\s*\+\s*/g, "+")
+    .split(/[,;\s]+/)
+    .filter(Boolean)
+    .map(chainFromCode)
+    .filter((c) => c.steps.length);
+}
+
 export function NanduCalculator() {
   const [event, setEvent] = useState<EventCode>("CQ");
   const { family, weapon } = familyOfEvent(event);
@@ -43,11 +53,16 @@ export function NanduCalculator() {
 
   useEffect(() => {
     const s = load();
-    // Restore the saved routine once on mount (storage is client-only).
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setEvent(s.event);
-    setChains(s.chains);
+    // A link from a scorecard (?event=CQ&codes=…) wins over the saved routine.
+    const p = new URLSearchParams(window.location.search);
+    const fromLink = parseCodes(p.get("codes") ?? "");
+    const linkEvent = p.get("event") as EventCode | null;
+    // Restore once on mount (storage and the URL are client-only).
+    /* eslint-disable react-hooks/set-state-in-effect */
+    setEvent(linkEvent && EVENT_CODES.includes(linkEvent) ? linkEvent : s.event);
+    setChains(fromLink.length ? fromLink : s.chains);
     setLoaded(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
   useEffect(() => {
     if (!loaded) return;
@@ -92,13 +107,7 @@ export function NanduCalculator() {
             <button
               type="button"
               onClick={() => {
-                // "353B + 323C + 1" is one chain: join around "+", then split on commas, semicolons or spaces.
-                const parsed = codes
-                  .replace(/\s*\+\s*/g, "+")
-                  .split(/[,;\s]+/)
-                  .filter(Boolean)
-                  .map(chainFromCode)
-                  .filter((c) => c.steps.length);
+                const parsed = parseCodes(codes);
                 if (parsed.length) setChains(parsed);
               }}
               className="min-h-tap shrink-0 rounded-card border border-line px-3 font-semibold"
@@ -108,6 +117,13 @@ export function NanduCalculator() {
           </div>
         </div>
       </div>
+
+      <FromCompetition
+        onPick={(d) => {
+          setEvent(d.code as EventCode);
+          setChains(parseCodes(d.nandu.join(",")));
+        }}
+      />
 
       <section aria-live="polite" className="sticky top-14 z-20 rounded-card border border-line bg-surface p-4 md:top-3">
         <div className="flex items-end justify-between gap-3">
@@ -372,5 +388,57 @@ function ChainEditor({
         )}
       </div>
     </div>
+  );
+}
+
+type Declared = { athlete: string; club?: string; competition: string; raw: string; code: string; nandu: string[] };
+
+/** Load an athlete's declared difficulty from a past competition (loaded on first use). */
+function FromCompetition({ onPick }: { onPick: (d: Declared) => void }) {
+  const [all, setAll] = useState<Declared[] | null>(null);
+  const [failed, setFailed] = useState(false);
+  const [q, setQ] = useState("");
+  const words = q.toLowerCase().split(/\s+/).filter(Boolean);
+  const hits = all && words.length ? all.filter((d) => words.every((w) => d.athlete.toLowerCase().includes(w))).slice(0, 12) : [];
+  const fetchOnce = () => {
+    if (all || failed) return;
+    fetch("/api/nandu")
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((d: Declared[]) => setAll(d))
+      .catch(() => setFailed(true));
+  };
+  return (
+    <details className="rounded-card border border-line bg-surface" onToggle={(e) => (e.currentTarget as HTMLDetailsElement).open && fetchOnce()}>
+      <summary className="flex min-h-tap cursor-pointer list-none items-center px-4 font-semibold">Load From a Competition</summary>
+      <div className="border-t border-line p-3">
+        <input
+          type="search"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Athlete name"
+          aria-label="Athlete name"
+          className={field}
+        />
+        {failed && <p className="mt-2 text-sm text-ink-muted">Couldn&apos;t load registrations. Try again later.</p>}
+        {!all && !failed && <p className="mt-2 text-sm text-ink-muted">Loading registrations…</p>}
+        {hits.length > 0 && (
+          <ul className="mt-2 divide-y divide-line">
+            {hits.map((d, i) => (
+              <li key={i}>
+                <button type="button" onClick={() => onPick(d)} className="flex min-h-tap w-full flex-col justify-center px-1 py-2 text-left hover:bg-surface-2">
+                  <span className="font-semibold">
+                    {d.athlete} · {d.raw}
+                  </span>
+                  <span className="text-xs text-ink-muted">
+                    {d.competition} · <span className="font-mono">{d.nandu.join("  ")}</span>
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {all && words.length > 0 && !hits.length && <p className="mt-2 text-sm text-ink-muted">No declared difficulty for that name.</p>}
+      </div>
+    </details>
   );
 }

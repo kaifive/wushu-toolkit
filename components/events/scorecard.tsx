@@ -72,6 +72,16 @@ export function ScorecardCard({ row, highlights, open }: { row: ScorecardRow; hi
           </p>
         </div>
       </div>
+      {row.nandu?.length && row.code ? (
+        <div className="border-t border-line px-4">
+          <Link
+            href={`/tools/nandu?${new URLSearchParams({ event: row.code, codes: row.nandu.join(",") })}`}
+            className="inline-flex min-h-tap items-center text-sm font-semibold text-primary"
+          >
+            Open in Nandu Calculator
+          </Link>
+        </div>
+      ) : null}
       <ExportButtons target={{ kind: "scorecard", athleteName: row.athleteName, raw: row.raw }} className="border-t border-line px-4 py-2" />
     </details>
   );
