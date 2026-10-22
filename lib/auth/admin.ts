@@ -1,23 +1,8 @@
 import "server-only";
-import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
-import { getAuth } from "firebase-admin/auth";
-import { getFirestore } from "firebase-admin/firestore";
-import { applyGrant } from "./grants";
 import { parseServiceAccount } from "./service-account";
 import type { WatchList } from "@/lib/watchlist/match";
 import { hasEntitlement, isSessionCurrent, parseAdminUids, SESSION_HEADER, type EntitlementsDoc, type SessionDoc } from "./model";
 
-/**
- * Firebase Admin, configured from FIREBASE_SERVICE_ACCOUNT (base64 of the
- * service-account JSON). Returns null when not configured so the rest of the
- * site still builds and runs without accounts.
- */
-function app(): App | null {
-  if (getApps()[0]) return getApps()[0]!;
-  const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
-  if (!raw) return null;
-  return initializeApp({ credential: cert(parseServiceAccount(raw)) });
-}
 
 export const adminConfigured = () => !!process.env.FIREBASE_SERVICE_ACCOUNT;
 
@@ -31,9 +16,20 @@ export class AuthError extends Error {
   }
 }
 
-function services() {
-  const a = app();
-  if (!a) throw new AuthError("Accounts aren't set up on this server.", 503, "not-configured");
+/**
+ * Firebase Admin, configured from FIREBASE_SERVICE_ACCOUNT (base64 of the
+ * service-account JSON). Loaded on first use, so routes that never touch an
+ * account (free event data) don't load firebase-admin at all.
+ */
+async function services() {
+  const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
+  if (!raw) throw new AuthError("Accounts aren't set up on this server.", 503, "not-configured");
+  const [{ cert, getApps, initializeApp }, { getAuth }, { getFirestore }] = await Promise.all([
+    import("firebase-admin/app"),
+    import("firebase-admin/auth"),
+    import("firebase-admin/firestore"),
+  ]);
+  const a = getApps()[0] ?? initializeApp({ credential: cert(parseServiceAccount(raw)) });
   return { auth: getAuth(a), db: getFirestore(a) };
 }
 
@@ -49,7 +45,7 @@ const TOKEN_ERRORS = new Set([
 
 /** Verify the bearer ID token. Returns the user's uid and email. */
 export async function verifyUser(req: Request) {
-  const { auth } = services();
+  const { auth } = await services();
   const token = req.headers.get("authorization")?.match(/^Bearer (.+)$/)?.[1];
   if (!token) throw new AuthError("Sign in first.", 401, "no-token");
   try {
@@ -72,21 +68,21 @@ function assertCurrentDevice(doc: SessionDoc | undefined, req: Request) {
 /** Verify token AND that this request comes from the account's current device. */
 export async function verifySession(req: Request) {
   const user = await verifyUser(req);
-  const { db } = services();
+  const { db } = await services();
   const snap = await db.collection("sessions").doc(user.uid).get();
   assertCurrentDevice(snap.data() as SessionDoc | undefined, req);
   return user;
 }
 
 export async function startSession(uid: string, sessionId: string, device: string) {
-  const { db } = services();
+  const { db } = await services();
   const doc: SessionDoc = { sessionId, device, updatedAt: Date.now() };
   await db.collection("sessions").doc(uid).set(doc);
   return doc.updatedAt;
 }
 
 export async function getEntitlements(uid: string): Promise<EntitlementsDoc> {
-  const { db } = services();
+  const { db } = await services();
   const snap = await db.collection("entitlements").doc(uid).get();
   return (snap.data() as EntitlementsDoc | undefined) ?? { events: {} };
 }
@@ -94,7 +90,7 @@ export async function getEntitlements(uid: string): Promise<EntitlementsDoc> {
 /** verifySession + requireEntitlement, with the session and pass reads in parallel (paid-data polls). */
 export async function verifySessionWithPass(req: Request, slug: string) {
   const user = await verifyUser(req);
-  const { db } = services();
+  const { db } = await services();
   const [session, ents] = await Promise.all([db.collection("sessions").doc(user.uid).get(), getEntitlements(user.uid)]);
   assertCurrentDevice(session.data() as SessionDoc | undefined, req);
   if (!hasEntitlement(ents, slug)) throw new AuthError("This account doesn't have a pass for this event.", 403, "no-pass");
@@ -108,19 +104,20 @@ export function requireAdmin(uid: string) {
 
 /** Grant (or revoke) an event pass by email. Used by the admin route; the script calls applyGrant directly. */
 export async function setGrant(email: string, slug: string, grantedBy: string, opts: { revoke?: boolean; expiresAt?: number } = {}) {
-  const { auth, db } = services();
+  const { auth, db } = await services();
+  const { applyGrant } = await import("./grants");
   return applyGrant(auth, db, email, slug, grantedBy, opts);
 }
 
 /** Watch lists saved to the account (watchlists/{uid}). */
 export async function getWatchlists(uid: string): Promise<{ lists: WatchList[]; updatedAt: number } | null> {
-  const { db } = services();
+  const { db } = await services();
   const snap = await db.collection("watchlists").doc(uid).get();
   return (snap.data() as { lists: WatchList[]; updatedAt: number } | undefined) ?? null;
 }
 
 export async function setWatchlists(uid: string, lists: WatchList[]) {
-  const { db } = services();
+  const { db } = await services();
   const updatedAt = Date.now();
   await db.collection("watchlists").doc(uid).set({ lists, updatedAt });
   return updatedAt;

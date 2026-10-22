@@ -1,5 +1,5 @@
 import type { Auth } from "firebase-admin/auth";
-import { FieldPath, FieldValue, type Firestore } from "firebase-admin/firestore";
+import type { Firestore } from "firebase-admin/firestore";
 
 /**
  * Grant or revoke an event pass by email. Shared by the admin route and
@@ -34,6 +34,7 @@ export async function applyGrant(
     if (err?.code === "auth/user-not-found") throw new GrantError("No account with that email. Ask them to sign up first.", "no-user");
     throw err; // permissions, quota, network: report as a real failure
   });
+  const { FieldPath, FieldValue } = await import("firebase-admin/firestore");
   const ref = db.collection("entitlements").doc(user.uid);
   if (opts.revoke) {
     await ref.set({ events: { [slug]: FieldValue.delete() } }, { merge: true });
