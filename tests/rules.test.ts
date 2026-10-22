@@ -177,10 +177,11 @@ test("required movements cover every individual event with unique ids", () => {
   }
 });
 
-test("orderToText numbers the routine and uses the athlete's names", () => {
+test("orderToText numbers the routine; repeated kinds are listed by kind", () => {
   const cq = REQUIRED_MOVEMENTS.find((m) => m.id === "changquan")!;
   const text = orderToText(cq, [{ id: "gong-bu-bow-stance" }, { id: "gone" }, { id: "fist-technique-1", name: "Chōng Quán" }, { id: "fist-technique-2" }]);
-  assert.equal(text, "1. Gōng Bù (Bow Stance)\n2. Chōng Quán (Fist technique 1)\n3. Fist technique 2");
+  assert.equal(text, "1. Gōng Bù (Bow Stance)\n2. Fist\n3. Fist");
+  assert.ok(allItems(cq).some((i) => i.label === "Straight-Leg Swing Kick"));
 });
 
 test("category average ignores events not scored yet", () => {

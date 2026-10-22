@@ -39,16 +39,20 @@ const named = (title: string, labels: string[], note?: string): Req => ({
   items: labels.map((label) => ({ id: slug(label), label })),
 });
 
-/** `n` techniques of a kind the athlete chooses. */
-const open = (title: string, label: string, n: number): Req => ({
+/**
+ * `n` techniques of a kind the athlete chooses. Registration only needs the
+ * kind, so each one is listed by it ("Fist" three times). `idBase` keeps saved
+ * orders working.
+ */
+const open = (title: string, idBase: string, n: number, label: string): Req => ({
   title,
-  items: Array.from({ length: n }, (_, i) => ({ id: `${slug(label)}-${i + 1}`, label: n > 1 ? `${label} ${i + 1}` : label, open: true })),
+  items: Array.from({ length: n }, (_, i) => ({ id: `${slug(idBase)}-${i + 1}`, label, open: true })),
 });
 
-/** Several different kinds, one each, athlete names the technique. */
+/** Several different kinds, one each. */
 const kinds = (title: string, labels: string[]): Req => ({
   title,
-  items: labels.map((label) => ({ id: slug(label), label, open: true })),
+  items: labels.map((label) => ({ id: slug(label), label: label.replace(/(^|[\s-])([a-z])/g, (_, a: string, b: string) => a + b.toUpperCase()), open: true })),
 });
 
 const slug = slugify;
@@ -74,7 +78,7 @@ const SOUTHERN_FEET = [named("Footwork", ["Qí Lín Bù (Kirin Steps)"]), named(
 
 const TAIJI_STANCES = named("Three stances", ["Gōng Bù (Bow Stance)", "Pū Bù (Crouching Stance)", "Xū Bù (Empty Stance)"]);
 
-const BALANCE = open("Extended balance", "Extended balance", 1);
+const BALANCE = open("Extended balance", "Extended balance", 1, "Extended Balance");
 
 export const REQUIRED_MOVEMENTS: RequiredMovementSet[] = [
   {
@@ -83,9 +87,9 @@ export const REQUIRED_MOVEMENTS: RequiredMovementSet[] = [
     events: ["CQ"],
     requirements: [
       named("Three hand forms", ["Quán (Fist)", "Zhǎng (Palm)", "Gōu (Hook)"]),
-      open("Three fist techniques", "Fist technique", 3),
-      open("Two palm techniques", "Palm technique", 2),
-      open("Offensive elbow", "Offensive elbow", 1),
+      open("Three fist techniques", "Fist technique", 3, "Fist"),
+      open("Two palm techniques", "Palm technique", 2, "Palm"),
+      open("Offensive elbow", "Offensive elbow", 1, "Offensive Elbow"),
       FIVE_STANCES,
       kinds("Three leg techniques", ["Straight-leg swing kick", "Flexion-extension kick", "Sweep"]),
       BALANCE,
@@ -246,7 +250,7 @@ export const REQUIRED_MOVEMENTS: RequiredMovementSet[] = [
         "Bān Lán Chuí (Deflect, Parry and Punch)",
       ]),
       TAIJI_STANCES,
-      open("Two different leg techniques", "Leg technique", 2),
+      open("Two different leg techniques", "Leg technique", 2, "Leg Technique"),
     ],
   },
   {
@@ -290,34 +294,34 @@ export const REQUIRED_MOVEMENTS: RequiredMovementSet[] = [
     type: "Barehand Duilian",
     events: [],
     requirements: [
-      open("Three fist techniques", "Fist technique", 3),
-      open("Two palm techniques", "Palm technique", 2),
-      open("Five leg techniques", "Leg technique", 5),
-      open("Two break-falls", "Break-fall", 2),
+      open("Three fist techniques", "Fist technique", 3, "Fist"),
+      open("Two palm techniques", "Palm technique", 2, "Palm"),
+      open("Five leg techniques", "Leg technique", 5, "Leg Technique"),
+      open("Two break-falls", "Break-fall", 2, "Break-fall"),
     ],
   },
   {
     id: "weapon-duilian",
     type: "Weapon Duilian",
     events: [],
-    requirements: [open("Six weapon techniques", "Weapon technique", 6), open("Two leg techniques", "Leg technique", 2), open("Break-fall", "Break-fall", 1)],
+    requirements: [open("Six weapon techniques", "Weapon technique", 6, "Weapon Technique"), open("Two leg techniques", "Leg technique", 2, "Leg Technique"), open("Break-fall", "Break-fall", 1, "Break-fall")],
   },
   {
     id: "barehand-vs-weapon-duilian",
     type: "Barehand vs. Weapon Duilian",
     events: [],
-    requirements: [open("Three fist techniques", "Fist technique", 3), open("Four weapon techniques", "Weapon technique", 4), open("Two break-falls", "Break-fall", 2)],
+    requirements: [open("Three fist techniques", "Fist technique", 3, "Fist"), open("Four weapon techniques", "Weapon technique", 4, "Weapon Technique"), open("Two break-falls", "Break-fall", 2, "Break-fall")],
   },
   {
     id: "jiti",
     type: "Jiti (Group)",
     events: [],
     requirements: [
-      open("Five hand or weapon techniques", "Hand or weapon technique", 5),
-      open("Five stances", "Stance", 5),
-      open("Four leg techniques", "Leg technique", 4),
-      open("Three jumps", "Jump", 3),
-      open("Five formations", "Formation", 5),
+      open("Five hand or weapon techniques", "Hand or weapon technique", 5, "Hand or Weapon Technique"),
+      open("Five stances", "Stance", 5, "Stance"),
+      open("Four leg techniques", "Leg technique", 4, "Leg Technique"),
+      open("Three jumps", "Jump", 3, "Jump"),
+      open("Five formations", "Formation", 5, "Formation"),
     ],
   },
 ];
@@ -341,6 +345,6 @@ export function orderToText(set: RequiredMovementSet, order: PlacedItem[]): stri
       const item = byId.get(p.id);
       return item ? [{ item, name: p.name?.trim() }] : [];
     })
-    .map(({ item, name }, n) => `${n + 1}. ${item.open && name ? `${name} (${item.label})` : name ? `${item.label}: ${name}` : item.label}`)
+    .map(({ item }, n) => `${n + 1}. ${item.label}`)
     .join("\n");
 }

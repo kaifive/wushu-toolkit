@@ -24,8 +24,7 @@ function load(fallback: string): Saved {
 const iconBtn = "flex h-11 w-11 shrink-0 items-center justify-center rounded-card border border-line bg-surface text-lg disabled:opacity-30";
 
 /**
- * Required movements: tap each one into routine order, name the open ones,
- * then copy the list for the compulsory content registration form.
+ * Required movements: tap each one into routine order, then copy the list for the compulsory content registration form.
  */
 export function RoutineOrder({ sets }: { sets: RequiredMovementSet[] }) {
   const [setId, setSetId] = useState(sets[0]?.id ?? "");
@@ -95,16 +94,7 @@ export function RoutineOrder({ sets }: { sets: RequiredMovementSet[] }) {
                 <li key={p.id} className="flex items-center gap-2 px-3 py-2">
                   <span className="w-6 shrink-0 text-right text-ink-muted tnum">{i + 1}</span>
                   <div className="min-w-0 flex-1">
-                    <p className={`text-[15px] ${item.open ? "text-sm text-ink-muted" : "font-semibold"}`}>{item.label}</p>
-                    {item.open && (
-                      <input
-                        aria-label={`Name for ${item.label}`}
-                        value={p.name ?? ""}
-                        onChange={(e) => setOrder(order.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)))}
-                        placeholder="Which one?"
-                        className="mt-1 min-h-tap w-full rounded-card border border-line bg-surface px-3 font-semibold"
-                      />
-                    )}
+                    <p className="text-[15px] font-semibold">{item.label}</p>
                   </div>
                   <button type="button" disabled={i === 0} onClick={() => setOrder(moveItem(order, i, -1))} aria-label={`Move ${item.label} earlier`} className={iconBtn}>
                     ↑
