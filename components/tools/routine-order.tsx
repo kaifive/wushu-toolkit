@@ -21,6 +21,10 @@ function load(fallback: string): Saved {
   return { set: fallback, orders: {} };
 }
 
+const SMALL = new Set(["a", "an", "and", "or", "the", "of", "to", "in", "on", "for", "with"]);
+/** "Three hand forms" -> "Three Hand Forms". */
+const titleCase = (s: string) => s.replace(/[A-Za-z][^\s-]*/g, (w, i: number) => (i > 0 && SMALL.has(w) ? w : w[0]!.toUpperCase() + w.slice(1)));
+
 const iconBtn = "flex h-11 w-11 shrink-0 items-center justify-center rounded-card border border-line bg-surface text-lg disabled:opacity-30";
 
 /**
@@ -72,7 +76,7 @@ export function RoutineOrder({ sets }: { sets: RequiredMovementSet[] }) {
       <section className="overflow-hidden rounded-card border border-line bg-surface">
         <header className="flex min-h-12 items-center justify-between gap-3 border-b border-line bg-surface-2 px-4 py-2">
           <h2 className="text-[15px] font-semibold">
-            Routine order <span className="font-normal text-ink-muted tnum">· {order.length} of {items.length}</span>
+            Routine Order <span className="font-normal text-ink-muted tnum">· {order.length} of {items.length}</span>
           </h2>
           <button
             type="button"
@@ -127,7 +131,7 @@ export function RoutineOrder({ sets }: { sets: RequiredMovementSet[] }) {
         return (
           <section key={r.title} className="rounded-card border border-line bg-surface">
             <header className="flex items-baseline justify-between gap-3 border-b border-line bg-surface-2 px-4 py-2">
-              <h3 className="text-sm font-semibold">{r.title}</h3>
+              <h3 className="text-sm font-semibold">{titleCase(r.title)}</h3>
               <span className={`shrink-0 text-sm tnum ${left.length ? "text-ink-muted" : "font-semibold text-jade"}`}>
                 {left.length ? `${r.items.length - left.length} / ${r.items.length}` : "Done"}
               </span>

@@ -226,7 +226,7 @@ export const highlightStyle = (h: Highlight | undefined) => (h ? { boxShadow: `i
 export interface ScorecardStats {
   /** Most common panel A codes, with how many routines got each. */
   deductions: { code: string; count: number; eventCode?: EventCode }[];
-  /** Average A, B, C and final per event (scored routines with a scorecard). */
+  /** Average A, B, C (when scorecards exist) and final per event, over scored routines. */
   byEvent: { raw: string; gender?: Gender; routines: number; a: number | null; b: number | null; c: number | null; final: number | null }[];
 }
 
@@ -235,13 +235,13 @@ const mean = (xs: (number | null | undefined)[]) => {
   return ok.length ? ok.reduce((t, x) => t + x, 0) / ok.length : null;
 };
 
-/** v1's scorecard stats: top deductions and average panel scores by event. */
+/** v1's scorecard stats and 2024 dashboards: top deductions and averages by event. */
 export function scorecardStats(data: EventData): ScorecardStats {
   const counts = new Map<string, { count: number; eventCode?: EventCode }>();
   const groups = new Map<string, ScoreEntry[]>();
   for (const s of data.scores) {
-    if (!s.scorecard || s.finalScore == null) continue;
-    for (const code of deductionCodes(s.scorecard.a?.deductions ?? [])) {
+    if (s.finalScore == null) continue;
+    for (const code of deductionCodes(s.scorecard?.a?.deductions ?? [])) {
       const c = counts.get(code) ?? { count: 0, eventCode: s.code };
       c.count++;
       counts.set(code, c);

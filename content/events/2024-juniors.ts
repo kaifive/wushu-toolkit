@@ -10,7 +10,7 @@ export const JUNIORS_2024: EventConfig = {
   status: "archived",
   access: "free",
   rulesetId: "usawkf-junior-trials-2024",
-  views: ["standings", "team"],
+  views: ["standings", "team", "stats"],
   data: () => snapshotSource(SNAPSHOTS, "2024-juniors"),
   description: "Final results from the 2024 Junior Taolu Team Trials, scored by best barehand plus best weapon.",
   notes: ["Results come from the bowuu results feed, saved before the feed changed."],

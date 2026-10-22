@@ -41,7 +41,7 @@ export const JUNIORS_2025: EventConfig = {
   status: "archived",
   access: "free",
   rulesetId: "usawkf-junior-trials-2025-26",
-  views: ["standings", "team", "schedule"],
+  views: ["standings", "team", "stats", "schedule"],
   revalidate: 3600,
   data,
   // Keep snapshotting until the live sheet has been saved; the archive must not depend on it.
