@@ -26,11 +26,26 @@ export function fixGenders(d: EventData, fixes: Record<string, Gender> = {}): Ev
   };
 }
 
+/** "GUNAWAN RAIDEN" / "CHEN Stephen" -> "Gunawan Raiden" / "Chen Stephen" (sources shout surnames). */
+export const tidyName = (name: string) =>
+  // A one-word name is likely a team or acronym ("TFCGW"): leave it.
+  name.trim().includes(" ") ? name.replace(/\p{Lu}{2,}/gu, (w) => w[0] + w.slice(1).toLowerCase()) : name;
+
+export function tidyNames(d: EventData): EventData {
+  if (!d.scores.some((s) => /\p{Lu}{2,}/u.test(s.athleteName)) && !d.registrations.some((r) => /\p{Lu}{2,}/u.test(r.athlete.name))) return d;
+  return {
+    ...d,
+    scores: d.scores.map((s) => ({ ...s, athleteName: tidyName(s.athleteName) })),
+    registrations: d.registrations.map((r) => ({ ...r, athlete: { ...r.athlete, name: tidyName(r.athlete.name) } })),
+    schedules: d.schedules.map((sc) => ({ ...sc, blocks: sc.blocks.map((b) => (b.type === "session" ? { ...b, entries: b.entries.map((x) => ({ ...x, athleteName: tidyName(x.athleteName) })) } : b)) })),
+  };
+}
+
 const normalized = (e: EventConfig): EventConfig => ({
   ...e,
   data: () => {
     const inner = e.data();
-    return source(inner.label, async (ctx) => fixGenders(dropZeroScores(await inner.load(ctx)), e.genderFixes));
+    return source(inner.label, async (ctx) => tidyNames(fixGenders(dropZeroScores(await inner.load(ctx)), e.genderFixes)));
   },
 });
 

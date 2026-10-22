@@ -59,7 +59,10 @@ export function StandingsBody({ ruleset, data, highlights, scorecardsHref, athle
                 tabs={mine.map((m) => ({ id: m.division.id, label: m.division.label }))}
                 panels={mine.map((m) => (
                   <section key={m.division.id}>
-                    <h2 className="mb-1 font-display text-lg font-bold">Overall · {m.division.label}</h2>
+                    <div className="mb-1 flex items-center justify-between gap-3">
+                      <h2 className="font-display text-lg font-bold">Overall · {m.division.label}</h2>
+                      {mine.length > 1 && <ExportButtons target={{ kind: "overall-all", gender: g.id }} text="All Divisions" below />}
+                    </div>
                     <p className="mb-3 text-xs text-ink-muted">
                       {m.scored}/{m.total} routines scored
                     </p>
@@ -110,13 +113,17 @@ export function TeamBody({ ruleset, data, highlights, athletesHref, scorecardsHr
           const mine = models.filter((m) => m.gender === g.id);
           if (!mine.length) return <p key={g.id} className="text-sm text-ink-muted">No athletes.</p>;
           return (
-            <Tabs
-              key={g.id}
-              label="Division"
-              param="division"
-              tabs={mine.map((m) => ({ id: m.division.id, label: m.division.label }))}
-              panels={mine.map((m) => <TeamProjection key={m.division.id} model={m} highlights={hl} athletesHref={athletesHref} scorecardsHref={scorecardsHref} />)}
-            />
+            <div key={g.id}>
+              <div className="mb-3 flex justify-end">
+                <ExportButtons target={{ kind: "teams", gender: g.id }} text={mine.length > 1 ? "All Divisions" : "Teams"} below />
+              </div>
+              <Tabs
+                label="Division"
+                param="division"
+                tabs={mine.map((m) => ({ id: m.division.id, label: m.division.label }))}
+                panels={mine.map((m) => <TeamProjection key={m.division.id} model={m} highlights={hl} athletesHref={athletesHref} scorecardsHref={scorecardsHref} />)}
+              />
+            </div>
           );
         })}
       />

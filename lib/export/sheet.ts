@@ -178,7 +178,24 @@ export function combineSheets(title: string, subtitle: string, sheets: Sheet[]):
     title,
     subtitle,
     blocks: sheets.flatMap((s) =>
-      s.blocks.map((b, i) => (i === 0 ? { ...b, heading: [s.title, s.subtitle && s.subtitle !== subtitle ? s.subtitle.replace(`${subtitle} · `, "") : "", b.heading].filter(Boolean).join(" · ") } : b)),
+      // Blocks that already name themselves keep their heading; otherwise the first takes the sheet's title.
+      s.blocks.map((b, i) => (i === 0 && !b.heading ? { ...b, heading: [s.title, s.subtitle && s.subtitle !== subtitle ? s.subtitle.replace(`${subtitle} · `, "") : ""].filter(Boolean).join(" · ") } : b)),
     ),
+  };
+}
+
+/** Projected teams for one division: one table per team. */
+export function teamsSheet(eventName: string, m: ScopeModel): Sheet {
+  return {
+    title: `Teams · ${GENDER_LABEL[m.gender]} · ${m.division.label}`,
+    subtitle: eventName,
+    blocks: m.teams.map((t) => ({
+      kind: "table" as const,
+      heading: `${m.division.id === "*" ? "" : `${m.division.label} · `}${t.id} Team${t.minAverage ? ` (min ${t.minAverage.toFixed(1)})` : ""}`,
+      columns: [{ label: "#" }, { label: "Athlete", weight: 3, split: ["Athlete", "Club"] }, { label: "Discipline", weight: 2 }, { label: "Total", align: "right" as const }, { label: "Avg", align: "right" as const }],
+      rows: t.members.length
+        ? t.members.map((x, i) => [c(String(i + 1), { muted: true }), c(x.club ? `${x.athleteName} · ${x.club}` : x.athleteName, { bold: true }), c(x.discipline, { muted: true }), c(x.score.toFixed(3), { bold: true }), c(x.average.toFixed(3), { muted: true })])
+        : [[c(""), c("No one qualified", { muted: true }), c(""), c(""), c("")]],
+    })),
   };
 }

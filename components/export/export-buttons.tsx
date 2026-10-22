@@ -17,6 +17,10 @@ export type ExportTarget =
   | { kind: "result"; raw: string; gender?: Gender }
   | { kind: "overall"; gender: Gender; division: string }
   | { kind: "stats" }
+  /** Overall standings for every division of one gender. */
+  | { kind: "overall-all"; gender: Gender }
+  /** Projected teams for every division of one gender. */
+  | { kind: "teams"; gender: Gender }
   /** Every event's results in one file (one gender tab; none = the Groups tab). */
   | { kind: "results"; gender?: Gender }
   /** The scorecards currently listed (filtered by athlete or event). */
@@ -92,6 +96,18 @@ async function build(ctx: Ctx, t: ExportTarget): Promise<{ sheet: Sheet; name: s
         name: fileName(ctx.eventName, "scorecards", t.label),
       };
     }
+    case "overall-all": {
+      const ms = views.selectionModel(data, ruleset).filter((x) => x.gender === t.gender);
+      if (!ms.length) return null;
+      const who = views.GENDER_LABEL[t.gender];
+      return { sheet: sheets.combineSheets(`Overall Standings · ${who}`, ctx.eventName, ms.map((m) => sheets.overallSheet(ctx.eventName, m))), name: fileName(ctx.eventName, "overall", who) };
+    }
+    case "teams": {
+      const ms = views.selectionModel(data, ruleset).filter((x) => x.gender === t.gender);
+      if (!ms.length) return null;
+      const who = views.GENDER_LABEL[t.gender];
+      return { sheet: sheets.combineSheets(`Teams · ${who}`, ctx.eventName, ms.map((m) => sheets.teamsSheet(ctx.eventName, m))), name: fileName(ctx.eventName, "teams", who) };
+    }
     case "stats":
       return { sheet: sheets.statsSheet(ctx.eventName, views.scorecardStats(data)), name: fileName(ctx.eventName, "stats") };
     case "athlete": {
@@ -145,6 +161,10 @@ const labelOf = (t: ExportTarget) => {
       return `${t.items.length} scorecards`;
     case "stats":
       return "stats";
+    case "overall-all":
+      return "overall standings for every division";
+    case "teams":
+      return "projected teams";
     case "athlete":
       return `${t.athleteName} results`;
     default:

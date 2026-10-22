@@ -128,3 +128,12 @@ test("a 0 is 'did not compete': dropped before any average", async () => {
   ] });
   assert.deepEqual(d.scores.map((s) => [s.finalScore, !!s.didNotCompete]), [[null, true], [9.1, false]]);
 });
+
+test("shouted names are tidied; mixed case and initials survive", async () => {
+  const { tidyName } = await import("@/lib/events/registry");
+  assert.equal(tidyName("GUNAWAN RAIDEN"), "Gunawan Raiden");
+  assert.equal(tidyName("CHEN Stephen"), "Chen Stephen");
+  assert.equal(tidyName("Liam O'Brien"), "Liam O'Brien");
+  assert.equal(tidyName("A Lee"), "A Lee");
+  assert.equal(tidyName("TFCGW"), "TFCGW");
+});
