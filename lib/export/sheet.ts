@@ -1,6 +1,6 @@
 import { fmtScore } from "@/lib/rules/score";
 import { slugify } from "@/lib/domain/names";
-import { GENDER_LABEL, type AthleteProfile, type EventResult, type ScopeModel, type ScorecardRow, type ScorecardStats } from "@/lib/events/views";
+import { GENDER_LABEL, genderTag, type AthleteProfile, type EventResult, type ScopeModel, type ScorecardRow, type ScorecardStats } from "@/lib/events/views";
 import { deductionCodes, findDeduction } from "@/lib/rules/iwuf-2024/deductions";
 import { familyOfEvent, sheetElements } from "@/lib/rules/iwuf-2024/nandu";
 
@@ -117,8 +117,6 @@ export function overallSheet(eventName: string, m: ScopeModel): Sheet {
     ],
   };
 }
-
-const genderTag = (raw: string, gender?: string) => (gender && !/\b(fe)?male\b|\b(wo)?men/i.test(raw) ? ` · ${gender === "male" ? "Men" : "Women"}` : "");
 
 export function statsSheet(eventName: string, st: ScorecardStats): Sheet {
   const panels = st.byEvent.some((e) => e.a != null || e.b != null || e.c != null);

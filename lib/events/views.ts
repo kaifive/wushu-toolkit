@@ -2,7 +2,7 @@ import type { EventCode, EventData, Gender, ScoreEntry } from "@/lib/domain/type
 import { DISCIPLINE_LABEL, EVENTS, type Ruleset, type TeamId } from "@/lib/rules";
 import type { Discipline } from "@/lib/domain/types";
 import { ageGroupChampions, allAround, grandChampion, standings as aaStandings, type AllAroundAthlete } from "@/lib/rules/all-around";
-import { deductionCodes } from "@/lib/rules/iwuf-2024/deductions";
+import { deductionCodes, deductionGroupFor } from "@/lib/rules/iwuf-2024/deductions";
 import { runSelection, withDivisions, type Candidate, type Team } from "@/lib/rules/selection";
 import { groupByAthlete, round3 } from "@/lib/rules/score";
 import type { AthleteHighlight } from "./types";
@@ -224,11 +224,17 @@ export function highlighter(highlights: AthleteHighlight[] = []): HighlightFor {
 export const highlightStyle = (h: Highlight | undefined) => (h ? { boxShadow: `inset 3px 0 0 ${h.color}` } : undefined);
 
 export interface ScorecardStats {
-  /** Most common panel A codes, with how many routines got each. */
+  /**
+   * Most common panel A codes, with how many times each was given. Counted per
+   * deduction table: "23" means a different fault in Changquan and Nanquan.
+   */
   deductions: { code: string; count: number; eventCode?: EventCode }[];
   /** Average A, B, C (when scorecards exist) and final per event, over scored routines. */
   byEvent: { raw: string; gender?: Gender; routines: number; a: number | null; b: number | null; c: number | null; final: number | null }[];
 }
+
+/** " · Men" / " · Women" for an event name that leaves the gender out (PWC, 2024). */
+export const genderTag = (raw: string, gender?: Gender) => (gender && !/\b(fe)?male\b|\b(wo)?men/i.test(raw) ? ` · ${gender === "male" ? "Men" : "Women"}` : "");
 
 const mean = (xs: (number | null | undefined)[]) => {
   const ok = xs.filter((x): x is number => typeof x === "number" && Number.isFinite(x));
@@ -237,19 +243,23 @@ const mean = (xs: (number | null | undefined)[]) => {
 
 /** v1's scorecard stats and 2024 dashboards: top deductions and averages by event. */
 export function scorecardStats(data: EventData): ScorecardStats {
-  const counts = new Map<string, { count: number; eventCode?: EventCode }>();
+  const counts = new Map<string, { code: string; count: number; eventCode?: EventCode }>();
   const groups = new Map<string, ScoreEntry[]>();
   for (const s of data.scores) {
     if (s.finalScore == null) continue;
+    const table = deductionGroupFor(s.code).id;
     for (const code of deductionCodes(s.scorecard?.a?.deductions ?? [])) {
-      const c = counts.get(code) ?? { count: 0, eventCode: s.code };
+      const key = `${table}\u0000${code}`;
+      const c = counts.get(key) ?? { code, count: 0, eventCode: s.code };
       c.count++;
-      counts.set(code, c);
+      counts.set(key, c);
     }
     const key = `${s.raw}\u0000${s.gender ?? ""}`;
-    groups.set(key, [...(groups.get(key) ?? []), s]);
+    const list = groups.get(key);
+    if (list) list.push(s);
+    else groups.set(key, [s]);
   }
-  const deductions = [...counts.entries()].map(([code, c]) => ({ code, ...c })).sort((x, y) => y.count - x.count || x.code.localeCompare(y.code));
+  const deductions = [...counts.values()].sort((x, y) => y.count - x.count || x.code.localeCompare(y.code));
   const byEvent = [...groups.values()]
     .map((list) => ({
       raw: list[0]!.raw,

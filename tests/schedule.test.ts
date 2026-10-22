@@ -76,3 +76,28 @@ test("athleteProfiles: each routine's place and event average", async () => {
   const amy = p.find((x) => x.name === "Amy")!;
   assert.deepEqual(amy.routines.map((r) => [r.raw, r.place, r.of, r.average]), [["CQ", 1, 2, 8.5], ["JS", 1, 1, 7]]);
 });
+
+test("scorecardStats keeps the same code apart in different deduction tables", async () => {
+  const { scorecardStats } = await import("@/lib/events/views");
+  const card = (ded: string[]) => ({ a: { score: 4.9, deductions: ded } });
+  const st = scorecardStats({
+    registrations: [], schedules: [], asOf: "", source: "",
+    scores: [
+      { athleteId: "a", athleteName: "A", raw: "CQ", code: "CQ", finalScore: 9.5, scorecard: card(["23"]) },
+      { athleteId: "b", athleteName: "B", raw: "NQ", code: "NQ", finalScore: 9.3, scorecard: card(["23"]) },
+    ],
+  });
+  assert.deepEqual(st.deductions.map((d) => [d.code, d.count, d.eventCode]), [["23", 1, "CQ"], ["23", 1, "NQ"]]);
+});
+
+test("USAWKF order page (saved copy of the 2025 Junior Trials page)", async () => {
+  const { readFileSync } = await import("node:fs");
+  const { parseUsawkfOrder } = await import("@/lib/data/usawkf-order");
+  const s = parseUsawkfOrder(readFileSync("tests/fixtures/usawkf/junior-2025-order.html", "utf8"));
+  assert.deepEqual(s.map((r) => r.ring), ["Ring 1", "Ring 2"]);
+  const entries = s.flatMap((r) => r.blocks.flatMap((b) => (b.type === "session" ? b.entries : [])));
+  assert.equal(entries.length, 778);
+  assert.ok(entries.every((e) => !e.athleteName.includes("_")));
+  const first = s[0]!.blocks[0]!;
+  assert.equal(first.type === "session" && first.title, "Friday Morning Session 8:30am · Junior Female 1st Set Changquan");
+});

@@ -39,10 +39,11 @@ export function AthleteFinder({ athletes, scorecardsHref }: { athletes: AthleteP
     window.history.replaceState(null, "", url);
   };
 
+  const tokens = useMemo(() => new Map(athletes.map((a) => [a.id, prepareName(a.name).tokens])), [athletes]);
   const matches = useMemo(() => {
     const words = prepareName(q).tokens;
-    return athletes.filter((a) => (!club || a.club === club) && (!words.length || words.every((w) => prepareName(a.name).tokens.some((t) => t.startsWith(w)))));
-  }, [athletes, q, club]);
+    return athletes.filter((a) => (!club || a.club === club) && (!words.length || words.every((w) => tokens.get(a.id)!.some((t) => t.startsWith(w)))));
+  }, [athletes, tokens, q, club]);
   const current = athletes.find((a) => a.id === picked);
 
   if (current) return <Profile a={current} onBack={() => pick(null)} scorecardsHref={scorecardsHref} />;
@@ -176,7 +177,7 @@ function Profile({ a, onBack, scorecardsHref }: { a: AthleteProfile; onBack: () 
           })}
         </tbody>
       </ScrollTable>
-      <ExportButtons target={{ kind: "athlete", athleteName: a.name }} />
+      <ExportButtons target={{ kind: "athlete", athleteId: a.id, athleteName: a.name }} />
     </div>
   );
 }

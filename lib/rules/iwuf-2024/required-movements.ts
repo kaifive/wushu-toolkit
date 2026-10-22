@@ -341,10 +341,7 @@ export interface PlacedItem {
 export function orderToText(set: RequiredMovementSet, order: PlacedItem[]): string {
   const byId = new Map(allItems(set).map((i) => [i.id, i]));
   return order
-    .flatMap((p) => {
-      const item = byId.get(p.id);
-      return item ? [{ item, name: p.name?.trim() }] : [];
-    })
-    .map(({ item }, n) => `${n + 1}. ${item.label}`)
+    .flatMap((p) => byId.get(p.id) ?? [])
+    .map((item, n) => `${n + 1}. ${item.label}`)
     .join("\n");
 }

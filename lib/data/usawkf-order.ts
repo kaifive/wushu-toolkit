@@ -36,7 +36,7 @@ export function parseUsawkfOrder(html: string): Schedule[] {
       rings.set(ring, list);
     } else if (block) {
       const row = text(m[3]!).match(/^(\d+)\s+(.+)$/);
-      if (row) block.entries.push({ time: "", athleteName: titleCaseName(row[2]!.replace(/\p{Lu}{2,}/gu, (w) => w[0] + w.slice(1).toLowerCase())), event: block.title!.split(" · ").pop()! });
+      if (row) block.entries.push({ time: "", athleteName: titleCaseName(row[2]!.replace(/_/g, " ").replace(/\p{Lu}{2,}/gu, (w) => w[0] + w.slice(1).toLowerCase())), event: block.title!.split(" · ").pop()! });
     }
   }
   return [...rings.entries()]

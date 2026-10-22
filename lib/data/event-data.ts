@@ -31,7 +31,13 @@ export function liveWithSnapshot(live: DataSource<EventData>, snapshot: DataSour
  */
 export function withSchedule(data: DataSource<EventData>, schedule: DataSource<Schedule[]>): DataSource<EventData> {
   return source(data.label, async (ctx) => {
-    const [d, s] = await Promise.all([data.load(ctx), schedule.load(ctx).catch(() => null)]);
+    const [d, s] = await Promise.all([
+      data.load(ctx),
+      schedule.load(ctx).catch((err: unknown) => {
+        console.warn(`${schedule.label} failed; keeping the saved schedule:`, err instanceof Error ? err.message : String(err));
+        return null;
+      }),
+    ]);
     return { ...d, schedules: withScores(s?.length ? s : d.schedules, d.scores) };
   });
 }

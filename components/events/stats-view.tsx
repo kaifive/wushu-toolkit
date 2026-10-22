@@ -3,14 +3,12 @@ import { ExportButtons } from "@/components/export/export-buttons";
 import { Card, StatTile } from "@/components/ui/card";
 import { ScrollTable, stickyCol, td, th } from "@/components/ui/table";
 import type { EventData } from "@/lib/domain/types";
-import { scorecardStats } from "@/lib/events/views";
+import { genderTag, scorecardStats } from "@/lib/events/views";
 import {
   deductionGroupFor,
   findDeduction,
 } from "@/lib/rules/iwuf-2024/deductions";
-
-const f = (x: number | null, digits = 3) =>
-  x == null ? "—" : x.toFixed(digits);
+import { fmtScore as f } from "@/lib/rules/score";
 
 /** Top deductions and average panel scores per event, from the scorecards. */
 export function StatsView({ data }: { data: EventData }) {
@@ -43,10 +41,11 @@ export function StatsView({ data }: { data: EventData }) {
             <ol className="divide-y divide-line">
               {top.map((d, i) => {
                 const info = findDeduction(d.code, d.eventCode);
+                const group = deductionGroupFor(d.eventCode).id;
                 return (
-                  <li key={d.code}>
+                  <li key={`${group}-${d.code}`}>
                     <Link
-                      href={`/tools/deductions?group=${deductionGroupFor(d.eventCode).id}&code=${encodeURIComponent(d.code)}`}
+                      href={`/tools/deductions?group=${group}&code=${encodeURIComponent(d.code)}`}
                       className="flex min-h-tap items-center gap-3 px-4 py-2 hover:bg-surface-2"
                     >
                       <span className="w-5 shrink-0 text-right text-sm text-ink-muted tabular-nums">
@@ -101,7 +100,7 @@ export function StatsView({ data }: { data: EventData }) {
                   <p className="font-semibold">
                     {e.raw}
                     {/* Some sources (PWC, 2024) leave the gender out of the event name. */}
-                    {e.gender && !/\b(fe)?male\b|\b(wo)?men/i.test(e.raw) ? ` · ${e.gender === "male" ? "Men" : "Women"}` : ""}
+                    {genderTag(e.raw, e.gender)}
                   </p>
                   <p className="text-xs text-ink-muted">
                     {e.routines} routines

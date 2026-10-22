@@ -15,7 +15,7 @@ export type ExportTarget =
   | { kind: "result"; raw: string; gender?: Gender }
   | { kind: "overall"; gender: Gender; division: string }
   | { kind: "stats" }
-  | { kind: "athlete"; athleteName: string };
+  | { kind: "athlete"; athleteId: string; athleteName: string };
 
 interface Ctx {
   eventName: string;
@@ -71,7 +71,7 @@ async function build(ctx: Ctx, t: ExportTarget): Promise<{ sheet: Sheet; name: s
     case "stats":
       return { sheet: sheets.statsSheet(ctx.eventName, views.scorecardStats(data)), name: fileName(ctx.eventName, "stats") };
     case "athlete": {
-      const a = views.athleteProfiles(data, ruleset).find((x) => x.name === t.athleteName);
+      const a = views.athleteProfiles(data, ruleset).find((x) => x.id === t.athleteId);
       return a ? { sheet: sheets.athleteSheet(ctx.eventName, a), name: fileName(ctx.eventName, a.name) } : null;
     }
   }

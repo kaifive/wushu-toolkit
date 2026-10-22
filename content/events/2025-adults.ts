@@ -1,5 +1,6 @@
+import { withSchedule } from "@/lib/data/event-data";
 import { snapshotSource } from "@/lib/data/snapshot";
-import { source } from "@/lib/data/source";
+import { constant } from "@/lib/data/source";
 import { orderSchedule } from "@/lib/domain/schedule";
 import { ADULTS_2025_ORDER } from "./2025-adults-order";
 import type { EventConfig } from "@/lib/events/types";
@@ -14,14 +15,8 @@ export const ADULTS_2025: EventConfig = {
   access: "free",
   rulesetId: "usawkf-adult-trials-2025",
   views: ["standings", "team", "athletes", "scorecards", "stats", "schedule"],
-  data: () => {
-    const snap = snapshotSource(SNAPSHOTS, "2025-adults");
-    // The snapshot has no schedule; add the posted order of competition.
-    return source(snap.label, async (ctx) => {
-      const d = await snap.load(ctx);
-      return { ...d, schedules: [orderSchedule("Order of Competition", ADULTS_2025_ORDER, d.scores)] };
-    });
-  },
+  // The snapshot has no schedule; add the posted order of competition (scores are filled in).
+  data: () => withSchedule(snapshotSource(SNAPSHOTS, "2025-adults"), constant("posted order of competition", [orderSchedule("Order of Competition", ADULTS_2025_ORDER, [])])),
   description: "Adult team trials: category averages, with full difficulty required for the A team.",
   notes: ["Scores were scraped from Sportdata during the event and saved as a snapshot."],
 };

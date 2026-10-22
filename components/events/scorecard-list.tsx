@@ -34,10 +34,11 @@ export function ScorecardList({ rows, highlights }: { rows: ScorecardRow[]; high
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [events]);
 
+  const tokens = useMemo(() => rows.map((r) => prepareName(r.athleteName).tokens), [rows]);
   const shown = useMemo(() => {
     const words = prepareName(q).tokens;
-    return rows.filter((r) => (!event || r.raw === event) && (!words.length || words.every((w) => prepareName(r.athleteName).tokens.some((t) => t.startsWith(w)))));
-  }, [rows, q, event]);
+    return rows.filter((r, i) => (!event || r.raw === event) && (!words.length || words.every((w) => tokens[i]!.some((t) => t.startsWith(w)))));
+  }, [rows, tokens, q, event]);
 
   const set = (key: "athlete" | "event", value: string) => {
     if (key === "athlete") setQ(value);

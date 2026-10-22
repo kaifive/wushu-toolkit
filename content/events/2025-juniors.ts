@@ -23,7 +23,7 @@ function data() {
     const scores = scoresFromRows(csvToLetterRows(rows, 1), { name: "A", event: "B", score: "C" }, { eventPrefix: "Taolu" });
     return { ...snap, scores: joinRegistrationScores(snap.registrations, scores), asOf: new Date().toISOString(), source: "Google Sheet (manual tracking)" };
   });
-  // The schedule comes from its own page, so it shows even when the scores can't load.
+  // The schedule comes from its own page; if that page is down, the snapshot's copy is kept.
   return withSchedule(liveWithSnapshot(live, snapshot), usawkfOrder(ORDER_PAGE));
 }
 

@@ -9,7 +9,6 @@ export default function ContactPage() {
   return (
     <Container className="max-w-2xl">
       <PageHeader title="Contact Us" />
-      <p className="mb-4 text-ink-muted">Feature requests, score corrections and event passes are all welcome.</p>
       {process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ? <ContactForm /> : <p className="text-ink-muted">Reach out to {SITE.author} through your club or team.</p>}
     </Container>
   );
