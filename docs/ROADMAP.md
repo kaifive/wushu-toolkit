@@ -44,7 +44,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] Demo order generator (groups and solos, levels 1–5, rest gaps, locks and links, regenerate, copy, import)
 - [x] PNG/PDF export of scorecards, results by event and overall standings ("Powered by Wushu Toolkit" footer; canvas + built-in PDF writer, no libraries)
 - [x] Light/dark toggle (follows the system until tapped; saved per device)
-- [ ] AI code review loop over the whole PR until no new findings
+- [x] Code review of the v1-parity round (2026-10-22; 9 fixes)
 
 ## Phase 5b — Watch lists
 - [x] Local watch lists (multiple, colored, one per school) with fuzzy name matching
