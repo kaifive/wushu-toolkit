@@ -26,7 +26,13 @@ junior team roster.
    entered in full (CQ/DS/GS, CQ/JS/QS, NQ/ND/NG). We were also ranking
    CQ/DS/GS athletes in CQ/JS/QS on their Changquan alone, which inflated 45
    overall scores.
-4. **Standings list each athlete once** (best line), numbered like USAWKF's.
+4. **Standings list each athlete once** (best line, with any team they made),
+   numbered like USAWKF's.
+5. **A 0 means "did not compete"** and is dropped before any average,
+   ranking or team projection (`dropZeroScores`). A junior with one routine
+   averages that routine instead of half of it. An adult who skipped a
+   routine in a category isn't ranked in that category, as in USAWKF's
+   2025 results.
 
 ## Remaining differences (not fixed)
 

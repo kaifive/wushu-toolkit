@@ -60,6 +60,8 @@ export interface ScoreEntry extends EntryRef {
   club?: string;
   /** null = registered but not yet scored. */
   finalScore: number | null;
+  /** The source scored this routine 0: the athlete didn't compete it (finalScore is null). */
+  didNotCompete?: boolean;
   scorecard?: Scorecard;
   nandu?: string[];
   /** Ring / session label, if the source has one. */

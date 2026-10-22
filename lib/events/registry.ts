@@ -1,14 +1,35 @@
 import { EVENT_CONFIGS } from "@/content/events";
+import { source } from "@/lib/data/source";
+import type { EventData } from "@/lib/domain/types";
 import type { EventConfig } from "./types";
 
-const BY_SLUG = new Map(EVENT_CONFIGS.map((e) => [e.slug, e]));
+/**
+ * A 0 means "did not compete" (sheets type it for scratches), not a score:
+ * it would drag every average, ranking and team projection down. Treat it as
+ * unscored everywhere.
+ */
+export function dropZeroScores(d: EventData): EventData {
+  if (!d.scores.some((s) => s.finalScore === 0)) return d;
+  return { ...d, scores: d.scores.map((s) => (s.finalScore === 0 ? { ...s, finalScore: null, didNotCompete: true } : s)) };
+}
+
+const withoutZeros = (e: EventConfig): EventConfig => ({
+  ...e,
+  data: () => {
+    const inner = e.data();
+    return source(inner.label, async (ctx) => dropZeroScores(await inner.load(ctx)));
+  },
+});
+
+const EVENTS = EVENT_CONFIGS.map(withoutZeros);
+const BY_SLUG = new Map(EVENTS.map((e) => [e.slug, e]));
 
 export function getEvent(slug: string): EventConfig | undefined {
   return BY_SLUG.get(slug);
 }
 
 export function allEvents(): EventConfig[] {
-  return [...EVENT_CONFIGS].sort((a, b) => b.dates.start.localeCompare(a.dates.start));
+  return [...EVENTS].sort((a, b) => b.dates.start.localeCompare(a.dates.start));
 }
 
 /** Archived events are always free, whatever the config says. */

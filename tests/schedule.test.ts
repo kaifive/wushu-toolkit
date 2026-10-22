@@ -119,3 +119,12 @@ test("USAWKF official results: overall ranks with teams, per-event scores joined
   assert.equal(joined[0]!.finalScore, first.score);
   assert.ok(joined.length > 1, "official results without a registration are kept");
 });
+
+test("a 0 is 'did not compete': dropped before any average", async () => {
+  const { dropZeroScores } = await import("@/lib/events/registry");
+  const d = dropZeroScores({ registrations: [], schedules: [], asOf: "", source: "", scores: [
+    { athleteId: "a", athleteName: "A", raw: "CQ", finalScore: 0 },
+    { athleteId: "a", athleteName: "A", raw: "DS", finalScore: 9.1 },
+  ] });
+  assert.deepEqual(d.scores.map((s) => [s.finalScore, !!s.didNotCompete]), [[null, true], [9.1, false]]);
+});

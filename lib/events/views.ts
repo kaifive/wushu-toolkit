@@ -101,21 +101,19 @@ export function selectionKeyLabel(ruleset: Ruleset, key: string): string {
 }
 
 /**
- * Standings list each athlete once, on their best-ranked line (or the line that
- * made a team), and number places from 1 the way USAWKF's results do. Team
- * selection still sees every discipline/category line.
+ * Standings list each athlete once, on their best-ranked line (with the team
+ * they made on any line), and number places from 1 the way USAWKF's results
+ * do. Team selection still sees every discipline/category line.
  */
 function onePerAthlete(ranked: SelectionResult["ranked"]): SelectionResult["ranked"] {
-  const pick = new Map<string, SelectionResult["ranked"][number]>();
-  for (const c of ranked) {
-    const prev = pick.get(c.athleteId);
-    if (!prev || (!prev.team && c.team)) pick.set(c.athleteId, c);
-  }
-  const kept = ranked.filter((c) => pick.get(c.athleteId) === c);
+  const team = new Map<string, TeamId>();
+  for (const c of ranked) if (c.team && !team.has(c.athleteId)) team.set(c.athleteId, c.team);
+  const seen = new Set<string>();
+  const kept = ranked.filter((c) => !seen.has(c.athleteId) && seen.add(c.athleteId));
   let place = 0;
   return kept.map((c, i) => {
     if (!c.tiedWithAbove || i === 0) place = i + 1;
-    return { ...c, rank: place };
+    return { ...c, rank: place, team: team.get(c.athleteId) };
   });
 }
 

@@ -77,9 +77,11 @@ export function buildCandidates(scores: ScoreEntry[], scoring: SelectionScoring)
         const weapon = best(list.filter((e) => kindOf(e) === "weapon"));
         if (!barehand && !weapon) continue;
         const total = round3(scoreOf(barehand) + scoreOf(weapon));
+        // Average over the routines actually done: a missing one is "didn't compete", not a 0.
+        // (Ranking still uses the two-routine total, so one routine ranks below a full pair.)
         const counted = [barehand, weapon].filter((e): e is ScoreEntry => !!e);
         const discipline = key === "any" ? (barehand?.code ? EVENTS[barehand.code].discipline : weapon?.code ? EVENTS[weapon.code].discipline : "changquan") : key;
-        const c: Candidate = { ...base, key: discipline, counted, barehand, weapon, score: total, average: total / 2, cleanNandu: counted.some(isClean) };
+        const c: Candidate = { ...base, key: discipline, counted, barehand, weapon, score: total, average: total / counted.length, cleanNandu: counted.some(isClean) };
         if (!pick || c.score > pick.score) pick = c;
       }
       if (pick) out.push(pick);
@@ -88,6 +90,8 @@ export function buildCandidates(scores: ScoreEntry[], scoring: SelectionScoring)
         // Only a category the athlete entered in full (USAWKF ranks CQ/DS/GS and
         // CQ/JS/QS separately; a lone Changquan is in neither).
         if (cat.complete && !cat.events.every((code) => entries.some((e) => e.code === code))) continue;
+        // Skipping a routine in the category leaves the athlete unranked there (as USAWKF did in 2025).
+        if (cat.complete && entries.some((e) => e.didNotCompete && e.code && cat.events.includes(e.code))) continue;
         // Registered-but-unscored events (live) don't drag the average down.
         const inCat = entries.filter((e) => e.code && cat.events.includes(e.code) && e.finalScore != null);
         if (!inCat.length) continue;
