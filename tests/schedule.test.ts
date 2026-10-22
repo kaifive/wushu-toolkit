@@ -66,3 +66,13 @@ test("bowuu ring: events in order, participants by lot order, scores kept", asyn
   assert.equal(b.type === "session" && b.title, "42 Movements Taijijian · Group B · Male");
   assert.deepEqual(b.type === "session" && b.entries.map((e) => [e.athleteName, e.score]), [["Ryan Yin", "7.916"], ["Justin Shen", "8.910"]]);
 });
+
+test("athleteProfiles: each routine's place and event average", async () => {
+  const { athleteProfiles } = await import("@/lib/events/views");
+  const { RULESETS } = await import("@/lib/rules");
+  const ruleset = Object.values(RULESETS).find((r) => !r.selection && !r.allAround) ?? Object.values(RULESETS)[0]!;
+  const e = (id: string, raw: string, score: number) => ({ athleteId: id, athleteName: id, raw, gender: "male" as const, finalScore: score });
+  const p = athleteProfiles({ registrations: [], schedules: [], asOf: "", source: "", scores: [e("Amy", "CQ", 9), e("Ben", "CQ", 8), e("Amy", "JS", 7)] }, ruleset);
+  const amy = p.find((x) => x.name === "Amy")!;
+  assert.deepEqual(amy.routines.map((r) => [r.raw, r.place, r.of, r.average]), [["CQ", 1, 2, 8.5], ["JS", 1, 1, 7]]);
+});

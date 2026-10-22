@@ -14,7 +14,7 @@ export const JUNIORS_2024: EventConfig = {
   status: "archived",
   access: "free",
   rulesetId: "usawkf-junior-trials-2024",
-  views: ["standings", "team", "stats", "schedule"],
+  views: ["standings", "team", "athletes", "stats", "schedule"],
   // Ring schedules saved from the bowuu feed v1 read (rings 8 and 9, Sunday and Monday).
   data: () => withSchedule(snapshotSource(SNAPSHOTS, "2024-juniors"), constant("bowuu ring schedules (saved)", SCHEDULE as Schedule[])),
   description: "Final results from the 2024 Junior Taolu Team Trials, scored by best barehand plus best weapon.",

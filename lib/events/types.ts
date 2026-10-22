@@ -2,7 +2,7 @@ import type { DataSource } from "@/lib/data/source";
 import type { EventData } from "@/lib/domain/types";
 import type { RulesetId } from "@/lib/rules";
 
-export type EventView = "standings" | "schedule" | "team" | "scorecards" | "stats" | "all-around";
+export type EventView = "standings" | "schedule" | "team" | "scorecards" | "stats" | "athletes" | "all-around";
 
 export type EventStatus = "upcoming" | "live" | "archived";
 

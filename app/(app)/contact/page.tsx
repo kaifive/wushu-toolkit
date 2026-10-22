@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ContactForm, contactConfigured } from "@/components/contact/contact-form";
+import { ContactForm } from "@/components/contact/contact-form";
 import { Container, PageHeader } from "@/components/ui/page-header";
 import { SITE } from "@/lib/site";
 
@@ -10,7 +10,7 @@ export default function ContactPage() {
     <Container className="max-w-2xl">
       <PageHeader title="Contact Us" />
       <p className="mb-4 text-ink-muted">Feature requests, score corrections and event passes are all welcome.</p>
-      {contactConfigured() ? <ContactForm /> : <p className="text-ink-muted">Reach out to {SITE.author} through your club or team.</p>}
+      {process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ? <ContactForm /> : <p className="text-ink-muted">Reach out to {SITE.author} through your club or team.</p>}
     </Container>
   );
 }

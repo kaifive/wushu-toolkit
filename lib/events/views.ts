@@ -263,3 +263,74 @@ export function scorecardStats(data: EventData): ScorecardStats {
     .sort((x, y) => x.raw.localeCompare(y.raw));
   return { deductions, byEvent };
 }
+
+export interface AthleteProfile {
+  id: string;
+  name: string;
+  club?: string;
+  gender?: Gender;
+  routines: { raw: string; score: number | null; place: number | null; of: number; average: number | null; hasScorecard: boolean }[];
+  /** Place in each overall ranking the athlete is in (team trials). */
+  overall: { scope: string; rank: number; of: number; discipline: string; team?: TeamId }[];
+  /** All-around place (top forms total), when the event has one. */
+  allAround?: { place: number; of: number; total: number };
+}
+
+/**
+ * Every athlete's results in one place (v1's athlete dashboard, for every
+ * competition): each routine's place and the event average, overall rank and
+ * projected team, all-around place.
+ */
+export function athleteProfiles(data: EventData, ruleset: Ruleset): AthleteProfile[] {
+  const results = resultsByEvent(data, ruleset);
+  const routines = new Map<string, AthleteProfile["routines"]>();
+  const resultKey = (raw: string, gender?: Gender) => `${raw}\u0000${gender ?? ""}`;
+  const placeIn = new Map<string, Map<string, number>>();
+  const averages = new Map<string, { avg: number | null; of: number }>();
+  for (const r of results) {
+    const scored = r.rows.filter((x) => x.finalScore != null);
+    averages.set(resultKey(r.raw, r.gender), { avg: scored.length ? scored.reduce((t, x) => t + x.finalScore!, 0) / scored.length : null, of: scored.length });
+    placeIn.set(resultKey(r.raw, r.gender), new Map(scored.map((x) => [x.athleteName, x.place])));
+  }
+  for (const s of data.scores) {
+    const k = resultKey(s.raw, s.gender);
+    const list = routines.get(s.athleteId) ?? [];
+    list.push({
+      raw: s.raw,
+      score: s.finalScore,
+      place: s.finalScore != null ? (placeIn.get(k)?.get(s.athleteName) ?? null) : null,
+      of: averages.get(k)?.of ?? 0,
+      average: averages.get(k)?.avg ?? null,
+      hasScorecard: !!s.scorecard,
+    });
+    routines.set(s.athleteId, list);
+  }
+  const overall = new Map<string, AthleteProfile["overall"]>();
+  for (const m of selectionModel(data, ruleset)) {
+    const scope = `${m.gender === "male" ? "Men" : "Women"}${m.division.id === "*" ? "" : ` · ${m.division.label}`}`;
+    for (const row of m.rows) {
+      const list = overall.get(row.athleteId) ?? [];
+      list.push({ scope, rank: row.rank, of: m.rows.length, discipline: selectionKeyLabel(ruleset, row.discipline), team: row.team });
+      overall.set(row.athleteId, list);
+    }
+  }
+  const aa = new Map<string, AthleteProfile["allAround"]>();
+  const aaModel = allAroundModel(data, ruleset);
+  if (aaModel)
+    for (const list of Object.values(aaModel.standings))
+      list.forEach((a, i) => aa.set(a.athleteId, { place: i + 1, of: list.length, total: a.total }));
+  const seen = new Map<string, AthleteProfile>();
+  for (const s of data.scores) {
+    if (seen.has(s.athleteId)) continue;
+    seen.set(s.athleteId, {
+      id: s.athleteId,
+      name: s.athleteName,
+      club: s.club,
+      gender: s.gender,
+      routines: (routines.get(s.athleteId) ?? []).sort((a, b) => (b.score ?? -1) - (a.score ?? -1)),
+      overall: overall.get(s.athleteId) ?? [],
+      allAround: aa.get(s.athleteId),
+    });
+  }
+  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name));
+}

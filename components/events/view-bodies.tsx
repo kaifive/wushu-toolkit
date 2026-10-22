@@ -2,7 +2,7 @@ import { StatTile } from "@/components/ui/card";
 import { Tabs } from "@/components/ui/tabs";
 import type { EventData } from "@/lib/domain/types";
 import type { AthleteHighlight, EventView } from "@/lib/events/types";
-import { allAroundModel, GENDERS, highlighter, resultsByEvent, scorecards, selectionModel } from "@/lib/events/views";
+import { allAroundModel, athleteProfiles, GENDERS, highlighter, resultsByEvent, scorecards, selectionModel } from "@/lib/events/views";
 import type { Ruleset } from "@/lib/rules";
 import { ExportButtons } from "@/components/export/export-buttons";
 import { AllAroundTable, Champions } from "./all-around-view";
@@ -11,6 +11,7 @@ import { ResultsByEvent } from "./results-by-event";
 import { ScheduleView } from "./schedule-view";
 import { ScorecardList } from "./scorecard-list";
 import { StatsView } from "./stats-view";
+import { AthleteFinder } from "./athlete-finder";
 import { TeamProjection } from "./team-projection";
 
 /**
@@ -154,11 +155,16 @@ export function StatsBody({ data }: ViewProps) {
   return <StatsView data={data} />;
 }
 
+export function AthletesBody({ data, ruleset, scorecardsHref }: ViewProps) {
+  return <AthleteFinder athletes={athleteProfiles(data, ruleset)} scorecardsHref={scorecardsHref} />;
+}
+
 export const VIEW_BODY: Record<EventView, (p: ViewProps) => React.ReactNode> = {
   standings: StandingsBody,
   team: TeamBody,
   scorecards: ScorecardsBody,
   stats: StatsBody,
+  athletes: AthletesBody,
   schedule: ScheduleBody,
   "all-around": AllAroundBody,
 };

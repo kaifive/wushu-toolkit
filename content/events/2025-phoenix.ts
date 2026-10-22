@@ -12,7 +12,7 @@ export const PHOENIX_2025: EventConfig = {
   status: "archived",
   access: "free",
   rulesetId: "open-tournament",
-  views: ["standings", "scorecards", "stats"],
+  views: ["standings", "athletes", "scorecards", "stats"],
   data: () => snapshotSource(SNAPSHOTS, "2025-phoenix"),
   description: "Optional taolu results with full scorecards.",
 };

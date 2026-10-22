@@ -5,6 +5,7 @@ export const VIEW_LABEL: Record<EventView, string> = {
   team: "Team",
   scorecards: "Scorecards",
   stats: "Stats",
+  athletes: "Athletes",
   schedule: "Schedule",
   "all-around": "All-Around",
 };

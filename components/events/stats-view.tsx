@@ -97,7 +97,11 @@ export function StatsView({ data }: { data: EventData }) {
                 className="border-b border-line last:border-0"
               >
                 <td className={`${td} ${stickyCol}`}>
-                  <p className="font-semibold">{e.raw}</p>
+                  <p className="font-semibold">
+                    {e.raw}
+                    {/* Some sources (PWC, 2024) leave the gender out of the event name. */}
+                    {e.gender && !/\b(fe)?male\b|\b(wo)?men/i.test(e.raw) ? ` · ${e.gender === "male" ? "Men" : "Women"}` : ""}
+                  </p>
                   <p className="text-xs text-ink-muted">
                     {e.routines} routines
                   </p>

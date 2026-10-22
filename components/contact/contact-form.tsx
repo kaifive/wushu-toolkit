@@ -8,8 +8,6 @@ const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = "template_fgrygiq";
 const PUBLIC_KEY = "xo572Xf-hdKwWQOr6";
 
-export const contactConfigured = () => !!SERVICE_ID;
-
 const field = "min-h-tap w-full rounded-card border border-line bg-surface px-3";
 
 export function ContactForm() {
