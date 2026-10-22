@@ -53,7 +53,8 @@ export function emptyEventData(sourceLabel: string, asOf = new Date().toISOStrin
 export function snapshotRegression(prev: EventData | null, next: EventData, keep = 1): string | null {
   if (!next.registrations.length && !next.scores.length) return "the live source returned no entries";
   if (!prev) return null;
-  const scored = (d: EventData) => d.scores.filter((s) => s.finalScore != null).length;
+  // A 0 typed into a sheet for "didn't compete" is not a score.
+  const scored = (d: EventData) => d.scores.filter((s) => s.finalScore != null && s.finalScore > 0).length;
   if (scored(next) < scored(prev) * keep) return `${scored(next)} scored routines vs ${scored(prev)} in the saved copy`;
   return null;
 }
