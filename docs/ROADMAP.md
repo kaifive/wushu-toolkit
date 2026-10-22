@@ -72,7 +72,7 @@ Resume from the first unchecked item. One commit per item.
 - [x] Three logo concepts for review (round 1, none picked)
 - [x] Round 2: four "toolkit for wushu" concepts (`/brand`, screenshot in docs/logo-concepts.png)
 - [x] Landing page (+ About page); own top-nav layout, no sidebar
-- [x] Logo: gear and spear (round 3, concept 3, picked 2026-10-22); one source in lib/brand/mark.ts
+- [x] Logo: gear and spear with a white tassel in front of the shaft (final 2026-10-22); one source in lib/brand/mark.ts
 
 ## Phase 7 — Accounts (ADR-005)
 - [x] Firebase client + sign-in page
