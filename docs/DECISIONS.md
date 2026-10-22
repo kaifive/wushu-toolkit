@@ -204,7 +204,7 @@ removed score stays live. The snapshot script reads live only
 (`liveOnly`) and refuses any drop in scored routines unless run with
 `--force`. The generic `withFallback` had no other user and was removed.
 
-## ADR-013: Official results beat hand-kept sheets
+## ADR-013 — Official results beat hand-kept sheets
 
 Date: 2026-10-22. Status: accepted.
 
