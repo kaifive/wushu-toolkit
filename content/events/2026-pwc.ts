@@ -54,7 +54,7 @@ export const PWC_2026: EventConfig = {
   status: "archived",
   access: "free",
   rulesetId: "pwc-2026",
-  views: ["all-around", "schedule"],
+  views: ["all-around", "standings", "stats", "schedule"],
   revalidate: 86400, // archived: the sheet is final; re-read daily until a snapshot exists
   data,
   // Keep snapshotting until the live sheet has been saved; the archive must not depend on it.
