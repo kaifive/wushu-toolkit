@@ -34,7 +34,7 @@ const GEAR = gearPath(31, 33, 17.5, 13.8, 8, -Math.PI / 4, [0, 4]);
  * variables in the app, so dark mode can lighten the seal).
  */
 /** Tassel styles under the spear head (spear upright; the group is turned 45° after). Drawn behind the shaft. */
-export type TasselStyle = "strands" | "fan" | "windswept" | "knot" | "ribbons" | "flame";
+export type TasselStyle = "strands" | "strands5" | "fan" | "windswept" | "knot" | "ribbons" | "flame";
 export const TASSEL_STYLES: { id: TasselStyle; name: string }[] = [
   { id: "strands", name: "Strands (current)" },
   { id: "fan", name: "Fan" },
@@ -52,6 +52,9 @@ function tassel(style: TasselStyle, seal: string, ink: string): string {
   switch (style) {
     case "strands":
       return edge(TASSEL, 2);
+    case "strands5":
+      // five strands, the middle one running down over the shaft
+      return edge("M30.6 18.4 Q28.2 23 25 27.4 M31.2 18.6 Q29.4 24.4 28.2 29.8 M32 18.8 L32 31 M32.8 18.6 Q34.6 24.4 35.8 29.8 M33.4 18.4 Q35.8 23 39 27.4", 1.9);
     case "fan":
       return shape("M30.6 18 Q25 25 25.8 31 Q32 33.4 38.2 31 Q39 25 33.4 18 Z");
     case "windswept":
@@ -67,7 +70,7 @@ function tassel(style: TasselStyle, seal: string, ink: string): string {
   }
 }
 
-export function markInner(seal: string, ink: string, style: TasselStyle = "strands", tasselInk = ink): string {
+export function markInner(seal: string, ink: string, style: TasselStyle = "strands", tasselInk = ink, tasselOnTop = false): string {
   const cut = `stroke="${seal}" stroke-width="2.4" paint-order="stroke" stroke-linejoin="round"`;
   return [
     `<rect x="2" y="2" width="60" height="60" rx="13" fill="${seal}"/>`,
@@ -75,16 +78,17 @@ export function markInner(seal: string, ink: string, style: TasselStyle = "stran
     `<circle cx="31" cy="33" r="6.2" fill="${seal}"/>`,
     // Spear drawn upright, then turned 45° so it runs bottom-left to top-right.
     `<g transform="rotate(45 32 32)">`,
-    // tassel behind the shaft: strands splaying back from the neck, with a seal edge so they read over the gear
-    tassel(style, seal, tasselInk),
+    // tassel behind the shaft (or in front, below), with a seal edge so it reads over the gear
+    tasselOnTop ? "" : tassel(style, seal, tasselInk),
     // shaft, one piece from the butt up into the head; outlined where it crosses the gear
     `<rect x="30.3" y="12" width="3.4" height="51" rx="1.7" fill="${ink}" ${cut}/>`,
     // collar and head (outside the gear, so no outline: they join the shaft)
     `<rect x="29.2" y="15.6" width="5.6" height="2.6" rx="1.2" fill="${ink}"/>`,
+    tasselOnTop ? tassel(style, seal, tasselInk) : "",
     `<path d="M32 0.8 L36.8 11.5 L32 16.4 L27.2 11.5 Z" fill="${ink}"/>`,
     `</g>`,
   ].join("");
 }
 
-export const markSvg = (seal = "#d4371f", ink = "#ffffff", style: TasselStyle = "strands", tasselInk = ink) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">${markInner(seal, ink, style, tasselInk)}</svg>`;
+export const markSvg = (seal = "#d4371f", ink = "#ffffff", style: TasselStyle = "strands", tasselInk = ink, tasselOnTop = false) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">${markInner(seal, ink, style, tasselInk, tasselOnTop)}</svg>`;
