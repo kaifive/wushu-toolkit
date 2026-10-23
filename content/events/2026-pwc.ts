@@ -20,7 +20,13 @@ const RINGS = [
 ];
 const tab = (sheetId: string, r: (typeof RINGS)[number]): TabRef => ({ sheetId, ...r });
 
-function data() {
+/**
+ * The live sources, kept for reference and for re-saving by hand
+ * (`npm run snapshot -- <slug>` after pointing `data` back here). The event is
+ * final, so pages read the saved copy only: a change on the source's side
+ * (as when USAWKF trimmed its results page in October 2026) can't affect it.
+ */
+export function liveData() {
   return liveWithSnapshot(live(), snapshotSource(SNAPSHOTS, "2026-pwc"));
 }
 
@@ -55,12 +61,10 @@ export const PWC_2026: EventConfig = {
   access: "free",
   rulesetId: "pwc-2026",
   views: ["all-around", "standings", "athletes", "stats", "schedule"],
-  revalidate: 86400, // archived: the sheet is final; re-read daily until a snapshot exists
-  data,
-  // Keep snapshotting until the live sheet has been saved; the archive must not depend on it.
-  snapshot: { until: "2026-12-31" },
+  revalidate: 86400,
+  data: () => snapshotSource(SNAPSHOTS, "2026-pwc"),
   description: "All-around standings (sum of each athlete's top three forms), age-group champions and live ring schedules.",
   // The sheet left these blank. TFCGW and DeQi Taichi Group are group entries (shown under Groups).
   genderFixes: { "Zakariya Gulam": "male" },
-  notes: ["Scores and schedules are read live from the organizer's Google Sheet."],
+  notes: ["Scores and schedules were saved from the organizer's Google Sheet."],
 };

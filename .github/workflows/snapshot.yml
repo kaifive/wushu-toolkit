@@ -3,9 +3,9 @@ name: Snapshot event data
 # Pre-scrapes live sources (Sportdata registration, organizer sheets) for events
 # whose config sets snapshot.until (ADR-008), and commits changes to
 # data/snapshots/. The next Vercel deploy serves them as the fallback copy.
+# The schedule is off while no competition is live (every event is final and
+# saved). Run it by hand from the Actions tab, or put the cron back when one is.
 on:
-  schedule:
-    - cron: "17 */6 * * *"
   workflow_dispatch:
     inputs:
       slug:

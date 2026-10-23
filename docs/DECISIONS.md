@@ -214,3 +214,15 @@ published teams (docs/DATA_AUDIT.md). Hand-kept sheets are only for live
 scoring before the official page exists. The 2025–26 junior team rule and
 the 2025 adult category rule were corrected to match the official results.
 
+## ADR-014 — Finished events read only their saved copy
+
+**Status:** accepted (2026-10-23).
+
+Once a competition is final and saved, its config reads `snapshotSource`
+only; the live loader stays in the file as `liveData` for re-saving by
+hand. The snapshot workflow's schedule is off while nothing is live (run it
+from the Actions tab, or restore the cron when an event goes live). Reason:
+USAWKF trimmed its 2025 junior results page from 761 scores to 114; the
+snapshot check refused to save it, but nothing should depend on a source
+after the event is over.
+

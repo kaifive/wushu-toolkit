@@ -13,7 +13,13 @@ const ORDER_PAGE = "https://usawkf.org/2025TT/JuniorTaoluOrder.php";
 /** USAWKF's official results for these trials: final, corrected scores (data audit 2026-10-22). */
 const RESULTS_PAGE = "https://usawkf.org/competition-results/?ID=139";
 
-function data() {
+/**
+ * The live sources, kept for reference and for re-saving by hand
+ * (`npm run snapshot -- <slug>` after pointing `data` back here). The event is
+ * final, so pages read the saved copy only: a change on the source's side
+ * (as when USAWKF trimmed its results page in October 2026) can't affect it.
+ */
+export function liveData() {
   const snapshot = snapshotSource(SNAPSHOTS, "2025-juniors");
   const live = source("USAWKF official results + Sportdata registration", async (ctx) => {
     const [snap, rows] = await Promise.all([snapshot.load(ctx), usawkfResults(RESULTS_PAGE).load(ctx)]);
@@ -36,9 +42,7 @@ export const JUNIORS_2025: EventConfig = {
   rulesetId: "usawkf-junior-trials-2025-26",
   views: ["standings", "team", "athletes", "stats", "schedule"],
   revalidate: 3600,
-  data,
-  // Keep snapshotting until the official results have been saved; the archive must not depend on them.
-  snapshot: { until: "2026-12-31" },
+  data: () => snapshotSource(SNAPSHOTS, "2025-juniors"),
   description:
     "Selection for the 10th World Junior Wushu Championships (Tianjin, March 2026). Team projections use the r15 regulations: best barehand plus best weapon in one discipline, with minimum averages.",
   links: [
